@@ -1,0 +1,193 @@
+#' Title
+#'
+#' @param seurat_obj
+#' @param gene_list
+#' @param species
+#' @param cluster_col
+#' @param assay
+#' @param save_path
+#' @param min_counts
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+Celltype_annotation_Cellmarker2 <- function(
+    seurat_obj,
+    gene_list,
+    species,
+    cluster_col = "seurat_clusters",
+    assay = "RNA",
+    save_path = "./Celltype_annotation_Cellmarker2/",
+    min_counts = 1
+) {
+  if (!requireNamespace("cowplot", quietly = TRUE)) {
+    stop("Please install package 'cowplot': install.packages('cowplot')")
+  }
+  if (!inherits(seurat_obj, "Seurat")) {
+    stop("Input object must be a Seurat object!")
+  }
+  if (!is.list(gene_list)) {
+    stop("Gene list must be a list of data.frames with 'marker' and 'counts' columns!")
+  }
+  if (species != "Human" && species != "Mouse") {
+    stop("species must be 'Human' or 'Mouse'")
+  }
+
+  dir.create(save_path, showWarnings = FALSE)
+
+  seurat_genes <- rownames(seurat_obj@assays[[assay]])
+
+  capitalize_first <- function(gene) {
+    s <- as.character(gene)
+    if (nchar(s) == 0) return(s)
+    first_char <- toupper(substr(s, 1, 1))
+    rest <- substr(s, 2, nchar(s))
+    return(paste(first_char, rest, sep = ""))
+  }
+
+  for (cell_type in names(gene_list)) {
+    cat("Processing cell type:", cell_type, "\n")
+
+    current_df <- gene_list[[cell_type]]
+    if (!all(c("marker", "counts") %in% names(current_df))) {
+      warning(paste("Missing 'marker' or 'counts' column for cell type", cell_type))
+      next
+    }
+
+    if (any(is.na(current_df$marker))) {
+      warning(paste("NA values found in marker column for cell type:", cell_type))
+      next
+    }
+
+    genes <- current_df$marker
+    counts <- current_df$counts
+
+    if (species == "Human") {
+      genes_processed <- toupper(genes)
+    } else if (species == "Mouse") {
+      genes_processed <- sapply(genes, capitalize_first)
+    }
+
+    valid_genes <- genes_processed[genes_processed %in% seurat_genes]
+    valid_genes <- unique(valid_genes)
+    if (length(valid_genes) == 0) {
+      warning(paste("No valid genes found for", cell_type))
+      next
+    }
+
+    original_genes <- genes[genes_processed %in% valid_genes]
+    original_counts <- counts[genes_processed %in% valid_genes]
+
+    valid_genes_seurat <- intersect(valid_genes, seurat_genes)
+    original_genes <- original_genes[genes_processed %in% valid_genes_seurat]
+    original_counts <- original_counts[genes_processed %in% valid_genes_seurat]
+
+    if (length(original_genes) == 0) {
+      warning(paste("No genes exist in the Seurat object for", cell_type))
+      next
+    }
+
+    filtered_genes <- original_genes[original_counts >= min_counts]
+    filtered_counts <- original_counts[original_counts >= min_counts]
+
+    if (length(filtered_genes) == 0) {
+      warning(paste("No genes meet the minimum counts requirement for", cell_type))
+      next
+    }
+
+    valid_features <- intersect(filtered_genes, rownames(seurat_obj@assays[[assay]]))
+    if (length(valid_features) == 0) {
+      warning(paste("No valid features found in Seurat object for cell type:", cell_type))
+      next
+    }
+
+    num_idents <- length(unique(Idents(seurat_obj)))
+    num_genes <- length(valid_features)
+
+    plot_height <- max(6, num_idents * 0.5)
+    plot_width <- max(8, num_genes * 0.3)
+
+    dp <- Seurat::DotPlot(
+      seurat_obj,
+      features = valid_features,
+      assay = assay,
+      group.by = cluster_col,
+      cols = c("white", "dodgerblue")
+    ) +
+      theme(
+        axis.text.x = element_text(
+          angle = 45,
+          hjust = 1,
+          family = "sans",
+          size = 10
+        ),
+        axis.title.x = element_blank(),
+        axis.title.y = element_text(family = "sans")
+      ) +
+      labs(
+        title = paste("Cell Type:", cell_type, "| Database: Cellmarkers2.0 | SlimR"),
+        subtitle = "Dot size: Expression percentage | Color: Normalized expression level"
+      )
+
+    counts_for_heatmap <- filtered_counts[match(valid_features, filtered_genes)]
+    heatmap_data <- data.frame(
+      Gene = factor(valid_features, levels = valid_features),
+      Counts = counts_for_heatmap
+    )
+
+    hp <- ggplot(heatmap_data, aes(x = Gene, y = "Counts", fill = Counts)) +
+      geom_tile(color = "gray") +
+      scale_fill_gradient(
+        low = "white",
+        high = "dodgerblue",
+        limits = c(0, max(counts_for_heatmap))
+      ) +
+      theme_minimal() +
+      theme(
+        axis.text.x = element_text(
+          angle = 45,
+          hjust = 1,
+          family = "sans",
+          size = 10,
+          face = "plain",
+          margin = margin(t = 5, unit = "pt")
+        ),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        panel.grid = element_blank(),
+        plot.title = element_text(hjust = 0, size = 12),
+        plot.margin = margin(t = 10, b = 15, unit = "pt")
+      ) +
+      labs(
+        x = NULL,
+        y = "Counts",
+        title = "Gene counts in database Cellmarkers2.0"
+      )
+
+    base_height <- 5
+    heatmap_height_ratio <- 0.2
+
+    combined_plot <- cowplot::plot_grid(
+      dp,
+      hp,
+      ncol = 1,
+      align = "v",
+      rel_heights = c(1, heatmap_height_ratio)
+    )
+
+    ggsave(
+      filename = file.path(save_path, paste0(cell_type, ".png")),
+      plot = combined_plot,
+      height = plot_height * (1 + heatmap_height_ratio),
+      width = plot_width,
+      limitsize = FALSE
+    )
+
+    cat("Combined plot saved for", cell_type, "\n\n")
+  }
+
+  message("All combined plots saved to:", save_path)
+}

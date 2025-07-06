@@ -1,0 +1,26 @@
+Package: SlimR
+Title: SlimR: Marker-Based Package for Single-Cell and ST Annotation
+Version: 0.9.0.0
+Authors@R: 
+    person(given = "Zhao qing",
+           family = "Wang",
+           role = c("aut", "cre"),
+           email = "851091628@qq.com",
+           comment = c(ORCID = "0000-0001-8348-7245"))
+Description: What the package does (one paragraph).
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Depends: 
+    R (>= 3.5)
+LazyData: true
+Imports: 
+    dplyr,
+    ggplot2,
+    patchwork,
+    pheatmap,
+    readxl,
+    Seurat,
+    tools
