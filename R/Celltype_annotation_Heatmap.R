@@ -20,10 +20,12 @@
 #'
 #' @examples
 #' \donttest{Celltype_annotation_Heatmap(seurat_obj = sce.all,
-#'     gene_list = Markers_list,
-#'     species = "Human",
-#'     cluster_col = "RNA_snn_res.0.4",
-#'     assay = "RNA")}
+#'           gene_list = Markers_list,
+#'           species = "Human",
+#'           cluster_col = "RNA_snn_res.0.4",
+#'           assay = "RNA"
+#'           )
+#'           }
 #'
 Celltype_annotation_Heatmap <- function(
     seurat_obj,

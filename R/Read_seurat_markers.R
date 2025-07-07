@@ -13,8 +13,10 @@
 #'
 #' @examples
 #' \donttest{Markers_list_Seurat <- read_seurat_markers(seurat_markers,
-#'    sort_by = "avg_log2FC",
-#'    gene_fliter = 10)}
+#'           sort_by = "avg_log2FC",
+#'           gene_fliter = 10
+#'           )
+#'           }
 #'
 read_seurat_markers <- function(df, sort_by = "avg_log2FC", gene_fliter = 20) {
   if (!sort_by %in% c("avg_log2FC", "p_val_adj")) {

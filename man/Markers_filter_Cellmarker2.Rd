@@ -61,15 +61,16 @@ The standardized "Marker_list" in the SlimR package
 Create Marker_list from the Cellmarkers2 database
 }
 \examples{
-\donttest{Markers_list_Cellmarker2 <-
-Markers_filter_Cellmarker2(Cellmarker2,
-                           species = "Human",
-                           tissue_class = "Intestine",
-                           tissue_type = NULL,
-                           cancer_type = NULL,
-                           cell_type = NULL,
-                           cell_name = NULL,
-                           marker = NULL,
-                           counts = NULL)}
+\donttest{Markers_list_Cellmarker2 <- Markers_filter_Cellmarker2(Cellmarker2,
+          species = "Human",
+          tissue_class = "Intestine",
+          tissue_type = NULL,
+          cancer_type = NULL,
+          cell_type = NULL,
+          cell_name = NULL,
+          marker = NULL,
+          counts = NULL
+          )
+          }
 
 }

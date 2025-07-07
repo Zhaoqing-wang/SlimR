@@ -15,7 +15,10 @@
 #'
 #' @examples
 #' \donttest{Markers_list_panglaoDB <- Markers_filter_PanglaoDB(PanglaoDB,
-#' species_input = 'Human',#' organ_input = 'GI tract')}
+#'           species_input = 'Human',
+#'           organ_input = 'GI tract'
+#'           )
+#'           }
 #'
 Markers_filter_PanglaoDB <- function(df, species_input, organ_input) {
   required_columns <- c("species", "official.gene.symbol", "cell.type",

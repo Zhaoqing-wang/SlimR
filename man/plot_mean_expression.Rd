@@ -26,6 +26,8 @@ given "cluster_col" and given "features".
 }
 \examples{
 \donttest{plot_mean_expression(sce.all,
-    features = c("CD19","CD79A","MS4A1"))}
+          features = c("CD19","CD79A","MS4A1")
+          )
+          }
 
 }

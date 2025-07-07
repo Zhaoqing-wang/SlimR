@@ -22,11 +22,13 @@
 #'
 #' @examples
 #' \donttest{Celltype_annotation_Seurat(seurat_obj = sce.all,
-#'     gene_list = Markers_list_Seurat,
-#'     species = "Human",
-#'     cluster_col = "integrated_snn_res.0.3",
-#'     assay = "RNA",
-#'     save_path = "D:/Laboratory/Seurat/")}
+#'           gene_list = Markers_list_Seurat,
+#'           species = "Human",
+#'           cluster_col = "integrated_snn_res.0.3",
+#'           assay = "RNA",
+#'           save_path = "D:/Laboratory/Seurat/"
+#'           )
+#'           }
 #'
 Celltype_annotation_Seurat <- function(
     seurat_obj,

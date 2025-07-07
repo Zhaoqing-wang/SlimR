@@ -10,7 +10,9 @@
 #'
 #' @examples
 #' \donttest{Markers_list_Excel <- read_excel_markers(
-#'   "D:/Laboratory/Marker_load.xlsx")}
+#'          "D:/Laboratory/Marker_load.xlsx"
+#'          )
+#'          }
 #'
 read_excel_markers <- function(path) {
   if (!file.exists(path)) stop("Path does not exist:")

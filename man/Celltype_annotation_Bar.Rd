@@ -47,10 +47,12 @@ Uses "marker_list" to generate Bar plot for cell annotation
 }
 \examples{
 \donttest{Celltype_annotation_Bar(seurat_obj = sce.all,
-    gene_list = Markers_list,
-    species = "Human",
-    cluster_col = "RNA_snn_res.0.4",
-    assay = "RNA",
-    save_path = "D:/Laboratory/Bar/")}
+          gene_list = Markers_list,
+          species = "Human",
+          cluster_col = "RNA_snn_res.0.4",
+          assay = "RNA",
+          save_path = "D:/Laboratory/Bar/"
+          )
+          }
 
 }

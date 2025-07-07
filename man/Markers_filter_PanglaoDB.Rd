@@ -27,6 +27,9 @@ Create Marker_list from the PanglaoDB database
 }
 \examples{
 \donttest{Markers_list_panglaoDB <- Markers_filter_PanglaoDB(PanglaoDB,
-species_input = 'Human',#' organ_input = 'GI tract')}
+          species_input = 'Human',
+          organ_input = 'GI tract'
+          )
+          }
 
 }

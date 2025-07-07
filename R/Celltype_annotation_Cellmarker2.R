@@ -28,7 +28,9 @@
 #'           species = "Human",
 #'           cluster_col = "RNA_snn_res.0.4",
 #'           assay = "RNA",
-#'           save_path = "D:/Laboratory/Cellmarkers2.0/")}
+#'           save_path = "D:/Laboratory/Cellmarkers2.0/"
+#'           )
+#'           }
 #'
 Celltype_annotation_Cellmarker2 <- function(
     seurat_obj,

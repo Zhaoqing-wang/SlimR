@@ -52,6 +52,8 @@ Uses "marker_list" from Cellmarker2 for cell annotation
           species = "Human",
           cluster_col = "RNA_snn_res.0.4",
           assay = "RNA",
-          save_path = "D:/Laboratory/Cellmarkers2.0/")}
+          save_path = "D:/Laboratory/Cellmarkers2.0/"
+          )
+          }
 
 }
