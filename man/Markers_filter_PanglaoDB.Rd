@@ -2,13 +2,31 @@
 % Please edit documentation in R/Markers_filter_PanglaoDB.R
 \name{Markers_filter_PanglaoDB}
 \alias{Markers_filter_PanglaoDB}
-\title{Title}
+\title{Create Marker_list from the PanglaoDB database}
 \usage{
 Markers_filter_PanglaoDB(df, species_input, organ_input)
 }
 \arguments{
-\item{organ_input}{}
+\item{df}{Standardized PanglaoDB database. It is read as data(PanglaoDB)
+in the SlimR library and does not require input by default.}
+
+\item{species_input}{Species information in PanglaoDB database. The default
+input is "Human" or "Mouse".The input can be retrieved by "PanglaoDB_table".
+For more information,please refer to https://panglaodb.se/ on PanglaoDB's
+official website.}
+
+\item{organ_input}{Organ type information in the PanglaoDB database.
+The input can be retrieved by "PanglaoDB_table".For more information,
+please refer to https://panglaodb.se/ on PanglaoDB's official website.}
+}
+\value{
+The standardized "Marker_list" in the SlimR package
 }
 \description{
-Title
+Create Marker_list from the PanglaoDB database
+}
+\examples{
+\donttest{Markers_list_panglaoDB <- Markers_filter_PanglaoDB(PanglaoDB,
+species_input = 'Human',#' organ_input = 'GI tract')}
+
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/Markers_filter_Cellmarker2.R
 \name{Markers_filter_Cellmarker2}
 \alias{Markers_filter_Cellmarker2}
-\title{Title}
+\title{Create Marker_list from the Cellmarkers2 database}
 \usage{
 Markers_filter_Cellmarker2(
   df,
@@ -17,8 +17,59 @@ Markers_filter_Cellmarker2(
 )
 }
 \arguments{
-\item{counts}{}
+\item{df}{Standardized Cellmarkers2 database. It is read as data(Cellmarkers2)
+in the SlimR library and does not require input by default.}
+
+\item{species}{Species information in Cellmarkers2 database. The default
+input is "Human" or "Mouse".The input can be retrieved by "Cellmarkers2_table".
+For more information,please refer to http://117.50.127.228/CellMarker/ on
+Cellmarkers2's official website.}
+
+\item{tissue_class}{Tissue_class information in Cellmarkers2 database.
+The input can be retrieved by "Cellmarkers2_table". For more information,
+please refer to http://117.50.127.228/CellMarker/ on Cellmarkers2's official
+website.}
+
+\item{tissue_type}{Tissue_type information in Cellmarkers2 database.
+The input can be retrieved by "Cellmarkers2_table". For more information,
+please refer to http://117.50.127.228/CellMarker/ on Cellmarkers2's official
+website.}
+
+\item{cancer_type}{Cancer_type information in Cellmarkers2 database.
+The input can be retrieved by "Cellmarkers2_table". For more information,
+please refer to http://117.50.127.228/CellMarker/ on Cellmarkers2's official
+website.}
+
+\item{cell_type}{Cell_type information in Cellmarkers2 database.
+The input can be retrieved by "Cellmarkers2_table". For more information,
+please refer to http://117.50.127.228/CellMarker/ on Cellmarkers2's official
+website.}
+
+\item{cell_name}{Warning: Do not enter information, this parameter is used to return
+results for saving}
+
+\item{marker}{Warning: Do not enter information, this parameter is used to return
+results for saving}
+
+\item{counts}{Warning: Do not enter information, this parameter is used to return
+results for saving}
+}
+\value{
+The standardized "Marker_list" in the SlimR package
 }
 \description{
-Title
+Create Marker_list from the Cellmarkers2 database
+}
+\examples{
+\donttest{Markers_list_Cellmarker2 <-
+Markers_filter_Cellmarker2(Cellmarker2,
+                           species = "Human",
+                           tissue_class = "Intestine",
+                           tissue_type = NULL,
+                           cancer_type = NULL,
+                           cell_type = NULL,
+                           cell_name = NULL,
+                           marker = NULL,
+                           counts = NULL)}
+
 }

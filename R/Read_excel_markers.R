@@ -1,11 +1,17 @@
-#' Title
+#' Create Marker_list from Excel files ".xlsx"
 #'
-#' @param path
+#' @param path The path information of Marker files stored in ".xlsx" format.
+#'     The Sheet name in the file is filled with cell type. The first line of
+#'     each Sheet is the table head, the first column is filled with markers
+#'     information, and the following column is filled with mertic information.
 #'
-#' @returns
+#' @returns The standardized "Marker_list" in the SlimR package
 #' @export
 #'
 #' @examples
+#' \donttest{Markers_list_Excel <- read_excel_markers(
+#'   "D:/Laboratory/Marker_load.xlsx")}
+#'
 read_excel_markers <- function(path) {
   if (!file.exists(path)) stop("Path does not exist:")
   file_info <- file.info(path)

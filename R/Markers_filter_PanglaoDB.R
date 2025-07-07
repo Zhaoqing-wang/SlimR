@@ -1,13 +1,22 @@
-#' Title
+#' Create Marker_list from the PanglaoDB database
 #'
-#' @param df
-#' @param species_input
-#' @param organ_input
+#' @param df Standardized PanglaoDB database. It is read as data(PanglaoDB)
+#'     in the SlimR library and does not require input by default.
+#' @param species_input Species information in PanglaoDB database. The default
+#'     input is "Human" or "Mouse".The input can be retrieved by "PanglaoDB_table".
+#'     For more information,please refer to https://panglaodb.se/ on PanglaoDB's
+#'     official website.
+#' @param organ_input Organ type information in the PanglaoDB database.
+#'     The input can be retrieved by "PanglaoDB_table".For more information,
+#'     please refer to https://panglaodb.se/ on PanglaoDB's official website.
 #'
-#' @returns
+#' @returns The standardized "Marker_list" in the SlimR package
 #' @export
 #'
 #' @examples
+#' \donttest{Markers_list_panglaoDB <- Markers_filter_PanglaoDB(PanglaoDB,
+#' species_input = 'Human',#' organ_input = 'GI tract')}
+#'
 Markers_filter_PanglaoDB <- function(df, species_input, organ_input) {
   required_columns <- c("species", "official.gene.symbol", "cell.type",
                         "ubiquitousness.index", "organ", "sensitivity_human",

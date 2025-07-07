@@ -1,19 +1,49 @@
-#' Title
+#' Create Marker_list from the Cellmarkers2 database
 #'
-#' @param df
-#' @param species
-#' @param tissue_class
-#' @param tissue_type
-#' @param cancer_type
-#' @param cell_type
-#' @param cell_name
-#' @param marker
-#' @param counts
+#' @param df Standardized Cellmarkers2 database. It is read as data(Cellmarkers2)
+#'     in the SlimR library and does not require input by default.
+#' @param species Species information in Cellmarkers2 database. The default
+#'     input is "Human" or "Mouse".The input can be retrieved by "Cellmarkers2_table".
+#'     For more information,please refer to http://117.50.127.228/CellMarker/ on
+#'     Cellmarkers2's official website.
+#' @param tissue_class Tissue_class information in Cellmarkers2 database.
+#'     The input can be retrieved by "Cellmarkers2_table". For more information,
+#'     please refer to http://117.50.127.228/CellMarker/ on Cellmarkers2's official
+#'     website.
+#' @param tissue_type Tissue_type information in Cellmarkers2 database.
+#'     The input can be retrieved by "Cellmarkers2_table". For more information,
+#'     please refer to http://117.50.127.228/CellMarker/ on Cellmarkers2's official
+#'     website.
+#' @param cancer_type Cancer_type information in Cellmarkers2 database.
+#'     The input can be retrieved by "Cellmarkers2_table". For more information,
+#'     please refer to http://117.50.127.228/CellMarker/ on Cellmarkers2's official
+#'     website.
+#' @param cell_type Cell_type information in Cellmarkers2 database.
+#'     The input can be retrieved by "Cellmarkers2_table". For more information,
+#'     please refer to http://117.50.127.228/CellMarker/ on Cellmarkers2's official
+#'     website.
+#' @param cell_name Warning: Do not enter information, this parameter is used to return
+#' results for saving
+#' @param marker Warning: Do not enter information, this parameter is used to return
+#' results for saving
+#' @param counts Warning: Do not enter information, this parameter is used to return
+#' results for saving
 #'
-#' @returns
+#' @returns The standardized "Marker_list" in the SlimR package
 #' @export
 #'
 #' @examples
+#' \donttest{Markers_list_Cellmarker2 <-
+#' Markers_filter_Cellmarker2(Cellmarker2,
+#'                            species = "Human",
+#'                            tissue_class = "Intestine",
+#'                            tissue_type = NULL,
+#'                            cancer_type = NULL,
+#'                            cell_type = NULL,
+#'                            cell_name = NULL,
+#'                            marker = NULL,
+#'                            counts = NULL)}
+#'
 Markers_filter_Cellmarker2 <- function(df,
                                        species = NULL,
                                        tissue_class = NULL,
