@@ -17,7 +17,7 @@
 #' \donttest{Markers_list_panglaoDB <- Markers_filter_PanglaoDB(PanglaoDB,
 #' species_input = 'Human',#' organ_input = 'GI tract')}
 #'
-Markers_filter_PanglaoDB <- function(df = data("PanglaoDB",package = "SlimR"), species_input, organ_input) {
+Markers_filter_PanglaoDB <- function(df, species_input, organ_input) {
   required_columns <- c("species", "official.gene.symbol", "cell.type",
                         "ubiquitousness.index", "organ", "sensitivity_human",
                         "sensitivity_mouse", "specificity_human", "specificity_mouse")

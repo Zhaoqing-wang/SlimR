@@ -10,7 +10,7 @@ Celltype_annotation_Bar(
   species,
   cluster_col = "seurat_clusters",
   assay = "RNA",
-  save_path = "../SlimR//Celltype_annotation_Bar/",
+  save_path = "../SlimR/Celltype_annotation_Bar/",
   metric_names = NULL
 )
 }
@@ -27,11 +27,14 @@ Lists can be generated using functions such as "Markers_filter_Cellmarker2 ()",
 gene format correction of markers entered by "Marker_list".}
 
 \item{cluster_col}{Enter annotation columns such as "seurat_cluster" in meta.data
-of the Seurat object to be annotated.}
+of the Seurat object to be annotated. Default parameters use "cluster_col =
+"seurat_clusters"".}
 
-\item{assay}{Enter the assay used by the Seurat object, such as "RNA".}
+\item{assay}{Enter the assay used by the Seurat object, such as "RNA". Default
+parameters use "assay = "RNA"".}
 
-\item{save_path}{The output path of the cell annotation picture.}
+\item{save_path}{The output path of the cell annotation picture. Default parameters
+use "save_path = "./SlimR/Celltype_annotation_Bar/"".}
 
 \item{metric_names}{Warning: Do not enter information. This parameter is used to
 check if "Marker_list" conforms to the SlimR output.}

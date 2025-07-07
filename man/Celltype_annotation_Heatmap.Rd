@@ -25,9 +25,11 @@ Lists can be generated using functions such as "Markers_filter_Cellmarker2 ()",
 gene format correction of markers entered by "Marker_list".}
 
 \item{cluster_col}{Enter annotation columns such as "seurat_cluster" in meta.data
-of the Seurat object to be annotated.}
+of the Seurat object to be annotated. Default parameters use "cluster_col =
+"seurat_clusters"".}
 
-\item{assay}{Enter the assay used by the Seurat object, such as "RNA".}
+\item{assay}{Enter the assay used by the Seurat object, such as "RNA". Default
+parameters use "assay = "RNA"".}
 }
 \value{
 The heatmap of the comparison between "cluster_col" in the

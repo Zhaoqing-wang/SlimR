@@ -26,16 +26,19 @@ function.}
 gene format correction of markers entered by "Marker_list".}
 
 \item{cluster_col}{Enter annotation columns such as "seurat_cluster" in meta.data
-of the Seurat object to be annotated.}
+of the Seurat object to be annotated. Default parameters use "cluster_col =
+"seurat_clusters"".}
 
-\item{assay}{Enter the assay used by the Seurat object, such as "RNA".}
+\item{assay}{Enter the assay used by the Seurat object, such as "RNA". Default
+parameters use "assay = "RNA"".}
 
-\item{save_path}{The output path of the cell annotation picture.}
+\item{save_path}{The output path of the cell annotation picture. Default parameters
+use "save_path = "./SlimR/Celltype_annotation_Cellmarker2/"".}
 
 \item{min_counts}{The minimum number of counts of genes in "Marker_list" entered.
 This number represents the number of the same gene in the same species and
 the same location in the Cellmarker2 database used for annotation of this cell
-type.}
+type. Default parameters use "min_counts = 1".}
 }
 \value{
 The cell annotation picture is saved in "save_path".

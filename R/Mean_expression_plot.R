@@ -2,9 +2,10 @@
 #'
 #' @param object Enter a Seurat object.
 #' @param features Enter one or a set of markers.
-#' @param assay Enter the assay used by the Seurat object, such as "RNA".
+#' @param assay Enter the assay used by the Seurat object, such as "RNA". Default
+#'     parameters use "assay = NULL".
 #' @param cluster_col Enter the meta.data column in the Seurat object to be
-#'     annotated, such as "seurat_cluster".
+#'     annotated, such as "seurat_cluster". Default parameters use "cluster_col = NULL".
 #'
 #' @returns  Average expression bar plot of genes in the input "Seurat" object
 #'     given "cluster_col" and given "features".

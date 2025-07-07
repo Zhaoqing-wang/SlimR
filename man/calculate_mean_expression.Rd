@@ -11,10 +11,11 @@ calculate_mean_expression(object, features, assay = NULL, cluster_col = NULL)
 
 \item{features}{Enter one or a set of markers.}
 
-\item{assay}{Enter the assay used by the Seurat object, such as "RNA".}
+\item{assay}{Enter the assay used by the Seurat object, such as "RNA". Default
+parameters use "assay = NULL".}
 
 \item{cluster_col}{Enter the meta.data column in the Seurat object to be
-annotated, such as "seurat_cluster".}
+annotated, such as "seurat_cluster". Default parameters use "cluster_col = NULL".}
 }
 \value{
 Average expression of genes in the input "Seurat" object given
