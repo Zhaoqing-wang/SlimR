@@ -18,7 +18,7 @@ Markers_filter_Cellmarker2(
 }
 \arguments{
 \item{df}{Standardized Cellmarkers2 database. It is read as data(Cellmarkers2)
-in the SlimR library and does not require input by default.}
+in the SlimR library.}
 
 \item{species}{Species information in Cellmarkers2 database. The default
 input is "Human" or "Mouse".The input can be retrieved by "Cellmarkers2_table".

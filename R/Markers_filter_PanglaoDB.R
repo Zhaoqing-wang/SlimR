@@ -1,7 +1,7 @@
 #' Create Marker_list from the PanglaoDB database
 #'
 #' @param df Standardized PanglaoDB database. It is read as data(PanglaoDB)
-#'     in the SlimR library and does not require input by default.
+#'     in the SlimR library.
 #' @param species_input Species information in PanglaoDB database. The default
 #'     input is "Human" or "Mouse".The input can be retrieved by "PanglaoDB_table".
 #'     For more information,please refer to https://panglaodb.se/ on PanglaoDB's

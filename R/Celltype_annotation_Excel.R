@@ -22,11 +22,13 @@
 #'
 #' @examples
 #' #' \donttest{Celltype_annotation_Excel(seurat_obj = sce.all,
-#'     gene_list = Markers_list_Excel,
-#'     species = "Human",
-#'     cluster_col = "RNA_snn_res.0.4",
-#'     assay = "RNA",
-#'     save_path = "D:/Laboratory/Excel/")}
+#'              gene_list = Markers_list_Excel,
+#'              species = "Human",
+#'              cluster_col = "RNA_snn_res.0.4",
+#'              assay = "RNA",
+#'              save_path = "D:/Laboratory/Excel/"
+#'              )
+#'              }
 #'
 Celltype_annotation_Excel <- function(
     seurat_obj,

@@ -1,6 +1,6 @@
 Package: SlimR
 Title: SlimR: Marker-Based Package for Single-Cell and ST Annotation
-Version: 0.9.8.0
+Version: 0.9.8.5
 Authors@R: 
     person(given = "Zhao qing",
            family = "Wang",
@@ -26,10 +26,13 @@ Depends:
     R (>= 3.5)
 LazyData: true
 Imports: 
+    cowplot,
     dplyr,
     ggplot2,
     patchwork,
     pheatmap,
     readxl,
+    scales,
     Seurat,
+    tidyr,
     tools

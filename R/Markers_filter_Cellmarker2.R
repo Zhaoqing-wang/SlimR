@@ -1,7 +1,7 @@
 #' Create Marker_list from the Cellmarkers2 database
 #'
 #' @param df Standardized Cellmarkers2 database. It is read as data(Cellmarkers2)
-#'     in the SlimR library and does not require input by default.
+#'     in the SlimR library.
 #' @param species Species information in Cellmarkers2 database. The default
 #'     input is "Human" or "Mouse".The input can be retrieved by "Cellmarkers2_table".
 #'     For more information,please refer to http://117.50.127.228/CellMarker/ on
