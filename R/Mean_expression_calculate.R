@@ -1,13 +1,18 @@
-#' Title
+#' "Use in package" Counts average expression of gene set and plots Barplot
 #'
-#' @param object
-#' @param features
-#' @param assay
-#' @param cluster_col
+#' @param object Enter a Seurat object.
+#' @param features Enter one or a set of markers.
+#' @param assay Enter the assay used by the Seurat object, such as "RNA".
+#' @param cluster_col Enter the meta.data column in the Seurat object to be
+#'     annotated, such as "seurat_cluster".
 #'
-#' @returns
+#' @returns Average expression of genes in the input "Seurat" object given
+#'     "cluster_col" and given "features".
 #'
 #' @examples
+#' \donttest{calculate_mean_expression(sce.all,
+#'     features = c("CD19","CD79A","MS4A1"))}
+#'
 calculate_mean_expression <- function(object, features,assay = NULL, cluster_col = NULL) {
   assay <- if (is.null(assay)) DefaultAssay(object) else assay
   DefaultAssay(object) <- assay

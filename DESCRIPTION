@@ -1,6 +1,6 @@
 Package: SlimR
 Title: SlimR: Marker-Based Package for Single-Cell and ST Annotation
-Version: 0.9.2.0
+Version: 0.9.5.0
 Authors@R: 
     person(given = "Zhao qing",
            family = "Wang",

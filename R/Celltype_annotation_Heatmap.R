@@ -1,15 +1,28 @@
-#' Title
+#' Uses "marker_list" to generate heatmaps for cell annotation
 #'
-#' @param seurat_obj
-#' @param gene_list
-#' @param species
-#' @param cluster_col
-#' @param assay
+#' @param seurat_obj Enter the Seurat object with annotation columns such as
+#'     "seurat_cluster" in meta.data to be annotated.
+#' @param gene_list A list of cells and corresponding gene controls, the name of
+#'     the list is cell type, and the first column of the list corresponds to markers.
+#'     Lists can be generated using functions such as "Markers_filter_Cellmarker2 ()",
+#'     "Markers_filter_PanglaoDB ()", "read_excel_markers ()", "read_seurat_markers ()", etc.
+#' @param species This parameter selects the species "Human" or "Mouse" for standard
+#'     gene format correction of markers entered by "Marker_list".
+#' @param cluster_col Enter annotation columns such as "seurat_cluster" in meta.data
+#'     of the Seurat object to be annotated.
+#' @param assay Enter the assay used by the Seurat object, such as "RNA".
 #'
-#' @returns
+#' @returns The heatmap of the comparison between "cluster_col" in the
+#'     Seurat object and the given gene set "gene_list" needs to be annotated.
 #' @export
 #'
 #' @examples
+#' \donttest{Celltype_annotation_Heatmap(seurat_obj = sce.all,
+#'     gene_list = Markers_list,
+#'     species = "Human",
+#'     cluster_col = "RNA_snn_res.0.4",
+#'     assay = "RNA")}
+#'
 Celltype_annotation_Heatmap <- function(
     seurat_obj,
     gene_list,

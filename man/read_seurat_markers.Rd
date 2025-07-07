@@ -2,7 +2,7 @@
 % Please edit documentation in R/Read_seurat_markers.R
 \name{read_seurat_markers}
 \alias{read_seurat_markers}
-\title{Create Marker_list from Seurat object}
+\title{Create "Marker_list" from Seurat object}
 \usage{
 read_seurat_markers(df, sort_by = "avg_log2FC", gene_fliter = 20)
 }
@@ -16,10 +16,10 @@ to use parameter "group.by = "Cell_type"" and "only.pos = TRUE".}
 on the "sort_by" parameter's level of difference.}
 }
 \value{
-The standardized "Marker_list" in the SlimR package
+The standardized "Marker_list" in the SlimR package.
 }
 \description{
-Create Marker_list from Seurat object
+Create "Marker_list" from Seurat object
 }
 \examples{
 \donttest{Markers_list_Seurat <- read_seurat_markers(seurat_markers,

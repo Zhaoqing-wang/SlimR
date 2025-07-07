@@ -2,7 +2,7 @@
 % Please edit documentation in R/Celltype_annotation_Heatmap.R
 \name{Celltype_annotation_Heatmap}
 \alias{Celltype_annotation_Heatmap}
-\title{Title}
+\title{Uses "marker_list" to generate heatmaps for cell annotation}
 \usage{
 Celltype_annotation_Heatmap(
   seurat_obj,
@@ -13,8 +13,34 @@ Celltype_annotation_Heatmap(
 )
 }
 \arguments{
-\item{assay}{}
+\item{seurat_obj}{Enter the Seurat object with annotation columns such as
+"seurat_cluster" in meta.data to be annotated.}
+
+\item{gene_list}{A list of cells and corresponding gene controls, the name of
+the list is cell type, and the first column of the list corresponds to markers.
+Lists can be generated using functions such as "Markers_filter_Cellmarker2 ()",
+"Markers_filter_PanglaoDB ()", "read_excel_markers ()", "read_seurat_markers ()", etc.}
+
+\item{species}{This parameter selects the species "Human" or "Mouse" for standard
+gene format correction of markers entered by "Marker_list".}
+
+\item{cluster_col}{Enter annotation columns such as "seurat_cluster" in meta.data
+of the Seurat object to be annotated.}
+
+\item{assay}{Enter the assay used by the Seurat object, such as "RNA".}
+}
+\value{
+The heatmap of the comparison between "cluster_col" in the
+Seurat object and the given gene set "gene_list" needs to be annotated.
 }
 \description{
-Title
+Uses "marker_list" to generate heatmaps for cell annotation
+}
+\examples{
+\donttest{Celltype_annotation_Heatmap(seurat_obj = sce.all,
+    gene_list = Markers_list,
+    species = "Human",
+    cluster_col = "RNA_snn_res.0.4",
+    assay = "RNA")}
+
 }

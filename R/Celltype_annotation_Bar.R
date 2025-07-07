@@ -1,24 +1,38 @@
-#' Title
+#' Uses "marker_list" to generate Bar plot for cell annotation
 #'
-#' @param seurat_obj
-#' @param gene_list
-#' @param species
-#' @param cluster_col
-#' @param assay
-#' @param save_path
-#' @param metric_names
+#' @param seurat_obj Enter the Seurat object with annotation columns such as
+#'     "seurat_cluster" in meta.data to be annotated.
+#' @param gene_list A list of cells and corresponding gene controls, the name of
+#'     the list is cell type, and the first column of the list corresponds to markers.
+#'     Lists can be generated using functions such as "Markers_filter_Cellmarker2 ()",
+#'     "Markers_filter_PanglaoDB ()", "read_excel_markers ()", "read_seurat_markers ()", etc.
+#' @param species This parameter selects the species "Human" or "Mouse" for standard
+#'     gene format correction of markers entered by "Marker_list".
+#' @param cluster_col Enter annotation columns such as "seurat_cluster" in meta.data
+#'     of the Seurat object to be annotated.
+#' @param assay Enter the assay used by the Seurat object, such as "RNA".
+#' @param save_path The output path of the cell annotation picture.
+#' @param metric_names Warning: Do not enter information. This parameter is used to
+#'     check if "Marker_list" conforms to the SlimR output.
 #'
-#' @returns
+#' @returns The cell annotation picture is saved in "save_path".
 #' @export
 #'
 #' @examples
+#' \donttest{Celltype_annotation_Bar(seurat_obj = sce.all,
+#'     gene_list = Markers_list,
+#'     species = "Human",
+#'     cluster_col = "RNA_snn_res.0.4",
+#'     assay = "RNA",
+#'     save_path = "D:/Laboratory/Bar/")}
+#'
 Celltype_annotation_Bar <- function(
     seurat_obj,
     gene_list,
     species,
     cluster_col = "seurat_clusters",
     assay = "RNA",
-    save_path = "./Celltype_annotation_Excel/",
+    save_path = "../SlimR//Celltype_annotation_Bar/",
     metric_names = NULL
 ) {
   required_packages <- c("ggplot2", "patchwork", "dplyr", "scales", "tidyr", "gridExtra", "gtable", "grid")

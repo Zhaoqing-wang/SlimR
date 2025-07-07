@@ -23,11 +23,11 @@
 #'     please refer to http://117.50.127.228/CellMarker/ on Cellmarkers2's official
 #'     website.
 #' @param cell_name Warning: Do not enter information, this parameter is used to return
-#' results for saving
+#'     results for saving
 #' @param marker Warning: Do not enter information, this parameter is used to return
-#' results for saving
+#'     results for saving
 #' @param counts Warning: Do not enter information, this parameter is used to return
-#' results for saving
+#'     results for saving
 #'
 #' @returns The standardized "Marker_list" in the SlimR package
 #' @export

@@ -2,7 +2,7 @@
 % Please edit documentation in R/Read_excel_markers.R
 \name{read_excel_markers}
 \alias{read_excel_markers}
-\title{Create Marker_list from Excel files ".xlsx"}
+\title{Create "Marker_list" from Excel files ".xlsx"}
 \usage{
 read_excel_markers(path)
 }
@@ -13,10 +13,10 @@ each Sheet is the table head, the first column is filled with markers
 information, and the following column is filled with mertic information.}
 }
 \value{
-The standardized "Marker_list" in the SlimR package
+The standardized "Marker_list" in the SlimR package.
 }
 \description{
-Create Marker_list from Excel files ".xlsx"
+Create "Marker_list" from Excel files ".xlsx"
 }
 \examples{
 \donttest{Markers_list_Excel <- read_excel_markers(

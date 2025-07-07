@@ -2,13 +2,29 @@
 % Please edit documentation in R/Mean_expression_calculate.R
 \name{calculate_mean_expression}
 \alias{calculate_mean_expression}
-\title{Title}
+\title{"Use in package" Counts average expression of gene set and plots Barplot}
 \usage{
 calculate_mean_expression(object, features, assay = NULL, cluster_col = NULL)
 }
 \arguments{
-\item{cluster_col}{}
+\item{object}{Enter a Seurat object.}
+
+\item{features}{Enter one or a set of markers.}
+
+\item{assay}{Enter the assay used by the Seurat object, such as "RNA".}
+
+\item{cluster_col}{Enter the meta.data column in the Seurat object to be
+annotated, such as "seurat_cluster".}
+}
+\value{
+Average expression of genes in the input "Seurat" object given
+"cluster_col" and given "features".
 }
 \description{
-Title
+"Use in package" Counts average expression of gene set and plots Barplot
+}
+\examples{
+\donttest{calculate_mean_expression(sce.all,
+    features = c("CD19","CD79A","MS4A1"))}
+
 }
