@@ -8,8 +8,7 @@ Authors@R:
            email = "851091628@qq.com",
            comment = c(ORCID = "0000-0001-8348-7245"))
 Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
