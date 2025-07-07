@@ -8,9 +8,12 @@
 #' @param species This parameter selects the species "Human" or "Mouse" for standard
 #'     gene format correction of markers entered by "Marker_list".
 #' @param cluster_col Enter annotation columns such as "seurat_cluster" in meta.data
-#'     of the Seurat object to be annotated.
-#' @param assay Enter the assay used by the Seurat object, such as "RNA".
-#' @param save_path The output path of the cell annotation picture.
+#'     of the Seurat object to be annotated. Default parameters use "cluster_col =
+#'     "seurat_clusters"".
+#' @param assay Enter the assay used by the Seurat object, such as "RNA". Default
+#'     parameters use "assay = "RNA"".
+#' @param save_path The output path of the cell annotation picture. Default parameters
+#'     use "save_path = "./SlimR/Celltype_annotation_Excel/"".
 #' @param metric_names Warning: Do not enter information. This parameter is used to
 #'     check if "Marker_list" conforms to the Excel files output.
 #'
@@ -31,7 +34,7 @@ Celltype_annotation_Excel <- function(
     species,
     cluster_col = "seurat_clusters",
     assay = "RNA",
-    save_path = "./Celltype_annotation_Excel/",
+    save_path = "./SlimR/Celltype_annotation_Excel/",
     metric_names = NULL
 ) {
   if (!requireNamespace("ggplot2", quietly = TRUE)) install.packages("ggplot2")

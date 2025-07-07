@@ -9,8 +9,10 @@
 #' @param species This parameter selects the species "Human" or "Mouse" for standard
 #'     gene format correction of markers entered by "Marker_list".
 #' @param cluster_col Enter annotation columns such as "seurat_cluster" in meta.data
-#'     of the Seurat object to be annotated.
-#' @param assay Enter the assay used by the Seurat object, such as "RNA".
+#'     of the Seurat object to be annotated. Default parameters use "cluster_col =
+#'     "seurat_clusters"".
+#' @param assay Enter the assay used by the Seurat object, such as "RNA". Default
+#'     parameters use "assay = "RNA"".
 #'
 #' @returns The heatmap of the comparison between "cluster_col" in the
 #'     Seurat object and the given gene set "gene_list" needs to be annotated.
