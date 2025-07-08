@@ -4,7 +4,7 @@
 #'     to use parameter "group.by = "Cell_type"" and "only.pos = TRUE".
 #' @param sort_by Marker sorting parameter, select "avg_log2FC" or "p_val_adj".
 #'     Default parameters use "sort_by = "avg_log2FC"".
-#' @param gene_fliter The number of markers left for each cell type based
+#' @param gene_filter The number of markers left for each cell type based
 #'     on the "sort_by" parameter's level of difference. Default parameters use
 #'     "gene_fliter = 20"
 #'
@@ -14,11 +14,11 @@
 #' @examples
 #' \donttest{Markers_list_Seurat <- read_seurat_markers(seurat_markers,
 #'           sort_by = "avg_log2FC",
-#'           gene_fliter = 10
+#'           gene_filter = 10
 #'           )
 #'           }
 #'
-read_seurat_markers <- function(df, sort_by = "avg_log2FC", gene_fliter = 20) {
+read_seurat_markers <- function(df, sort_by = "avg_log2FC", gene_filter = 20) {
   if (!sort_by %in% c("avg_log2FC", "p_val_adj")) {
     stop("sort_by must be either 'avg_log2FC' or 'p_val_adj'")
   }
@@ -32,7 +32,7 @@ read_seurat_markers <- function(df, sort_by = "avg_log2FC", gene_fliter = 20) {
       sorted_df <- cluster_df[order(cluster_df$p_val_adj), , drop = FALSE]
     }
 
-    filtered_df <- head(sorted_df, gene_fliter)
+    filtered_df <- head(sorted_df, gene_filter)
     desired_order <- c("gene", "avg_log2FC", "p_val_adj", "p_val", "pct.1", "pct.2")
     reordered_df <- filtered_df[, desired_order, drop = FALSE]
 
