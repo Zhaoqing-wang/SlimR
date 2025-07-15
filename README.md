@@ -20,7 +20,7 @@ Based on the "Markers_list", SlimR enables one-click generation of annotation he
 
 3. [Automated Annotation Workflow](#3-automated-annotation-workflow)  
    - [3.1 Annotation Heatmap](#31-annotation-heatmap)  
-   - [3.2 Annotation Bar Plot](#32-annotation-bar-plot)  
+   - [3.2 Annotation Box Plot](#32-annotation-box-plot)  
 
 4. [Semi-Automated Annotation Workflow](#4-semi-automated-annotation-workflow)  
    - [4.1 With Excel-Based Marker Lists](#41-with-excel-based-marker-lists)  
@@ -146,10 +146,10 @@ Celltype_annotation_Heatmap(
 )
 ```
 
-### 3.2 Annotation Bar Plot
-Generates per-cell-type expression bar plots:
+### 3.2 Annotation Box Plot
+Generates per-cell-type expression box plots:
 ```r
-Celltype_annotation_Bar(
+Celltype_annotation_Box(
   seurat_obj = sce.all,
   gene_list = Markers_list, 
   species = "Human",
