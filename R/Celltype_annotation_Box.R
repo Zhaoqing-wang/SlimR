@@ -22,7 +22,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{Celltype_annotation_Bar(seurat_obj = sce.all,
+#' \donttest{Celltype_annotation_Box(seurat_obj = sce.all,
 #'           gene_list = Markers_list,
 #'           species = "Human",
 #'           cluster_col = "RNA_snn_res.0.4",
@@ -31,7 +31,7 @@
 #'           )
 #'           }
 #'
-Celltype_annotation_Bar <- function(
+Celltype_annotation_Box <- function(
     seurat_obj,
     gene_list,
     species,

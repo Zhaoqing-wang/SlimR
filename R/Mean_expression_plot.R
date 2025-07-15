@@ -24,12 +24,9 @@ plot_mean_expression <- function(object, features, assay = NULL, cluster_col = N
   assay <- assay %||% DefaultAssay(object)
   DefaultAssay(object) <- assay
 
-  cells <- unlist(CellsByIdentities(object = object,
-                                    cells = colnames(object[[assay]])))
+  cells <- unlist(CellsByIdentities(object = object, cells = colnames(object[[assay]])))
 
-  data.features <- FetchData(object = object,
-                             vars = features,
-                             cells = cells)
+  data.features <- FetchData(object = object, vars = features, cells = cells)
 
   if (!is.null(cluster_col)) {
     data.features$id <- object@meta.data[cells, cluster_col, drop = TRUE]
@@ -49,26 +46,38 @@ plot_mean_expression <- function(object, features, assay = NULL, cluster_col = N
   expr_matrix <- do.call(rbind, cluster_expr_list)
   rownames(expr_matrix) <- unique(data.features$id)
 
-  df <- data.frame(
-    cluster = rownames(expr_matrix),
-    Mean_exp = rowMeans(expr_matrix)
-  )
-  df$cluster <- factor(df$cluster, levels = id.levels)
+  expr_df <- as.data.frame(expr_matrix) %>%
+    tibble::rownames_to_column("cluster") %>%
+    tidyr::pivot_longer(
+      cols = -cluster,
+      names_to = "gene",
+      values_to = "mean_expression"
+    )
 
-  p <- ggplot(df, aes(x = Mean_exp, y = cluster, fill = Mean_exp)) +
-    geom_col(width = 0.7) +
+  expr_df$cluster <- factor(expr_df$cluster, levels = id.levels)
+
+  cluster_avg_exp <- expr_df %>%
+    group_by(cluster) %>%
+    summarise(avg_cluster_exp = mean(mean_expression), .groups = "drop")
+
+  expr_df <- left_join(expr_df, cluster_avg_exp, by = "cluster")
+
+  p <- ggplot(expr_df, aes(x = cluster, y = mean_expression, color = avg_cluster_exp, fill = avg_cluster_exp)) +
+    geom_boxplot(outlier.shape = NA, width = 0.6) +
+    geom_point(position = position_dodge(width = 0.6), size = 2, stroke = 0) +
+    scale_color_gradient(low = "lightgrey", high = "dodgerblue") +
     scale_fill_gradient(low = "lightgrey", high = "dodgerblue") +
     labs(
-      title = "Mean expression between clusters",
+      title = "Gene Expression per Cluster",
       subtitle = paste("Features:", paste(features, collapse = ", ")),
-      x = "Mean Expression",
-      y = "Cell Cluster"
+      x = "Cell Cluster",
+      y = "Mean Expression"
     ) +
     theme_minimal() +
     theme(
       plot.title = element_text(hjust = 0.5, size = 12, face = "bold"),
       plot.subtitle = element_text(hjust = 0.5, size = 10),
-      axis.text.y = element_text(size = 10, hjust = 0.5, vjust = 0.5),
+      axis.text.y = element_text(size = 10),
       axis.text.x = element_text(size = 10),
       axis.title.x = element_text(size = 10),
       axis.title.y = element_text(size = 10),
