@@ -1,22 +1,22 @@
 Package: SlimR
-Title: SlimR: Marker-Based Package for Single-Cell and ST Annotation
-Version: 1.0.1.2
+Title: Marker-Based Package for Single-Cell and ST Annotation
+Version: 1.0.1.4
 Authors@R: 
     person(given = "Zhao qing",
            family = "Wang",
            role = c("aut", "cre"),
            email = "851091628@qq.com",
            comment = c(ORCID = "0000-0001-8348-7245"))
-Description: SlimR is an R package designed for annotating single-cell and spatial
-    transcriptomics datasets. It supports the creation of a unified marker list,
-    "Markers_list", using sources including: the package's built-in curated
-    species-specific cell type and marker reference databases (e.g., Cellmarker2,
-    PanglaoDB), Seurat objects containing cell label information, or user-provided
-    Excel tables mapping cell types to markers.
+Description: Provide an R software toolkit for annotating single-cell and spatial 
+    transcriptomic data based on the Marker dataset. It supports the creation of 
+    a unified marker list, "Markers_list", using sources including: the package's 
+    built-in curated species-specific cell type and marker reference databases (e.g., 
+    "Cellmarker2", "PanglaoDB"), Seurat objects containing cell label information, 
+    or user-provided Excel tables mapping cell types to markers.
     Based on the "Markers_list", SlimR can iterate through different cell types to
-    generate corresponding annotation reference plots (e.g., Markers_dotplot,
-    Metric_heatmap, Mean_expression_bar_plot). Furthermore, it enables one-click
-    generation of an annotation heatmap (Annotation_heatmap) visualizing the
+    generate corresponding annotation reference plots (e.g., "Markers_Dotplot",
+    "Metric_Heatmap", "Mean_expression_Box_plot"). Furthermore, it enables one-click
+    generation of an annotation heatmap ("Annotation_Heatmap") visualizing the
     relationship between input cell types and the reference marker list.
 License: GPL-3
 Encoding: UTF-8
@@ -35,4 +35,5 @@ Imports:
     scales,
     Seurat,
     tidyr,
-    tools
+    tools,
+    magrittr

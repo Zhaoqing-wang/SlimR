@@ -21,6 +21,11 @@
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export
 #'
+#' @importFrom magrittr %>%
+#' @importFrom Seurat Idents
+#' @importFrom ggplot2 ggsave
+#' @importFrom dplyr distinct
+#'
 #' @examples
 #' \donttest{Celltype_annotation_Box(seurat_obj = sce.all,
 #'           gene_list = Markers_list,
@@ -40,12 +45,6 @@ Celltype_annotation_Box <- function(
     save_path = "../SlimR/Celltype_annotation_Bar/",
     metric_names = NULL
 ) {
-  required_packages <- c("ggplot2", "patchwork", "dplyr", "scales", "tidyr", "gridExtra", "gtable", "grid")
-  for (pkg in required_packages) {
-    if (!requireNamespace(pkg, quietly = TRUE)) install.packages(pkg)
-    library(pkg, character.only = TRUE)
-  }
-
   if (!inherits(seurat_obj, "Seurat")) stop("Input object must be a Seurat object!")
   if (!is.list(gene_list)) stop("Gene list must be a list of data.frames!")
   if (species != "Human" && species != "Mouse") stop("species must be 'Human' or 'Mouse'")
