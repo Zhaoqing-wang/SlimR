@@ -2,7 +2,7 @@
 % Please edit documentation in R/Celltype_annotation_Box.R
 \name{Celltype_annotation_Box}
 \alias{Celltype_annotation_Box}
-\title{Uses "marker_list" to generate Bar plot for cell annotation}
+\title{Uses "marker_list" to generate Box plot for cell annotation}
 \usage{
 Celltype_annotation_Box(
   seurat_obj,
@@ -43,7 +43,7 @@ check if "Marker_list" conforms to the SlimR output.}
 The cell annotation picture is saved in "save_path".
 }
 \description{
-Uses "marker_list" to generate Bar plot for cell annotation
+Uses "marker_list" to generate Box plot for cell annotation
 }
 \examples{
 \donttest{Celltype_annotation_Box(seurat_obj = sce.all,

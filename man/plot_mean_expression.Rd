@@ -2,7 +2,7 @@
 % Please edit documentation in R/Mean_expression_plot.R
 \name{plot_mean_expression}
 \alias{plot_mean_expression}
-\title{"Use in package" Counts average expression of gene set and plots barplot}
+\title{"Use in package" Counts average expression of gene set and plots Boxplot}
 \usage{
 plot_mean_expression(object, features, assay = NULL, cluster_col = NULL)
 }
@@ -18,11 +18,11 @@ parameters use "assay = NULL".}
 annotated, such as "seurat_cluster". Default parameters use "cluster_col = NULL".}
 }
 \value{
-Average expression bar plot of genes in the input "Seurat" object
+Average expression box plot of genes in the input "Seurat" object
 given "cluster_col" and given "features".
 }
 \description{
-"Use in package" Counts average expression of gene set and plots barplot
+"Use in package" Counts average expression of gene set and plots Boxplot
 }
 \examples{
 \donttest{plot_mean_expression(sce.all,

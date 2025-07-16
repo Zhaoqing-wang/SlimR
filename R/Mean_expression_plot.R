@@ -1,4 +1,4 @@
-#' "Use in package" Counts average expression of gene set and plots barplot
+#' "Use in package" Counts average expression of gene set and plots Boxplot
 #'
 #' @param object Enter a Seurat object.
 #' @param features Enter one or a set of markers.
@@ -7,7 +7,7 @@
 #' @param cluster_col Enter the meta.data column in the Seurat object to be
 #'     annotated, such as "seurat_cluster". Default parameters use "cluster_col = NULL".
 #'
-#' @returns  Average expression bar plot of genes in the input "Seurat" object
+#' @returns  Average expression box plot of genes in the input "Seurat" object
 #'     given "cluster_col" and given "features".
 #'
 #' @examples

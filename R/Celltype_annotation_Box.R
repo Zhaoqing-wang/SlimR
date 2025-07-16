@@ -1,4 +1,4 @@
-#' Uses "marker_list" to generate Bar plot for cell annotation
+#' Uses "marker_list" to generate Box plot for cell annotation
 #'
 #' @param seurat_obj Enter the Seurat object with annotation columns such as
 #'     "seurat_cluster" in meta.data to be annotated.
