@@ -10,6 +10,11 @@
 #' @returns  Average expression box plot of genes in the input "Seurat" object
 #'     given "cluster_col" and given "features".
 #'
+#' @importFrom Seurat `%||%`
+#' @importFrom Seurat DefaultAssay DefaultAssay<- CellsByIdentities FetchData
+#' @importFrom dplyr group_by summarise left_join
+#' @importFrom ggplot2 geom_boxplot geom_point position_dodge scale_color_gradient
+#'
 #' @examples
 #' \donttest{plot_mean_expression(sce.all,
 #'           features = c("CD19","CD79A","MS4A1")

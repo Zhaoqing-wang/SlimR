@@ -8,6 +8,8 @@
 #' @returns The standardized "Marker_list" in the SlimR package.
 #' @export
 #'
+#' @importFrom readxl excel_sheets
+#'
 #' @examples
 #' \donttest{Markers_list_Excel <- read_excel_markers(
 #'          "D:/Laboratory/Marker_load.xlsx"
@@ -32,7 +34,7 @@ read_excel_markers <- function(path) {
   process_file <- function(file) {
     file_name <- tools::file_path_sans_ext(basename(file))
     sheets <- excel_sheets(file)
-    sheet_dfs <- lapply(seq_along(sheets),function(i) read_excel(file,sheet=i,progress = TRUE))
+    sheet_dfs <- lapply(seq_along(sheets),function(i) readxl::read_excel(file,sheet=i,progress = TRUE))
     names(sheet_dfs) <- paste0(sheets)
     return(sheet_dfs)
 

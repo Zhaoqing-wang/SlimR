@@ -10,6 +10,8 @@
 #' @returns Average expression of genes in the input "Seurat" object given
 #'     "cluster_col" and given "features".
 #'
+#' @importFrom Seurat DefaultAssay DefaultAssay<- CellsByIdentities FetchData
+#'
 #' @examples
 #' \donttest{calculate_mean_expression(sce.all,
 #'           features = c("CD19","CD79A","MS4A1")

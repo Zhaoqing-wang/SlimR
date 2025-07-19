@@ -18,11 +18,13 @@
 #'     Seurat object and the given gene set "gene_list" needs to be annotated.
 #' @export
 #'
+#' @importFrom grDevices colorRampPalette
+#'
 #' @examples
 #' \donttest{Celltype_annotation_Heatmap(seurat_obj = sce.all,
 #'           gene_list = Markers_list,
 #'           species = "Human",
-#'           cluster_col = "RNA_snn_res.0.4",
+#'           cluster_col = "seurat_clusters",
 #'           assay = "RNA"
 #'           )
 #'           }
@@ -36,7 +38,9 @@ Celltype_annotation_Heatmap <- function(
 ) {
   required_packages <- c("ggplot2", "patchwork", "dplyr", "scales", "tidyr", "gridExtra", "gtable", "grid")
   for (pkg in required_packages) {
-    if (!requireNamespace(pkg, quietly = TRUE)) install.packages(pkg)
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      stop(sprintf("Please install the required package: %s", pkg))
+    }
     library(pkg, character.only = TRUE)
   }
 

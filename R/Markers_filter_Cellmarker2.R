@@ -32,6 +32,8 @@
 #' @returns The standardized "Marker_list" in the SlimR package
 #' @export
 #'
+#' @importFrom stats aggregate
+#'
 #' @examples
 #' \donttest{Markers_list_Cellmarker2 <- Markers_filter_Cellmarker2(Cellmarker2,
 #'           species = "Human",

@@ -30,9 +30,9 @@
 #' \donttest{Celltype_annotation_Box(seurat_obj = sce.all,
 #'           gene_list = Markers_list,
 #'           species = "Human",
-#'           cluster_col = "RNA_snn_res.0.4",
+#'           cluster_col = "seurat_clusters",
 #'           assay = "RNA",
-#'           save_path = "D:/Laboratory/Bar/"
+#'           save_path = "./SlimR/Celltype_annotation_Bar/"
 #'           )
 #'           }
 #'
@@ -42,7 +42,7 @@ Celltype_annotation_Box <- function(
     species,
     cluster_col = "seurat_clusters",
     assay = "RNA",
-    save_path = "../SlimR/Celltype_annotation_Bar/",
+    save_path = "./SlimR/Celltype_annotation_Bar/",
     metric_names = NULL
 ) {
   if (!inherits(seurat_obj, "Seurat")) stop("Input object must be a Seurat object!")

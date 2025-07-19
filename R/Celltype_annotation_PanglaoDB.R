@@ -20,13 +20,15 @@
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export
 #'
+#' @importFrom dplyr all_of
+#'
 #' @examples
 #' \donttest{Celltype_annotation_PanglaoDB(seurat_obj = sce.all,
 #'           gene_list = Markers_list_panglaoDB,
 #'           species = "Human",
-#'           cluster_col = "RNA_snn_res.0.4",
+#'           cluster_col = "seurat_clusters",
 #'           assay = "RNA",
-#'           save_path = "D:/Laboratory/PanglaoDB/"
+#'           save_path = "./SlimR/Celltype_annotation_PanglaoDB/"
 #'           )
 #'           }
 #'
@@ -39,10 +41,13 @@ Celltype_annotation_PanglaoDB <- function(
     save_path = "./SlimR/Celltype_annotation_PanglaoDB/",
     metric_names = NULL
 ) {
-  if (!requireNamespace("ggplot2", quietly = TRUE)) install.packages("ggplot2")
-  if (!requireNamespace("patchwork", quietly = TRUE)) install.packages("patchwork")
-  if (!requireNamespace("dplyr", quietly = TRUE)) install.packages("dplyr")
-  if (!requireNamespace("scales", quietly = TRUE)) install.packages("scales")
+  required_packages <- c("ggplot2", "patchwork", "dplyr", "scales")
+  for (pkg in required_packages) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      stop(sprintf("Please install the required package: %s", pkg))
+    }
+    library(pkg, character.only = TRUE)
+  }
 
   if (!inherits(seurat_obj, "Seurat")) stop("Input object must be a Seurat object!")
   if (!is.list(gene_list)) stop("Gene list must be a list of data.frames!")

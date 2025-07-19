@@ -22,13 +22,17 @@
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export
 #'
+#' @importFrom ggplot2 ggplot aes theme labs element_text element_blank
+#' @importFrom ggplot2 geom_tile scale_fill_gradient theme_minimal
+#' @importFrom ggplot2 margin
+#'
 #' @examples
 #' \donttest{Celltype_annotation_Cellmarker2(seurat_obj = sce.all,
 #'           gene_list = Markers_list_Cellmarker2,
 #'           species = "Human",
-#'           cluster_col = "RNA_snn_res.0.4",
+#'           cluster_col = "seurat_clusters",
 #'           assay = "RNA",
-#'           save_path = "D:/Laboratory/Cellmarkers2.0/"
+#'           save_path = "./SlimR/Celltype_annotation_Cellmarker2/"
 #'           )
 #'           }
 #'

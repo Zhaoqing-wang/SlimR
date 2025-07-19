@@ -20,6 +20,9 @@
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export
 #'
+#' @importFrom utils install.packages
+#' @importFrom stats setNames
+#'
 #' @examples
 #' \donttest{Celltype_annotation_Excel(seurat_obj = sce.all,
 #'           gene_list = Markers_list_Excel,
@@ -39,11 +42,13 @@ Celltype_annotation_Excel <- function(
     save_path = "./SlimR/Celltype_annotation_Excel/",
     metric_names = NULL
 ) {
-  if (!requireNamespace("ggplot2", quietly = TRUE)) install.packages("ggplot2")
-  if (!requireNamespace("patchwork", quietly = TRUE)) install.packages("patchwork")
-  if (!requireNamespace("dplyr", quietly = TRUE)) install.packages("dplyr")
-  if (!requireNamespace("scales", quietly = TRUE)) install.packages("scales")
-  if (!requireNamespace("tidyr", quietly = TRUE)) install.packages("tidyr")
+  required_packages <- c("ggplot2", "patchwork", "dplyr", "scales", "tidyr")
+  for (pkg in required_packages) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      stop(sprintf("Please install the required package: %s", pkg))
+    }
+    library(pkg, character.only = TRUE)
+  }
 
   if (!inherits(seurat_obj, "Seurat")) stop("Input object must be a Seurat object!")
   if (!is.list(gene_list)) stop("Gene list must be a list of data.frames!")

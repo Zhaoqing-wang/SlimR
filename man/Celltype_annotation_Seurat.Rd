@@ -48,9 +48,9 @@ Uses "marker_list" from Seurat object for cell annotation
 \donttest{Celltype_annotation_Seurat(seurat_obj = sce.all,
           gene_list = Markers_list_Seurat,
           species = "Human",
-          cluster_col = "integrated_snn_res.0.3",
+          cluster_col = "seurat_clusters",
           assay = "RNA",
-          save_path = "D:/Laboratory/Seurat/"
+          save_path = "./SlimR/Celltype_annotation_Seurat/"
           )
           }
 

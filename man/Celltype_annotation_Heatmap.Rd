@@ -42,7 +42,7 @@ Uses "marker_list" to generate heatmaps for cell annotation
 \donttest{Celltype_annotation_Heatmap(seurat_obj = sce.all,
           gene_list = Markers_list,
           species = "Human",
-          cluster_col = "RNA_snn_res.0.4",
+          cluster_col = "seurat_clusters",
           assay = "RNA"
           )
           }

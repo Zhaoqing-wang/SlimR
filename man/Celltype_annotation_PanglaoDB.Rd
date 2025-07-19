@@ -48,9 +48,9 @@ Uses "marker_list" from PanglaoDB for cell annotation
 \donttest{Celltype_annotation_PanglaoDB(seurat_obj = sce.all,
           gene_list = Markers_list_panglaoDB,
           species = "Human",
-          cluster_col = "RNA_snn_res.0.4",
+          cluster_col = "seurat_clusters",
           assay = "RNA",
-          save_path = "D:/Laboratory/PanglaoDB/"
+          save_path = "./SlimR/Celltype_annotation_PanglaoDB/"
           )
           }
 

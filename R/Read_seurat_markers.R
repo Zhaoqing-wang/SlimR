@@ -11,6 +11,8 @@
 #' @returns The standardized "Marker_list" in the SlimR package.
 #' @export
 #'
+#' @importFrom utils head
+#'
 #' @examples
 #' \donttest{Markers_list_Seurat <- read_seurat_markers(seurat_markers,
 #'           sort_by = "avg_log2FC",

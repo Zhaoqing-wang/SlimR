@@ -50,9 +50,9 @@ Uses "marker_list" from Cellmarker2 for cell annotation
 \donttest{Celltype_annotation_Cellmarker2(seurat_obj = sce.all,
           gene_list = Markers_list_Cellmarker2,
           species = "Human",
-          cluster_col = "RNA_snn_res.0.4",
+          cluster_col = "seurat_clusters",
           assay = "RNA",
-          save_path = "D:/Laboratory/Cellmarkers2.0/"
+          save_path = "./SlimR/Celltype_annotation_Cellmarker2/"
           )
           }
 
