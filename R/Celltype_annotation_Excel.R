@@ -20,7 +20,6 @@
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export
 #'
-#' @importFrom utils install.packages
 #' @importFrom stats setNames
 #'
 #' @examples

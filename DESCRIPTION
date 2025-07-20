@@ -7,17 +7,17 @@ Authors@R:
            email = c("851091628@qq.com","zhaoqingwang@mail.sdu.edu.cn"),
            comment = c(ORCID = "0000-0001-8348-7245"))
 Description: Provide an R software toolkit for annotating single-cell and 
-    spatial transcriptomic data based on the Marker dataset. It supports the 
-    creation of a unified marker list, "Markers_list", using sources including: 
+    spatial-transcriptomic data based on the Marker dataset. It supports the 
+    creation of a unified marker list, Markers_list, using sources including: 
     the package's built-in curated species-specific cell type and marker 
-    reference databases (e.g., "Cellmarker2", "PanglaoDB"), Seurat objects 
+    reference databases (e.g., 'Cellmarker2', 'PanglaoDB'), Seurat objects 
     containing cell label information, or user-provided Excel tables mapping 
     cell types to markers.
-    Based on the "Markers_list", SlimR can iterate through different cell types 
+    Based on the Markers_list, 'SlimR' can iterate through different cell types 
     to generate corresponding annotation reference plots (e.g., 
-    "Markers_Dotplot", "Metric_Heatmap", "Mean_expression_Box_plot"). 
+    'Markers_Dotplot', 'Metric_Heatmap', 'Mean_expression_Box_plot'). 
     Furthermore, it enables one-click generation of an annotation heatmap 
-    ("Annotation_Heatmap") visualizing the relationship between input cell types
+    ('Annotation_Heatmap') visualizing the relationship between input cell types
     and the reference marker list.
 License: GPL-3
 Encoding: UTF-8
@@ -26,7 +26,7 @@ RoxygenNote: 7.3.2
 Depends: 
     R (>= 3.5)
 LazyData: true
-Date: 2025-07-19
+Date: 2025-07-20
 Imports: 
     cowplot,
     dplyr,
