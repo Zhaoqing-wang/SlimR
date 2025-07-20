@@ -2,9 +2,9 @@
 
 ## Overview
 
-SlimR is an R package designed for annotating single-cell and spatial transcriptomics datasets. It supports the creation of a unified marker list ("Markers_list") using multiple sources including: user-provided Excel tables mapping cell types to markers, Seurat objects containing cell label information, and the package's built-in curated species-specific cell type and marker reference databases (e.g., "Cellmarker2", "PanglaoDB").
+SlimR is an R package designed for annotating single-cell and spatial-transcriptomics datasets. It supports the creation of a unified marker list ('Markers_list') using multiple sources including: user-provided Excel tables mapping cell types to markers, Seurat objects containing cell label information, and the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB').
 
-Based on the "Markers_list", SlimR enables one-click generation of annotation heatmaps ("Annotation_heatmap") visualizing relationships between input cell types and reference marker lists. Additionally, it can iterate through different cell types to generate corresponding annotation reference plots (e.g., "Markers_dotplot", "Metric_heatmap", "Mean_expression_box_plot").
+Based on the Markers_list, 'SlimR' enables one-click generation of annotation heatmaps ('Annotation_heatmap') visualizing relationships between input cell types and reference marker lists. Additionally, it can iterate through different cell types to generate corresponding annotation reference plots (e.g., 'Markers_dotplot', 'Metric_heatmap', 'Mean_expression_box_plot').
 
 ## Table of Contents
 1. [Preparation](#1-preparation)  
@@ -12,7 +12,7 @@ Based on the "Markers_list", SlimR enables one-click generation of annotation he
    - [1.2 Loading SlimR](#12-loading-slimr)  
    - [1.3 Dependencies](#13-dependencies)  
 
-2. [Standardized "Marker_list" Input](#2-standardized-marker_list-input)  
+2. [Standardized Marker_list Input](#2-standardized-marker_list-input)  
    - [2.1 From Excel Tables](#21-from-excel-tables)  
    - [2.2 From Seurat Objects](#22-from-seurat-objects)  
    - [2.3 From Preprocessed Cellmarker2 Database](#23-from-preprocessed-cellmarker2-database)  
@@ -54,7 +54,7 @@ install.packages(c("cowplot", "dplyr", "ggplot2", "patchwork",
                    "tidyr", "tools"))
 ```
 
-## 2. Standardized "Marker_list" Input
+## 2. Standardized Marker_list Input
 SlimR requires a standardized list format for storing marker information, metrics, and corresponding cell types (list names = cell types, first column = markers, subsequent columns = metrics).
 
 ### 2.1 From Excel Tables
