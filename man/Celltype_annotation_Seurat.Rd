@@ -10,7 +10,7 @@ Celltype_annotation_Seurat(
   species,
   cluster_col = "seurat_clusters",
   assay = "RNA",
-  save_path = "./SlimR/Celltype_annotation_Seurat/",
+  save_path = NULL,
   metric_names = NULL
 )
 }

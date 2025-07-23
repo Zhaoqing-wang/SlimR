@@ -42,7 +42,7 @@ Celltype_annotation_Cellmarker2 <- function(
     species,
     cluster_col = "seurat_clusters",
     assay = "RNA",
-    save_path = "./SlimR/Celltype_annotation_Cellmarker2/",
+    save_path = NULL,
     min_counts = 1
 ) {
   if (!requireNamespace("cowplot", quietly = TRUE)) {
@@ -57,6 +57,7 @@ Celltype_annotation_Cellmarker2 <- function(
   if (species != "Human" && species != "Mouse") {
     stop("species must be 'Human' or 'Mouse'")
   }
+  if (missing(save_path)) {stop("Output path must be explicitly specified")}
 
   dir.create(save_path, showWarnings = FALSE)
 

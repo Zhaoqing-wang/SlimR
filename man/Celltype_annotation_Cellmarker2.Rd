@@ -10,7 +10,7 @@ Celltype_annotation_Cellmarker2(
   species,
   cluster_col = "seurat_clusters",
   assay = "RNA",
-  save_path = "./SlimR/Celltype_annotation_Cellmarker2/",
+  save_path = NULL,
   min_counts = 1
 )
 }

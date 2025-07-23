@@ -38,7 +38,7 @@ Celltype_annotation_Seurat <- function(
     species,
     cluster_col = "seurat_clusters",
     assay = "RNA",
-    save_path = "./SlimR/Celltype_annotation_Seurat/",
+    save_path = NULL,
     metric_names = NULL
 ) {
   required_packages <- c("ggplot2", "patchwork", "dplyr", "scales")
@@ -52,6 +52,7 @@ Celltype_annotation_Seurat <- function(
   if (!inherits(seurat_obj, "Seurat")) stop("Input object must be a Seurat object!")
   if (!is.list(gene_list)) stop("Gene list must be a list of data.frames!")
   if (species != "Human" && species != "Mouse") stop("species must be 'Human' or 'Mouse'")
+  if (missing(save_path)) {stop("Output path must be explicitly specified")}
 
   dir.create(save_path, showWarnings = FALSE, recursive = TRUE)
 
