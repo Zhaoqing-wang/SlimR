@@ -50,7 +50,7 @@ Uses "marker_list" from Seurat object for cell annotation
           species = "Human",
           cluster_col = "seurat_clusters",
           assay = "RNA",
-          save_path = "./SlimR/Celltype_annotation_Seurat/"
+          save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Seurat"
           )
           }
 

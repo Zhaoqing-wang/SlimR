@@ -50,7 +50,7 @@ Uses "marker_list" from Excel input for cell annotation
           species = "Human",
           cluster_col = "RNA_snn_res.0.4",
           assay = "RNA",
-          save_path = "D:/Laboratory/Excel/"
+          save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Excel"
           )
           }
 

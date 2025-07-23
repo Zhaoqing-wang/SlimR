@@ -50,7 +50,7 @@ Uses "marker_list" from PanglaoDB for cell annotation
           species = "Human",
           cluster_col = "seurat_clusters",
           assay = "RNA",
-          save_path = "./SlimR/Celltype_annotation_PanglaoDB/"
+          save_path = file.path(tempdir(),"SlimR_Celltype_annotation_PanglaoDB"
           )
           }
 

@@ -32,7 +32,7 @@
 #'           species = "Human",
 #'           cluster_col = "seurat_clusters",
 #'           assay = "RNA",
-#'           save_path = "./SlimR/Celltype_annotation_Bar/"
+#'           save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Box")
 #'           )
 #'           }
 #'
@@ -49,6 +49,10 @@ Celltype_annotation_Box <- function(
   if (!is.list(gene_list)) stop("Gene list must be a list of data.frames!")
   if (species != "Human" && species != "Mouse") stop("species must be 'Human' or 'Mouse'")
   if (missing(save_path)) {stop("Output path must be explicitly specified")}
+  if (!interactive() && !grepl(tempdir(),save_path, fixed = TRUE)) {
+    warning("Writing to non-temporary locations is restricted", immediate. = TRUE)
+    path <- file.path(tempdir(), "fallback_output")
+  }
 
   dir.create(save_path, showWarnings = FALSE, recursive = TRUE)
 
