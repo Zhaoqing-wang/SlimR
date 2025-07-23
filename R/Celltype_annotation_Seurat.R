@@ -67,7 +67,7 @@ Celltype_annotation_Seurat <- function(
   }
 
   for (cell_type in names(gene_list)) {
-    cat("Processing cell type:", cell_type, "\n")
+    message("Processing cell type:", cell_type, "\n")
     current_df <- gene_list[[cell_type]]
 
     if (ncol(current_df) < 4) {
@@ -190,7 +190,7 @@ Celltype_annotation_Seurat <- function(
       width = plot_width,
       limitsize = FALSE
     )
-    cat("Combined plot saved for", cell_type, "\n\n")
+    message("Combined plot saved for", cell_type, "\n\n")
   }
 
   message("Visualization saved to:", normalizePath(save_path))

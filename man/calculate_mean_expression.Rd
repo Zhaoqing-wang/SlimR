@@ -24,10 +24,3 @@ Average expression of genes in the input "Seurat" object given
 \description{
 "Use in package" Counts average expression of gene set and plots Barplot
 }
-\examples{
-\donttest{calculate_mean_expression(sce.all,
-          features = c("CD19","CD79A","MS4A1")
-          )
-          }
-
-}

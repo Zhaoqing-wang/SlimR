@@ -35,7 +35,8 @@
 #' @importFrom stats aggregate
 #'
 #' @examples
-#' \donttest{Markers_list_Cellmarker2 <- Markers_filter_Cellmarker2(Cellmarker2,
+#' Cellmarker2 <- SlimR::Cellmarker2
+#' Markers_list_Cellmarker2 <- Markers_filter_Cellmarker2(Cellmarker2,
 #'           species = "Human",
 #'           tissue_class = "Intestine",
 #'           tissue_type = NULL,
@@ -45,7 +46,6 @@
 #'           marker = NULL,
 #'           counts = NULL
 #'           )
-#'           }
 #'
 Markers_filter_Cellmarker2 <- function(df,
                                        species = NULL,

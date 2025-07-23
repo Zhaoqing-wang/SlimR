@@ -12,11 +12,6 @@
 #'
 #' @importFrom Seurat DefaultAssay DefaultAssay<- CellsByIdentities FetchData
 #'
-#' @examples
-#' \donttest{calculate_mean_expression(sce.all,
-#'           features = c("CD19","CD79A","MS4A1")
-#'           )
-#'           }
 #'
 calculate_mean_expression <- function(object, features,assay = NULL, cluster_col = NULL) {
   assay <- if (is.null(assay)) DefaultAssay(object) else assay

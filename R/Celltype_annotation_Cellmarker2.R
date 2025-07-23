@@ -71,7 +71,7 @@ Celltype_annotation_Cellmarker2 <- function(
   }
 
   for (cell_type in names(gene_list)) {
-    cat("Processing cell type:", cell_type, "\n")
+    message("Processing cell type:", cell_type, "\n")
 
     current_df <- gene_list[[cell_type]]
     if (!all(c("marker", "counts") %in% names(current_df))) {
@@ -210,7 +210,7 @@ Celltype_annotation_Cellmarker2 <- function(
       limitsize = FALSE
     )
 
-    cat("Combined plot saved for", cell_type, "\n\n")
+    message("Combined plot saved for", cell_type, "\n\n")
   }
 
   message("All combined plots saved to:", save_path)

@@ -24,10 +24,3 @@ given "cluster_col" and given "features".
 \description{
 "Use in package" Counts average expression of gene set and plots Boxplot
 }
-\examples{
-\donttest{plot_mean_expression(sce.all,
-          features = c("CD19","CD79A","MS4A1")
-          )
-          }
-
-}
