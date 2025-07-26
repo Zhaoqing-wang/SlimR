@@ -46,13 +46,13 @@ The cell annotation picture is saved in "save_path".
 Uses "marker_list" to generate Box plot for cell annotation
 }
 \examples{
-\donttest{Celltype_annotation_Box(seurat_obj = sce,
-          gene_list = Markers_list,
-          species = "Human",
-          cluster_col = "seurat_clusters",
-          assay = "RNA",
-          save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Box")
-          )
-          }
+\dontrun{Celltype_annotation_Box(seurat_obj = sce,
+         gene_list = Markers_list,
+         species = "Human",
+         cluster_col = "seurat_clusters",
+         assay = "RNA",
+         save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Box")
+         )
+         }
 
 }
