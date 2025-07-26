@@ -19,7 +19,7 @@ The standardized "Marker_list" in the SlimR package.
 Create "Marker_list" from Excel files ".xlsx"
 }
 \examples{
-\donttest{Markers_list_Excel <- read_excel_markers(
+\dontrun{Markers_list_Excel <- read_excel_markers(
          "D:/Laboratory/Marker_load.xlsx"
          )
          }

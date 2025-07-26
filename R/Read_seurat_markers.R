@@ -13,12 +13,16 @@
 #'
 #' @importFrom utils head
 #'
-#' @examples
-#' \donttest{Markers_list_Seurat <- read_seurat_markers(seurat_markers,
+#' @examples library(Seurat)
+#'           data("pbmc_small")
+#'           sce <- pbmc_small
+#'           seurat_markers <- FindAllMarkers(sce,
+#'                                            group.by = "RNA_snn_res.1",
+#'                                            only.pos = TRUE)
+#'           Markers_list_Seurat <- read_seurat_markers(seurat_markers,
 #'           sort_by = "avg_log2FC",
 #'           gene_filter = 10
 #'           )
-#'           }
 #'
 read_seurat_markers <- function(df, sort_by = "avg_log2FC", gene_filter = 20) {
   if (!sort_by %in% c("avg_log2FC", "p_val_adj")) {

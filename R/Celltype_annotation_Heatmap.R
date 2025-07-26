@@ -30,15 +30,15 @@
 #' @importFrom grDevices colorRampPalette
 #'
 #' @examples
-#' \donttest{Celltype_annotation_Heatmap(seurat_obj = sce.all,
-#'           gene_list = Markers_list,
-#'           species = "Human",
-#'           cluster_col = "seurat_clusters",
-#'           assay = "RNA",
-#'           min_expression = 0.1,
-#'           specificity_weight = 3
-#'           )
-#'           }
+#' \dontrun{Celltype_annotation_Heatmap(seurat_obj = sce,
+#'          gene_list = Markers_list,
+#'          species = "Human",
+#'          cluster_col = "seurat_clusters",
+#'          assay = "RNA",
+#'          min_expression = 0.1,
+#'          specificity_weight = 3
+#'          )
+#'          }
 #'
 Celltype_annotation_Heatmap <- function(
     seurat_obj,

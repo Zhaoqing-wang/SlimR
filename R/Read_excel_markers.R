@@ -11,7 +11,7 @@
 #' @importFrom readxl excel_sheets
 #'
 #' @examples
-#' \donttest{Markers_list_Excel <- read_excel_markers(
+#' \dontrun{Markers_list_Excel <- read_excel_markers(
 #'          "D:/Laboratory/Marker_load.xlsx"
 #'          )
 #'          }

@@ -45,13 +45,13 @@ The cell annotation picture is saved in "save_path".
 Uses "marker_list" from Seurat object for cell annotation
 }
 \examples{
-\donttest{Celltype_annotation_Seurat(seurat_obj = sce,
-          gene_list = Markers_list_Seurat,
-          species = "Human",
-          cluster_col = "seurat_clusters",
-          assay = "RNA",
-          save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Seurat"
-          )
-          }
+\dontrun{Celltype_annotation_Seurat(seurat_obj = sce,
+         gene_list = Markers_list_Seurat,
+         species = "Human",
+         cluster_col = "seurat_clusters",
+         assay = "RNA",
+         save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Seurat")
+         )
+         }
 
 }
