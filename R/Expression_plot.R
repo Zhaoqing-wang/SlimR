@@ -1,4 +1,4 @@
-#' "Use in package" Counts average expression of gene set and plots Boxplot
+#' Counts average expression of gene set and plots Boxplot (Use in package)
 #'
 #' @param object Enter a Seurat object.
 #' @param features Enter one or a set of markers.

@@ -9,7 +9,9 @@ Celltype_annotation_Heatmap(
   gene_list,
   species,
   cluster_col = "seurat_clusters",
-  assay = "RNA"
+  assay = "RNA",
+  min_expression = 0.1,
+  specificity_weight = 3
 )
 }
 \arguments{
@@ -29,7 +31,18 @@ of the Seurat object to be annotated. Default parameters use "cluster_col =
 "seurat_clusters"".}
 
 \item{assay}{Enter the assay used by the Seurat object, such as "RNA". Default
-parameters use "assay = "RNA"".}
+parameters use "assay = "RNA".}
+
+\item{min_expression}{The min_expression parameter defines a threshold value to
+determine whether a cell's expression of a feature is considered "expressed"
+or not. It is used to filter out low-expression cells that may contribute
+noise to the analysis. Default parameters use "min_expression = 0.1".}
+
+\item{specificity_weight}{The specificity_weight parameter controls how much the
+expression variability (standard deviation) of a feature within a cluster
+contributes to its "specificity score." It amplifies or suppresses the impact
+of variability in the final score calculation.Default parameters use
+"specificity_weight = 3".}
 }
 \value{
 The heatmap of the comparison between "cluster_col" in the
@@ -43,7 +56,9 @@ Uses "marker_list" to generate heatmaps for cell annotation
           gene_list = Markers_list,
           species = "Human",
           cluster_col = "seurat_clusters",
-          assay = "RNA"
+          assay = "RNA",
+          min_expression = 0.1,
+          specificity_weight = 3
           )
           }
 

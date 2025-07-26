@@ -139,10 +139,12 @@ Markers_list_panglaoDB <- Markers_filter_PanglaoDB(
 Generates a heatmap comparing marker expression across cell clusters:
 ```r
 Celltype_annotation_Heatmap(
-  seurat_obj = sce.all,
+  seurat_obj = sce,
   gene_list = Markers_list,
   species = "Human",
-  cluster_col = "RNA_snn_res.0.4"
+  cluster_col = "seurat_cluster",
+  min_expression = 0.1,
+  specificity_weight = 3
 )
 ```
 
@@ -150,7 +152,7 @@ Celltype_annotation_Heatmap(
 Generates per-cell-type expression box plots:
 ```r
 Celltype_annotation_Box(
-  seurat_obj = sce.all,
+  seurat_obj = sce,
   gene_list = Markers_list, 
   species = "Human",
   cluster_col = "seurat_cluster",
@@ -164,7 +166,7 @@ Celltype_annotation_Box(
 Generates integrated dot plots and metric heatmaps:
 ```r
 Celltype_annotation_Excel(
-  seurat_obj = sce.all,
+  seurat_obj = sce,
   gene_list = Markers_list_Excel,
   species = "Human",
   cluster_col = "seurat_cluster",
@@ -176,7 +178,7 @@ Celltype_annotation_Excel(
 ### 4.2 With Seurat-Based Marker Lists
 ```r
 Celltype_annotation_Seurat(
-  seurat_obj = sce.all,
+  seurat_obj = sce,
   gene_list = Markers_list_Seurat,
   species = "Human",
   cluster_col = "seurat_cluster",
@@ -188,7 +190,7 @@ Celltype_annotation_Seurat(
 ### 4.3 With Cellmarker2 Database
 ```r
 Celltype_annotation_Cellmarker2(
-  seurat_obj = sce.all,
+  seurat_obj = sce,
   gene_list = Markers_list_Cellmarker2,
   species = "Human",
   cluster_col = "seurat_cluster",
@@ -200,7 +202,7 @@ Celltype_annotation_Cellmarker2(
 ### 4.4 With PanglaoDB Database
 ```r
 Celltype_annotation_PanglaoDB(
-  seurat_obj = sce.all,
+  seurat_obj = sce,
   gene_list = Markers_list_panglaoDB,
   species = "Human",
   cluster_col = "seurat_cluster",

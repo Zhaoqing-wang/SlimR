@@ -12,7 +12,16 @@
 #'     of the Seurat object to be annotated. Default parameters use "cluster_col =
 #'     "seurat_clusters"".
 #' @param assay Enter the assay used by the Seurat object, such as "RNA". Default
-#'     parameters use "assay = "RNA"".
+#'     parameters use "assay = "RNA".
+#' @param min_expression The min_expression parameter defines a threshold value to
+#'     determine whether a cell's expression of a feature is considered "expressed"
+#'     or not. It is used to filter out low-expression cells that may contribute
+#'     noise to the analysis. Default parameters use "min_expression = 0.1".
+#' @param specificity_weight The specificity_weight parameter controls how much the
+#'     expression variability (standard deviation) of a feature within a cluster
+#'     contributes to its "specificity score." It amplifies or suppresses the impact
+#'     of variability in the final score calculation.Default parameters use
+#'     "specificity_weight = 3".
 #'
 #' @returns The heatmap of the comparison between "cluster_col" in the
 #'     Seurat object and the given gene set "gene_list" needs to be annotated.
@@ -25,7 +34,9 @@
 #'           gene_list = Markers_list,
 #'           species = "Human",
 #'           cluster_col = "seurat_clusters",
-#'           assay = "RNA"
+#'           assay = "RNA",
+#'           min_expression = 0.1,
+#'           specificity_weight = 3
 #'           )
 #'           }
 #'
@@ -34,7 +45,9 @@ Celltype_annotation_Heatmap <- function(
     gene_list,
     species,
     cluster_col = "seurat_clusters",
-    assay = "RNA"
+    assay = "RNA",
+    min_expression = 0.1,
+    specificity_weight = 3
 ) {
   required_packages <- c("ggplot2", "patchwork", "dplyr", "scales", "tidyr", "gridExtra", "gtable", "grid")
   for (pkg in required_packages) {
@@ -80,12 +93,14 @@ Celltype_annotation_Heatmap <- function(
     gene_order_processed <- valid_data$processed
     gene_order_original <- valid_data$original
 
-    mean_expression <- calculate_mean_expression(object = seurat_obj,
-                                                 cluster_col = cluster_col,
-                                                 assay = assay,
-                                                 features = gene_order_processed)
-    cluster_expr_list[[cell_type]] <- scales::rescale(mean_expression , na.rm = TRUE)
-    message(paste0(cell_type," mean expression calculated","\n"))
+    prob_expression <- calculate_probability(object = seurat_obj,
+                                             cluster_col = cluster_col,
+                                             assay = assay,
+                                             features = gene_order_processed,
+                                             min_expression = min_expression,
+                                             specificity_weight = specificity_weight)
+    cluster_expr_list[[cell_type]] <- prob_expression
+    message(paste0(cell_type," probability calculated","\n"))
   }
 
   expr_matrix <- do.call(rbind, cluster_expr_list)
@@ -93,12 +108,12 @@ Celltype_annotation_Heatmap <- function(
   result_matrix <- t(expr_matrix)
 
   p <- pheatmap::pheatmap(result_matrix,
-                main = "Cell annotation heatmap | SlimR",
-                color = colorRampPalette(c("navy", "white", "firebrick3"))(50),
-                fontsize = 12,
-                cluster_rows = T,
-                cluster_cols = T,
-                legend_breaks = c(0,0.5,1),
-                legend_labels = c("Low", "Median", "High"))
+                          main = "Cell annotation heatmap | SlimR",
+                          color = colorRampPalette(c("navy", "white", "firebrick3"))(50),
+                          fontsize = 12,
+                          cluster_rows = T,
+                          cluster_cols = T,
+                          legend_breaks = c(0,1),
+                          legend_labels = c("Low probability","High probability"))
   return(p)
 }
