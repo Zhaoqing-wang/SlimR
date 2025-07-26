@@ -46,7 +46,7 @@ The cell annotation picture is saved in "save_path".
 Uses "marker_list" to generate Box plot for cell annotation
 }
 \examples{
-\donttest{Celltype_annotation_Box(seurat_obj = sce.all,
+\donttest{Celltype_annotation_Box(seurat_obj = sce,
           gene_list = Markers_list,
           species = "Human",
           cluster_col = "seurat_clusters",

@@ -27,7 +27,7 @@
 #' @importFrom ggplot2 margin
 #'
 #' @examples
-#' \donttest{Celltype_annotation_Cellmarker2(seurat_obj = sce.all,
+#' \donttest{Celltype_annotation_Cellmarker2(seurat_obj = sce,
 #'           gene_list = Markers_list_Cellmarker2,
 #'           species = "Human",
 #'           cluster_col = "seurat_clusters",

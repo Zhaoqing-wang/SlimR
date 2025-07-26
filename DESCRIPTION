@@ -7,7 +7,7 @@ Authors@R:
            email = c("851091628@qq.com","zhaoqingwang@mail.sdu.edu.cn"),
            comment = c(ORCID = "0000-0001-8348-7245"))
 Description: Annotating single-cell and spatial-transcriptomic (ST) data based on the Marker dataset. It supports the creation of a unified marker list, Markers_list, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers.
-    Based on the Markers_list, 'SlimR' can iterate through different cell types to generate corresponding annotation reference plots (e.g., 'Markers_Dotplot', 'Metric_Heatmap', 'Mean_expression_Box_plot'). Furthermore, it enables one-click generation of an annotation heatmap ('Annotation_Heatmap') visualizing the relationship between input cell types and the reference marker list.For more details see Kabacoff (2015, ISBN:9781617291388) and Hu et al. (2023) <doi:10.1093/nar/gkac947> and Franzén et al. (2019) <doi:10.1093/database/baz046>.
+    Based on the Markers_list, 'SlimR' can iterate through different cell types to generate corresponding annotation reference plots (e.g., 'Markers_Dotplot', 'Metric_Heatmap', 'Mean_expression_Box_plot'). Furthermore, it enables one-click generation of an annotation heatmap ('Annotation_Heatmap') visualizing the relationship between input cell types and the reference marker list. For more details see Kabacoff (2015, ISBN:9781617291388) and Hu et al. (2023) <doi:10.1093/nar/gkac947> and Franzén et al. (2019) <doi:10.1093/database/baz046>.
 License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

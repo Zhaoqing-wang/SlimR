@@ -27,7 +27,7 @@
 #' @importFrom dplyr distinct
 #'
 #' @examples
-#' \donttest{Celltype_annotation_Box(seurat_obj = sce.all,
+#' \donttest{Celltype_annotation_Box(seurat_obj = sce,
 #'           gene_list = Markers_list,
 #'           species = "Human",
 #'           cluster_col = "seurat_clusters",

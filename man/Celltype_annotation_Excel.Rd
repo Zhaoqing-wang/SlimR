@@ -45,7 +45,7 @@ The cell annotation picture is saved in "save_path".
 Uses "marker_list" from Excel input for cell annotation
 }
 \examples{
-\donttest{Celltype_annotation_Excel(seurat_obj = sce.all,
+\donttest{Celltype_annotation_Excel(seurat_obj = sce,
           gene_list = Markers_list_Excel,
           species = "Human",
           cluster_col = "RNA_snn_res.0.4",

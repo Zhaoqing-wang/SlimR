@@ -23,7 +23,7 @@
 #' @importFrom dplyr all_of
 #'
 #' @examples
-#' \donttest{Celltype_annotation_Seurat(seurat_obj = sce.all,
+#' \donttest{Celltype_annotation_Seurat(seurat_obj = sce,
 #'           gene_list = Markers_list_Seurat,
 #'           species = "Human",
 #'           cluster_col = "seurat_clusters",

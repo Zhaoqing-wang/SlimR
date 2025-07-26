@@ -23,7 +23,7 @@
 #' @importFrom stats setNames
 #'
 #' @examples
-#' \donttest{Celltype_annotation_Excel(seurat_obj = sce.all,
+#' \donttest{Celltype_annotation_Excel(seurat_obj = sce,
 #'           gene_list = Markers_list_Excel,
 #'           species = "Human",
 #'           cluster_col = "RNA_snn_res.0.4",
