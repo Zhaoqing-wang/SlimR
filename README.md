@@ -45,7 +45,7 @@ Load the package in your R environment:
 library(SlimR)
 ```
 
-### 1.3 Dependencies
+### 1.3 Dependencies (if needed)
 SlimR requires R (≥ 3.5) and depends on the following packages: `cowplot`, `dplyr`, `ggplot2`, `patchwork`, `pheatmap`, `readxl`, `scales`, `Seurat`, `tidyr`, `tools`. Install missing dependencies using:
 ```r
 # Install dependencies if needed:
