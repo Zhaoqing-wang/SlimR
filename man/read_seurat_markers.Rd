@@ -25,14 +25,14 @@ Create "Marker_list" from Seurat object
 }
 \examples{
 library(Seurat)
-          data("pbmc_small")
-          sce <- pbmc_small
-          seurat_markers <- FindAllMarkers(sce,
-                                           group.by = "RNA_snn_res.1",
-                                           only.pos = TRUE)
-          Markers_list_Seurat <- read_seurat_markers(seurat_markers,
-          sort_by = "avg_log2FC",
-          gene_filter = 10
-          )
+data("pbmc_small")
+sce <- pbmc_small
+seurat_markers <- FindAllMarkers(sce,
+    group.by = "RNA_snn_res.1",
+    only.pos = TRUE)
+Markers_list_Seurat <- read_seurat_markers(seurat_markers,
+    sort_by = "avg_log2FC",
+    gene_filter = 10
+    )
 
 }

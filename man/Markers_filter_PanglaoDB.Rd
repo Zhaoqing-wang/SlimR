@@ -27,11 +27,11 @@ Create Marker_list from the PanglaoDB database
 }
 \examples{
 PanglaoDB <- SlimR::PanglaoDB
-          Markers_list_panglaoDB <- Markers_filter_PanglaoDB(
-          PanglaoDB,
-          species_input = 'Human',
-          organ_input = 'GI tract'
-          )
+Markers_list_panglaoDB <- Markers_filter_PanglaoDB(
+    PanglaoDB,
+    species_input = 'Human',
+    organ_input = 'GI tract'
+    )
 
 
 

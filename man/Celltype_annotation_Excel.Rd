@@ -45,13 +45,14 @@ The cell annotation picture is saved in "save_path".
 Uses "marker_list" from Excel input for cell annotation
 }
 \examples{
-\dontrun{Celltype_annotation_Excel(seurat_obj = sce,
-         gene_list = Markers_list_Excel,
-         species = "Human",
-         cluster_col = "RNA_snn_res.0.4",
-         assay = "RNA",
-         save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Excel")
-         )
-         }
+\dontrun{
+Celltype_annotation_Excel(seurat_obj = sce,
+    gene_list = Markers_list_Excel,
+    species = "Human",
+    cluster_col = "RNA_snn_res.0.4",
+    assay = "RNA",
+    save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Excel")
+    )
+    }
 
 }

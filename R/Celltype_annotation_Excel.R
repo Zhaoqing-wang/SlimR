@@ -23,14 +23,15 @@
 #' @importFrom stats setNames
 #'
 #' @examples
-#' \dontrun{Celltype_annotation_Excel(seurat_obj = sce,
-#'          gene_list = Markers_list_Excel,
-#'          species = "Human",
-#'          cluster_col = "RNA_snn_res.0.4",
-#'          assay = "RNA",
-#'          save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Excel")
-#'          )
-#'          }
+#' \dontrun{
+#' Celltype_annotation_Excel(seurat_obj = sce,
+#'     gene_list = Markers_list_Excel,
+#'     species = "Human",
+#'     cluster_col = "RNA_snn_res.0.4",
+#'     assay = "RNA",
+#'     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Excel")
+#'     )
+#'     }
 #'
 Celltype_annotation_Excel <- function(
     seurat_obj,

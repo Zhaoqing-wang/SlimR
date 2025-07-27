@@ -34,18 +34,19 @@
 #'
 #' @importFrom stats aggregate
 #'
-#' @examples Cellmarker2 <- SlimR::Cellmarker2
-#'           Markers_list_Cellmarker2 <- Markers_filter_Cellmarker2(
-#'           Cellmarker2,
-#'           species = "Human",
-#'           tissue_class = "Intestine",
-#'           tissue_type = NULL,
-#'           cancer_type = NULL,
-#'           cell_type = NULL,
-#'           cell_name = NULL,
-#'           marker = NULL,
-#'           counts = NULL
-#'           )
+#' @examples
+#' Cellmarker2 <- SlimR::Cellmarker2
+#' Markers_list_Cellmarker2 <- Markers_filter_Cellmarker2(
+#'     Cellmarker2,
+#'     species = "Human",
+#'     tissue_class = "Intestine",
+#'     tissue_type = NULL,
+#'     cancer_type = NULL,
+#'     cell_type = NULL,
+#'     cell_name = NULL,
+#'     marker = NULL,
+#'     counts = NULL
+#'     )
 #'
 Markers_filter_Cellmarker2 <- function(df,
                                        species = NULL,

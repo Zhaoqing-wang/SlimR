@@ -23,14 +23,15 @@
 #' @importFrom dplyr all_of
 #'
 #' @examples
-#' \dontrun{Celltype_annotation_Seurat(seurat_obj = sce,
-#'          gene_list = Markers_list_Seurat,
-#'          species = "Human",
-#'          cluster_col = "seurat_clusters",
-#'          assay = "RNA",
-#'          save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Seurat")
-#'          )
-#'          }
+#' \dontrun{
+#' Celltype_annotation_Seurat(seurat_obj = sce,
+#'     gene_list = Markers_list_Seurat,
+#'     species = "Human",
+#'     cluster_col = "seurat_clusters",
+#'     assay = "RNA",
+#'     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Seurat")
+#'     )
+#'     }
 #'
 Celltype_annotation_Seurat <- function(
     seurat_obj,

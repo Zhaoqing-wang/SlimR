@@ -23,14 +23,15 @@
 #' @importFrom dplyr all_of
 #'
 #' @examples
-#' \dontrun{Celltype_annotation_PanglaoDB(seurat_obj = sce,
-#'          gene_list = Markers_list_panglaoDB,
-#'          species = "Human",
-#'          cluster_col = "seurat_clusters",
-#'          assay = "RNA",
-#'          save_path = file.path(tempdir(),"SlimR_Celltype_annotation_PanglaoDB")
-#'          )
-#'          }
+#' \dontrun{
+#' Celltype_annotation_PanglaoDB(seurat_obj = sce,
+#'     gene_list = Markers_list_panglaoDB,
+#'     species = "Human",
+#'     cluster_col = "seurat_clusters",
+#'     assay = "RNA",
+#'     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_PanglaoDB")
+#'     )
+#'     }
 #'
 Celltype_annotation_PanglaoDB <- function(
     seurat_obj,

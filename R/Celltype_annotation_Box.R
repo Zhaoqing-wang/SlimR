@@ -27,14 +27,15 @@
 #' @importFrom dplyr distinct
 #'
 #' @examples
-#' \dontrun{Celltype_annotation_Box(seurat_obj = sce,
-#'          gene_list = Markers_list,
-#'          species = "Human",
-#'          cluster_col = "seurat_clusters",
-#'          assay = "RNA",
-#'          save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Box")
-#'          )
-#'          }
+#' \dontrun{
+#' Celltype_annotation_Box(seurat_obj = sce,
+#'     gene_list = Markers_list,
+#'     species = "Human",
+#'     cluster_col = "seurat_clusters",
+#'     assay = "RNA",
+#'     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Box")
+#'     )
+#'     }
 #'
 Celltype_annotation_Box <- function(
     seurat_obj,

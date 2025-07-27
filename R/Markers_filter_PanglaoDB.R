@@ -13,12 +13,13 @@
 #' @returns The standardized "Marker_list" in the SlimR package
 #' @export
 #'
-#' @examples PanglaoDB <- SlimR::PanglaoDB
-#'           Markers_list_panglaoDB <- Markers_filter_PanglaoDB(
-#'           PanglaoDB,
-#'           species_input = 'Human',
-#'           organ_input = 'GI tract'
-#'           )
+#' @examples
+#' PanglaoDB <- SlimR::PanglaoDB
+#' Markers_list_panglaoDB <- Markers_filter_PanglaoDB(
+#'     PanglaoDB,
+#'     species_input = 'Human',
+#'     organ_input = 'GI tract'
+#'     )
 #'
 #'
 #'
