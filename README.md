@@ -2,6 +2,8 @@
 
 ## Overview
 
+<img width="233.28" height="270" alt="base" src="https://github.com/user-attachments/assets/ba535e87-b4c0-46a1-87c9-ab0669acc6f8" align="right"/>
+
 SlimR is an R package designed for annotating single-cell and spatial-transcriptomics (ST) datasets. It supports the creation of a unified marker list ('Markers_list') using multiple sources including: user-provided Excel tables mapping cell types to markers, Seurat objects containing cell label information, and the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB').
 
 Based on the Markers_list, 'SlimR' enables one-click generation of annotation heatmaps ('Annotation_heatmap') visualizing relationships between input cell types and reference marker lists. Additionally, it can iterate through different cell types to generate corresponding annotation reference plots (e.g., 'Markers_dotplot', 'Metric_heatmap', 'Mean_expression_box_plot').
@@ -10,7 +12,7 @@ Based on the Markers_list, 'SlimR' enables one-click generation of annotation he
 1. [Preparation](#1-preparation)  
    - [1.1 Installation](#11-installation)  
    - [1.2 Loading SlimR](#12-loading-slimr)  
-   - [1.3 Dependencies](#13-dependencies)  
+   - [1.3 Dependencies (if installation fails)](13-dependencies-if-installation-fails)  
 
 2. [Standardized Marker_list Input](#2-standardized-marker_list-input)  
    - [2.1 From Excel Tables](#21-from-excel-tables)  
@@ -45,7 +47,7 @@ Load the package in your R environment:
 library(SlimR)
 ```
 
-### 1.3 Dependencies (if needed)
+### 1.3 Dependencies (if installation fails)
 SlimR requires R (≥ 3.5) and depends on the following packages: `cowplot`, `dplyr`, `ggplot2`, `patchwork`, `pheatmap`, `readxl`, `scales`, `Seurat`, `tidyr`, `tools`. Install missing dependencies using:
 ```r
 # Install dependencies if needed:
