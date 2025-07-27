@@ -136,7 +136,7 @@ Markers_list_panglaoDB <- Markers_filter_PanglaoDB(
 
 ## 3. Automated Annotation Workflow
 ### 3.1 Annotation Heatmap
-Generates a heatmap comparing marker expression across cell clusters:
+Generate a heatmap to estimate the likelihood that various cell clusters exhibited similarity to control cell types:
 ```r
 Celltype_annotation_Heatmap(
   seurat_obj = sce,
