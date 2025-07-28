@@ -1,2 +1,5 @@
-^SlimR\.Rproj$
 ^\.Rproj\.user$
+^SlimR\.Rproj$
+^\.Rhistory$
+^\.RData$
+^\.gitignore$
