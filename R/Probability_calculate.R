@@ -79,9 +79,6 @@ calculate_probability <- function(
     weighted.mean(x, w = gene_weights, na.rm = TRUE)
   })
 
-  final_scores <- (cluster_scores - min(cluster_scores)) /
-    (max(cluster_scores) - min(cluster_scores))
-
-  names(final_scores) <- rownames(specificity_matrix)
-  return(final_scores)
+  names(cluster_scores) <- rownames(specificity_matrix)
+  return(cluster_scores)
 }

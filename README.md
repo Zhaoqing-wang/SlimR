@@ -36,7 +36,13 @@ Based on the Markers_list, 'SlimR' enables one-click generation of annotation he
 
 ## 1. Preparation
 ### 1.1 Installation
-Install SlimR directly from GitHub using:
+Install SlimR directly from CRAN using: (Stable version)
+```r
+install.packages("SlimR")
+```
+*Note: Try adjusting the CRAN image to "Global (CDN)" if you encounter a version mismatch during installation.*
+
+Install SlimR directly from GitHub using: (Development version, more recommended)
 ```r
 devtools::install_github("Zhaoqing-wang/SlimR")
 ```

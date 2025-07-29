@@ -106,7 +106,14 @@ Celltype_annotation_Heatmap <- function(
 
   expr_matrix <- do.call(rbind, cluster_expr_list)
 
-  result_matrix <- t(expr_matrix)
+  normalize_row <- function(x) {
+    if (diff(range(x)) == 0) return(rep(0, length(x)))
+    (x - min(x)) / (max(x) - min(x))
+  }
+
+  normalize_matrix <- apply(expr_matrix, 2, normalize_row)
+
+  result_matrix <- t(normalize_matrix)
 
   p <- pheatmap::pheatmap(result_matrix,
                           main = "Cell annotation heatmap | SlimR",
