@@ -149,7 +149,7 @@ TCellSI: A database of T cell markers. Reference: Yang et al. (2024) <doi:10.100
 ```r
 Markers_list_TCellSI <- SlimR::Markers_list_TCellSI
 ```
-*Note: Output usable in sections 3.1, 3.2, 3.3 and 4.4.*
+*Note: 1. Important: This is only for T cell subset annotation. Ensure that the input Seurat object is of T cell type to guarantee the accuracy of the annotation. 2. Output usable in sections 3.1, 3.2, 3.3 and 4.4.*
 
 ## 3. Automated Annotation Workflow
 ### 3.1 Annotation Heatmap
