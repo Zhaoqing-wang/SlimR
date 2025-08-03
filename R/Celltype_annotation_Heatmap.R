@@ -10,9 +10,9 @@
 #'     gene format correction of markers entered by "Marker_list".
 #' @param cluster_col Enter annotation columns such as "seurat_cluster" in meta.data
 #'     of the Seurat object to be annotated. Default parameters use "cluster_col =
-#'     "seurat_clusters"".
+#'     'seurat_clusters'".
 #' @param assay Enter the assay used by the Seurat object, such as "RNA". Default
-#'     parameters use "assay = "RNA".
+#'     parameters use "assay = 'RNA'".
 #' @param min_expression The min_expression parameter defines a threshold value to
 #'     determine whether a cell's expression of a feature is considered "expressed"
 #'     or not. It is used to filter out low-expression cells that may contribute

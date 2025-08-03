@@ -11,7 +11,7 @@ read_seurat_markers(df, sort_by = "avg_log2FC", gene_filter = 20)
 to use parameter "group.by = "Cell_type"" and "only.pos = TRUE".}
 
 \item{sort_by}{Marker sorting parameter, select "avg_log2FC" or "p_val_adj".
-Default parameters use "sort_by = "avg_log2FC"".}
+Default parameters use "sort_by = 'avg_log2FC'".}
 
 \item{gene_filter}{The number of markers left for each cell type based
 on the "sort_by" parameter's level of difference. Default parameters use

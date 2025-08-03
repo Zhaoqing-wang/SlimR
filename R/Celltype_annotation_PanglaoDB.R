@@ -9,11 +9,11 @@
 #'     gene format correction of markers entered by "Marker_list".
 #' @param cluster_col Enter annotation columns such as "seurat_cluster" in meta.data
 #'     of the Seurat object to be annotated. Default parameters use "cluster_col =
-#'     "seurat_clusters"".
+#'     'seurat_clusters'".
 #' @param assay Enter the assay used by the Seurat object, such as "RNA". Default
-#'     parameters use "assay = "RNA"".
-#' @param save_path The output path of the cell annotation picture. Default parameters
-#'     use "save_path = "./SlimR/Celltype_annotation_PanglaoDB/"".
+#'     parameters use "assay = 'RNA'".
+#' @param save_path The output path of the cell annotation picture. Example parameters
+#'     use "save_path = './SlimR/Celltype_annotation_PanglaoDB/'".
 #' @param metric_names Warning: Do not enter information. This parameter is used to
 #'     check if "Marker_list" conforms to the PanglaoDB database output.
 #'

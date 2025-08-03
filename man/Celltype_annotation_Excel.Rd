@@ -30,10 +30,10 @@ of the Seurat object to be annotated. Default parameters use "cluster_col =
 "seurat_clusters"".}
 
 \item{assay}{Enter the assay used by the Seurat object, such as "RNA". Default
-parameters use "assay = "RNA"".}
+parameters use "assay = 'RNA'".}
 
-\item{save_path}{The output path of the cell annotation picture. Default parameters
-use "save_path = "./SlimR/Celltype_annotation_Excel/"".}
+\item{save_path}{The output path of the cell annotation picture. Example parameters
+use "save_path = './SlimR/Celltype_annotation_Excel/'".}
 
 \item{metric_names}{Warning: Do not enter information. This parameter is used to
 check if "Marker_list" conforms to the Excel files output.}
