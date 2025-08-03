@@ -33,6 +33,4 @@ Markers_list_panglaoDB <- Markers_filter_PanglaoDB(
     organ_input = 'GI tract'
     )
 
-
-
 }

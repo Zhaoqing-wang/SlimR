@@ -21,8 +21,6 @@
 #'     organ_input = 'GI tract'
 #'     )
 #'
-#'
-#'
 Markers_filter_PanglaoDB <- function(df, species_input, organ_input) {
   required_columns <- c("species", "official.gene.symbol", "cell.type",
                         "ubiquitousness.index", "organ", "sensitivity_human",

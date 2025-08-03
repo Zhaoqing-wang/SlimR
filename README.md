@@ -6,7 +6,7 @@
 
 SlimR is an R package designed for annotating single-cell and spatial-transcriptomics (ST) datasets. It supports the creation of a unified marker list, Markers_list, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB', 'TCellSI'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers.
 
-Based on the Markers_list, 'SlimR' enables one-click generation of annotation heatmaps ('Annotation_heatmap') visualizing relationships between input cell types and reference marker lists. Additionally, it can iterate through different cell types to generate corresponding annotation reference plots (e.g., 'Markers_dotplot', 'Metric_heatmap', 'Mean_expression_box_plot').
+Based on the Markers_list, 'SlimR' enables one-click generation of annotation heatmaps ('Annotation_heatmap') visualizing relationships between input cell types and reference marker lists. Additionally, it can iterate through different cell types to generate corresponding annotation reference plots (e.g., 'Markers_dotplot', 'Metric_heatmap', 'Markers_box_plot').
 
 ## Table of Contents
 1. [Preparation](#1-preparation)  
@@ -149,7 +149,9 @@ TCellSI: A database of T cell markers. Reference: Yang et al. (2024) <doi:10.100
 ```r
 Markers_list_TCellSI <- SlimR::Markers_list_TCellSI
 ```
-*Note: 1. Important: This is only for T cell subset annotation. Ensure that the input Seurat object is of T cell type to guarantee the accuracy of the annotation. 2. Output usable in sections 3.1, 3.2, 3.3 and 4.4.*
+*Note: 1. Important: This is only for T cell subset annotation. Ensure that the input Seurat object is of T cell type to guarantee the accuracy of the annotation.*
+
+*2. Output usable in sections 3.1, 3.2, 3.3 and 4.4.*
 
 ## 3. Automated Annotation Workflow
 ### 3.1 Annotation Heatmap

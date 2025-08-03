@@ -72,8 +72,13 @@ Celltype_annotation_Seurat <- function(
       )
   }
 
-  for (cell_type in names(gene_list)) {
-    message("Processing cell type:", cell_type, "\n")
+  cell_types <- names(gene_list)
+  total <- length(cell_types)
+
+  for (i in seq_along(cell_types)) {
+    cell_type <- cell_types[i]
+    message(paste0("[", i, "/", total, "] Processing cell type: ", cell_type))
+
     current_df <- gene_list[[cell_type]]
 
     if (ncol(current_df) < 4) {
@@ -112,7 +117,7 @@ Celltype_annotation_Seurat <- function(
 
     num_clusters <- length(unique(Seurat::Idents(seurat_obj)))
     num_genes <- length(gene_order)
-    plot_height <- max(6, num_clusters * 0.5) + 2
+    plot_height <- max(6, num_clusters * 0.8) + 2
     plot_width <- max(10, num_genes * 0.4)
 
     dp <- Seurat::DotPlot(
@@ -196,8 +201,8 @@ Celltype_annotation_Seurat <- function(
       width = plot_width,
       limitsize = FALSE
     )
-    message("Combined plot saved for", cell_type, "\n\n")
+    message(paste0("[", i, "/", total, "] Combined plot saved for: ", cell_type),"\n")
   }
 
-  message("Visualization saved to:", normalizePath(save_path))
+  message("Visualization saved to: ", normalizePath(save_path))
 }

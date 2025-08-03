@@ -49,7 +49,7 @@ Uses "marker_list" from Excel input for cell annotation
 Celltype_annotation_Excel(seurat_obj = sce,
     gene_list = Markers_list_Excel,
     species = "Human",
-    cluster_col = "RNA_snn_res.0.4",
+    cluster_col = "seurat_clusters",
     assay = "RNA",
     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Excel")
     )

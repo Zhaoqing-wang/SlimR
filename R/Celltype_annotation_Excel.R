@@ -27,7 +27,7 @@
 #' Celltype_annotation_Excel(seurat_obj = sce,
 #'     gene_list = Markers_list_Excel,
 #'     species = "Human",
-#'     cluster_col = "RNA_snn_res.0.4",
+#'     cluster_col = "seurat_clusters",
 #'     assay = "RNA",
 #'     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Excel")
 #'     )
@@ -72,8 +72,13 @@ Celltype_annotation_Excel <- function(
       )
   }
 
-  for (cell_type in names(gene_list)) {
-    message("Processing cell type:", cell_type, "\n")
+  cell_types <- names(gene_list)
+  total <- length(cell_types)
+
+  for (i in seq_along(cell_types)) {
+    cell_type <- cell_types[i]
+    message(paste0("[", i, "/", total, "] Processing cell type: ", cell_type))
+
     current_df <- gene_list[[cell_type]]
 
     if (ncol(current_df) < 1) {
@@ -106,7 +111,7 @@ Celltype_annotation_Excel <- function(
 
     num_clusters <- length(unique(Seurat::Idents(seurat_obj)))
     num_genes <- length(gene_order_original)
-    plot_height <- max(6, num_clusters * 0.5) + 2
+    plot_height <- max(6, num_clusters * 0.8) + 2
     plot_width <- max(10, num_genes * 0.4)
 
     dp <- Seurat::DotPlot(
@@ -158,7 +163,7 @@ Celltype_annotation_Excel <- function(
         dplyr::ungroup()
 
       num_metrics <- length(metric_cols)
-      heatmap_height_ratio <- min(0.5, max(0.15, 0.1 * num_metrics))
+      heatmap_height_ratio <- min(0.3, max(0.15, 0.07 * num_metrics))
 
       hp <- ggplot2::ggplot(
         metric_long,
@@ -181,7 +186,6 @@ Celltype_annotation_Excel <- function(
           panel.background = ggplot2::element_blank(),
         )
 
-      # Combine plots
       combined_plot <- patchwork::wrap_plots(
         dp,
         hp,
@@ -198,8 +202,8 @@ Celltype_annotation_Excel <- function(
       width = plot_width,
       limitsize = FALSE
     )
-    message("Combined plot saved for", cell_type, "\n\n")
+    message(paste0("[", i, "/", total, "] Combined plot saved for: ", cell_type),"\n")
   }
 
-  message("Visualization saved to:", normalizePath(save_path))
+  message("Visualization saved to: ", normalizePath(save_path))
 }

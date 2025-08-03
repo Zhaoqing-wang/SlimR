@@ -76,8 +76,12 @@ Celltype_annotation_Cellmarker2 <- function(
     return(paste(first_char, rest, sep = ""))
   }
 
-  for (cell_type in names(gene_list)) {
-    message("Processing cell type:", cell_type, "\n")
+  cell_types <- names(gene_list)
+  total <- length(cell_types)
+
+  for (i in seq_along(cell_types)) {
+    cell_type <- cell_types[i]
+    message(paste0("[", i, "/", total, "] Processing cell type: ", cell_type))
 
     current_df <- gene_list[[cell_type]]
     if (!all(c("marker", "counts") %in% names(current_df))) {
@@ -135,7 +139,7 @@ Celltype_annotation_Cellmarker2 <- function(
     num_idents <- length(unique(Idents(seurat_obj)))
     num_genes <- length(valid_features)
 
-    plot_height <- max(6, num_idents * 0.5)
+    plot_height <- max(6, num_idents * 0.8) + 1
     plot_width <- max(8, num_genes * 0.3)
 
     dp <- Seurat::DotPlot(
@@ -216,8 +220,8 @@ Celltype_annotation_Cellmarker2 <- function(
       limitsize = FALSE
     )
 
-    message("Combined plot saved for", cell_type, "\n\n")
+    message(paste0("[", i, "/", total, "] Combined plot saved for: ", cell_type),"\n")
   }
 
-  message("All combined plots saved to:", save_path)
+  message("Visualization saved to: ", normalizePath(save_path))
 }

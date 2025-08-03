@@ -63,8 +63,14 @@ Celltype_annotation_Heatmap <- function(
   if (species != "Human" && species != "Mouse") stop("species must be 'Human' or 'Mouse'")
 
   cluster_expr_list <- list()
-  for (cell_type in names(gene_list)) {
-    message("Processing cell type:", cell_type)
+
+  cell_types <- names(gene_list)
+  total <- length(cell_types)
+
+  for (i in seq_along(cell_types)) {
+    cell_type <- cell_types[i]
+    message(paste0("[", i, "/", total, "] Processing cell type: ", cell_type))
+
     current_df <- gene_list[[cell_type]]
 
     if (ncol(current_df) < 1) {
@@ -101,7 +107,7 @@ Celltype_annotation_Heatmap <- function(
                                              min_expression = min_expression,
                                              specificity_weight = specificity_weight)
     cluster_expr_list[[cell_type]] <- prob_expression
-    message(paste0(cell_type," probability calculated","\n"))
+    message(paste0("[", i, "/", total, "] ", cell_type)," characteristic genes expression calculated. \n")
   }
 
   expr_matrix <- do.call(rbind, cluster_expr_list)

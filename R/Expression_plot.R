@@ -58,18 +58,27 @@ plot_mean_expression <- function(object, features, assay = NULL, cluster_col = N
 
   cluster_avg_exp <- expr_df %>%
     group_by(cluster) %>%
-    summarise(avg_cluster_exp = mean(mean_expression), .groups = "drop")
+    summarise(Avg_exp = mean(mean_expression), .groups = "drop")
 
   expr_df <- left_join(expr_df, cluster_avg_exp, by = "cluster")
 
-  p <- ggplot(expr_df, aes(x = cluster, y = mean_expression, color = avg_cluster_exp, fill = avg_cluster_exp)) +
+  split_and_format_features <- function(features, n_per_line = 10) {
+    if (length(features) == 0) return("")
+    feature_groups <- split(features, ceiling(seq_along(features) / n_per_line))
+    formatted_lines <- lapply(feature_groups, function(group) {
+      paste(group, collapse = ", ")
+    })
+    paste(formatted_lines, collapse = "\n")
+  }
+
+  p <- ggplot(expr_df, aes(x = cluster, y = mean_expression, color = Avg_exp, fill = Avg_exp)) +
     geom_boxplot(outlier.shape = NA, width = 0.6) +
     geom_point(position = position_dodge(width = 0.6), size = 2, stroke = 0) +
     scale_color_gradient(low = "lightgrey", high = "dodgerblue") +
     scale_fill_gradient(low = "lightgrey", high = "dodgerblue") +
     labs(
-      title = "Gene Expression per Cluster",
-      subtitle = paste("Features:", paste(features, collapse = ", ")),
+      title = "Gene Expression per Cluster | SlimR",
+      subtitle = paste("Features:", split_and_format_features(features, n_per_line = 10)),
       x = "Cell Cluster",
       y = "Mean Expression"
     ) +
