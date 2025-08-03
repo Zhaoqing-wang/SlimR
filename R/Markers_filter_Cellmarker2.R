@@ -22,12 +22,6 @@
 #'     The input can be retrieved by "Cellmarkers2_table". For more information,
 #'     please refer to http://117.50.127.228/CellMarker/ on Cellmarkers2's official
 #'     website.
-#' @param cell_name Warning: Do not enter information, this parameter is used to return
-#'     results for saving
-#' @param marker Warning: Do not enter information, this parameter is used to return
-#'     results for saving
-#' @param counts Warning: Do not enter information, this parameter is used to return
-#'     results for saving
 #'
 #' @returns The standardized "Marker_list" in the SlimR package
 #' @export
@@ -42,10 +36,7 @@
 #'     tissue_class = "Intestine",
 #'     tissue_type = NULL,
 #'     cancer_type = NULL,
-#'     cell_type = NULL,
-#'     cell_name = NULL,
-#'     marker = NULL,
-#'     counts = NULL
+#'     cell_type = NULL
 #'     )
 #'
 Markers_filter_Cellmarker2 <- function(df,
@@ -53,13 +44,10 @@ Markers_filter_Cellmarker2 <- function(df,
                                        tissue_class = NULL,
                                        tissue_type = NULL,
                                        cancer_type = NULL,
-                                       cell_type = NULL,
-                                       cell_name = NULL,
-                                       marker = NULL,
-                                       counts = NULL) {
+                                       cell_type = NULL) {
 
   required_columns <- c("species", "tissue_class", "tissue_type", "cancer_type",
-                        "cell_type", "cell_name", "marker", "counts")
+                        "cell_type")
 
   if (!all(required_columns %in% colnames(df))) {
     stop("Data frame missing necessary columns! Please make sure to include the following: ",
@@ -72,9 +60,6 @@ Markers_filter_Cellmarker2 <- function(df,
   if (!is.null(tissue_type)) filters$tissue_type <- tissue_type
   if (!is.null(cancer_type)) filters$cancer_type <- cancer_type
   if (!is.null(cell_type)) filters$cell_type <- cell_type
-  if (!is.null(cell_name)) filters$cell_name <- cell_name
-  if (!is.null(marker)) filters$marker <- marker
-  if (!is.null(counts)) filters$counts <- counts
 
   filtered_df <- df
   for (col in names(filters)) {

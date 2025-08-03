@@ -85,10 +85,7 @@ Markers_list_Cellmarker2 <- Markers_filter_Cellmarker2(
   tissue_class = "Intestine",
   tissue_type = NULL,
   cancer_type = NULL,
-  cell_type = NULL,
-  cell_name = NULL,
-  marker = NULL,
-  counts = NULL
+  cell_type = NULL
 )
 ```
 *Note: Output usable in sections 3.1, 3.2, 3.3 and 4.1.*

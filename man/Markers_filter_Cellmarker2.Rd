@@ -10,10 +10,7 @@ Markers_filter_Cellmarker2(
   tissue_class = NULL,
   tissue_type = NULL,
   cancer_type = NULL,
-  cell_type = NULL,
-  cell_name = NULL,
-  marker = NULL,
-  counts = NULL
+  cell_type = NULL
 )
 }
 \arguments{
@@ -44,15 +41,6 @@ website.}
 The input can be retrieved by "Cellmarkers2_table". For more information,
 please refer to http://117.50.127.228/CellMarker/ on Cellmarkers2's official
 website.}
-
-\item{cell_name}{Warning: Do not enter information, this parameter is used to return
-results for saving}
-
-\item{marker}{Warning: Do not enter information, this parameter is used to return
-results for saving}
-
-\item{counts}{Warning: Do not enter information, this parameter is used to return
-results for saving}
 }
 \value{
 The standardized "Marker_list" in the SlimR package
@@ -68,10 +56,7 @@ Markers_list_Cellmarker2 <- Markers_filter_Cellmarker2(
     tissue_class = "Intestine",
     tissue_type = NULL,
     cancer_type = NULL,
-    cell_type = NULL,
-    cell_name = NULL,
-    marker = NULL,
-    counts = NULL
+    cell_type = NULL
     )
 
 }
