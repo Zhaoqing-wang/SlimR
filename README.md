@@ -6,13 +6,13 @@
 
 SlimR is an R package designed for annotating single-cell and spatial-transcriptomics (ST) datasets. It supports the creation of a unified marker list, Markers_list, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB', 'TCellSI'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers.
 
-Based on the Markers_list, 'SlimR' enables one-click generation of annotation heatmaps ('Annotation_heatmap') visualizing relationships between input cell types and reference marker lists. Additionally, it can iterate through different cell types to generate corresponding annotation reference plots (e.g., 'Markers_dotplot', 'Metric_heatmap', 'Markers_box_plot').
+Based on the Markers_list, SlimR can calculate the gene expression of different cell types and predict the annotation information ('Celltype_Calculate') with one click, and annotate it with one click ('Celltype_Annotation'). At the same time, it can calculate the gene expression corresponding to the cell type to generate the corresponding Annotation reference map for manual annotation (for example, 'Annotation_heatmap', 'Annotation Dot Plot', 'Annotation Box plot', 'Metric heatmap').
 
 ## Table of Contents
 1. [Preparation](#1-preparation)  
    - [1.1 Installation](#11-installation)  
    - [1.2 Loading SlimR](#12-loading-slimr)  
-   - [1.3 Dependencies (if installation fails)](13-dependencies-if-installation-fails)  
+   - [1.3 Dependencies (if installation fails)](#13-dependencies-if-installation-fails)  
 
 2. [Standardized Marker_list Input](#2-standardized-marker_list-input)  
    - [2.1 From Preprocessed Cellmarker2 Database](#21-from-preprocessed-cellmarker2-database)  
@@ -21,18 +21,17 @@ Based on the Markers_list, 'SlimR' enables one-click generation of annotation he
    - [2.4 From Excel Tables](#24-from-excel-tables)  
    - [2.5 From TCellSI](#25-from-tcellsi)  
 
-3. [Automated Annotation Workflow](#3-automated-annotation-workflow)  
-   - [3.1 Annotation Heatmap](#31-annotation-heatmap)  
-   - [3.2 Annotation Dot Plot](#32-annotation-dot-plot) 
-   - [3.3 Annotation Box Plot](#33-annotation-box-plot)  
+3. [Automated Annotation Workflow](#3-automated-annotation-workflow) 
+   - [3.1 Calculate Celltype](#31-calculate-celltype)  
+   - [3.2 Annotation Celltype](#32-annotation-celltype) 
 
 4. [Semi-Automated Annotation Workflow](#4-semi-automated-annotation-workflow)  
-   - [4.1 With Cellmarker2 Database](#41-with-cellmarker2-database)  
-   - [4.2 With PanglaoDB Database](#42-with-panglaodb-database)  
-   - [4.3 With Seurat-Based Marker Lists](#43-with-seurat-based-marker-lists)  
-   - [4.4 With Excel-Based Marker Lists](#44-with-excel-based-marker-lists)  
+   - [4.1 Annotation Heatmap](#41-annotation-heatmap)  
+   - [4.2 Annotation Dot Plot](#42-annotation-dot-plot) 
+   - [4.3 Annotation Box Plot](#43-annotation-box-plot)
 
-5. [Conclusion](#5-conclusion)
+5. [Other functions provided by SlimR](#5-other-functions-provided-by-slimr)
+6. [Conclusion](#6-conclusion)
 
 ---
 
@@ -88,7 +87,7 @@ Markers_list_Cellmarker2 <- Markers_filter_Cellmarker2(
   cell_type = NULL
 )
 ```
-*Note: Output usable in sections 3.1, 3.2, 3.3 and 4.1.*
+*Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.1.*
 
 ### 2.2 From Preprocessed PanglaoDB Database
 Load the database:
@@ -108,7 +107,7 @@ Markers_list_panglaoDB <- Markers_filter_PanglaoDB(
   organ_input = 'GI tract'
 )
 ```
-*Note: Output usable in sections 3.1, 3.2, 3.3 and 4.2.*
+*Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.2.*
 
 ### 2.3 From Seurat Objects
 First identify cluster features:
@@ -127,7 +126,7 @@ Markers_list_Seurat <- read_seurat_markers(
   gene_filter = 10
 )
 ```
-*Note: Output usable in sections 3.1, 3.2, 3.3 and 4.3.*
+*Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.3.*
 
 ### 2.4 From Excel Tables
 **Format Requirements**:  
@@ -139,7 +138,7 @@ Markers_list_Seurat <- read_seurat_markers(
 ```r
 Markers_list_Excel <- read_excel_markers("D:/Laboratory/Marker_load.xlsx")
 ```
-*Note: Output usable in sections 3.1, 3.2, 3.3 and 4.4.*
+*Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4.*
 
 ### 2.5 From TCellSI
 TCellSI: A database of T cell markers. Reference: Yang et al. (2024) <doi:10.1002/imt2.231>
@@ -148,10 +147,36 @@ Markers_list_TCellSI <- SlimR::Markers_list_TCellSI
 ```
 *Note: 1. Important: This is only for T cell subset annotation. Ensure that the input Seurat object is of T cell type to guarantee the accuracy of the annotation.*
 
-*2. Output usable in sections 3.1, 3.2, 3.3 and 4.4.*
+*2. Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4.*
 
 ## 3. Automated Annotation Workflow
-### 3.1 Annotation Heatmap
+### 3.1 Calculate Celltype
+Uses "marker_list" to calculate probability, prediction results and generate heatmap for cell annotation.
+```r
+SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
+    gene_list = Markers_list,
+    species = "Human",
+    cluster_col = "seurat_clusters",
+    assay = "RNA",
+    min_expression = 0.1,
+    specificity_weight = 3
+    )
+```
+*Note: Important: The parameter "cluster_col" in the function "Celltype_Calculate" and the function "Celltype_Annotation" must be strictly the same to avoid false matches.*
+
+### 3.2 Annotation Celltype
+Assigns SlimR predicted cell types to the Seurat object based on cluster annotations, and stores the results in the meta.data slot.
+```r
+sce <- Celltype_Annotation(seurat_obj = sce,
+    cluster_col = "seurat_clusters",
+    SlimR_anno_result = SlimR_anno_result
+    )
+```
+*Note: Important: The parameter "cluster_col" in the function "Celltype_Calculate" and the function "Celltype_Annotation" must be strictly the same to avoid false matches.*
+
+
+## 4. Semi-Automated Annotation Workflow
+### 4.1 Annotation Heatmap
 Generate a heatmap to estimate the likelihood that various cell clusters exhibited similarity to control cell types:
 ```r
 Celltype_annotation_Heatmap(
@@ -164,7 +189,7 @@ Celltype_annotation_Heatmap(
 )
 ```
 
-### 3.2 Annotation Dot Plot
+### 4.2 Annotation Dot Plot
 Generates per-cell-type expression dot plots:
 ```r
 Celltype_annotation_Dotplot(
@@ -176,7 +201,7 @@ Celltype_annotation_Dotplot(
   )
 ```
 
-### 3.3 Annotation Box Plot
+### 4.3 Annotation Box Plot
 Generates per-cell-type expression box plots:
 ```r
 Celltype_annotation_Box(
@@ -189,8 +214,8 @@ Celltype_annotation_Box(
 )
 ```
 
-## 4. Semi-Automated Annotation Workflow
-### 4.1 With Cellmarker2 Database
+## 5. Other functions provided by SlimR
+### 5.1 Dot plot With Cellmarker2 Database
 ```r
 Celltype_annotation_Cellmarker2(
   seurat_obj = sce,
@@ -198,11 +223,11 @@ Celltype_annotation_Cellmarker2(
   species = "Human",
   cluster_col = "seurat_cluster",
   assay = "RNA",
-  save_path = "./SlimR/Celltype_annotation_Cellmarkers2.0/"
+  save_path = "./SlimR/Celltype_annotation_Cellmarkers2/"
 )
 ```
 
-### 4.2 With PanglaoDB Database
+### 5.2 Dot plot With PanglaoDB Database
 ```r
 Celltype_annotation_PanglaoDB(
   seurat_obj = sce,
@@ -214,7 +239,7 @@ Celltype_annotation_PanglaoDB(
 )
 ```
 
-### 4.3 With Seurat-Based Marker Lists
+### 5.3 Dot plot With Seurat-Based Marker Lists
 ```r
 Celltype_annotation_Seurat(
   seurat_obj = sce,
@@ -226,7 +251,7 @@ Celltype_annotation_Seurat(
 )
 ```
 
-### 4.4 With Excel-Based Marker Lists
+### 5.4 Dot plot With Excel-Based Marker Lists
 Generates integrated dot plots and metric heatmaps:
 ```r
 Celltype_annotation_Excel(
@@ -238,7 +263,7 @@ Celltype_annotation_Excel(
   save_path = "./SlimR/Celltype_annotation_Excel/"
 )
 ```
-## 5. Conclusion
+## 6. Conclusion
 Thank you for using SlimR. For questions, issues, or suggestions, please contact:
 
 **Zhaoqing Wang**  
