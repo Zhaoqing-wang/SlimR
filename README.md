@@ -19,7 +19,7 @@ Based on the Markers_list, SlimR can calculate gene expression of different cell
    - [2.2 From Preprocessed PanglaoDB Database](#22-from-preprocessed-panglaodb-database)  
    - [2.3 From Seurat Objects](#23-from-seurat-objects)  
    - [2.4 From Excel Tables](#24-from-excel-tables)  
-   - [2.5 From TCellSI](#25-from-tcellsi)  
+   - [2.5 From TCellSI Database](#25-from-tcellsi-database)  
 
 3. [Automated Annotation Workflow](#3-automated-annotation-workflow) 
    - [3.1 Calculate Celltype](#31-calculate-celltype)  
@@ -140,14 +140,12 @@ Markers_list_Excel <- read_excel_markers("D:/Laboratory/Marker_load.xlsx")
 ```
 *Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4.*
 
-### 2.5 From TCellSI
+### 2.5 From TCellSI Database
 TCellSI: A database of T cell markers. Reference: Yang et al. (2024) <doi:10.1002/imt2.231>
 ```r
 Markers_list_TCellSI <- SlimR::Markers_list_TCellSI
 ```
-*Note: 1. Important: This is only for T cell subset annotation. Ensure that the input Seurat object is of T cell type to guarantee the accuracy of the annotation.*
-
-*2. Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4.*
+*Important: This is only for T cell subset annotation. Ensure that the input Seurat object is of T cell type to guarantee the accuracy of the annotation. Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4.*
 
 ## 3. Automated Annotation Workflow
 ### 3.1 Calculate Celltype
@@ -162,7 +160,7 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     specificity_weight = 3
     )
 ```
-*Note: Important: The parameter "cluster_col" in the function "Celltype_Calculate" and the function "Celltype_Annotation" must be strictly the same to avoid false matches.*
+*Important: The parameter "cluster_col" in the function "Celltype_Calculate" and the function "Celltype_Annotation" must be strictly the same to avoid false matches.*
 
 ### 3.2 Annotation Celltype
 Assigns SlimR predicted cell types to the Seurat object based on cluster annotations, and stores the results in the meta.data slot.
@@ -172,7 +170,7 @@ sce <- Celltype_Annotation(seurat_obj = sce,
     SlimR_anno_result = SlimR_anno_result
     )
 ```
-*Note: Important: The parameter "cluster_col" in the function "Celltype_Calculate" and the function "Celltype_Annotation" must be strictly the same to avoid false matches.*
+*Important: The parameter "cluster_col" in the function "Celltype_Calculate" and the function "Celltype_Annotation" must be strictly the same to avoid false matches.*
 
 
 ## 4. Semi-Automated Annotation Workflow
