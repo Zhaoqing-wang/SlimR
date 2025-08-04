@@ -2,7 +2,7 @@
 % Please edit documentation in R/Celltype_Calculate.R
 \name{Celltype_Calculate}
 \alias{Celltype_Calculate}
-\title{Uses "marker_list" to calculate probability and generate heatmap for cell annotation}
+\title{Uses "marker_list" to calculate probability, prediction results and generate heatmap for cell annotation}
 \usage{
 Celltype_Calculate(
   seurat_obj,
@@ -51,10 +51,10 @@ of variability in the final score calculation.Default parameters use
 }
 \value{
 A list containing the gene expression matrix, the corresponding probability
-matrix, and the cell annotation probability heatmap
+matrix, prediction results, and the cell annotation probability heatmap
 }
 \description{
-Uses "marker_list" to calculate probability and generate heatmap for cell annotation
+Uses "marker_list" to calculate probability, prediction results and generate heatmap for cell annotation
 }
 \examples{
 \dontrun{
