@@ -1,4 +1,4 @@
-#' Uses "marker_list" to calculate probability and generate heatmap for cell annotation
+#' Uses "marker_list" to calculate probability, prediction results and generate heatmap for cell annotation
 #'
 #' @param seurat_obj Enter the Seurat object with annotation columns such as
 #'     "seurat_cluster" in meta.data to be annotated.
@@ -27,7 +27,7 @@
 #'     (the default parameter is 0.8).
 #'
 #' @returns A list containing the gene expression matrix, the corresponding probability
-#'     matrix, and the cell annotation probability heatmap
+#'     matrix, prediction results, and the cell annotation probability heatmap
 #' @export
 #' @family Celltype_annotation
 #'
