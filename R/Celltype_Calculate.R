@@ -1,4 +1,4 @@
-#' Uses "marker_list" to generate heatmap for cell annotation
+#' Uses "marker_list" to calculate probability and generate heatmap for cell annotation
 #'
 #' @param seurat_obj Enter the Seurat object with annotation columns such as
 #'     "seurat_cluster" in meta.data to be annotated.
@@ -22,17 +22,20 @@
 #'     contributes to its "specificity score." It amplifies or suppresses the impact
 #'     of variability in the final score calculation.Default parameters use
 #'     "specificity_weight = 3".
+#' @param threshold This parameter refers to the normalized similarity between the
+#'     "alternative cell type" and the "predicted cell type" in the returned results
+#'     (the default parameter is 0.8).
 #'
-#' @returns The heatmap of the comparison between "cluster_col" in the
-#'     Seurat object and the given gene set "gene_list" needs to be annotated.
+#' @returns A list containing the gene expression matrix, the corresponding probability
+#'     matrix, and the cell annotation probability heatmap
 #' @export
-#' @family Cell_annotation
+#' @family Celltype_annotation
 #'
 #' @importFrom grDevices colorRampPalette
 #'
 #' @examples
 #' \dontrun{
-#' Celltype_annotation_Heatmap(seurat_obj = sce,
+#' SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
 #'     gene_list = Markers_list,
 #'     species = "Human",
 #'     cluster_col = "seurat_clusters",
@@ -42,14 +45,15 @@
 #'     )
 #'     }
 #'
-Celltype_annotation_Heatmap <- function(
+Celltype_Calculate <- function(
     seurat_obj,
     gene_list,
     species,
     cluster_col = "seurat_clusters",
     assay = "RNA",
     min_expression = 0.1,
-    specificity_weight = 3
+    specificity_weight = 3,
+    threshold = 0.8
 ) {
   required_packages <- c("ggplot2", "patchwork", "dplyr", "scales", "tidyr", "gridExtra", "gtable", "grid")
   for (pkg in required_packages) {
@@ -130,5 +134,43 @@ Celltype_annotation_Heatmap <- function(
                           cluster_cols = T,
                           legend_breaks = c(0,1),
                           legend_labels = c("Low probability","High probability"))
-  return(p)
+
+  generate_prediction_table <- function(df, threshold = 0.8) {
+    clusters <- rownames(df)
+    predicted_cell_types <- vector("character", length = length(clusters))
+    alternative_cell_types <- vector("character", length = length(clusters))
+    for (i in seq_along(clusters)) {
+      cluster <- clusters[i]
+      row_values <- as.numeric(unlist(df[i, ]))
+      cell_types <- names(df[i, ])
+      max_index <- which.max(row_values)
+      predicted <- cell_types[max_index]
+      alt <- cell_types[row_values > threshold & cell_types != predicted]
+      alt_str <- if (length(alt) > 0) paste(alt, collapse = "; ") else NA_character_
+      predicted_cell_types[i] <- predicted
+      alternative_cell_types[i] <- alt_str
+    }
+    result_df <- data.frame(
+      cluster_col = clusters,
+      Predicted_cell_type = predicted_cell_types,
+      Alternative_cell_types = alternative_cell_types,
+      stringsAsFactors = FALSE,
+      row.names = NULL
+    )
+    return(result_df)
+  }
+
+  expression_matrix = as.data.frame(t(expr_matrix))
+  probability_matrix = as.data.frame(result_matrix)
+
+  prediction_results <- generate_prediction_table(
+    probability_matrix,
+    threshold = threshold)
+
+  heatmap_plot = p
+
+  return(list(Expression_matrix = expression_matrix,
+              Probability_matrix = probability_matrix,
+              Prediction_results = prediction_results,
+              Heatmap_plot = heatmap_plot))
 }
