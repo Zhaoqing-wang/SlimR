@@ -92,4 +92,13 @@ Celltype_annotation_Dotplot(seurat_obj = sce,
 }
 
 }
-\concept{cell_annotation}
+\seealso{
+Other Cell_annotation: 
+\code{\link{Celltype_annotation_Box}()},
+\code{\link{Celltype_annotation_Cellmarker2}()},
+\code{\link{Celltype_annotation_Excel}()},
+\code{\link{Celltype_annotation_Heatmap}()},
+\code{\link{Celltype_annotation_PanglaoDB}()},
+\code{\link{Celltype_annotation_Seurat}()}
+}
+\concept{Cell_annotation}

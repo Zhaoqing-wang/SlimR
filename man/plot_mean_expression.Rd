@@ -24,3 +24,8 @@ given "cluster_col" and given "features".
 \description{
 Counts average expression of gene set and plots Boxplot (Use in package)
 }
+\seealso{
+Other Use_in_packages: 
+\code{\link{calculate_probability}()}
+}
+\concept{Use_in_packages}

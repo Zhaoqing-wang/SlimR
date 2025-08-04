@@ -19,6 +19,7 @@
 #'
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export
+#' @family Cell_annotation
 #'
 #' @importFrom stats setNames
 #'

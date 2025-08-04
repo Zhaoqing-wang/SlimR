@@ -19,6 +19,8 @@
 #' @returns Average expression of genes in the input "Seurat" object given
 #'     "cluster_col" and given "features".
 #'
+#' @family Use_in_packages
+#'
 #' @importFrom Seurat DefaultAssay DefaultAssay<- CellsByIdentities FetchData
 #' @importFrom stats sd weighted.mean
 #'

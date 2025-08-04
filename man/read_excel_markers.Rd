@@ -26,3 +26,10 @@ Markers_list_Excel <- read_excel_markers(
     }
 
 }
+\seealso{
+Other Markers_list_generation: 
+\code{\link{Markers_filter_Cellmarker2}()},
+\code{\link{Markers_filter_PanglaoDB}()},
+\code{\link{read_seurat_markers}()}
+}
+\concept{Markers_list_generation}

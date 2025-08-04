@@ -8,5 +8,7 @@
 #'     The dataset can be filtered based on species, tissue class, tissue type,
 #'     cancer type, and cell type to generate a list of marker genes for specific cell types.
 #'
+#' @family Database
+#'
 #' @source \url{http://117.50.127.228/CellMarker/}
 "Cellmarker2"

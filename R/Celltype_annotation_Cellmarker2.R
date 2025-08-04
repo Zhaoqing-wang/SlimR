@@ -21,6 +21,7 @@
 #'
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export
+#' @family Cell_annotation
 #'
 #' @importFrom ggplot2 ggplot aes theme labs element_text element_blank
 #' @importFrom ggplot2 geom_tile scale_fill_gradient theme_minimal

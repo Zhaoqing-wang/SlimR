@@ -19,4 +19,14 @@ A dataset containing marker genes for different cell types from PanglaoDB
 \details{
 This list is used to choose filters for creation of standardized marker list.
 }
+\seealso{
+Other Database: 
+\code{\link{Cellmarker2}},
+\code{\link{Cellmarker2_raw}},
+\code{\link{Cellmarker2_table}},
+\code{\link{Markers_list_TCellSI}},
+\code{\link{PanglaoDB}},
+\code{\link{PanglaoDB_raw}}
+}
+\concept{Database}
 \keyword{datasets}

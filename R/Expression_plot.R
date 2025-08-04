@@ -10,6 +10,8 @@
 #' @returns  Average expression box plot of genes in the input "Seurat" object
 #'     given "cluster_col" and given "features".
 #'
+#' @family Use_in_packages
+#'
 #' @importFrom Seurat `%||%`
 #' @importFrom Seurat DefaultAssay DefaultAssay<- CellsByIdentities FetchData
 #' @importFrom dplyr group_by summarise left_join

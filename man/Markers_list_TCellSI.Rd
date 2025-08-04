@@ -21,4 +21,14 @@ This list is a table of 10 types of T cell markers obtained from TCellSI.
 The data source is "https://github.com/GuoBioinfoLab/TCellSI/blob/main/data/markers.rda",
 and the reference literature is: Yang et al. (2024) \url{doi:10.1002/imt2.231}
 }
+\seealso{
+Other Database: 
+\code{\link{Cellmarker2}},
+\code{\link{Cellmarker2_raw}},
+\code{\link{Cellmarker2_table}},
+\code{\link{PanglaoDB}},
+\code{\link{PanglaoDB_raw}},
+\code{\link{PanglaoDB_table}}
+}
+\concept{Database}
 \keyword{datasets}

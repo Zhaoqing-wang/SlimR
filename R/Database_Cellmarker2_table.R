@@ -7,5 +7,7 @@
 #'
 #' @details This list is used to choose filters for creation of standardized marker list.
 #'
+#' @family Database
+#'
 #' @source \url{http://117.50.127.228/CellMarker/}
 "Cellmarker2_table"

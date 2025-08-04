@@ -34,3 +34,10 @@ Markers_list_panglaoDB <- Markers_filter_PanglaoDB(
     )
 
 }
+\seealso{
+Other Markers_list_generation: 
+\code{\link{Markers_filter_Cellmarker2}()},
+\code{\link{read_excel_markers}()},
+\code{\link{read_seurat_markers}()}
+}
+\concept{Markers_list_generation}

@@ -21,4 +21,14 @@ This dataset is used to filter and create a standardized marker list.
 The dataset can be filtered based on species, tissue class, tissue type,
 cancer type, and cell type to generate a list of marker genes for specific cell types.
 }
+\seealso{
+Other Database: 
+\code{\link{Cellmarker2_raw}},
+\code{\link{Cellmarker2_table}},
+\code{\link{Markers_list_TCellSI}},
+\code{\link{PanglaoDB}},
+\code{\link{PanglaoDB_raw}},
+\code{\link{PanglaoDB_table}}
+}
+\concept{Database}
 \keyword{datasets}

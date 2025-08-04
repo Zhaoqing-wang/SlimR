@@ -23,7 +23,7 @@
 #'
 #' @returns Saves cell type annotation PNGs in `save_path`. Returns invisibly.
 #' @export
-#' @family cell_annotation
+#' @family Cell_annotation
 #'
 #' @importFrom stats setNames
 #' @importFrom dplyr all_of

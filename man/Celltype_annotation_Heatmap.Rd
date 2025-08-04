@@ -64,3 +64,13 @@ Celltype_annotation_Heatmap(seurat_obj = sce,
     }
 
 }
+\seealso{
+Other Cell_annotation: 
+\code{\link{Celltype_annotation_Box}()},
+\code{\link{Celltype_annotation_Cellmarker2}()},
+\code{\link{Celltype_annotation_Dotplot}()},
+\code{\link{Celltype_annotation_Excel}()},
+\code{\link{Celltype_annotation_PanglaoDB}()},
+\code{\link{Celltype_annotation_Seurat}()}
+}
+\concept{Cell_annotation}

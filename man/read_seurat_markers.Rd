@@ -36,3 +36,10 @@ Markers_list_Seurat <- read_seurat_markers(seurat_markers,
     )
 
 }
+\seealso{
+Other Markers_list_generation: 
+\code{\link{Markers_filter_Cellmarker2}()},
+\code{\link{Markers_filter_PanglaoDB}()},
+\code{\link{read_excel_markers}()}
+}
+\concept{Markers_list_generation}
