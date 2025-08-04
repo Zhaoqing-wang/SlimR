@@ -141,7 +141,7 @@ Markers_list_Excel <- read_excel_markers("D:/Laboratory/Marker_load.xlsx")
 *Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4.*
 
 ### 2.5 From TCellSI Database
-TCellSI: A database of T cell markers. Reference: Yang et al. (2024) <doi:10.1002/imt2.231>
+TCellSI: A database of T cell markers. Reference: Yang et al. (2024) <doi:10.1002/imt2.231>.
 ```r
 Markers_list_TCellSI <- SlimR::Markers_list_TCellSI
 ```
