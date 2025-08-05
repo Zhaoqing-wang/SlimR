@@ -10,8 +10,10 @@
 #'     containing a data.frame in $Prediction_results with: 1.cluster_col (Cluster
 #'     identifiers (should match cluster_col in meta.data)) 2.Predicted_cell_type
 #'     (Predicted cell types for each cluster)
+#' @param plot logical(1); if TRUE, plot the UMAP with cell type annotations.
 #'
 #' @return A Seurat object with updated meta.data containing the predicted cell types
+#' @note If plot = TRUE, this function will print a UMAP plot as a side effect.
 #'
 #' @export
 #' @family Celltype_annotation
@@ -23,14 +25,16 @@
 #' \dontrun{
 #' sce <- Celltype_Annotation(seurat_obj = sce,
 #'     cluster_col = "seurat_clusters",
-#'     SlimR_anno_result = SlimR_anno_result
+#'     SlimR_anno_result = SlimR_anno_result,
+#'     plot = TRUE
 #'     )
 #'     }
 #'
 Celltype_Annotation <- function(
     seurat_obj,
     cluster_col,
-    SlimR_anno_result
+    SlimR_anno_result,
+    plot = TRUE
 ) {
   if (!inherits(seurat_obj, "Seurat")) {
     stop("Input must be a Seurat object")
@@ -75,7 +79,11 @@ Celltype_Annotation <- function(
 
   seurat_obj@meta.data$Cell_type_SlimR <- Seurat::Idents(seurat_obj)
 
-  Seurat::DimPlot(sce, reduction = "umap", label = TRUE, pt.size = 0.5) + NoLegend() + NoAxes()
+  p <- Seurat::DimPlot(seurat_obj, reduction = "umap", label = TRUE, pt.size = 0.5) + Seurat::NoLegend() + Seurat::NoAxes()
+
+  if (plot) {
+    print(p)
+  }
 
   return(seurat_obj)
 }

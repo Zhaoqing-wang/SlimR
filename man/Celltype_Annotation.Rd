@@ -4,7 +4,7 @@
 \alias{Celltype_Annotation}
 \title{Annotate Seurat Object with SlimR Cell Type Predictions}
 \usage{
-Celltype_Annotation(seurat_obj, cluster_col, SlimR_anno_result)
+Celltype_Annotation(seurat_obj, cluster_col, SlimR_anno_result, plot = TRUE)
 }
 \arguments{
 \item{seurat_obj}{A Seurat object containing cluster information in meta.data}
@@ -16,6 +16,8 @@ contains cluster IDs}
 containing a data.frame in $Prediction_results with: 1.cluster_col (Cluster
 identifiers (should match cluster_col in meta.data)) 2.Predicted_cell_type
 (Predicted cell types for each cluster)}
+
+\item{plot}{logical(1); if TRUE, plot the UMAP with cell type annotations.}
 }
 \value{
 A Seurat object with updated meta.data containing the predicted cell types
@@ -24,11 +26,15 @@ A Seurat object with updated meta.data containing the predicted cell types
 This function assigns SlimR predicted cell types to a Seurat object
 based on cluster annotations, and stores the results in the meta.data slot.
 }
+\note{
+If plot = TRUE, this function will print a UMAP plot as a side effect.
+}
 \examples{
 \dontrun{
 sce <- Celltype_Annotation(seurat_obj = sce,
     cluster_col = "seurat_clusters",
-    SlimR_anno_result = SlimR_anno_result
+    SlimR_anno_result = SlimR_anno_result,
+    plot = TRUE
     )
     }
 

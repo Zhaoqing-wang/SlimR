@@ -15,9 +15,13 @@
 #' @importFrom utils head
 #'
 #' @examples
+#' # The "pbmc_small" dataset is used here as a process reference only.
 #' library(Seurat)
 #' data("pbmc_small")
 #' sce <- pbmc_small
+#'
+#' # Change the "sce" here to the reference Seurat object.
+#' # And the "group.by" parameter is set to the cell type information in meta.data.
 #' seurat_markers <- FindAllMarkers(sce,
 #'     group.by = "RNA_snn_res.1",
 #'     only.pos = TRUE)

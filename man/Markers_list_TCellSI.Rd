@@ -3,7 +3,7 @@
 \docType{data}
 \name{Markers_list_TCellSI}
 \alias{Markers_list_TCellSI}
-\title{TCellSI dataset}
+\title{List of cell type markers in the TCellSI dataset}
 \format{
 A list with ten tables.
 }
@@ -19,13 +19,14 @@ A dataset containing marker genes for different T cell types from TCellSI
 \details{
 This list is a table of 10 types of T cell markers obtained from TCellSI.
 The data source is "https://github.com/GuoBioinfoLab/TCellSI/blob/main/data/markers.rda",
-and the reference literature is: Yang et al. (2024) \url{doi:10.1002/imt2.231}
+and the reference literature is: Yang et al. (2024) \url{doi:10.1002/imt2.231}.
 }
 \seealso{
 Other Database: 
 \code{\link{Cellmarker2}},
 \code{\link{Cellmarker2_raw}},
 \code{\link{Cellmarker2_table}},
+\code{\link{Markers_list_scIBD}},
 \code{\link{PanglaoDB}},
 \code{\link{PanglaoDB_raw}},
 \code{\link{PanglaoDB_table}}

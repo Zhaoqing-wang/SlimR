@@ -4,7 +4,7 @@
 
 <img width="233.28" height="270" alt="Sticker" src="inst/Sticker.png" align="right">
 
-SlimR is an R package designed for annotating single-cell and spatial-transcriptomics (ST) datasets. It supports the creation of a unified marker list, Markers_list, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB', 'TCellSI'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers.
+SlimR is an R package designed for annotating single-cell and spatial-transcriptomics (ST) datasets. It supports the creation of a unified marker list, Markers_list, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB', 'scIBD', 'TCellSI'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers.
 
 Based on the Markers_list, SlimR can calculate gene expression of different cell types and predict annotation information ('Celltype_Calculate') with one click, and annotate it ('Celltype_Annotation'). At the same time, it can calculate gene expression corresponding to the cell type to generate the corresponding annotation reference map for manual annotation (for example, 'Annotation_heatmap', 'Annotation Dot Plot', 'Annotation Box plot').
 
@@ -15,12 +15,13 @@ Based on the Markers_list, SlimR can calculate gene expression of different cell
    - [1.3 Dependencies (if installation fails)](#13-dependencies-if-installation-fails)  
 
 2. [Standardized Marker_list Input](#2-standardized-marker_list-input)  
-   - [2.1 From Preprocessed Cellmarker2 Database](#21-from-preprocessed-cellmarker2-database)  
-   - [2.2 From Preprocessed PanglaoDB Database](#22-from-preprocessed-panglaodb-database)  
-   - [2.3 From Seurat Objects](#23-from-seurat-objects)  
-   - [2.4 From Excel Tables](#24-from-excel-tables)  
-   - [2.5 From TCellSI Database](#25-from-tcellsi-database)  
-
+   - [2.1 From Cellmarker2 Database](#21-from-cellmarker2-database)  
+   - [2.2 From PanglaoDB Database](#22-from-panglaodb-database)  
+   - [2.3 From scIBD Database](#23-from-scibd-database)
+   - [2.4 From TCellSI Database](#24-from-tcellsi-database)  
+   - [2.5 From Seurat Objects](#25-from-seurat-objects)  
+   - [2.6 From Excel Tables](#26-from-excel-tables)  
+  
 3. [Automated Annotation Workflow](#3-automated-annotation-workflow) 
    - [3.1 Calculate Celltype](#31-calculate-celltype)  
    - [3.2 Annotation Celltype](#32-annotation-celltype) 
@@ -41,7 +42,7 @@ Based on the Markers_list, SlimR can calculate gene expression of different cell
 ```r
 install.packages("SlimR")
 ```
-*Note: Try adjusting the CRAN image to "Global (CDN)" if you encounter a version mismatch during installation.*
+*Note: Try adjusting the CRAN image to "Global (CDN)" or use "BiocManager::install("SlimR")" if you encounter a version mismatch during installation.*
 
 (Option Two) Install SlimR directly from GitHub using: (Development version, more recommended)
 ```r
@@ -66,7 +67,9 @@ install.packages(c("cowplot", "dplyr", "ggplot2", "patchwork",
 ## 2. Standardized Marker_list Input
 SlimR requires a standardized list format for storing marker information, metrics, and corresponding cell types (list names = cell types, first column = markers, subsequent columns = metrics).
 
-### 2.1 From Preprocessed Cellmarker2 Database
+### 2.1 From Cellmarker2 Database
+Cellmarkers2: A database of cell types and markers covering different species and tissue types. Reference: Hu et al. (2023) <doi:10.1093/nar/gkac947>.
+
 Load the database:
 ```r
 Cellmarker2 <- SlimR::Cellmarker2
@@ -87,9 +90,11 @@ Markers_list_Cellmarker2 <- Markers_filter_Cellmarker2(
   cell_type = NULL
 )
 ```
-*Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.1.*
+*Important: Select at least the 'species' and 'tissue_class' parameters to ensure the accuracy of the annotation. Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.1.*
 
-### 2.2 From Preprocessed PanglaoDB Database
+### 2.2 From PanglaoDB Database
+PanglaoDB: Database of cell types and markers covering different species and tissue types. Reference: Franzén et al. (2019) <doi:10.1093/database/baz046>.
+
 Load the database:
 ```r
 PanglaoDB <- SlimR::PanglaoDB
@@ -107,9 +112,23 @@ Markers_list_panglaoDB <- Markers_filter_PanglaoDB(
   organ_input = 'GI tract'
 )
 ```
-*Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.2.*
+*Important: Select the 'species_input' and 'organ_input' parameters to ensure the accuracy of the annotation. Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.2.*
 
-### 2.3 From Seurat Objects
+### 2.3 From scIBD Database
+scIBD: A database of human intestine markers. Reference: Nie et al. (2023) <doi:10.1038/s43588-023-00464-9>.
+```r
+Markers_list_scIBD <- SlimR::Markers_list_scIBD
+```
+*Important: This is for human intestinal annotation only. The input Seurat object was ensured to be a human intestinal type to ensure the accuracy of the labeling. Note: The output is available in Sections 3.1, 4.1, 4.2, 4.3 and 5.3*
+
+### 2.4 From TCellSI Database
+TCellSI: A database of T cell markers. Reference: Yang et al. (2024) <doi:10.1002/imt2.231>.
+```r
+Markers_list_TCellSI <- SlimR::Markers_list_TCellSI
+```
+*Important: This is only for T cell subset annotation. Ensure that the input Seurat object is of T cell type to guarantee the accuracy of the annotation. Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4.*
+
+### 2.5 From Seurat Objects
 First identify cluster features:
 ```r
 seurat_markers <- FindAllMarkers(
@@ -128,24 +147,16 @@ Markers_list_Seurat <- read_seurat_markers(
 ```
 *Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.3.*
 
-### 2.4 From Excel Tables
+### 2.6 From Excel Tables
 **Format Requirements**:  
 - Each sheet name = cell type  
 - First row = column headers  
 - First column = markers  
 - Subsequent columns = metrics  
-
 ```r
 Markers_list_Excel <- read_excel_markers("D:/Laboratory/Marker_load.xlsx")
 ```
 *Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4.*
-
-### 2.5 From TCellSI Database
-TCellSI: A database of T cell markers. Reference: Yang et al. (2024) <doi:10.1002/imt2.231>.
-```r
-Markers_list_TCellSI <- SlimR::Markers_list_TCellSI
-```
-*Important: This is only for T cell subset annotation. Ensure that the input Seurat object is of T cell type to guarantee the accuracy of the annotation. Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4.*
 
 ## 3. Automated Annotation Workflow
 ### 3.1 Calculate Celltype
@@ -167,7 +178,8 @@ Assigns SlimR predicted cell types to the Seurat object based on cluster annotat
 ```r
 sce <- Celltype_Annotation(seurat_obj = sce,
     cluster_col = "seurat_clusters",
-    SlimR_anno_result = SlimR_anno_result
+    SlimR_anno_result = SlimR_anno_result,
+    plot = TRUE
     )
 ```
 *Important: The parameter "cluster_col" in the function "Celltype_Calculate" and the function "Celltype_Annotation" must be strictly the same to avoid false matches.*

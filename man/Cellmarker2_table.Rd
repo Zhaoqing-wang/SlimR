@@ -25,6 +25,7 @@ Other Database:
 \code{\link{Cellmarker2}},
 \code{\link{Cellmarker2_raw}},
 \code{\link{Markers_list_TCellSI}},
+\code{\link{Markers_list_scIBD}},
 \code{\link{PanglaoDB}},
 \code{\link{PanglaoDB_raw}},
 \code{\link{PanglaoDB_table}}
