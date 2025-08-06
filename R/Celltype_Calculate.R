@@ -135,7 +135,7 @@ Celltype_Calculate <- function(
                           legend_breaks = c(0,1),
                           legend_labels = c("Low probability","High probability"))
 
-  generate_prediction_table <- function(df, threshold = 0.8) {
+  generate_prediction_table <- function(df, threshold = threshold) {
     clusters <- rownames(df)
     predicted_cell_types <- vector("character", length = length(clusters))
     alternative_cell_types <- vector("character", length = length(clusters))
