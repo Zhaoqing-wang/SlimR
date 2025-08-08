@@ -129,7 +129,7 @@ Celltype_annotation_Excel <- function(
         axis.title.y = ggplot2::element_text(family = "sans")
       ) +
       ggplot2::labs(
-        title = paste("Cell Type:", cell_type, "| Database of markers input from Excel files | SlimR"),
+        title = paste("Cell Type:", cell_type, "| Database of markers input by users | SlimR"),
         subtitle = "Dot size: Expression percentage | Color: Normalized expression level"
       )
 
