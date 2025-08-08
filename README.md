@@ -168,7 +168,8 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     cluster_col = "seurat_clusters",
     assay = "RNA",
     min_expression = 0.1,
-    specificity_weight = 3
+    specificity_weight = 3,
+    compute_AUC = TRUE
     )
 ```
 *Important: The parameter "cluster_col" in the function "Celltype_Calculate" and the function "Celltype_Annotation" must be strictly the same to avoid false matches.*
