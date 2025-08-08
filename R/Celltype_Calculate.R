@@ -48,6 +48,7 @@
 #' @family Celltype_annotation
 #'
 #' @importFrom grDevices colorRampPalette
+#' @importFrom utils tail
 #'
 #' @examples
 #' \dontrun{
