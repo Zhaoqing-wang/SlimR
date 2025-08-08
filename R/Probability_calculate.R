@@ -64,6 +64,9 @@ calculate_probability <- function(
     ))
   })
 
+  expr_matrix <- do.call(rbind, lapply(cluster_stats, function(x) x$avg))
+  rownames(expr_matrix) <- unique(data.features$id)
+
   specificity_matrix <- do.call(rbind, lapply(cluster_stats, function(x) x$specificity))
   rownames(specificity_matrix) <- unique(data.features$id)
 
@@ -82,5 +85,7 @@ calculate_probability <- function(
   })
 
   names(cluster_scores) <- rownames(specificity_matrix)
-  return(cluster_scores)
+
+  return(list(cluster_expr = expr_matrix,
+              cluster_scores = cluster_scores))
 }

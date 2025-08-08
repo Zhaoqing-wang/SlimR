@@ -1,4 +1,4 @@
-#' Uses "marker_list" to calculate probability, prediction results and generate heatmap for cell annotation
+#' Uses "marker_list" to calculate probability, prediction results, AUC and generate heatmap for cell annotation
 #'
 #' @param seurat_obj Enter the Seurat object with annotation columns such as
 #'     "seurat_cluster" in meta.data to be annotated.
@@ -25,9 +25,25 @@
 #' @param threshold This parameter refers to the normalized similarity between the
 #'     "alternative cell type" and the "predicted cell type" in the returned results
 #'     (the default parameter is 0.8).
+#' @param compute_AUC Logical indicating whether to calculate AUC values for predicted
+#'     cell types. AUC measures how well the marker genes distinguish the cluster from
+#'     others. When TRUE, adds an AUC column to the prediction results. (default: TRUE)
 #'
-#' @returns A list containing the gene expression matrix, the corresponding probability
-#'     matrix, prediction results, and the cell annotation probability heatmap
+#' @returns A list containing:
+#' \itemize{
+#'   \item Expression_list: List of expression matrices for each cell type
+#'   \item Expression_scores_matrix: Matrix of expression scores
+#'   \item Probability_matrix: Matrix of normalized probabilities
+#'   \item Prediction_results: Data frame with cluster annotations including:
+#'     \itemize{
+#'       \item cluster_col: Cluster identifier
+#'       \item Predicted_cell_type: Primary predicted cell type
+#'       \item AUC: Area Under the Curve value (when compute_AUC = TRUE)
+#'       \item Alternative_cell_types: Semi-colon separated alternative cell types
+#'     }
+#'   \item Heatmap_plot: Heatmap visualization of probability matrix
+#' }
+#'
 #' @export
 #' @family Celltype_annotation
 #'
@@ -41,7 +57,8 @@
 #'     cluster_col = "seurat_clusters",
 #'     assay = "RNA",
 #'     min_expression = 0.1,
-#'     specificity_weight = 3
+#'     specificity_weight = 3,
+#'     compute_AUC = TRUE
 #'     )
 #'     }
 #'
@@ -53,9 +70,10 @@ Celltype_Calculate <- function(
     assay = "RNA",
     min_expression = 0.1,
     specificity_weight = 3,
-    threshold = 0.8
+    threshold = 0.8,
+    compute_AUC = TRUE
 ) {
-  required_packages <- c("ggplot2", "patchwork", "dplyr", "scales", "tidyr", "gridExtra", "gtable", "grid")
+  required_packages <- c("ggplot2", "patchwork", "dplyr", "scales", "tidyr", "gridExtra", "gtable", "grid", "pheatmap")
   for (pkg in required_packages) {
     if (!requireNamespace(pkg, quietly = TRUE)) {
       stop(sprintf("Please install the required package: %s", pkg))
@@ -67,7 +85,9 @@ Celltype_Calculate <- function(
   if (!is.list(gene_list)) stop("Gene list must be a list of data.frames!")
   if (species != "Human" && species != "Mouse") stop("species must be 'Human' or 'Mouse'")
 
-  cluster_expr_list <- list()
+  cluster_scores_list <- list()
+  cluster_mean_list <- list()
+  valid_genes_list <- list()
 
   cell_types <- names(gene_list)
   total <- length(cell_types)
@@ -105,25 +125,28 @@ Celltype_Calculate <- function(
     gene_order_processed <- valid_data$processed
     gene_order_original <- valid_data$original
 
+    valid_genes_list[[cell_type]] <- gene_order_processed
+
     prob_expression <- calculate_probability(object = seurat_obj,
                                              cluster_col = cluster_col,
                                              assay = assay,
                                              features = gene_order_processed,
                                              min_expression = min_expression,
                                              specificity_weight = specificity_weight)
-    cluster_expr_list[[cell_type]] <- prob_expression
+    cluster_scores_list[[cell_type]] <- prob_expression$cluster_scores
+    cluster_mean_list[[cell_type]] <- prob_expression$cluster_expr
     message(paste0("[", i, "/", total, "] ", cell_type)," characteristic genes expression calculated. \n")
   }
 
-  expr_matrix <- do.call(rbind, cluster_expr_list)
+  expr_list <- cluster_mean_list
+  scores_matrix <- do.call(rbind, cluster_scores_list)
 
   normalize_row <- function(x) {
     if (diff(range(x)) == 0) return(rep(0, length(x)))
     (x - min(x)) / (max(x) - min(x))
   }
 
-  normalize_matrix <- apply(expr_matrix, 2, normalize_row)
-
+  normalize_matrix <- apply(scores_matrix, 2, normalize_row)
   result_matrix <- t(normalize_matrix)
 
   p <- pheatmap::pheatmap(result_matrix,
@@ -160,16 +183,66 @@ Celltype_Calculate <- function(
     return(result_df)
   }
 
-  expression_matrix = as.data.frame(t(expr_matrix))
-  probability_matrix = as.data.frame(result_matrix)
+  scores_matrix <- as.data.frame(t(scores_matrix))
+  probability_matrix <- as.data.frame(result_matrix)
+  prediction_results <- generate_prediction_table(probability_matrix, threshold = threshold)
 
-  prediction_results <- generate_prediction_table(
-    probability_matrix,
-    threshold = threshold)
+  if (compute_AUC) {
+    message("Calculating AUC values for predicted cell types.")
+    auc_values <- numeric(nrow(prediction_results))
 
-  heatmap_plot = p
+    fastAUC <- function(predictions, labels) {
+      ord <- order(predictions, decreasing = TRUE)
+      labels <- labels[ord]
+      predictions <- predictions[ord]
 
-  return(list(Expression_matrix = expression_matrix,
+      tpr <- cumsum(labels) / sum(labels)
+      fpr <- cumsum(!labels) / sum(!labels)
+
+      tpr <- c(0, tpr, 1)
+      fpr <- c(0, fpr, 1)
+
+      auc <- sum(diff(fpr) * (head(tpr, -1) + tail(tpr, -1)) / 2)
+      return(auc)
+    }
+
+    for (i in seq_len(nrow(prediction_results))) {
+      cluster_id <- prediction_results$cluster_col[i]
+      cell_type <- prediction_results$Predicted_cell_type[i]
+
+      if (!cell_type %in% names(valid_genes_list)) {
+        warning(paste("Skipping AUC for cluster", cluster_id, ": No valid genes for", cell_type))
+        auc_values[i] <- NA
+        next
+      }
+      features <- valid_genes_list[[cell_type]]
+
+      all_cells <- colnames(seurat_obj)
+      expr_data <- FetchData(seurat_obj, vars = features, cells = all_cells)
+
+      cell_scores <- rowMeans(expr_data, na.rm = TRUE)
+
+      labels <- seurat_obj@meta.data[all_cells, cluster_col] == cluster_id
+
+      if (length(unique(labels)) < 2) {
+        warning(paste("Skipping AUC for cluster", cluster_id, ": Only one class present"))
+        auc_values[i] <- NA
+      } else {
+        auc_values[i] <- fastAUC(cell_scores, labels)
+      }
+    }
+
+    prediction_results$AUC <- auc_values
+  } else {
+    prediction_results$AUC <- NA
+  }
+
+  prediction_results <- prediction_results[, c("cluster_col", "Predicted_cell_type", "AUC", "Alternative_cell_types")]
+
+  heatmap_plot <- p
+
+  return(list(Expression_list = expr_list,
+              Expression_scores_matrix = scores_matrix,
               Probability_matrix = probability_matrix,
               Prediction_results = prediction_results,
               Heatmap_plot = heatmap_plot))

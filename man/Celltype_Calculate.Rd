@@ -2,7 +2,7 @@
 % Please edit documentation in R/Celltype_Calculate.R
 \name{Celltype_Calculate}
 \alias{Celltype_Calculate}
-\title{Uses "marker_list" to calculate probability, prediction results and generate heatmap for cell annotation}
+\title{Uses "marker_list" to calculate probability, prediction results, AUC and generate heatmap for cell annotation}
 \usage{
 Celltype_Calculate(
   seurat_obj,
@@ -12,7 +12,8 @@ Celltype_Calculate(
   assay = "RNA",
   min_expression = 0.1,
   specificity_weight = 3,
-  threshold = 0.8
+  threshold = 0.8,
+  compute_AUC = TRUE
 )
 }
 \arguments{
@@ -48,13 +49,29 @@ of variability in the final score calculation.Default parameters use
 \item{threshold}{This parameter refers to the normalized similarity between the
 "alternative cell type" and the "predicted cell type" in the returned results
 (the default parameter is 0.8).}
+
+\item{compute_AUC}{Logical indicating whether to calculate AUC values for predicted
+cell types. AUC measures how well the marker genes distinguish the cluster from
+others. When TRUE, adds an AUC column to the prediction results. (default: TRUE)}
 }
 \value{
-A list containing the gene expression matrix, the corresponding probability
-matrix, prediction results, and the cell annotation probability heatmap
+A list containing:
+\itemize{
+\item Expression_list: List of expression matrices for each cell type
+\item Expression_scores_matrix: Matrix of expression scores
+\item Probability_matrix: Matrix of normalized probabilities
+\item Prediction_results: Data frame with cluster annotations including:
+\itemize{
+\item cluster_col: Cluster identifier
+\item Predicted_cell_type: Primary predicted cell type
+\item AUC: Area Under the Curve value (when compute_AUC = TRUE)
+\item Alternative_cell_types: Semi-colon separated alternative cell types
+}
+\item Heatmap_plot: Heatmap visualization of probability matrix
+}
 }
 \description{
-Uses "marker_list" to calculate probability, prediction results and generate heatmap for cell annotation
+Uses "marker_list" to calculate probability, prediction results, AUC and generate heatmap for cell annotation
 }
 \examples{
 \dontrun{
@@ -64,7 +81,8 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     cluster_col = "seurat_clusters",
     assay = "RNA",
     min_expression = 0.1,
-    specificity_weight = 3
+    specificity_weight = 3,
+    compute_AUC = TRUE
     )
     }
 

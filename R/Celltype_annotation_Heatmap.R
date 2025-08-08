@@ -63,7 +63,7 @@ Celltype_annotation_Heatmap <- function(
   if (!is.list(gene_list)) stop("Gene list must be a list of data.frames!")
   if (species != "Human" && species != "Mouse") stop("species must be 'Human' or 'Mouse'")
 
-  cluster_expr_list <- list()
+  cluster_scores_list <- list()
 
   cell_types <- names(gene_list)
   total <- length(cell_types)
@@ -107,11 +107,11 @@ Celltype_annotation_Heatmap <- function(
                                              features = gene_order_processed,
                                              min_expression = min_expression,
                                              specificity_weight = specificity_weight)
-    cluster_expr_list[[cell_type]] <- prob_expression
+    cluster_scores_list[[cell_type]] <- prob_expression$cluster_scores
     message(paste0("[", i, "/", total, "] ", cell_type)," characteristic genes expression calculated. \n")
   }
 
-  expr_matrix <- do.call(rbind, cluster_expr_list)
+  expr_matrix <- do.call(rbind, cluster_scores_list)
 
   normalize_row <- function(x) {
     if (diff(range(x)) == 0) return(rep(0, length(x)))
