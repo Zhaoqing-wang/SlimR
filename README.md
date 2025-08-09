@@ -170,6 +170,7 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     min_expression = 0.1,
     specificity_weight = 3,
     compute_AUC = TRUE,
+    plot_AUC = TRUE,
     AUC_correction = TRUE
     )
 ```

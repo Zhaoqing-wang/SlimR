@@ -14,6 +14,7 @@ Celltype_Calculate(
   specificity_weight = 3,
   threshold = 0.8,
   compute_AUC = TRUE,
+  plot_AUC = TRUE,
   AUC_correction = TRUE
 )
 }
@@ -55,6 +56,9 @@ of variability in the final score calculation.Default parameters use
 cell types. AUC measures how well the marker genes distinguish the cluster from
 others. When TRUE, adds an AUC column to the prediction results. (default: TRUE)}
 
+\item{plot_AUC}{The logic indicates whether to draw an AUC curve for the predicted cell
+type. When TRUE, add an AUC_plot to result. (default: TRUE)}
+
 \item{AUC_correction}{Logical value controlling AUC-based correction (default = TRUE).
 When set to TRUE:
 - Computes AUC values for candidate cell types (probability > threshold)
@@ -75,6 +79,7 @@ A list containing:
 \item Alternative_cell_types: Semi-colon separated alternative cell types
 }
 \item Heatmap_plot: Heatmap visualization of probability matrix
+\item AUC_plot: AUC visualization of Predicted cell type
 }
 }
 \description{
@@ -90,6 +95,7 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     min_expression = 0.1,
     specificity_weight = 3,
     compute_AUC = TRUE,
+    plot_AUC = TRUE,
     AUC_correction = TRUE
     )
     }

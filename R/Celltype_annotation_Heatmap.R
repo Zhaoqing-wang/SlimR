@@ -64,13 +64,12 @@ Celltype_annotation_Heatmap <- function(
   if (species != "Human" && species != "Mouse") stop("species must be 'Human' or 'Mouse'")
 
   cluster_scores_list <- list()
-
   cell_types <- names(gene_list)
-  total <- length(cell_types)
+
+  message(paste0("SlimR: The 'Celltype_annotation_Heatmap()' function has now been replaced by the 'Celltype_Calculate()' function.  You can still use it, but this function is no longer actively updated. Please use 'Celltype_Calculate()' instead."))
 
   for (i in seq_along(cell_types)) {
     cell_type <- cell_types[i]
-    message(paste0("[", i, "/", total, "] Processing cell type: ", cell_type))
 
     current_df <- gene_list[[cell_type]]
 
@@ -108,7 +107,6 @@ Celltype_annotation_Heatmap <- function(
                                              min_expression = min_expression,
                                              specificity_weight = specificity_weight)
     cluster_scores_list[[cell_type]] <- prob_expression$cluster_scores
-    message(paste0("[", i, "/", total, "] ", cell_type)," characteristic genes expression calculated. \n")
   }
 
   expr_matrix <- do.call(rbind, cluster_scores_list)

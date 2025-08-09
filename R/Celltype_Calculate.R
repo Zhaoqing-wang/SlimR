@@ -28,6 +28,8 @@
 #' @param compute_AUC Logical indicating whether to calculate AUC values for predicted
 #'     cell types. AUC measures how well the marker genes distinguish the cluster from
 #'     others. When TRUE, adds an AUC column to the prediction results. (default: TRUE)
+#' @param plot_AUC The logic indicates whether to draw an AUC curve for the predicted cell
+#'     type. When TRUE, add an AUC_plot to result. (default: TRUE)
 #' @param AUC_correction Logical value controlling AUC-based correction (default = TRUE).
 #'     When set to TRUE:
 #'     - Computes AUC values for candidate cell types (probability > threshold)
@@ -47,6 +49,7 @@
 #'       \item Alternative_cell_types: Semi-colon separated alternative cell types
 #'     }
 #'   \item Heatmap_plot: Heatmap visualization of probability matrix
+#'   \item AUC_plot: AUC visualization of Predicted cell type
 #' }
 #'
 #' @export
@@ -65,6 +68,7 @@
 #'     min_expression = 0.1,
 #'     specificity_weight = 3,
 #'     compute_AUC = TRUE,
+#'     plot_AUC = TRUE,
 #'     AUC_correction = TRUE
 #'     )
 #'     }
@@ -79,6 +83,7 @@ Celltype_Calculate <- function(
     specificity_weight = 3,
     threshold = 0.8,
     compute_AUC = TRUE,
+    plot_AUC = TRUE,
     AUC_correction = TRUE
 ) {
   required_packages <- c("ggplot2", "patchwork", "dplyr", "scales", "tidyr", "gridExtra", "gtable", "grid", "pheatmap")
@@ -89,6 +94,7 @@ Celltype_Calculate <- function(
     library(pkg, character.only = TRUE)
   }
 
+  if (plot_AUC) compute_AUC <- TRUE
   if (AUC_correction) compute_AUC <- TRUE
 
   if (!inherits(seurat_obj, "Seurat")) stop("Input object must be a Seurat object!")
@@ -101,10 +107,13 @@ Celltype_Calculate <- function(
 
   cell_types <- names(gene_list)
   total <- length(cell_types)
+  cycles <- 0
+
+  message(paste0("SlimR calculate: The input 'Markers_list' has ",total," cell types to be calculated."))
 
   for (i in seq_along(cell_types)) {
     cell_type <- cell_types[i]
-    message(paste0("[", i, "/", total, "] Processing cell type: ", cell_type))
+    message(paste0("\n","[", i, "/", total, "] Processing cell type: ", cell_type))
 
     current_df <- gene_list[[cell_type]]
 
@@ -145,8 +154,11 @@ Celltype_Calculate <- function(
                                              specificity_weight = specificity_weight)
     cluster_scores_list[[cell_type]] <- prob_expression$cluster_scores
     cluster_mean_list[[cell_type]] <- prob_expression$cluster_expr
-    message(paste0("[", i, "/", total, "] ", cell_type)," characteristic genes expression calculated. \n")
+
+    message(paste0("[", i, "/", total, "] ", cell_type)," characteristic genes expression calculated.")
+    cycles <- cycles + 1
   }
+  message(paste0("\n","SlimR calculate: Out of the ",total," cell types in 'Markers_list', ",cycles," cell types have been calculated. You can see the reason for not calculating cell types by 'warnings()'."))
 
   expr_list <- cluster_mean_list
   scores_matrix <- do.call(rbind, cluster_scores_list)
@@ -219,9 +231,25 @@ Celltype_Calculate <- function(
     return(auc)
   }
 
+  compute_roc_data <- function(predictions, labels) {
+    ord <- order(predictions, decreasing = TRUE)
+    labels <- labels[ord]
+    predictions <- predictions[ord]
+
+    n_pos <- sum(labels)
+    n_neg <- sum(!labels)
+    tpr <- cumsum(labels) / n_pos
+    fpr <- cumsum(!labels) / n_neg
+
+    tpr <- c(0, tpr, 1)
+    fpr <- c(0, fpr, 1)
+
+    data.frame(fpr = fpr, tpr = tpr)
+  }
+
   if (compute_AUC) {
     if (AUC_correction) {
-      message(paste0("Performing AUC correction for all candidate cell types (threshold > ",threshold,")."))
+      message(paste0("\n","SlimR AUC correction: Performing AUC correction for all candidate cell types (threshold > ",threshold,")."))
       new_predicted <- character(nrow(prediction_results))
       new_aucs <- numeric(nrow(prediction_results))
       new_alt_list <- character(nrow(prediction_results))
@@ -283,10 +311,10 @@ Celltype_Calculate <- function(
       prediction_results$AUC <- new_aucs
       prediction_results$Alternative_cell_types <- new_alt_list
 
-      message(paste0("\n","The predicted cell types were corrected by AUC values."))
+      message(paste0("SlimR AUC correction: The predicted cell types were corrected by AUC values."))
 
     } else {
-      message("Calculating AUC values for predicted cell type.")
+      message("\n","SlimR AUC compute: Calculating AUC values for predicted cell type.")
       auc_values <- numeric(nrow(prediction_results))
 
       for (i in seq_len(nrow(prediction_results))) {
@@ -313,7 +341,10 @@ Celltype_Calculate <- function(
         }
       }
       prediction_results$AUC <- auc_values
+
+      message("SlimR AUC compute: AUC values for predicting cell types were calculated.")
     }
+
   } else {
     prediction_results$AUC <- NA
   }
@@ -322,9 +353,104 @@ Celltype_Calculate <- function(
 
   heatmap_plot <- p
 
-  return(list(Expression_list = expr_list,
-              Expression_scores_matrix = scores_matrix,
-              Probability_matrix = probability_matrix,
-              Prediction_results = prediction_results,
-              Heatmap_plot = heatmap_plot))
+  auc_plot <- NULL
+  if (plot_AUC && compute_AUC) {
+    message(paste0("\n","SlimR AUC plot: Generating combined AUC plot for predicted cell types."))
+
+    roc_data_list <- list()
+
+    for (i in seq_len(nrow(prediction_results))) {
+      cluster_id <- prediction_results$cluster_col[i]
+      cell_type <- prediction_results$Predicted_cell_type[i]
+      auc_value <- prediction_results$AUC[i]
+
+      if (is.na(cell_type)) next
+      if (!cell_type %in% names(valid_genes_list)) next
+
+      features <- valid_genes_list[[cell_type]]
+      all_cells <- colnames(seurat_obj)
+
+      expr_data <- FetchData(seurat_obj, vars = features, cells = all_cells)
+      cell_scores <- rowMeans(expr_data, na.rm = TRUE)
+
+      labels <- seurat_obj@meta.data[all_cells, cluster_col] == cluster_id
+
+      if (length(unique(labels)) < 2) {
+        warning(paste("Skipping AUC plot for cluster", cluster_id, ": Insufficient classes"))
+        next
+      }
+
+      roc_data <- compute_roc_data(cell_scores, labels)
+
+      curve_label <- sprintf("%s - %s - %.3f", cluster_id, cell_type, auc_value)
+
+      roc_data_list[[curve_label]] <- roc_data
+    }
+
+    if (length(roc_data_list) > 0) {
+      combined_df <- do.call(rbind, lapply(names(roc_data_list), function(label) {
+        data.frame(
+          FPR = roc_data_list[[label]]$fpr,
+          TPR = roc_data_list[[label]]$tpr,
+          label = label
+        )
+      }))
+
+      color_count <- length(unique(combined_df$label))
+      colors <- scales::hue_pal()(color_count)
+
+      auc_plot <- ggplot(combined_df, aes(x = FPR, y = TPR, color = label)) +
+        geom_line(size = 1) +
+        geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "black") +
+        labs(
+          title = "ROC Curves for Predicted Cell Types | SlimR",
+          x = "False Positive Rate (1 - Specificity)",
+          y = "True Positive Rate (Sensitivity)",
+          color = "Cluster - Cell Type - AUC"
+        ) +
+        scale_color_manual(values = colors) +
+        scale_x_continuous(
+          limits = c(0, 1),
+          breaks = seq(0, 1, by = 0.2),
+          labels = scales::number_format(accuracy = 0.1)
+        ) +
+        scale_y_continuous(
+          limits = c(0, 1),
+          breaks = seq(0, 1, by = 0.2),
+          labels = scales::number_format(accuracy = 0.1)
+        ) +
+        theme_minimal() +
+        theme(
+          plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+          axis.title = element_text(size = 12),
+          axis.text = element_text(size = 10),
+          axis.ticks = element_line(color = "black"),
+          axis.line = element_line(color = "black"),
+          legend.position = "right",
+          legend.title = element_text(size = 10, face = "bold"),
+          legend.text = element_text(size = 8),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank()
+        ) +
+        guides(color = guide_legend(override.aes = list(size = 2))) +
+        expand_limits(x = 0, y = 0)
+    } else {
+      warning("No valid AUC data available for plotting.")
+    }
+    message(paste0("SlimR AUC plot: AUC graphs for the predicted cell types have been generated."))
+  }
+
+  return_list <- list(
+    Expression_list = expr_list,
+    Expression_scores_matrix = scores_matrix,
+    Probability_matrix = probability_matrix,
+    Prediction_results = prediction_results,
+    Heatmap_plot = heatmap_plot
+  )
+
+  if (!is.null(auc_plot)) {
+    return_list$AUC_plot <- auc_plot
+  }
+
+  return(return_list)
 }

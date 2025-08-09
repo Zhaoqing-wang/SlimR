@@ -75,10 +75,13 @@ Celltype_annotation_Seurat <- function(
 
   cell_types <- names(gene_list)
   total <- length(cell_types)
+  cycles <- 0
+
+  message(paste0("SlimR: The input 'Markers_list' has ",total," cell types to be processed."))
 
   for (i in seq_along(cell_types)) {
     cell_type <- cell_types[i]
-    message(paste0("[", i, "/", total, "] Processing cell type: ", cell_type))
+    message(paste0("\n","[", i, "/", total, "] Processing cell type: ", cell_type))
 
     current_df <- gene_list[[cell_type]]
 
@@ -202,8 +205,9 @@ Celltype_annotation_Seurat <- function(
       width = plot_width,
       limitsize = FALSE
     )
-    message(paste0("[", i, "/", total, "] Combined plot saved for: ", cell_type),"\n")
+    cycles <- cycles + 1
+    message(paste0("[", i, "/", total, "] Combined plot saved for: ", cell_type))
   }
-
-  message("Visualization saved to: ", normalizePath(save_path))
+  message(paste0("\n","SlimR: Out of the ",total," cell types in 'Markers_list', ",cycles," cell types have been processed. You can see the reason for not processing cell types by 'warnings()'."))
+  message(paste0("\n","Visualization saved to: ", normalizePath(save_path)))
 }
