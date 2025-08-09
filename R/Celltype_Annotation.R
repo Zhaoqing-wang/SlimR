@@ -85,7 +85,6 @@ Celltype_Annotation<- function(
     as.character(obj_clusters)
   )
 
-
   if (length(missing_clusters) > 0) {
     warning(sprintf("The following clusters in prediction results do not exist in the object: %s",
                     paste(missing_clusters, collapse = ", ")))
@@ -102,7 +101,7 @@ Celltype_Annotation<- function(
     print(p)
   }
 
-  message(paste0("SlimR predicted cell types information has been written into \n'seurat_obj@meta.data$Cell_type_SlimR'."))
+  message(paste0("The cell types information predicted by SlimR in 'SlimR_anno_result$Prediction_results$Predicted_cell_type' has been written into 'seurat_obj@meta.data$Cell_type_SlimR'."))
 
   return(seurat_obj)
 }
