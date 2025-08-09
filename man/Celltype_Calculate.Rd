@@ -13,7 +13,8 @@ Celltype_Calculate(
   min_expression = 0.1,
   specificity_weight = 3,
   threshold = 0.8,
-  compute_AUC = TRUE
+  compute_AUC = TRUE,
+  AUC_correction = TRUE
 )
 }
 \arguments{
@@ -53,6 +54,12 @@ of variability in the final score calculation.Default parameters use
 \item{compute_AUC}{Logical indicating whether to calculate AUC values for predicted
 cell types. AUC measures how well the marker genes distinguish the cluster from
 others. When TRUE, adds an AUC column to the prediction results. (default: TRUE)}
+
+\item{AUC_correction}{Logical value controlling AUC-based correction (default = TRUE).
+When set to TRUE:
+- Computes AUC values for candidate cell types (probability > threshold)
+- Selects the cell type with the highest AUC as the final predicted type
+- Records the selected type's AUC value in the "AUC" column.}
 }
 \value{
 A list containing:
@@ -82,7 +89,8 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     assay = "RNA",
     min_expression = 0.1,
     specificity_weight = 3,
-    compute_AUC = TRUE
+    compute_AUC = TRUE,
+    AUC_correction = TRUE
     )
     }
 

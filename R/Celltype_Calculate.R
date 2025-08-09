@@ -28,6 +28,11 @@
 #' @param compute_AUC Logical indicating whether to calculate AUC values for predicted
 #'     cell types. AUC measures how well the marker genes distinguish the cluster from
 #'     others. When TRUE, adds an AUC column to the prediction results. (default: TRUE)
+#' @param AUC_correction Logical value controlling AUC-based correction (default = TRUE).
+#'     When set to TRUE:
+#'     - Computes AUC values for candidate cell types (probability > threshold)
+#'     - Selects the cell type with the highest AUC as the final predicted type
+#'     - Records the selected type's AUC value in the "AUC" column.
 #'
 #' @returns A list containing:
 #' \itemize{
@@ -59,7 +64,8 @@
 #'     assay = "RNA",
 #'     min_expression = 0.1,
 #'     specificity_weight = 3,
-#'     compute_AUC = TRUE
+#'     compute_AUC = TRUE,
+#'     AUC_correction = TRUE
 #'     )
 #'     }
 #'
@@ -72,7 +78,8 @@ Celltype_Calculate <- function(
     min_expression = 0.1,
     specificity_weight = 3,
     threshold = 0.8,
-    compute_AUC = TRUE
+    compute_AUC = TRUE,
+    AUC_correction = TRUE
 ) {
   required_packages <- c("ggplot2", "patchwork", "dplyr", "scales", "tidyr", "gridExtra", "gtable", "grid", "pheatmap")
   for (pkg in required_packages) {
@@ -81,6 +88,8 @@ Celltype_Calculate <- function(
     }
     library(pkg, character.only = TRUE)
   }
+
+  if (AUC_correction) compute_AUC <- TRUE
 
   if (!inherits(seurat_obj, "Seurat")) stop("Input object must be a Seurat object!")
   if (!is.list(gene_list)) stop("Gene list must be a list of data.frames!")
@@ -163,13 +172,18 @@ Celltype_Calculate <- function(
     clusters <- rownames(df)
     predicted_cell_types <- vector("character", length = length(clusters))
     alternative_cell_types <- vector("character", length = length(clusters))
+    candidate_types_list <- list()
+
     for (i in seq_along(clusters)) {
       cluster <- clusters[i]
       row_values <- as.numeric(unlist(df[i, ]))
       cell_types <- names(df[i, ])
       max_index <- which.max(row_values)
       predicted <- cell_types[max_index]
-      alt <- cell_types[row_values > threshold & cell_types != predicted]
+      candidate_types <- cell_types[row_values > threshold]
+      candidate_types_list[[cluster]] <- candidate_types
+
+      alt <- candidate_types[candidate_types != predicted]
       alt_str <- if (length(alt) > 0) paste(alt, collapse = "; ") else NA_character_
       predicted_cell_types[i] <- predicted
       alternative_cell_types[i] <- alt_str
@@ -181,59 +195,125 @@ Celltype_Calculate <- function(
       stringsAsFactors = FALSE,
       row.names = NULL
     )
+    attr(result_df, "candidate_types") <- candidate_types_list
     return(result_df)
   }
 
   scores_matrix <- as.data.frame(t(scores_matrix))
   probability_matrix <- as.data.frame(result_matrix)
   prediction_results <- generate_prediction_table(probability_matrix, threshold = threshold)
+  candidate_types_list <- attr(prediction_results, "candidate_types")
+
+  fastAUC <- function(predictions, labels) {
+    ord <- order(predictions, decreasing = TRUE)
+    labels <- labels[ord]
+    predictions <- predictions[ord]
+
+    tpr <- cumsum(labels) / sum(labels)
+    fpr <- cumsum(!labels) / sum(!labels)
+
+    tpr <- c(0, tpr, 1)
+    fpr <- c(0, fpr, 1)
+
+    auc <- sum(diff(fpr) * (head(tpr, -1) + tail(tpr, -1)) / 2)
+    return(auc)
+  }
 
   if (compute_AUC) {
-    message("Calculating AUC values for predicted cell types.")
-    auc_values <- numeric(nrow(prediction_results))
+    if (AUC_correction) {
+      message(paste0("Performing AUC correction for all candidate cell types (threshold > ",threshold,")"))
+      new_predicted <- character(nrow(prediction_results))
+      new_aucs <- numeric(nrow(prediction_results))
+      new_alt_list <- character(nrow(prediction_results))
 
-    fastAUC <- function(predictions, labels) {
-      ord <- order(predictions, decreasing = TRUE)
-      labels <- labels[ord]
-      predictions <- predictions[ord]
+      for (i in seq_len(nrow(prediction_results))) {
+        cluster_id <- prediction_results$cluster_col[i]
+        candidate_types <- candidate_types_list[[cluster_id]]
 
-      tpr <- cumsum(labels) / sum(labels)
-      fpr <- cumsum(!labels) / sum(!labels)
+        if (length(candidate_types) == 0) {
+          new_predicted[i] <- NA
+          new_aucs[i] <- NA
+          new_alt_list[i] <- NA
+          next
+        }
 
-      tpr <- c(0, tpr, 1)
-      fpr <- c(0, fpr, 1)
+        auc_vals <- numeric(length(candidate_types))
+        names(auc_vals) <- candidate_types
 
-      auc <- sum(diff(fpr) * (head(tpr, -1) + tail(tpr, -1)) / 2)
-      return(auc)
-    }
+        for (j in seq_along(candidate_types)) {
+          cell_type <- candidate_types[j]
+          features <- valid_genes_list[[cell_type]]
 
-    for (i in seq_len(nrow(prediction_results))) {
-      cluster_id <- prediction_results$cluster_col[i]
-      cell_type <- prediction_results$Predicted_cell_type[i]
+          all_cells <- colnames(seurat_obj)
+          expr_data <- FetchData(seurat_obj, vars = features, cells = all_cells)
+          cell_scores <- rowMeans(expr_data, na.rm = TRUE)
 
-      if (!cell_type %in% names(valid_genes_list)) {
-        warning(paste("Skipping AUC for cluster", cluster_id, ": No valid genes for", cell_type))
-        auc_values[i] <- NA
-        next
+          labels <- seurat_obj@meta.data[all_cells, cluster_col] == cluster_id
+          if (length(unique(labels)) < 2) {
+            auc_vals[j] <- NA
+            warning(paste("Skipping AUC for cluster", cluster_id, "and cell type", cell_type, ": Only one class present"))
+          } else {
+            auc_vals[j] <- fastAUC(cell_scores, labels)
+          }
+        }
+
+        if (all(is.na(auc_vals))) {
+          best_idx <- 1
+          best_auc <- NA
+        } else {
+          best_idx <- which.max(auc_vals)
+          best_auc <- auc_vals[best_idx]
+        }
+
+        best_type <- candidate_types[best_idx]
+        new_predicted[i] <- best_type
+        new_aucs[i] <- best_auc
+
+        alt_types <- candidate_types[-best_idx]
+        alt_aucs <- auc_vals[-best_idx]
+        alt_strs <- character(0)
+
+        for (k in seq_along(alt_types)) {
+          alt_strs[k] <- paste0(alt_types[k], " (",round(alt_aucs[k], digits = 7), ")")
+        }
+        new_alt_list[i] <- paste(alt_strs, collapse = " ; ")
       }
-      features <- valid_genes_list[[cell_type]]
 
-      all_cells <- colnames(seurat_obj)
-      expr_data <- FetchData(seurat_obj, vars = features, cells = all_cells)
+      prediction_results$Predicted_cell_type <- new_predicted
+      prediction_results$AUC <- new_aucs
+      prediction_results$Alternative_cell_types <- new_alt_list
 
-      cell_scores <- rowMeans(expr_data, na.rm = TRUE)
+      message(paste0("\n","The predicted cell types were corrected by AUC values."))
 
-      labels <- seurat_obj@meta.data[all_cells, cluster_col] == cluster_id
+    } else {
+      message("Calculating AUC values for predicted cell type.")
+      auc_values <- numeric(nrow(prediction_results))
 
-      if (length(unique(labels)) < 2) {
-        warning(paste("Skipping AUC for cluster", cluster_id, ": Only one class present"))
-        auc_values[i] <- NA
-      } else {
-        auc_values[i] <- fastAUC(cell_scores, labels)
+      for (i in seq_len(nrow(prediction_results))) {
+        cluster_id <- prediction_results$cluster_col[i]
+        cell_type <- prediction_results$Predicted_cell_type[i]
+
+        if (!cell_type %in% names(valid_genes_list)) {
+          warning(paste("Skipping AUC for cluster", cluster_id, ": No valid genes for", cell_type))
+          auc_values[i] <- NA
+          next
+        }
+        features <- valid_genes_list[[cell_type]]
+
+        all_cells <- colnames(seurat_obj)
+        expr_data <- FetchData(seurat_obj, vars = features, cells = all_cells)
+        cell_scores <- rowMeans(expr_data, na.rm = TRUE)
+
+        labels <- seurat_obj@meta.data[all_cells, cluster_col] == cluster_id
+        if (length(unique(labels)) < 2) {
+          warning(paste("Skipping AUC for cluster", cluster_id, ": Only one class present"))
+          auc_values[i] <- NA
+        } else {
+          auc_values[i] <- fastAUC(cell_scores, labels)
+        }
       }
+      prediction_results$AUC <- auc_values
     }
-
-    prediction_results$AUC <- auc_values
   } else {
     prediction_results$AUC <- NA
   }
