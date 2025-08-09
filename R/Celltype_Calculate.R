@@ -221,7 +221,7 @@ Celltype_Calculate <- function(
 
   if (compute_AUC) {
     if (AUC_correction) {
-      message(paste0("Performing AUC correction for all candidate cell types (threshold > ",threshold,")"))
+      message(paste0("Performing AUC correction for all candidate cell types (threshold > ",threshold,")."))
       new_predicted <- character(nrow(prediction_results))
       new_aucs <- numeric(nrow(prediction_results))
       new_alt_list <- character(nrow(prediction_results))

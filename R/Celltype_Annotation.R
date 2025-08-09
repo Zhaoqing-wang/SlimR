@@ -10,10 +10,10 @@
 #'     containing a data.frame in $Prediction_results with: 1.cluster_col (Cluster
 #'     identifiers (should match cluster_col in meta.data)) 2.Predicted_cell_type
 #'     (Predicted cell types for each cluster)
-#' @param plot logical(1); if TRUE, plot the UMAP with cell type annotations.
+#' @param plot_UMAP logical(1); if TRUE, plot the UMAP with cell type annotations.
 #'
 #' @return A Seurat object with updated meta.data containing the predicted cell types
-#' @note If plot = TRUE, this function will print a UMAP plot as a side effect.
+#' @note If plot_UMAP = TRUE, this function will print a UMAP plot as a side effect.
 #'
 #' @export
 #' @family Celltype_annotation
@@ -26,15 +26,15 @@
 #' sce <- Celltype_Annotation(seurat_obj = sce,
 #'     cluster_col = "seurat_clusters",
 #'     SlimR_anno_result = SlimR_anno_result,
-#'     plot = TRUE
+#'     plot_UMAP = TRUE
 #'     )
 #'     }
 #'
-Celltype_Annotation <- function(
+Celltype_Annotation<- function(
     seurat_obj,
     cluster_col,
     SlimR_anno_result,
-    plot = TRUE
+    plot_UMAP = TRUE
 ) {
   if (!inherits(seurat_obj, "Seurat")) {
     stop("Input must be a Seurat object")
@@ -60,14 +60,31 @@ Celltype_Annotation <- function(
     stop(sprintf("Missing required columns in Prediction_results: %s", paste(missing, collapse = ", ")))
   }
 
+  obj_clusters <- as.character(unique(seurat_obj@meta.data[[cluster_col]]))
+  pred_clusters <- as.character(unique(prediction_df$cluster_col))
+
+  if (length(obj_clusters) != length(pred_clusters)) {
+    stop("Cluster count mismatch: ",
+         "Seurat object has ", length(obj_clusters), " clusters, \n",
+         "  SlimR_anno_result has ", length(pred_clusters), " clusters. \n",
+         "  Please check your input cluster_col.")
+  }
+
   prediction_df <- dplyr::as_tibble(prediction_df)
 
-  mapping <- setNames(as.character(prediction_df$Predicted_cell_type),
-                      as.character(prediction_df$cluster_col))
+  mapping <- setNames(
+    as.character(prediction_df$Predicted_cell_type),
+    as.character(prediction_df$cluster_col)
+  )
 
   obj_clusters <- as.character(seurat_obj@meta.data[[cluster_col]])
   pred_clusters <- as.character(prediction_df$cluster_col)
-  missing_clusters <- setdiff(pred_clusters, obj_clusters)
+
+  missing_clusters <- setdiff(
+    as.character(pred_clusters),
+    as.character(obj_clusters)
+  )
+
 
   if (length(missing_clusters) > 0) {
     warning(sprintf("The following clusters in prediction results do not exist in the object: %s",
@@ -81,9 +98,11 @@ Celltype_Annotation <- function(
 
   p <- Seurat::DimPlot(seurat_obj, reduction = "umap", label = TRUE, pt.size = 0.5) + Seurat::NoLegend() + Seurat::NoAxes()
 
-  if (plot) {
+  if (plot_UMAP) {
     print(p)
   }
+
+  message(paste0("SlimR predicted cell types information has been written into \n'seurat_obj@meta.data$Cell_type_SlimR'."))
 
   return(seurat_obj)
 }

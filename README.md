@@ -181,7 +181,7 @@ Assigns SlimR predicted cell types to the Seurat object based on cluster annotat
 sce <- Celltype_Annotation(seurat_obj = sce,
     cluster_col = "seurat_clusters",
     SlimR_anno_result = SlimR_anno_result,
-    plot = TRUE
+    plot_UMAP = TRUE
     )
 ```
 *Important: The parameter "cluster_col" in the function "Celltype_Calculate" and the function "Celltype_Annotation" must be strictly the same to avoid false matches.*
