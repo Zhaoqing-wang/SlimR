@@ -57,6 +57,11 @@
 #'
 #' @importFrom grDevices colorRampPalette
 #' @importFrom utils tail
+#' @importFrom ggplot2 ggplot aes geom_line geom_abline scale_color_manual
+#' @importFrom ggplot2 theme_minimal labs theme element_text element_blank
+#' @importFrom ggplot2 guide_legend guides scale_x_continuous scale_y_continuous
+#' @importFrom ggplot2 element_line expand_limits
+#' @importFrom ggplot2 .data
 #'
 #' @examples
 #' \dontrun{
@@ -399,7 +404,7 @@ Celltype_Calculate <- function(
       color_count <- length(unique(combined_df$label))
       colors <- scales::hue_pal()(color_count)
 
-      auc_plot <- ggplot(combined_df, aes(x = FPR, y = TPR, color = label)) +
+      auc_plot <- ggplot(combined_df, aes(.data$FPR, y = .data$TPR, color = .data$label)) +
         geom_line(size = 1) +
         geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "black") +
         labs(
