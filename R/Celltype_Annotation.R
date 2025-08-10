@@ -101,7 +101,7 @@ Celltype_Annotation<- function(
     print(p)
   }
 
-  message(paste0("The cell types information predicted by SlimR in 'SlimR_anno_result$Prediction_results$Predicted_cell_type' has been written into 'seurat_obj@meta.data$Cell_type_SlimR'."))
+  message(paste0("SlimR annotation: The cell types information predicted by SlimR in 'SlimR_anno_result$Prediction_results$Predicted_cell_type' has been written into 'seurat_obj@meta.data$Cell_type_SlimR'."))
 
   return(seurat_obj)
 }
