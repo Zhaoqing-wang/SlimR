@@ -1,13 +1,13 @@
 Package: SlimR
 Title: Marker-Based Package for Single-Cell and Spatial-Transcriptomic Annotation
-Version: 1.0.6
+Version: 1.0.7
 Authors@R: 
     person(given = "Zhao qing",family = "Wang",
            role = c("aut", "cre"),
            email = c("851091628@qq.com","zhaoqingwang@mail.sdu.edu.cn"),
            comment = c(ORCID = "0000-0001-8348-7245"))
 Description: Annotating single-cell and spatial-transcriptomic (ST) data based on the Marker dataset. It supports the creation of a unified marker list, Markers_list, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB', 'scIBD', 'TCellSI'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers. For more details see Hu et al. (2023) <doi:10.1093/nar/gkac947>, Franzén et al. (2019) <doi:10.1093/database/baz046>, Nie et al. (2023) <doi:10.1038/s43588-023-00464-9> and Yang et al. (2024) <doi:10.1002/imt2.231>.
-    Based on the Markers_list, SlimR can calculate gene expression of different cell types and predict annotation information and calculate AUC ('Celltype_Calculate') with one click, and annotate it ('Celltype_Annotation'). At the same time, it can calculate gene expression corresponding to the cell type to generate the corresponding annotation reference map for manual annotation (for example, 'Annotation_heatmap', 'Annotation Dot Plot', 'Annotation Box plot'). For more details see Kabacoff (2015, ISBN:9781617291388).
+    Based on the Markers_list, SlimR can calculate gene expression of different cell types and predict annotation information and calculate corresponding AUC ('Celltype_Calculate') with one click, and annotate it ('Celltype_Annotation'), then verify it ('Celltype_Verification'). At the same time, it can calculate gene expression corresponding to the cell type to generate the corresponding annotation reference map for manual annotation (for example, 'Heatmap', 'Dot Plot', 'Box plot'). For more details see Kabacoff (2015, ISBN:9781617291388).
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -15,7 +15,7 @@ RoxygenNote: 7.3.2
 Depends: 
     R (>= 3.5)
 LazyData: true
-Date: 2025-08-10
+Date: 2025-08-11
 Imports: 
     cowplot,
     dplyr,

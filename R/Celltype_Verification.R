@@ -3,16 +3,16 @@
 #' @description This function performs verification of predicted cell types by selecting
 #'     high-variability genes and generating a dotplot visualization.
 #'
-#' @param seurat_obj A Seurat object containing single-cell data
+#' @param seurat_obj A Seurat object containing single-cell data.
 #' @param SlimR_anno_result A list containing SlimR annotation results with:
-#'     Expression_list - List of expression matrices for each cell type
-#'     Prediction_results - Data frame with cluster annotations
-#' @param gene_number Integer specifying number of top genes to select per cell type
-#' @param cluster_col Character string specifying the column in meta.data to use for grouping
-#' @param colour_low Color for lowest expression level (default = "white")
-#' @param colour_high Color for highest expression level (default = "black")
+#'     Expression_list - List of expression matrices for each cell type.
+#'     Prediction_results - Data frame with cluster annotations.
+#' @param gene_number Integer specifying number of top genes to select per cell type.
+#' @param annotation_col Character string specifying the column in meta.data to use for grouping.
+#' @param colour_low Color for lowest expression level. (default = "white")
+#' @param colour_high Color for highest expression level. (default = "black")
 #'
-#' @return A ggplot object showing expression of top variable genes
+#' @return A ggplot object showing expression of top variable genes.
 #'
 #' @export
 #' @family Celltype_annotation
@@ -29,7 +29,8 @@
 #'     SlimR_anno_result = SlimR_anno_result,
 #'     gene_number = 5,
 #'     colour_low = "white",
-#'     colour_high = "navy"
+#'     colour_high = "navy",
+#'     annotation_col = "Cell_type_SlimR"
 #'     )
 #'     }
 #'
@@ -39,14 +40,14 @@ Celltype_Verification <- function(
     gene_number = 5,
     colour_low = "white",
     colour_high = "navy",
-    cluster_col = "Cell_type_SlimR"
+    annotation_col = "Cell_type_SlimR"
 ) {
   if (!inherits(seurat_obj, "Seurat")) stop("seurat_obj must be a Seurat object")
   if (!is.list(SlimR_anno_result)) stop("SlimR_anno_result must be a list")
   if (!"Prediction_results" %in% names(SlimR_anno_result)) stop("Prediction_results not found in SlimR_anno_result")
   if (!"Expression_list" %in% names(SlimR_anno_result)) stop("Expression_list not found in SlimR_anno_result")
   if (!is.numeric(gene_number) || gene_number < 1) stop("gene_number must be a positive integer")
-  if (!(cluster_col %in% colnames(seurat_obj@meta.data))) stop(paste0(cluster_col, " not found in seurat_obj meta.data"))
+  if (!(annotation_col %in% colnames(seurat_obj@meta.data))) stop(paste0(annotation_col, " not found in seurat_obj meta.data, please run Celltype_Annotation() first."))
 
   predicted_types <- unique(SlimR_anno_result$Prediction_results$Predicted_cell_type)
   predicted_types <- predicted_types[!is.na(predicted_types)]
@@ -77,16 +78,17 @@ Celltype_Verification <- function(
   all_features <- unique(unlist(feature_list))
   if (length(all_features) == 0) stop("No valid features found for verification")
 
-  cluster_order <- unique(seurat_obj@meta.data[[cluster_col]])
+  cluster_order <- unique(seurat_obj@meta.data[[annotation_col]])
   cluster_order <- cluster_order[!is.na(cluster_order)]
 
   dotplot <- Seurat::DotPlot(
     object = seurat_obj,
     features = all_features,
-    group.by = cluster_col
+    group.by = annotation_col
   ) +
     ggplot2::theme_bw() +
     ggplot2::theme(
+      plot.title = element_text(face = "bold", hjust = 0.5),
       panel.grid = ggplot2::element_blank(),
       axis.text.x = ggplot2::element_text(
         angle = 45,
@@ -104,6 +106,6 @@ Celltype_Verification <- function(
       colours = c(colour_low, colour_high),
       values = seq(0, 1, length.out = 2))
 
-  message(paste0("SlimR verification: By using the highly variable genes in 'SlimR_anno_result$Expression_list' corresponding to the predicted cell type information in 'SlimR_anno_result$Prediction_results$Predicted_cell_type', a dotplot is generated based on 'seurat_obj@meta.data$cluster_col'."))
+  message(paste0("SlimR verification: By using the highly variable genes in 'SlimR_anno_result$Expression_list' corresponding to predicted cell type information in 'SlimR_anno_result$Prediction_results$Predicted_cell_type', the dotplot is generated based on clusters as 'seurat_obj@meta.data$",annotation_col,"."))
   return(dotplot)
 }

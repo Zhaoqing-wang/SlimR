@@ -12,7 +12,7 @@
 
 SlimR is an R package designed for annotating single-cell and spatial-transcriptomics (ST) datasets. It supports the creation of a unified marker list, Markers_list, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB', 'scIBD', 'TCellSI'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers.
 
-Based on the Markers_list, SlimR can calculate gene expression of different cell types and predict annotation information and calculate corresponding AUC ('Celltype_Calculate') with one click, and annotate it ('Celltype_Annotation'). At the same time, it can calculate gene expression corresponding to the cell type to generate the corresponding annotation reference map for manual annotation (for example, 'Heatmap', 'Dot Plot', 'Box plot').
+Based on the Markers_list, SlimR can calculate gene expression of different cell types and predict annotation information and calculate corresponding AUC ('Celltype_Calculate') with one click, and annotate it ('Celltype_Annotation'), then verify it ('Celltype_Verification'). At the same time, it can calculate gene expression corresponding to the cell type to generate the corresponding annotation reference map for manual annotation (for example, 'Heatmap', 'Dot Plot', 'Box plot').
 
 ## Table of Contents
 1. [Preparation](#1-preparation)  
@@ -195,7 +195,8 @@ Assigns SlimR predicted cell types to the Seurat object based on cluster annotat
 sce <- Celltype_Annotation(seurat_obj = sce,
     cluster_col = "seurat_clusters",
     SlimR_anno_result = SlimR_anno_result,
-    plot_UMAP = TRUE
+    plot_UMAP = TRUE,
+    annotation_col = "Cell_type_SlimR"
     )
 ```
 *Important: The parameter "cluster_col" in the function "Celltype_Calculate", "Celltype_Annotation" and the function "Celltype_Verification" must be strictly the same to avoid false matches.*
@@ -207,7 +208,8 @@ Celltype_Verification(seurat_obj = sce,
     SlimR_anno_result = SlimR_anno_result,
     gene_number = 5,
     colour_low = "white",
-    colour_high = "navy"
+    colour_high = "navy",
+    annotation_col = "Cell_type_SlimR"
     )
 ```
 *Important: The parameter "cluster_col" in the function "Celltype_Calculate", "Celltype_Annotation" and the function "Celltype_Verification" must be strictly the same to avoid false matches.*

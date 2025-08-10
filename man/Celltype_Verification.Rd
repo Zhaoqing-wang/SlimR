@@ -10,26 +10,26 @@ Celltype_Verification(
   gene_number = 5,
   colour_low = "white",
   colour_high = "navy",
-  cluster_col = "Cell_type_SlimR"
+  annotation_col = "Cell_type_SlimR"
 )
 }
 \arguments{
-\item{seurat_obj}{A Seurat object containing single-cell data}
+\item{seurat_obj}{A Seurat object containing single-cell data.}
 
 \item{SlimR_anno_result}{A list containing SlimR annotation results with:
-Expression_list - List of expression matrices for each cell type
-Prediction_results - Data frame with cluster annotations}
+Expression_list - List of expression matrices for each cell type.
+Prediction_results - Data frame with cluster annotations.}
 
-\item{gene_number}{Integer specifying number of top genes to select per cell type}
+\item{gene_number}{Integer specifying number of top genes to select per cell type.}
 
-\item{colour_low}{Color for lowest expression level (default = "white")}
+\item{colour_low}{Color for lowest expression level. (default = "white")}
 
-\item{colour_high}{Color for highest expression level (default = "black")}
+\item{colour_high}{Color for highest expression level. (default = "black")}
 
-\item{cluster_col}{Character string specifying the column in meta.data to use for grouping}
+\item{annotation_col}{Character string specifying the column in meta.data to use for grouping.}
 }
 \value{
-A ggplot object showing expression of top variable genes
+A ggplot object showing expression of top variable genes.
 }
 \description{
 This function performs verification of predicted cell types by selecting
@@ -41,7 +41,8 @@ Celltype_Verification(seurat_obj = sce,
     SlimR_anno_result = SlimR_anno_result,
     gene_number = 5,
     colour_low = "white",
-    colour_high = "navy"
+    colour_high = "navy",
+    annotation_col = "Cell_type_SlimR"
     )
     }
 

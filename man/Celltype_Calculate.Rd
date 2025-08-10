@@ -49,8 +49,8 @@ of variability in the final score calculation.Default parameters use
 "specificity_weight = 3".}
 
 \item{threshold}{This parameter refers to the normalized similarity between the
-"alternative cell type" and the "predicted cell type" in the returned results
-(the default parameter is 0.8).}
+"alternative cell type" and the "predicted cell type" in the returned results.
+(the default parameter is 0.8)}
 
 \item{compute_AUC}{Logical indicating whether to calculate AUC values for predicted
 cell types. AUC measures how well the marker genes distinguish the cluster from
@@ -59,11 +59,11 @@ others. When TRUE, adds an AUC column to the prediction results. (default: TRUE)
 \item{plot_AUC}{The logic indicates whether to draw an AUC curve for the predicted cell
 type. When TRUE, add an AUC_plot to result. (default: TRUE)}
 
-\item{AUC_correction}{Logical value controlling AUC-based correction (default = TRUE).
+\item{AUC_correction}{Logical value controlling AUC-based correction. (default = TRUE)
 When set to TRUE:
-- Computes AUC values for candidate cell types (probability > threshold)
-- Selects the cell type with the highest AUC as the final predicted type
-- Records the selected type's AUC value in the "AUC" column.}
+1.Computes AUC values for candidate cell types. (probability > threshold)
+2.Selects the cell type with the highest AUC as the final predicted type.
+3.Records the selected type's AUC value in the "AUC" column.}
 }
 \value{
 A list containing:
