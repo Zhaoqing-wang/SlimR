@@ -44,15 +44,19 @@ Based on the Markers_list, SlimR can calculate gene expression of different cell
 
 ## 1. Preparation
 ### 1.1 Installation
-(Option One) Install SlimR directly from CRAN using: (Stable version)
-[![CRAN Version](https://img.shields.io/cran/v/SlimR?label=CRAN)](https://cran.r-project.org/package=SlimR)
+Option One: [![CRAN Version](https://img.shields.io/cran/v/SlimR?label=CRAN)](https://cran.r-project.org/package=SlimR)
+
+Install SlimR directly from CRAN using: (Stable version)
+
 ```r
 install.packages("SlimR")
 ```
 *Note: Try adjusting the CRAN image to "Global (CDN)" or use "BiocManager::install("SlimR")" if you encounter a version mismatch during installation.*
 
-(Option Two) Install SlimR directly from GitHub using: (Development version, more recommended)
-[![GitHub R package version](https://img.shields.io/github/r-package/v/Zhaoqing-wang/SlimR?label=GitHub&color=green)](https://github.com/Zhaoqing-wang/SlimR/releases)
+Option Two: [![GitHub R package version](https://img.shields.io/github/r-package/v/Zhaoqing-wang/SlimR?label=GitHub&color=green)](https://github.com/Zhaoqing-wang/SlimR/releases)
+
+Install SlimR directly from GitHub using: (Development version, more recommended)
+
 ```r
 devtools::install_github("Zhaoqing-wang/SlimR")
 ```
