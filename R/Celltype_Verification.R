@@ -38,7 +38,8 @@ Celltype_Verification <- function(
     SlimR_anno_result,
     gene_number = 5,
     colour_low = "white",
-    colour_high = "navy"
+    colour_high = "navy",
+    cluster_col = "Cell_type_SlimR"
 ) {
   if (!inherits(seurat_obj, "Seurat")) stop("seurat_obj must be a Seurat object")
   if (!is.list(SlimR_anno_result)) stop("SlimR_anno_result must be a list")
@@ -53,6 +54,8 @@ Celltype_Verification <- function(
   feature_list <- list()
   for (cell_type in predicted_types) {
     if (!(cell_type %in% names(SlimR_anno_result$Expression_list))) next
+
+    cv <- NULL
 
     expr_df <- SlimR_anno_result$Expression_list[[cell_type]]
     if (nrow(expr_df) == 0) next

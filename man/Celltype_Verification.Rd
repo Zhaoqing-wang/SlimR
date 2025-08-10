@@ -8,9 +8,9 @@ Celltype_Verification(
   seurat_obj,
   SlimR_anno_result,
   gene_number = 5,
-  cluster_col = "Cell_type_SlimR",
   colour_low = "white",
-  colour_high = "navy"
+  colour_high = "navy",
+  cluster_col = "Cell_type_SlimR"
 )
 }
 \arguments{
@@ -22,11 +22,11 @@ Prediction_results - Data frame with cluster annotations}
 
 \item{gene_number}{Integer specifying number of top genes to select per cell type}
 
-\item{cluster_col}{Character string specifying the column in meta.data to use for grouping}
-
 \item{colour_low}{Color for lowest expression level (default = "white")}
 
 \item{colour_high}{Color for highest expression level (default = "black")}
+
+\item{cluster_col}{Character string specifying the column in meta.data to use for grouping}
 }
 \value{
 A ggplot object showing expression of top variable genes
@@ -39,7 +39,9 @@ high-variability genes and generating a dotplot visualization.
 \dontrun{
 Celltype_Verification(seurat_obj = sce,
     SlimR_anno_result = SlimR_anno_result,
-    gene_number = 5
+    gene_number = 5,
+    colour_low = "white",
+    colour_high = "navy"
     )
     }
 
