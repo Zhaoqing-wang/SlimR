@@ -1,8 +1,8 @@
-#' Annotate cell types using DotPlot with different marker databases
+#' Annotate cell types using combined plot with different marker databases
 #'
-#' This function dynamically selects the appropriate annotation method based on the
-#' `gene_list_type` parameter. It supports marker databases from Cellmarker2, PanglaoDB,
-#' Seurat (via `FindAllMarkers`), or Excel files.
+#' @description This function dynamically selects the appropriate annotation method
+#'     based on the `gene_list_type` parameter. It supports marker databases from
+#'     Cellmarker2, PanglaoDB, Seurat (via `FindAllMarkers`), or Excel files.
 #'
 #' @param seurat_obj A valid Seurat object with cluster annotations in `meta.data`.
 #' @param gene_list A list of data frames containing marker genes and metrics.
@@ -36,7 +36,7 @@
 #' @examples
 #' \dontrun{
 #' # Example for Cellmarker2
-#' Celltype_annotation_Dotplot(seurat_obj = sce,
+#' Celltype_annotation_Combined(seurat_obj = sce,
 #'     gene_list = Markers_list_Cellmarker2,
 #'     species = "Human",
 #'     cluster_col = "seurat_clusters",
@@ -45,7 +45,7 @@
 #'     )
 #'
 #' # Example for PanglaoDB
-#' Celltype_annotation_Dotplot(seurat_obj = sce,
+#' Celltype_annotation_Combined(seurat_obj = sce,
 #'     gene_list = Markers_list_panglaoDB,
 #'     species = "Human",
 #'     cluster_col = "seurat_clusters",
@@ -54,7 +54,7 @@
 #'     )
 #'
 #' # Example for Seurat marker list
-#' Celltype_annotation_Dotplot(seurat_obj = sce,
+#' Celltype_annotation_Combined(seurat_obj = sce,
 #'     gene_list = Markers_list_Seurat,
 #'     species = "Human",
 #'     cluster_col = "seurat_clusters",
@@ -63,7 +63,7 @@
 #'     )
 #'
 #' # Example for Excel marker list
-#' Celltype_annotation_Dotplot(seurat_obj = sce,
+#' Celltype_annotation_Combined(seurat_obj = sce,
 #'     gene_list = Markers_list_Excel,
 #'     species = "Human",
 #'     cluster_col = "seurat_clusters",
@@ -72,7 +72,7 @@
 #'     )
 #' }
 #'
-Celltype_annotation_Dotplot <- function(
+Celltype_annotation_Combined <- function(
     seurat_obj,
     gene_list,
     gene_list_type = 'Default',
