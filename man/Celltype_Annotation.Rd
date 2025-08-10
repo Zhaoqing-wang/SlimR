@@ -46,6 +46,7 @@ sce <- Celltype_Annotation(seurat_obj = sce,
 }
 \seealso{
 Other Celltype_annotation: 
-\code{\link{Celltype_Calculate}()}
+\code{\link{Celltype_Calculate}()},
+\code{\link{Celltype_Verification}()}
 }
 \concept{Celltype_annotation}

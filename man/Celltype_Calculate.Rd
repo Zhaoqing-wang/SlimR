@@ -103,6 +103,7 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
 }
 \seealso{
 Other Celltype_annotation: 
-\code{\link{Celltype_Annotation}()}
+\code{\link{Celltype_Annotation}()},
+\code{\link{Celltype_Verification}()}
 }
 \concept{Celltype_annotation}

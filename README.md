@@ -29,8 +29,9 @@ Based on the Markers_list, SlimR can calculate gene expression of different cell
    - [2.6 From Excel Tables](#26-from-excel-tables)  
   
 3. [Automated Annotation Workflow](#3-automated-annotation-workflow) 
-   - [3.1 Calculate Celltype](#31-calculate-celltype)  
-   - [3.2 Annotation Celltype](#32-annotation-celltype) 
+   - [3.1 Calculate cell types](#31-calculate-cell-types)  
+   - [3.2 Annotate cell types](#32-annotate-cell-types) 
+   - [3.3 Verify cell types](#33-verify-cell-types) 
 
 4. [Semi-Automated Annotation Workflow](#4-semi-automated-annotation-workflow)  
    - [4.1 Annotation Heatmap](#41-annotation-heatmap)  
@@ -171,7 +172,7 @@ Markers_list_Excel <- read_excel_markers("D:/Laboratory/Marker_load.xlsx")
 *Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4.*
 
 ## 3. Automated Annotation Workflow
-### 3.1 Calculate Celltype
+### 3.1 Calculate cell types
 Uses "marker_list" to calculate probability, prediction results and generate heatmap for cell annotation.
 ```r
 SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
@@ -186,9 +187,9 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     AUC_correction = TRUE
     )
 ```
-*Important: The parameter "cluster_col" in the function "Celltype_Calculate" and the function "Celltype_Annotation" must be strictly the same to avoid false matches.*
+*Important: The parameter "cluster_col" in the function "Celltype_Calculate", "Celltype_Annotation" and the function "Celltype_Verification" must be strictly the same to avoid false matches.*
 
-### 3.2 Annotation Celltype
+### 3.2 Annotate cell types
 Assigns SlimR predicted cell types to the Seurat object based on cluster annotations, and stores the results in the meta.data slot.
 ```r
 sce <- Celltype_Annotation(seurat_obj = sce,
@@ -197,8 +198,19 @@ sce <- Celltype_Annotation(seurat_obj = sce,
     plot_UMAP = TRUE
     )
 ```
-*Important: The parameter "cluster_col" in the function "Celltype_Calculate" and the function "Celltype_Annotation" must be strictly the same to avoid false matches.*
+*Important: The parameter "cluster_col" in the function "Celltype_Calculate", "Celltype_Annotation" and the function "Celltype_Verification" must be strictly the same to avoid false matches.*
 
+### 3.3 Verify cell types
+The predicted cell type accuracy was verified by screening the highly variable genes corresponding to the predicted cell type to generate a visual dot plot.
+```r
+Celltype_Verification(seurat_obj = sce,
+    SlimR_anno_result = SlimR_anno_result,
+    gene_number = 5,
+    colour_low = "white",
+    colour_high = "navy"
+    )
+```
+*Important: The parameter "cluster_col" in the function "Celltype_Calculate", "Celltype_Annotation" and the function "Celltype_Verification" must be strictly the same to avoid false matches.*
 
 ## 4. Semi-Automated Annotation Workflow
 ### 4.1 Annotation Heatmap
