@@ -50,12 +50,11 @@ Celltype_Verification <- function(
 
   predicted_types <- unique(SlimR_anno_result$Prediction_results$Predicted_cell_type)
   predicted_types <- predicted_types[!is.na(predicted_types)]
+  cv <- NULL
 
   feature_list <- list()
   for (cell_type in predicted_types) {
     if (!(cell_type %in% names(SlimR_anno_result$Expression_list))) next
-
-    cv <- NULL
 
     expr_df <- SlimR_anno_result$Expression_list[[cell_type]]
     if (nrow(expr_df) == 0) next
