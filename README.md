@@ -1,10 +1,10 @@
 # SlimR: Marker-Based R Package for Single-Cell and Spatial-Transcriptomic Annotation
 
-![CRAN Version](https://img.shields.io/cran/v/SlimR?label=CRAN&link=https%3A%2F%2Fcran.r-project.org%2Fpackage%3DSlimR)
-![License](https://img.shields.io/github/license/Zhaoqing-wang/SlimR?label=License&link=https%3A%2F%2Fgithub.com%2FZhaoqing-wang%2FSlimR%2Fblob%2Fmain%2FLICENSE)
+[![CRAN Version](https://img.shields.io/cran/v/SlimR?label=CRAN)](https://cran.r-project.org/package=SlimR)
+[![GitHub License](https://img.shields.io/github/license/Zhaoqing-wang/SlimR?label=License)](https://github.com/Zhaoqing-wang/SlimR/blob/main/LICENSE)
 [![CRAN Downloads](https://cranlogs.r-pkg.org/badges/SlimR?text=Downloads)](https://cran.r-project.org/package=SlimR)
-![GitHub R package version](https://img.shields.io/github/r-package/v/Zhaoqing-wang/SlimR?label=GitHub&color=green)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Zhaoqing-wang/SlimR?label=Commit%20activity)
+[![GitHub R package version](https://img.shields.io/github/r-package/v/Zhaoqing-wang/SlimR?label=GitHub&color=green)](https://github.com/Zhaoqing-wang/SlimR/releases)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Zhaoqing-wang/SlimR?label=Commit%20activity)](https://github.com/Zhaoqing-wang/SlimR/commits/main/)
 
 ## Overview
 
@@ -45,14 +45,14 @@ Based on the Markers_list, SlimR can calculate gene expression of different cell
 ## 1. Preparation
 ### 1.1 Installation
 (Option One) Install SlimR directly from CRAN using: (Stable version)
-![CRAN/METACRAN Version](https://img.shields.io/cran/v/SlimR?label=CRAN&link=https%3A%2F%2Fcran.r-project.org%2Fpackage%3DSlimR)
+[![CRAN Version](https://img.shields.io/cran/v/SlimR?label=CRAN)](https://cran.r-project.org/package=SlimR)
 ```r
 install.packages("SlimR")
 ```
 *Note: Try adjusting the CRAN image to "Global (CDN)" or use "BiocManager::install("SlimR")" if you encounter a version mismatch during installation.*
 
 (Option Two) Install SlimR directly from GitHub using: (Development version, more recommended)
-![GitHub R package version](https://img.shields.io/github/r-package/v/Zhaoqing-wang/SlimR?label=GitHub&color=green)
+[![GitHub R package version](https://img.shields.io/github/r-package/v/Zhaoqing-wang/SlimR?label=GitHub&color=green)](https://github.com/Zhaoqing-wang/SlimR/releases)
 ```r
 devtools::install_github("Zhaoqing-wang/SlimR")
 ```
