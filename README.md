@@ -12,7 +12,7 @@
 
 SlimR is an R package designed for annotating single-cell and spatial-transcriptomics (ST) datasets. It supports the creation of a unified marker list, Markers_list, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB', 'scIBD', 'TCellSI'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers.
 
-Based on the Markers_list, SlimR can calculate gene expression of different cell types and predict annotation information and calculate AUC ('Celltype_Calculate'), and annotate it ('Celltype_Annotation'), then verify it ('Celltype_Verification'). At the same time, it can calculate gene expression corresponding to the cell type to generate the corresponding annotation reference map for manual annotation (e.g., 'Heatmap', 'Combined Plot', 'Box plot').
+Based on the Markers_list, SlimR can calculate gene expression of different cell types and predict annotation information and calculate AUC (`Celltype_Calculate`), and annotate it (`Celltype_Annotation`), then verify it (`Celltype_Verification`). At the same time, it can calculate gene expression corresponding to the cell type to generate the corresponding annotation reference map for manual annotation (e.g., 'Heatmap', 'Combined Plot', 'Box plot').
 
 ## Table of Contents
 1. [Preparation](#1-preparation)  
@@ -195,7 +195,7 @@ Markers_list_Excel <- read_excel_markers("D:/Laboratory/Marker_load.xlsx")
 ## 3. Automated Annotation Workflow
 ### 3.1 Calculate cell types
 #### 3.1.1 Calculate Cell types (Core)
-Uses "marker_list" to calculate probability, prediction results and generate heatmap for cell annotation.
+Uses `markers_list` to calculate probability, prediction results and generate heatmap for cell annotation.
 ```r
 SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     gene_list = Markers_list,
@@ -209,16 +209,16 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     AUC_correction = TRUE
     )
 ```
-**Important: The parameter "cluster_col" in the function "Celltype_Calculate" and the function "Celltype_Annotation" must be strictly the same to avoid false matches.**
+**Important: The parameter `cluster_col` in the function `Celltype_Calculate()` and the function `Celltype_Annotation()` must be strictly the same to avoid false matches.**
 
 *Note: Using the parameter `AUC_correction = TRUE` takes a little longer to compute, but it is recommended to correct the predicted cell type this way.*
 
 #### 3.1.2 Plot Heatmap (Optional)
-Check the annotation probability of the cell type to be annotated in the input 'cluster_col' column and the cell type in 'Markers_list' with the following code.
+Check the annotation probability of the cell type to be annotated in the input `cluster_col` column and cell types in `Markers_list` with the following code.
 ```r
 print(SlimR_anno_result$Heatmap_plot)
 ```
-*Note: If the heatmap is not generated properly, please run the function "library(pheatmap)" first.*
+*Note: If the heatmap is not generated properly, please run the function `library(pheatmap)` first.*
 
 
 #### 3.1.3 View prediction results (Optional)
@@ -228,22 +228,23 @@ View(SlimR_anno_result$Prediction_results)
 ```
 
 #### 3.1.4 Plot ROC curve and AUC value (Optional)
-Furthermore, the ROC curve and AUC value of the corresponding "cluster_col" and the predicted cell type can be viewed by the following code.
+Furthermore, the ROC curve and AUC value of the corresponding `cluster_col` and the predicted cell type can be viewed by the following code.
 ```r
 print(SlimR_anno_result$AUC_plot)
 ```
-**Improtant: This feature depends on 'plot_AUC = TRUE'**
+**Improtant: This feature depends on `plot_AUC = TRUE`**
 
-*Note: If the heatmap is not generated properly, please run the function "library(ggplot2)" first.*
+*Note: If the heatmap is not generated properly, please run the function `library(ggplot2)` first.*
 
 #### 3.1.5 Correction for predicted cell type (Alternative)
-After viewing the list of predicted cell types and the corresponding AUC values, the predicted cell types can be corrected with the following code. (For example, cluster "15" in "cluster_col" corresponds to the predicted cell type "Intestinal stem cell")
+After viewing the list of predicted cell types and the corresponding AUC values, the predicted cell types can be corrected with the following code. (For example, cluster `15` in `cluster_col` corresponds to the predicted cell type `Intestinal stem cell`)
 ```r
-# For example, cluster "15" in "cluster_col" corresponds to the predicted cell type "Intestinal stem cell"
+# For example, cluster `15` in `cluster_col` corresponds to the predicted cell type `Intestinal stem cell`.
 SlimR_anno_result$Prediction_results$Predicted_cell_type[
   SlimR_anno_result$Prediction_results$cluster_col == 15
 ] <- "Intestinal stem cell"
 ```
+**Improtant: All the input cell types can be recognized by `Celltype_Annotation()`; however, only when the cell types listed in `Markers_list` are input, can they be recognized by `Celltype_Verification()`. (It is strongly recommended that if you need to correct the cell type, use cell types in `Prediction_results$Alternative_cell_type`)**
 
 ### 3.2 Annotate cell types
 Assigns SlimR predicted cell types information in `SlimR_anno_result$Prediction_results$Predicted_cell_type` to the Seurat object based on cluster annotations, and stores the results into `seurat_obj@meta.data$annotation_col`.
@@ -256,7 +257,7 @@ sce <- Celltype_Annotation(seurat_obj = sce,
     annotation_col = "Cell_type_SlimR"
     )
 ```
-**Important: The parameter "cluster_col" in the function "Celltype_Calculate" and the function "Celltype_Annotation" must be strictly the same to avoid false matches. And the parameter "annotation_col" in the function "Celltype_Annotation" and the function "Celltype_Verification" must be strictly the same to avoid false matches.**
+**Important: The parameter `cluster_col` in the function `Celltype_Calculate()` and the function `Celltype_Annotation()` must be strictly the same to avoid false matches. And the parameter `annotation_col` in the function `Celltype_Annotation()` and the function `Celltype_Verification()` must be strictly the same to avoid false matches.**
 
 ### 3.3 Verify cell types
 By using the highly variable genes in `SlimR_anno_result$Expression_list` corresponding to predicted cell type information in `SlimR_anno_result$Prediction_results$Predicted_cell_type`, generate dotplot based on clusters as `seurat_obj@meta.data$annotation_col`.
@@ -269,7 +270,7 @@ Celltype_Verification(seurat_obj = sce,
     annotation_col = "Cell_type_SlimR"
     )
 ```
-**Important: The parameter "annotation_col" in the function "Celltype_Annotation" and the function "Celltype_Verification" must be strictly the same to avoid false matches.**
+**Important: The parameter `annotation_col` in the function `Celltype_Annotation()` and the function `Celltype_Verification()` must be strictly the same to avoid false matches.**
 
 ## 4. Semi-Automated Annotation Workflow
 ### 4.1 Annotation Heatmap
@@ -284,7 +285,7 @@ Celltype_annotation_Heatmap(
   specificity_weight = 3
 )
 ```
-*Note: Now this function has been incorporated into "Celltype_Calculate()", and it is recommended to use "Celltype_Calculate()" instead.*
+*Note: Now this function has been incorporated into `Celltype_Calculate()`, and it is recommended to use `Celltype_Calculate()` instead.*
 
 ### 4.2 Annotation Combined Plot
 Generates per-cell-type expression dot plots with metric heatmap (when the metric information exists):
@@ -314,7 +315,7 @@ Celltype_annotation_Box(
 Each generated boxplot shows the box plot of the expression levels of the corresponding markers for that cell type, with the colors corresponding to the average expression levels of the markers.
 
 ## 5. Other functions provided by SlimR
-Functions in section 5.1, 5.2, 5.3 and 5.4 has been incorporated into "Celltype_annotation_Combined()", and it is recommended to use "Celltype_annotation_Combined() instead.
+Functions in section 5.1, 5.2, 5.3 and 5.4 has been incorporated into `Celltype_annotation_Combined()`, and it is recommended to use `Celltype_annotation_Combined()` and set corresponding parameters (for example, `gene_list_type = "Cellmarker2"`) instead. For more information, please refer to Section 4.2.
 
 #### 5.1 Dot plot With Cellmarker2 Database
 ```r
@@ -327,6 +328,8 @@ Celltype_annotation_Cellmarker2(
   save_path = "./SlimR/Celltype_annotation_Cellmarkers2/"
 )
 ```
+*Note: To call this function, set the parameter `gene_list_type = "Cellmarker2"` in the function `Celltype_annotation_Combined()`.*
+
 #### 5.2 Dot plot With PanglaoDB Database
 ```r
 Celltype_annotation_PanglaoDB(
@@ -338,6 +341,8 @@ Celltype_annotation_PanglaoDB(
   save_path = "./SlimR/Celltype_annotation_PanglaoDB/"
 )
 ```
+*Note: To call this function, set the parameter `gene_list_type = "PanglaoDB"` in the function `Celltype_annotation_Combined()`.*
+
 #### 5.3 Dot plot With Seurat-Based Marker Lists
 ```r
 Celltype_annotation_Seurat(
@@ -349,6 +354,8 @@ Celltype_annotation_Seurat(
   save_path = "./SlimR/Celltype_annotation_Seurat/"
 )
 ```
+*Note: To call this function, set the parameter `gene_list_type = "Seurat"` in the function `Celltype_annotation_Combined()`.*
+
 #### 5.4 Dot plot With Excel-Based Marker Lists
 ```r
 Celltype_annotation_Excel(
@@ -360,7 +367,7 @@ Celltype_annotation_Excel(
   save_path = "./SlimR/Celltype_annotation_Excel/"
 )
 ```
-*Note: This function also works with 'Markers_list' without mertic information or with mertic information generated in other ways.*
+*Note: To call this function, set the parameter `gene_list_type = "Excel"` in the function `Celltype_annotation_Combined()`. This function also works with `Markers_list` without mertic information or with mertic information generated in other ways.*
 
 ## 6. Conclusion
 Thank you for using SlimR. For questions, issues, or suggestions, please contact:
