@@ -26,6 +26,7 @@
 - Optimized `Celltype_annotation_Heatmap()` performance.
 - Enhanced probability calculation in `calculate_probability()`.
 - Modified code to meet CRAN submission requirements.
+- Change the License type from "GPL-3" to "MIT".
 
 # SlimR 1.0.3 (2025-07-28)
 - Replaced `calculate_mean_expression()` with `calculate_probability()` in `Celltype_annotation_Heatmap()`.
