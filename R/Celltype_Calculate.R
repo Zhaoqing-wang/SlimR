@@ -149,8 +149,6 @@ Celltype_Calculate <- function(
     gene_order_processed <- valid_data$processed
     gene_order_original <- valid_data$original
 
-    valid_genes_list[[cell_type]] <- gene_order_processed
-
     prob_expression <- calculate_probability(object = seurat_obj,
                                              cluster_col = cluster_col,
                                              assay = assay,
@@ -159,6 +157,8 @@ Celltype_Calculate <- function(
                                              specificity_weight = specificity_weight)
     cluster_scores_list[[cell_type]] <- prob_expression$cluster_scores
     cluster_mean_list[[cell_type]] <- prob_expression$cluster_expr
+
+    valid_genes_list[[cell_type]] <- unique(colnames(prob_expression$cluster_expr))
 
     message(paste0("[", i, "/", total, "] ", cell_type)," characteristic genes expression calculated.")
     cycles <- cycles + 1
