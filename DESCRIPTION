@@ -7,15 +7,15 @@ Authors@R:
            email = c("851091628@qq.com","zhaoqingwang@mail.sdu.edu.cn"),
            comment = c(ORCID = "0000-0001-8348-7245"))
 Description: Annotating single-cell and spatial-transcriptomic (ST) data based on the Marker dataset. It supports the creation of a unified marker list, Markers_list, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB', 'scIBD', 'TCellSI'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers.
-    Based on the Markers_list, SlimR can calculate gene expression of different cell types and predict annotation information and calculate corresponding AUC ('Celltype_Calculate') with one click, and annotate it ('Celltype_Annotation'), then verify it ('Celltype_Verification'). At the same time, it can calculate gene expression corresponding to the cell type to generate the corresponding annotation reference map for manual annotation (e.g., 'Heatmap', 'Combined Plot', 'Box plot'). For more details see Kabacoff (2020, ISBN:9787115420572).
+    Based on the Markers_list, SlimR can calculate gene expression of different cell types and predict annotation information and calculate corresponding AUC by 'Celltype_Calculate()', and annotate it by 'Celltype_Annotation()', then verify it by 'Celltype_Verification()'. At the same time, it can calculate gene expression corresponding to the cell type to generate the corresponding annotation reference map for manual annotation (e.g., 'Heatmap', 'Combined Plot', 'Box plot'). For more details see Kabacoff (2020, ISBN:9787115420572).
 License: MIT + file LICENSE
+Date: 2025-08-14
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Depends: 
     R (>= 3.5)
 LazyData: true
-Date: 2025-08-11
 Imports: 
     cowplot,
     dplyr,
