@@ -147,7 +147,7 @@ Markers_list_scIBD <- SlimR::Markers_list_scIBD
 *Note: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.3*
 
 ### 2.4 From TCellSI Database
-TCellSI: A database of T cell markers. 
+TCellSI: A database of T cell markers of different subtypes.
 
 Reference: Yang et al. (2024) <doi:10.1002/imt2.231>.
 ```r
@@ -195,7 +195,7 @@ Markers_list_Excel <- read_excel_markers("D:/Laboratory/Marker_load.xlsx")
 ## 3. Automated Annotation Workflow
 ### 3.1 Calculate cell types
 #### 3.1.1 Calculate Cell types (Core)
-Uses `markers_list` to calculate probability, prediction results and generate heatmap for cell annotation.
+Uses `markers_list` to calculate probability, prediction results, calculate corresponding AUC (optional) and generate heatmap and ROC graphs (optional) for cell annotation.
 ```r
 SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     gene_list = Markers_list,
@@ -211,7 +211,7 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
 ```
 **Important: The parameter `cluster_col` in the function `Celltype_Calculate()` and the function `Celltype_Annotation()` must be strictly the same to avoid false matches.**
 
-*Note: Using the parameter `AUC_correction = TRUE` takes a little longer to compute, but it is recommended to correct the predicted cell type this way.*
+*Note: Using the parameter `AUC_correction = TRUE` takes a little longer to compute, but it is recommended to correct the predicted cell type this way in order to obtain more accurate cell type prediction results.*
 
 #### 3.1.2 Plot Heatmap (Optional)
 Check the annotation probability of the cell type to be annotated in the input `cluster_col` column and cell types in `Markers_list` with the following code.
@@ -228,11 +228,11 @@ View(SlimR_anno_result$Prediction_results)
 ```
 
 #### 3.1.4 Plot ROC curve and AUC value (Optional)
-Furthermore, the ROC curve and AUC value of the corresponding `cluster_col` and the predicted cell type can be viewed by the following code.
+Furthermore, the ROC curve and AUC value of the corresponding `cluster_col` and predicted cell types can be viewed by the following code.
 ```r
 print(SlimR_anno_result$AUC_plot)
 ```
-**Improtant: This feature depends on `plot_AUC = TRUE`**
+**Improtant: This feature depends on the parameter `plot_AUC = TRUE`**
 
 *Note: If the heatmap is not generated properly, please run the function `library(ggplot2)` first.*
 
@@ -298,7 +298,7 @@ Celltype_annotation_Combined(
   save_path = "./SlimR/Celltype_annotation_Combined/"
   )
 ```
-Each resulting combined image consists of a dot plot above and a heat map below (if mertic information present). Dot plots show the expression level and expression ratio relationship between cell type and corresponding markers. Below it, there is a metric heatmap for the corresponding marker (if the metric information exists).
+Each resulting combined image consists of a dot plot above and a heat map below (if mertic information present). Dot plots show the expression level and expression ratio relationship between the cell type and corresponding markers. Below it, there is a metric heatmap for the corresponding markers (if the metric information exists).
 
 ### 4.3 Annotation Box Plot
 Generates per-cell-type expression box plots:
@@ -315,7 +315,7 @@ Celltype_annotation_Box(
 Each generated boxplot shows the box plot of the expression levels of the corresponding markers for that cell type, with the colors corresponding to the average expression levels of the markers.
 
 ## 5. Other functions provided by SlimR
-Functions in section 5.1, 5.2, 5.3 and 5.4 has been incorporated into `Celltype_annotation_Combined()`, and it is recommended to use `Celltype_annotation_Combined()` and set corresponding parameters (for example, `gene_list_type = "Cellmarker2"`) instead. For more information, please refer to Section 4.2.
+Functions in section 5.1, 5.2, 5.3 and 5.4 has been incorporated into `Celltype_annotation_Combined()`, and it is recommended to use `Celltype_annotation_Combined()` and set corresponding parameters (for example, `gene_list_type = "Cellmarker2"`) instead. For more information, please refer to section 4.2.
 
 #### 5.1 Dot plot With Cellmarker2 Database
 ```r
