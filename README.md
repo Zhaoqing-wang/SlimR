@@ -370,7 +370,7 @@ Celltype_annotation_Excel(
 *Note: To call this function, set the parameter `gene_list_type = "Excel"` in the function `Celltype_annotation_Combined()`. This function also works with `Markers_list` without mertic information or with mertic information generated in other ways.*
 
 ## 6. Conclusion
-Thank you for using SlimR. For questions, issues, or suggestions, please submit them in the issue section or discussion section on Github (suggested options) or send an email (alternative options) :
+Thank you for using SlimR. For questions, issues, or suggestions, please submit them in the issue section or discussion section on GitHub (suggested) or send an email (alternative):
 
 **Zhaoqing Wang**  
 📧 851091628@qq.com; zhaoqingwang@mail.sdu.edu.cn
