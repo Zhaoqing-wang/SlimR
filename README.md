@@ -260,17 +260,20 @@ sce <- Celltype_Annotation(seurat_obj = sce,
 **Important: The parameter `cluster_col` in the function `Celltype_Calculate()` and the function `Celltype_Annotation()` must be strictly the same to avoid false matches. And the parameter `annotation_col` in the function `Celltype_Annotation()` and the function `Celltype_Verification()` must be strictly the same to avoid false matches.**
 
 ### 3.3 Verify cell types
-By using the highly variable genes in `SlimR_anno_result$Expression_list` corresponding to predicted cell type information in `SlimR_anno_result$Prediction_results$Predicted_cell_type`, generate dotplot based on clusters as `seurat_obj@meta.data$annotation_col`.
+Use the cell group identity information in `seurat_obj@meta.data$annotation_col` and use the product value of 'log2FC' and 'expression ratio' as the ranking basis.
 ```r
 Celltype_Verification(seurat_obj = sce,
     SlimR_anno_result = SlimR_anno_result,
     gene_number = 5,
+    assay = "RNA",
     colour_low = "white",
     colour_high = "navy",
     annotation_col = "Cell_type_SlimR"
     )
 ```
 **Important: The parameter `annotation_col` in the function `Celltype_Annotation()` and the function `Celltype_Verification()` must be strictly the same to avoid false matches.**
+
+*Note: cell types located in `SlimR_anno_result$Prediction_results` were verified using the markers information from `SlimR_anno_result$Expression_list`. cell types that are not in the above list are validated using the markers information from the function `FindMarkers()`.*
 
 ## 4. Semi-Automated Annotation Workflow
 ### 4.1 Annotation Heatmap
