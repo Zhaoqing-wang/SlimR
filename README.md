@@ -17,8 +17,9 @@ Based on the Markers_list, SlimR can calculate gene expression of different cell
 ## Table of Contents
 1. [Preparation](#1-preparation)  
    - [1.1 Installation](#11-installation)  
-   - [1.2 Loading SlimR](#12-loading-slimr)  
-   - [1.3 Dependencies (if installation fails)](#13-dependencies-if-installation-fails)  
+   - [1.2 Loading SlimR](#12-loading-slimr) 
+   - [1.3 Prepare Seurat object](#13-prepare-seurat-object) 
+   - [1.4 Dependencies (if installation fails)](#13-dependencies-if-installation-fails)  
 
 2. [Standardized Marker_list Input](#2-standardized-marker_list-input)  
    - [2.1 From Cellmarker2 Database](#21-from-cellmarker2-database)  
@@ -68,7 +69,17 @@ Load the package in your R environment:
 library(SlimR)
 ```
 
-### 1.3 Dependencies (if installation fails)
+### 1.3 Prepare Seurat object
+For Seurat objects with multiple layers in the assay, please run `JoinLayers()` first.
+```r
+# For example, if you want to use the 'RNA' layer in the multilayered Seurat object assay.
+sce@assays$RNA <- JoinLayers(sce@assays$RNA)
+```
+**Important: To ensure accuracy of the annotation, make sure that the entered Seurat object has run the standard process and removed batch effects.**
+
+*Note: It is recommended to use the `clustree` package to determine the appropriate resolution for the input Seurat object.*
+
+### 1.4 Dependencies (if installation fails)
 SlimR requires R (≥ 3.5) and depends on the following packages: `cowplot`, `dplyr`, `ggplot2`, `patchwork`, `pheatmap`, `readxl`, `scales`, `Seurat`, `tidyr`, `tools`. Install missing dependencies using:
 ```r
 # Install dependencies if needed:
@@ -238,13 +249,27 @@ print(SlimR_anno_result$AUC_plot)
 *Note: If the heatmap is not generated properly, please run the function `library(ggplot2)` first.*
 
 #### 3.1.5 Correction for predicted cell type (Alternative)
-After viewing the list of predicted cell types and the corresponding AUC values, the predicted cell types can be corrected with the following code. (For example, cluster `15` in `cluster_col` corresponds to the predicted cell type `Intestinal stem cell`)
+After viewing the list of predicted cell types and the corresponding AUC values, the predicted cell types can be corrected with the following code.
+
+Example 1:
 ```r
-# For example, cluster `15` in `cluster_col` corresponds to the predicted cell type `Intestinal stem cell`.
+# For example, cluster `15` in `cluster_col` corresponds to cell type `Intestinal stem cell`.
 SlimR_anno_result$Prediction_results$Predicted_cell_type[
   SlimR_anno_result$Prediction_results$cluster_col == 15
 ] <- "Intestinal stem cell"
 ```
+Example 2:
+```r
+# For example, a predicted cell type with an AUC of 0.5 or less should be labeled `Unknown`.
+SlimR_anno_result$Prediction_results$Predicted_cell_type[
+  SlimR_anno_result$Prediction_results$AUC <= 0.5
+] <- "Unknown"
+```
+After modifying the corresponding predicted cell type, the following code is used to view the updated predicted cell type table.
+```r
+View(SlimR_anno_result$Prediction_results)
+```
+
 **Improtant: It is strongly recommended that if you need to correct the cell type, use cell types in `SlimR_anno_result$Prediction_results$Alternative_cell_type`.**
 
 ### 3.2 Annotate cell types

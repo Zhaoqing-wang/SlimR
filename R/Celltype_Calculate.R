@@ -108,6 +108,8 @@ Celltype_Calculate <- function(
   if (!is.list(gene_list)) stop("Gene list must be a list of data.frames!")
   if (species != "Human" && species != "Mouse") stop("species must be 'Human' or 'Mouse'")
 
+  assay <- if (is.null(assay)) DefaultAssay(seurat_obj) else assay
+
   cluster_scores_list <- list()
   cluster_mean_list <- list()
   cluster_frac_list <- list()
@@ -258,6 +260,9 @@ Celltype_Calculate <- function(
   }
 
   if (compute_AUC) {
+
+    Seurat::DefaultAssay(seurat_obj) <- assay
+
     if (AUC_correction) {
       message(paste0("\n","SlimR AUC correction: Performing AUC correction for all candidate cell types (threshold > ",threshold,")."))
       new_predicted <- character(nrow(prediction_results))
@@ -365,6 +370,9 @@ Celltype_Calculate <- function(
 
   auc_plot <- NULL
   if (plot_AUC && compute_AUC) {
+
+    Seurat::DefaultAssay(seurat_obj) <- assay
+
     message(paste0("\n","SlimR AUC plot: Generating combined AUC plot for predicted cell types."))
 
     roc_data_list <- list()

@@ -55,6 +55,8 @@ Celltype_Verification <- function(
   if (!(annotation_col %in% colnames(seurat_obj@meta.data))) stop(paste0(annotation_col, " not found in seurat_obj meta.data, please run Celltype_Annotation() first."))
 
   Seurat::Idents(seurat_obj) <- seurat_obj@meta.data[[annotation_col]]
+  assay <- if (is.null(assay)) DefaultAssay(seurat_obj) else assay
+
   predicted_types <- unique(names(table(seurat_obj@meta.data[[annotation_col]])))
   predicted_types <- predicted_types[!is.na(predicted_types)]
 
@@ -63,7 +65,7 @@ Celltype_Verification <- function(
   total <- length(cell_types)
   cycles <- 0
 
-  message(paste0("SlimR Verification: The input idents: '",annotation_col,"' has ",total," cell types to be verify."))
+  message(paste0("SlimR verification: The input idents: '",annotation_col,"' has ",total," cell types to be verify."))
 
   for (i in seq_along(cell_types)) {
     cell_type <- cell_types[i]
@@ -110,6 +112,7 @@ Celltype_Verification <- function(
     } else if (cell_type %in% predicted_types) {
       message(paste0("[", i, "/", total, "] ",cell_type," not found in 'SlimR_anno_result$Expression_list', using marker information from the function 'FindMarkers()' to verify."))
 
+      Seurat::DefaultAssay(seurat_obj) <- assay
       markers <- Seurat::FindMarkers(seurat_obj, ident.1 = cell_type, only.pos = TRUE)
 
       markers$gene <- row.names(markers)
@@ -139,6 +142,7 @@ Celltype_Verification <- function(
   dotplot <- Seurat::DotPlot(
     object = seurat_obj,
     features = all_features,
+    assay = assay,
     group.by = annotation_col
   ) +
     ggplot2::theme_bw() +
@@ -161,7 +165,7 @@ Celltype_Verification <- function(
       colours = c(colour_low, colour_high),
       values = seq(0, 1, length.out = 2))
 
-  message(paste0("\n","SlimR Verification: Use the cell group identity information in 'seurat_obj@meta.data$",annotation_col," and use the product value of 'log2FC' and 'expression ratio' as the ranking basis."))
+  message(paste0("\n","SlimR verification: Use the cell group identity information in 'seurat_obj@meta.data$",annotation_col," and use the product value of 'log2FC' and 'expression ratio' as the ranking basis."))
 
   return(dotplot)
 }
