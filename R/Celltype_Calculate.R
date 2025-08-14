@@ -110,6 +110,7 @@ Celltype_Calculate <- function(
 
   cluster_scores_list <- list()
   cluster_mean_list <- list()
+  cluster_frac_list <- list()
   valid_genes_list <- list()
 
   cell_types <- names(gene_list)
