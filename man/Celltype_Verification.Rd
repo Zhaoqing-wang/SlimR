@@ -2,7 +2,7 @@
 % Please edit documentation in R/Celltype_Verification.R
 \name{Celltype_Verification}
 \alias{Celltype_Verification}
-\title{Perform cell type verification using top variable genes}
+\title{Perform cell type verification}
 \usage{
 Celltype_Verification(
   seurat_obj,
@@ -37,7 +37,7 @@ A ggplot object showing expression of top variable genes.
 }
 \description{
 This function performs verification of predicted cell types by selecting
-high-variability genes and generating a dotplot visualization.
+high log2FC and high expression proportion genes and generating a dotplot visualization.
 }
 \examples{
 \dontrun{
