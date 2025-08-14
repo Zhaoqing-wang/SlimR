@@ -244,7 +244,7 @@ SlimR_anno_result$Prediction_results$Predicted_cell_type[
   SlimR_anno_result$Prediction_results$cluster_col == 15
 ] <- "Intestinal stem cell"
 ```
-**Improtant: All the input cell types can be recognized by `Celltype_Annotation()`; however, only when the cell types listed in `Markers_list` are input, can they be recognized by `Celltype_Verification()`. (It is strongly recommended that if you need to correct the cell type, use cell types in `Prediction_results$Alternative_cell_type`)**
+**Improtant: It is strongly recommended that if you need to correct the cell type, use cell types in `SlimR_anno_result$Prediction_results$Alternative_cell_type`.**
 
 ### 3.2 Annotate cell types
 Assigns SlimR predicted cell types information in `SlimR_anno_result$Prediction_results$Predicted_cell_type` to the Seurat object based on cluster annotations, and stores the results into `seurat_obj@meta.data$annotation_col`.
@@ -376,4 +376,4 @@ Celltype_annotation_Excel(
 Thank you for using SlimR. For questions, issues, or suggestions, please submit them in the issue section or discussion section on GitHub (suggested) or send an email (alternative):
 
 **Zhaoqing Wang**  
-📧 851091628@qq.com; zhaoqingwang@mail.sdu.edu.cn
+📧 zhaoqingwang@mail.sdu.edu.cn

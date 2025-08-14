@@ -1,7 +1,8 @@
-#' Perform cell type verification
+#' Perform cell type verification and generate the validation dotplot
 #'
 #' @description This function performs verification of predicted cell types by selecting
-#'     high log2FC and high expression proportion genes and generating a dotplot visualization.
+#'     high log2FC and high expression proportion genes and generates and generate the
+#'     validation dotplot.
 #'
 #' @param seurat_obj A Seurat object containing single-cell data.
 #' @param SlimR_anno_result A list containing SlimR annotation results with:
@@ -109,7 +110,7 @@ Celltype_Verification <- function(
     } else if (cell_type %in% predicted_types) {
       message(paste0("[", i, "/", total, "] ",cell_type," not found in 'SlimR_anno_result$Expression_list', using marker information from the function 'FindMarkers()' to verify."))
 
-      markers <- FindMarkers(seurat_obj, ident.1 = cell_type, only.pos = TRUE)
+      markers <- Seurat::FindMarkers(seurat_obj, ident.1 = cell_type, only.pos = TRUE)
 
       markers$gene <- row.names(markers)
       markers$score <- markers$avg_log2FC * markers$pct.1
