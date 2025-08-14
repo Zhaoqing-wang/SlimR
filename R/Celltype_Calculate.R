@@ -73,6 +73,7 @@
 #'     assay = "RNA",
 #'     min_expression = 0.1,
 #'     specificity_weight = 3,
+#'     threshold = 0.8,
 #'     compute_AUC = TRUE,
 #'     plot_AUC = TRUE,
 #'     AUC_correction = TRUE

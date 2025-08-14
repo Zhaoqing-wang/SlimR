@@ -204,6 +204,7 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     assay = "RNA",
     min_expression = 0.1,
     specificity_weight = 3,
+    threshold = 0.8,
     compute_AUC = TRUE,
     plot_AUC = TRUE,
     AUC_correction = TRUE
@@ -211,7 +212,7 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
 ```
 **Important: The parameter `cluster_col` in the function `Celltype_Calculate()` and the function `Celltype_Annotation()` must be strictly the same to avoid false matches.**
 
-*Note: Using the parameter `AUC_correction = TRUE` takes a little longer to compute, but it is recommended to correct the predicted cell type this way in order to obtain more accurate cell type prediction results.*
+*Note: Using the parameter `AUC_correction = TRUE` takes a little longer to compute, but it is recommended to correct the predicted cell type this way in order to obtain more accurate cell type prediction results. The lower the parameter `threshold`, the more alternative cell types will be checked by AUC, and the longer the operation time will be.*
 
 #### 3.1.2 Plot Heatmap (Optional)
 Check the annotation probability of the cell type to be annotated in the input `cluster_col` column and cell types in `Markers_list` with the following code.
@@ -273,7 +274,7 @@ Celltype_Verification(seurat_obj = sce,
 ```
 **Important: The parameter `annotation_col` in the function `Celltype_Annotation()` and the function `Celltype_Verification()` must be strictly the same to avoid false matches.**
 
-*Note: cell types located in `SlimR_anno_result$Prediction_results` were verified using the markers information from `SlimR_anno_result$Expression_list`. cell types that are not in the above list are validated using the markers information from the function `FindMarkers()`.*
+*Note: Cell types located in `SlimR_anno_result$Prediction_results` were verified using the markers information from `SlimR_anno_result$Expression_list`; cell types that are not in the above list are validated using the markers information from the function `FindMarkers()`.*
 
 ## 4. Semi-Automated Annotation Workflow
 ### 4.1 Annotation Heatmap
