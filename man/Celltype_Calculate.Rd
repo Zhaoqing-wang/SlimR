@@ -69,6 +69,7 @@ When set to TRUE:
 A list containing:
 \itemize{
 \item Expression_list: List of expression matrices for each cell type
+\item Proportion_list: List of proportion of expression for each cell type
 \item Expression_scores_matrix: Matrix of expression scores
 \item Probability_matrix: Matrix of normalized probabilities
 \item Prediction_results: Data frame with cluster annotations including:

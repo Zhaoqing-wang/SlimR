@@ -39,6 +39,7 @@
 #' @returns A list containing:
 #' \itemize{
 #'   \item Expression_list: List of expression matrices for each cell type
+#'   \item Proportion_list: List of proportion of expression for each cell type
 #'   \item Expression_scores_matrix: Matrix of expression scores
 #'   \item Probability_matrix: Matrix of normalized probabilities
 #'   \item Prediction_results: Data frame with cluster annotations including:
@@ -157,15 +158,17 @@ Celltype_Calculate <- function(
                                              specificity_weight = specificity_weight)
     cluster_scores_list[[cell_type]] <- prob_expression$cluster_scores
     cluster_mean_list[[cell_type]] <- prob_expression$cluster_expr
+    cluster_frac_list[[cell_type]] <- prob_expression$cluster_frac
 
     valid_genes_list[[cell_type]] <- unique(colnames(prob_expression$cluster_expr))
 
-    message(paste0("[", i, "/", total, "] ", cell_type)," characteristic genes expression calculated.")
+    message(paste0("[", i, "/", total, "] ",cell_type," characteristic genes expression calculated."))
     cycles <- cycles + 1
   }
   message(paste0("\n","SlimR calculate: Out of the ",total," cell types in 'Markers_list', ",cycles," cell types have been calculated. You can see the reason for not calculating cell types by 'warnings()'."))
 
   expr_list <- cluster_mean_list
+  frac_list <- cluster_frac_list
   scores_matrix <- do.call(rbind, cluster_scores_list)
 
   normalize_row <- function(x) {
@@ -447,6 +450,7 @@ Celltype_Calculate <- function(
 
   return_list <- list(
     Expression_list = expr_list,
+    Proportion_list = frac_list,
     Expression_scores_matrix = scores_matrix,
     Probability_matrix = probability_matrix,
     Prediction_results = prediction_results,

@@ -60,12 +60,16 @@ calculate_probability <- function(
 
     return(list(
       avg = avg.exp,
+      frac = frac.expressing,
       specificity = specificity_score
     ))
   })
 
   expr_matrix <- do.call(rbind, lapply(cluster_stats, function(x) x$avg))
   rownames(expr_matrix) <- unique(data.features$id)
+
+  frac_matrix <- do.call(rbind, lapply(cluster_stats, function(x) x$frac))
+  rownames(frac_matrix) <- unique(data.features$id)
 
   specificity_matrix <- do.call(rbind, lapply(cluster_stats, function(x) x$specificity))
   rownames(specificity_matrix) <- unique(data.features$id)
@@ -87,5 +91,6 @@ calculate_probability <- function(
   names(cluster_scores) <- rownames(specificity_matrix)
 
   return(list(cluster_expr = expr_matrix,
+              cluster_frac = frac_matrix,
               cluster_scores = cluster_scores))
 }

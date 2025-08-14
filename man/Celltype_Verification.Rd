@@ -7,6 +7,7 @@
 Celltype_Verification(
   seurat_obj,
   SlimR_anno_result,
+  assay = "RNA",
   gene_number = 5,
   colour_low = "white",
   colour_high = "navy",
@@ -19,6 +20,9 @@ Celltype_Verification(
 \item{SlimR_anno_result}{A list containing SlimR annotation results with:
 Expression_list - List of expression matrices for each cell type.
 Prediction_results - Data frame with cluster annotations.}
+
+\item{assay}{Enter the assay used by the Seurat object, such as "RNA". Default
+parameters use "assay = 'RNA'".}
 
 \item{gene_number}{Integer specifying number of top genes to select per cell type.}
 
@@ -39,6 +43,7 @@ high-variability genes and generating a dotplot visualization.
 \dontrun{
 Celltype_Verification(seurat_obj = sce,
     SlimR_anno_result = SlimR_anno_result,
+    assay = "RNA",
     gene_number = 5,
     colour_low = "white",
     colour_high = "navy",

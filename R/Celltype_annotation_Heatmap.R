@@ -66,7 +66,7 @@ Celltype_annotation_Heatmap <- function(
   cluster_scores_list <- list()
   cell_types <- names(gene_list)
 
-  message(paste0("SlimR: The 'Celltype_annotation_Heatmap()' function has now been replaced by the 'Celltype_Calculate()' function.  You can still use it, but this function is no longer actively updated. Please use 'Celltype_Calculate()' instead."))
+  message(paste0("SlimR: The 'Celltype_annotation_Heatmap()' function has now been replaced by the 'Celltype_Calculate()' function. You can still use it, but this function is no longer actively updated. It is recommended to use 'Celltype_Calculate()' instead."))
 
   for (i in seq_along(cell_types)) {
     cell_type <- cell_types[i]
