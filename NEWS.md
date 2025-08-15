@@ -1,4 +1,5 @@
 # SlimR 1.0.7 (2025-08-14)
+- Optimize the function "read_seurat_markers()". This can be compatible with the "presto::wilcoxauc()" source "Markers".
 - Added new function `Celltype_Verification()` for predicted cell types validation and generate the validation dotplot.
 - Renamed `Celltype_annotation_Dotplot()` to `Celltype_annotation_Combined()` for unified function naming structure.
 - Enhanced README with detailed process descriptions.
