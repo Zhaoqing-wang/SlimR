@@ -30,8 +30,8 @@ Based on the Markers_list, SlimR can calculate gene expression of different cell
     -   [3.3 Verify cell types](#33-verify-cell-types)
 4.  [Semi-Automated Annotation Workflow](#4-semi-automated-annotation-workflow)
     -   [4.1 Annotation Heatmap](#41-annotation-heatmap)
-    -   [4.2 Annotation Combined Plot](#42-annotation-combined-plot)
-    -   [4.3 Annotation Box Plot](#43-annotation-box-plot)
+    -   [4.2 Annotation Features Plot](#42-annotation-features-plot)
+    -   [4.3 Annotation Combined Plot](#43-annotation-combined-plot)
 5.  [Other functions provided by SlimR](#5-other-functions-provided-by-slimr)
 6.  [Conclusion](#6-conclusion)
 
@@ -393,7 +393,7 @@ Celltype_annotation_Heatmap(
 
 *Note: Now this function has been incorporated into `Celltype_Calculate()`, and it is recommended to use `Celltype_Calculate()` instead.*
 
-### 4.2 Annotation Combined Plot
+### 4.2 Annotation Features Plot
 
 Generates per-cell-type expression dot plots with metric heatmap (when the metric information exists):
 
@@ -409,7 +409,7 @@ Celltype_annotation_Combined(
 
 Each resulting combined image consists of a dot plot above and a heat map below (if mertic information present). Dot plots show the expression level and expression ratio relationship between the cell type and corresponding markers. Below it, there is a metric heatmap for the corresponding markers (if the metric information exists).
 
-### 4.3 Annotation Box Plot
+### 4.3 Annotation Combined Plot
 
 Generates per-cell-type expression box plots:
 
@@ -495,4 +495,5 @@ Celltype_annotation_Excel(
 Thank you for using SlimR. For questions, issues, or suggestions, please submit them in the issue section or discussion section on GitHub (suggested) or send an email (alternative):
 
 **Zhaoqing Wang**
-zhaoqingwang@mail.sdu.edu.cn
+
+zhaoqingwang\@mail.sdu.edu.cn

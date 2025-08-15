@@ -60,11 +60,11 @@ Celltype_annotation_Cellmarker2(seurat_obj = sce,
 }
 \seealso{
 Other Cell_annotation: 
-\code{\link{Celltype_annotation_Box}()},
-\code{\link{Celltype_annotation_Combined}()},
 \code{\link{Celltype_annotation_Excel}()},
 \code{\link{Celltype_annotation_Heatmap}()},
 \code{\link{Celltype_annotation_PanglaoDB}()},
-\code{\link{Celltype_annotation_Seurat}()}
+\code{\link{Celltype_annotation_Seurat}()},
+\code{\link{Celltype_annotation_combined}()},
+\code{\link{Celltype_annotation_features}()}
 }
 \concept{Cell_annotation}
