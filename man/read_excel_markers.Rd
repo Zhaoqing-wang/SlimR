@@ -27,9 +27,9 @@ Markers_list_Excel <- read_excel_markers(
 
 }
 \seealso{
-Other Markers_list_generation: 
+Other Standardized_Marker_list_Input: 
 \code{\link{Markers_filter_Cellmarker2}()},
 \code{\link{Markers_filter_PanglaoDB}()},
 \code{\link{read_seurat_markers}()}
 }
-\concept{Markers_list_generation}
+\concept{Standardized_Marker_list_Input}

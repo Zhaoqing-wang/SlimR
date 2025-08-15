@@ -19,7 +19,7 @@
 #'
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export
-#' @family Cell_annotation
+#' @family Other_Functions_Provided_By_SlimR
 #'
 #' @importFrom dplyr all_of
 #'

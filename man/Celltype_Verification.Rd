@@ -54,8 +54,8 @@ Celltype_Verification(seurat_obj = sce,
 
 }
 \seealso{
-Other Celltype_annotation: 
+Other Automated_Annotation_Workflow: 
 \code{\link{Celltype_Annotation}()},
 \code{\link{Celltype_Calculate}()}
 }
-\concept{Celltype_annotation}
+\concept{Automated_Annotation_Workflow}

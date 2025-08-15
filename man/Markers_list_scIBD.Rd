@@ -22,7 +22,7 @@ obtained from scIBD. The data source is "http://scibd.cn", and the reference
 literature is: Nie et al. (2023) \url{doi:10.1038/s43588-023-00464-9}.
 }
 \seealso{
-Other Database: 
+Other SlimR_Database: 
 \code{\link{Cellmarker2}},
 \code{\link{Cellmarker2_raw}},
 \code{\link{Cellmarker2_table}},
@@ -31,5 +31,5 @@ Other Database:
 \code{\link{PanglaoDB_raw}},
 \code{\link{PanglaoDB_table}}
 }
-\concept{Database}
+\concept{SlimR_Database}
 \keyword{datasets}

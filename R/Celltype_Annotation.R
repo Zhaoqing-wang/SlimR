@@ -18,7 +18,7 @@
 #' @note If plot_UMAP = TRUE, this function will print a UMAP plot as a side effect.
 #'
 #' @export
-#' @family Celltype_annotation
+#' @family Automated_Annotation_Workflow
 #'
 #' @importFrom Seurat RenameIdents Idents
 #' @importFrom dplyr as_tibble

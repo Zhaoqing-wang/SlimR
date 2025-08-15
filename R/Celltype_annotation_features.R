@@ -23,7 +23,7 @@
 #'
 #' @returns Saves cell type annotation PNGs in `save_path`. Returns invisibly.
 #' @export
-#' @family Cell_annotation
+#' @family Semi_Automated_Annotation_Workflow
 #'
 #' @importFrom stats setNames
 #' @importFrom dplyr all_of
@@ -36,7 +36,7 @@
 #' @examples
 #' \dontrun{
 #' # Example for Cellmarker2
-#' Celltype_annotation_features(seurat_obj = sce,
+#' Celltype_Annotation_Features(seurat_obj = sce,
 #'     gene_list = Markers_list_Cellmarker2,
 #'     species = "Human",
 #'     cluster_col = "seurat_clusters",
@@ -45,7 +45,7 @@
 #'     )
 #'
 #' # Example for PanglaoDB
-#' Celltype_annotation_features(seurat_obj = sce,
+#' Celltype_Annotation_Features(seurat_obj = sce,
 #'     gene_list = Markers_list_panglaoDB,
 #'     species = "Human",
 #'     cluster_col = "seurat_clusters",
@@ -54,7 +54,7 @@
 #'     )
 #'
 #' # Example for Seurat marker list
-#' Celltype_annotation_features(seurat_obj = sce,
+#' Celltype_Annotation_Features(seurat_obj = sce,
 #'     gene_list = Markers_list_Seurat,
 #'     species = "Human",
 #'     cluster_col = "seurat_clusters",
@@ -63,7 +63,7 @@
 #'     )
 #'
 #' # Example for Excel marker list
-#' Celltype_annotation_features(seurat_obj = sce,
+#' Celltype_Annotation_Features(seurat_obj = sce,
 #'     gene_list = Markers_list_Excel,
 #'     species = "Human",
 #'     cluster_col = "seurat_clusters",
@@ -72,7 +72,7 @@
 #'     )
 #' }
 #'
-Celltype_annotation_features <- function(
+Celltype_Annotation_Features <- function(
     seurat_obj,
     gene_list,
     gene_list_type = 'Default',

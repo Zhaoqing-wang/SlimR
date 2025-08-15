@@ -20,7 +20,7 @@ A dataset containing marker genes for different cell types from PanglaoDB
 This dataset is used to filter and create a standardized marker list.'
 }
 \seealso{
-Other Database: 
+Other SlimR_Database: 
 \code{\link{Cellmarker2}},
 \code{\link{Cellmarker2_raw}},
 \code{\link{Cellmarker2_table}},
@@ -29,5 +29,5 @@ Other Database:
 \code{\link{PanglaoDB}},
 \code{\link{PanglaoDB_table}}
 }
-\concept{Database}
+\concept{SlimR_Database}
 \keyword{datasets}

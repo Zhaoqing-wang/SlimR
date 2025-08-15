@@ -57,12 +57,9 @@ Celltype_annotation_PanglaoDB(seurat_obj = sce,
 
 }
 \seealso{
-Other Cell_annotation: 
+Other Other_Functions_Provided_By_SlimR: 
 \code{\link{Celltype_annotation_Cellmarker2}()},
 \code{\link{Celltype_annotation_Excel}()},
-\code{\link{Celltype_annotation_Heatmap}()},
-\code{\link{Celltype_annotation_Seurat}()},
-\code{\link{Celltype_annotation_combined}()},
-\code{\link{Celltype_annotation_features}()}
+\code{\link{Celltype_annotation_Seurat}()}
 }
-\concept{Cell_annotation}
+\concept{Other_Functions_Provided_By_SlimR}

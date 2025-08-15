@@ -26,13 +26,13 @@
 #' @returns The heatmap of the comparison between "cluster_col" in the
 #'     Seurat object and the given gene set "gene_list" needs to be annotated.
 #' @export
-#' @family Cell_annotation
+#' @family Semi_Automated_Annotation_Workflow
 #'
 #' @importFrom grDevices colorRampPalette
 #'
 #' @examples
 #' \dontrun{
-#' Celltype_annotation_Heatmap(seurat_obj = sce,
+#' Celltype_Annotation_Heatmap(seurat_obj = sce,
 #'     gene_list = Markers_list,
 #'     species = "Human",
 #'     cluster_col = "seurat_clusters",
@@ -42,7 +42,7 @@
 #'     )
 #'     }
 #'
-Celltype_annotation_Heatmap <- function(
+Celltype_Annotation_Heatmap <- function(
     seurat_obj,
     gene_list,
     species,

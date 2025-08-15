@@ -20,7 +20,7 @@
 #'
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export
-#' @family Cell_annotation
+#' @family Semi_Automated_Annotation_Workflow
 #'
 #' @importFrom magrittr %>%
 #' @importFrom Seurat Idents
@@ -29,16 +29,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' Celltype_annotation_combined(seurat_obj = sce,
+#' Celltype_Annotation_Combined(seurat_obj = sce,
 #'     gene_list = Markers_list,
 #'     species = "Human",
 #'     cluster_col = "seurat_clusters",
 #'     assay = "RNA",
-#'     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Box")
+#'     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_combined")
 #'     )
 #'     }
 #'
-Celltype_annotation_combined <- function(
+Celltype_Annotation_Combined <- function(
     seurat_obj,
     gene_list,
     species,

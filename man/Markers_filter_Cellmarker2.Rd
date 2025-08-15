@@ -61,9 +61,9 @@ Markers_list_Cellmarker2 <- Markers_filter_Cellmarker2(
 
 }
 \seealso{
-Other Markers_list_generation: 
+Other Standardized_Marker_list_Input: 
 \code{\link{Markers_filter_PanglaoDB}()},
 \code{\link{read_excel_markers}()},
 \code{\link{read_seurat_markers}()}
 }
-\concept{Markers_list_generation}
+\concept{Standardized_Marker_list_Input}

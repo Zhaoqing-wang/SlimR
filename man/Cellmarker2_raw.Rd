@@ -22,7 +22,7 @@ The dataset can be filtered based on species, tissue class, tissue type,
 cancer type, and cell type to generate a list of marker genes for specific cell types.
 }
 \seealso{
-Other Database: 
+Other SlimR_Database: 
 \code{\link{Cellmarker2}},
 \code{\link{Cellmarker2_table}},
 \code{\link{Markers_list_TCellSI}},
@@ -31,5 +31,5 @@ Other Database:
 \code{\link{PanglaoDB_raw}},
 \code{\link{PanglaoDB_table}}
 }
-\concept{Database}
+\concept{SlimR_Database}
 \keyword{datasets}

@@ -54,7 +54,7 @@
 #' }
 #'
 #' @export
-#' @family Celltype_annotation
+#' @family Automated_Annotation_Workflow
 #'
 #' @importFrom grDevices colorRampPalette
 #' @importFrom utils tail
