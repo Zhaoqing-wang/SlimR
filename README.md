@@ -118,7 +118,7 @@ Markers_list_Cellmarker2 <- Markers_filter_Cellmarker2(
 ```
 **Important: Select at least the 'species' and 'tissue_class' parameters to ensure the accuracy of the annotation.**
 
-*Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.1.*
+*Note: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.1. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.2 From PanglaoDB Database
 PanglaoDB: Database of cell types and markers covering different species and tissue types. 
@@ -144,7 +144,7 @@ Markers_list_panglaoDB <- Markers_filter_PanglaoDB(
 ```
 **Important: Select the 'species_input' and 'organ_input' parameters to ensure the accuracy of the annotation.**
 
-*Note: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.2.*
+*Note: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.2. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.3 From scIBD Database
 scIBD: A database of human intestine markers. 
@@ -155,7 +155,7 @@ Markers_list_scIBD <- SlimR::Markers_list_scIBD
 ```
 **Important: This is for human intestinal annotation only. The input Seurat object was ensured to be a human intestinal type to ensure the accuracy of the labeling.**
 
-*Note: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.3*
+*Note: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.3. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.4 From TCellSI Database
 TCellSI: A database of T cell markers of different subtypes.
@@ -166,7 +166,7 @@ Markers_list_TCellSI <- SlimR::Markers_list_TCellSI
 ```
 **Important: This is only for T cell subset annotation. Ensure that the input Seurat object is of T cell type to guarantee the accuracy of the annotation.**
 
-*Note: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4.*
+*Note: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.5 From Seurat Objects
 #### 2.5.1 First identify cluster features:
@@ -185,7 +185,7 @@ Markers_list_Seurat <- read_seurat_markers(
   gene_filter = 10
 )
 ```
-*Note: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.3.*
+*Note: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.3. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.6 From Excel Tables
 **Format Requirements**:  
@@ -201,7 +201,7 @@ Markers_list_Seurat <- read_seurat_markers(
 ```r
 Markers_list_Excel <- read_excel_markers("D:/Laboratory/Marker_load.xlsx")
 ```
-*Note: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4.*
+*Note: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ## 3. Automated Annotation Workflow
 ### 3.1 Calculate cell types
