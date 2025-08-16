@@ -1,9 +1,11 @@
-# SlimR 1.0.7 (2025-08-16)
+# SlimR 1.0.7 (2025-08-17)
 
 -   Added new function `Celltype_Verification()` for predicted cell types validation and generate the validation dotplot.
--   Optimize the function `read_seurat_markers()`. This can be compatible with the `presto::wilcoxauc()` source markers.
+-   Optimize the function 'Read_seurat_markers()'. This is compatible with the 'presto::wilcoxauc()' source tag, and the 'FSS' (product of 'log2FC' and 'expression ratio') can be calculated and sorted accordingly.
 -   Renamed `Celltype_annotation_Dotplot()` to `Celltype_Annotation_Features()` for unified function naming structure.
 -   Renamed `Celltype_annotation_Box()` to `Celltype_Annotation_Combined()` for unified function naming structure.
+-   Renamed `read_seurat_markers()` to `Read_seurat_markers()` for unified function naming structure.
+-   Renamed `read_excel_markers()` to `Read_excel_markers()` for unified function naming structure.
 -   Enhanced README with detailed process descriptions.
 -   Optimized message output system for cleaner console feedback.
 -   Resolved various code bugs reported by users.

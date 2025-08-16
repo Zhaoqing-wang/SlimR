@@ -37,7 +37,7 @@ Markers_list_panglaoDB <- Markers_filter_PanglaoDB(
 \seealso{
 Other Standardized_Marker_list_Input: 
 \code{\link{Markers_filter_Cellmarker2}()},
-\code{\link{read_excel_markers}()},
-\code{\link{read_seurat_markers}()}
+\code{\link{Read_excel_markers}()},
+\code{\link{Read_seurat_markers}()}
 }
 \concept{Standardized_Marker_list_Input}
