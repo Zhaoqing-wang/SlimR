@@ -52,7 +52,7 @@ Celltype_Annotation_Combined(seurat_obj = sce,
     species = "Human",
     cluster_col = "seurat_clusters",
     assay = "RNA",
-    save_path = file.path(tempdir(),"SlimR_Celltype_annotation_combined")
+    save_path = file.path(tempdir(),"SlimR_Celltype_Annotation_Combined")
     )
     }
 

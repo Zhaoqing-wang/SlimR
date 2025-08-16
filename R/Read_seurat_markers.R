@@ -18,8 +18,7 @@
 #' @examples
 #'\dontrun{
 #' # Example for Seurat sources markers
-#' library(Seurat)
-#' seurat_markers <- FindAllMarkers(
+#' seurat_markers <- Seurat::FindAllMarkers(
 #'     seurat_obj = sce,
 #'     group.by = "Cell_type",
 #'     only.pos = TRUE)
@@ -31,9 +30,7 @@
 #'     )
 #'
 #' # Example for presto sources markers
-#' library(presto)
-#' library(dplyr)
-#' seurat_markers <- wilcoxauc(
+#' seurat_markers <- presto::wilcoxauc(
 #'     seurat_obj = sce,
 #'     group_by = "Cell_type",
 #'     seurat_assay = "RNA"
