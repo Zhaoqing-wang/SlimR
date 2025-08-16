@@ -400,7 +400,7 @@ Celltype_Annotation_Heatmap(
 
 ### 4.2 Annotation Features Plot
 
-Generates per-cell-type expression dot plots with metric heatmap (when the metric information exists):
+Generates per-cell-type expression dot plot with metric heatmap (when the metric information exists):
 
 ``` r
 Celltype_Annotation_Features(
@@ -412,7 +412,7 @@ Celltype_Annotation_Features(
   )
 ```
 
-Each resulting combined image consists of a dot plot above and a heat map below (if mertic information present). Dot plots show the expression level and expression ratio relationship between the cell type and corresponding markers. Below it, there is a metric heatmap for the corresponding markers (if the metric information exists).
+Each resulting combined image consists of a dot plot above and a heat map below (if mertic information present). Dot plot show the expression level and expression ratio relationship between the cell type and corresponding markers. Below it, there is a metric heatmap for the corresponding markers (if the metric information exists).
 
 ### 4.3 Annotation Combined Plot
 
@@ -448,7 +448,7 @@ Celltype_annotation_Cellmarker2(
 )
 ```
 
-*Note: To call this function, set the parameter `gene_list_type = "Cellmarker2"` in the function `Celltype_annotation_Combined()`.*
+*Note: To call this function, set the parameter `gene_list_type = "Cellmarker2"` in the function* `Celltype_Annotation_Features`*`()`.*
 
 #### 5.2 Annotation Features Plot with PanglaoDB Database
 
@@ -463,7 +463,7 @@ Celltype_annotation_PanglaoDB(
 )
 ```
 
-*Note: To call this function, set the parameter `gene_list_type = "PanglaoDB"` in the function `Celltype_annotation_Combined()`.*
+*Note: To call this function, set the parameter `gene_list_type = "PanglaoDB"` in the function* `Celltype_Annotation_Features`*`()`.*
 
 #### 5.3 Annotation Features Plot with Seurat-Based Markers List
 
@@ -478,7 +478,7 @@ Celltype_annotation_Seurat(
 )
 ```
 
-*Note: To call this function, set the parameter `gene_list_type = "Seurat"` in the function `Celltype_annotation_Combined()`.*
+*Note: To call this function, set the parameter `gene_list_type = "Seurat"` in the function* `Celltype_Annotation_Features`*`()`.*
 
 #### 5.4 Annotation Features Plot with Excel-Based Markers List
 
@@ -493,7 +493,7 @@ Celltype_annotation_Excel(
 )
 ```
 
-*Note: To call this function, set the parameter `gene_list_type = "Excel"` in the function `Celltype_annotation_Combined()`. This function also works with `Markers_list` without mertic information or with mertic information generated in other ways.*
+*Note: To call this function, set the parameter `gene_list_type = "Excel"` in the function* `Celltype_Annotation_Features`*. This function also works with `Markers_list` without mertic information or with mertic information generated in other ways.*
 
 ## 6. Conclusion
 
@@ -501,4 +501,4 @@ Thank you for using SlimR. For questions, issues, or suggestions, please submit 
 
 **Zhaoqing Wang**
 
-zhaoqingwang@mail.sdu.edu.cn
+zhaoqingwang\@mail.sdu.edu.cn
