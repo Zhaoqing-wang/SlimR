@@ -433,7 +433,7 @@ Each generated combined plot shows the box plot of the expression levels of the 
 
 ## 5. Other Functions Provided by SlimR
 
-Functions in section 5.1, 5.2, 5.3 and 5.4 has been incorporated into `Celltype_annotation_Combined()`, and it is recommended to use `Celltype_annotation_Combined()` and set corresponding parameters (for example, `gene_list_type = "Cellmarker2"`) instead. For more information, please refer to section 4.2.
+Functions in section 5.1, 5.2, 5.3 and 5.4 has been incorporated into `Celltype_Annotation_Features()`, and it is recommended to use `Celltype_Annotation_Features()` and set corresponding parameters (for example, `gene_list_type = "Cellmarker2"`) instead. For more information, please refer to section 4.2.
 
 #### 5.1 Annotation Features Plot with Cellmarker2 Database
 
@@ -501,4 +501,4 @@ Thank you for using SlimR. For questions, issues, or suggestions, please submit 
 
 **Zhaoqing Wang**
 
-zhaoqingwang\@mail.sdu.edu.cn
+zhaoqingwang@mail.sdu.edu.cn
