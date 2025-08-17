@@ -277,7 +277,9 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     threshold = 0.8,
     compute_AUC = TRUE,
     plot_AUC = TRUE,
-    AUC_correction = TRUE
+    AUC_correction = TRUE,
+    colour_low = "navy",
+    colour_high = "firebrick3"
     )
 ```
 
@@ -392,7 +394,9 @@ Celltype_Annotation_Heatmap(
   species = "Human",
   cluster_col = "seurat_cluster",
   min_expression = 0.1,
-  specificity_weight = 3
+  specificity_weight = 3,
+  colour_low = "navy",
+  colour_high = "firebrick3"
 )
 ```
 
@@ -408,7 +412,11 @@ Celltype_Annotation_Features(
   gene_list = Markers_list,
   gene_list_type = "Cellmarker2",
   species = "Human",
-  save_path = "./SlimR/Celltype_Annotation_Features/"
+  save_path = "./SlimR/Celltype_Annotation_Features/",
+  colour_low = "white",
+  colour_high = "navy",
+  colour_low_mertic = "white",
+  colour_high_mertic = "navy"
   )
 ```
 
@@ -425,7 +433,9 @@ Celltype_Annotation_Combined(
   species = "Human",
   cluster_col = "seurat_cluster",
   assay = "RNA",
-  save_path = "./SlimR/Celltype_Annotation_Combined/"
+  save_path = "./SlimR/Celltype_Annotation_Combined/",
+  colour_low = "white",
+  colour_high = "navy"
 )
 ```
 
@@ -444,7 +454,11 @@ Celltype_annotation_Cellmarker2(
   species = "Human",
   cluster_col = "seurat_cluster",
   assay = "RNA",
-  save_path = "./SlimR/Celltype_annotation_Cellmarkers2/"
+  save_path = "./SlimR/Celltype_annotation_Cellmarkers2/",
+  colour_low = "white",
+  colour_high = "navy",
+  colour_low_mertic = "white",
+  colour_high_mertic = "navy"
 )
 ```
 
@@ -459,7 +473,11 @@ Celltype_annotation_PanglaoDB(
   species = "Human",
   cluster_col = "seurat_cluster",
   assay = "RNA",
-  save_path = "./SlimR/Celltype_annotation_PanglaoDB/"
+  save_path = "./SlimR/Celltype_annotation_PanglaoDB/",
+  colour_low = "white",
+  colour_high = "navy",
+  colour_low_mertic = "white",
+  colour_high_mertic = "navy"
 )
 ```
 
@@ -474,7 +492,11 @@ Celltype_annotation_Seurat(
   species = "Human",
   cluster_col = "seurat_cluster",
   assay = "RNA",
-  save_path = "./SlimR/Celltype_annotation_Seurat/"
+  save_path = "./SlimR/Celltype_annotation_Seurat/",
+  colour_low = "white",
+  colour_high = "navy",
+  colour_low_mertic = "white",
+  colour_high_mertic = "navy"
 )
 ```
 
@@ -489,7 +511,11 @@ Celltype_annotation_Excel(
   species = "Human",
   cluster_col = "seurat_cluster",
   assay = "RNA",
-  save_path = "./SlimR/Celltype_annotation_Excel/"
+  save_path = "./SlimR/Celltype_annotation_Excel/",
+  colour_low = "white",
+  colour_high = "navy",
+  colour_low_mertic = "white",
+  colour_high_mertic = "navy"
 )
 ```
 

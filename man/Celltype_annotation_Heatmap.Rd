@@ -11,7 +11,9 @@ Celltype_Annotation_Heatmap(
   cluster_col = "seurat_clusters",
   assay = "RNA",
   min_expression = 0.1,
-  specificity_weight = 3
+  specificity_weight = 3,
+  colour_low = "navy",
+  colour_high = "firebrick3"
 )
 }
 \arguments{
@@ -43,6 +45,12 @@ expression variability (standard deviation) of a feature within a cluster
 contributes to its "specificity score." It amplifies or suppresses the impact
 of variability in the final score calculation.Default parameters use
 "specificity_weight = 3".}
+
+\item{colour_low}{Color for lowest probability level in Heatmap visualization of
+probability matrix. (default = "navy")}
+
+\item{colour_high}{Color for highest probability level Heatmap visualization of
+probability matrix. (default = "firebrick3")}
 }
 \value{
 The heatmap of the comparison between "cluster_col" in the
@@ -59,7 +67,9 @@ Celltype_Annotation_Heatmap(seurat_obj = sce,
     cluster_col = "seurat_clusters",
     assay = "RNA",
     min_expression = 0.1,
-    specificity_weight = 3
+    specificity_weight = 3,
+    colour_low = "navy",
+    colour_high = "firebrick3"
     )
     }
 

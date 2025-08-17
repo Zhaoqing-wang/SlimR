@@ -4,7 +4,14 @@
 \alias{plot_mean_expression}
 \title{Counts average expression of gene set and plots Boxplot (Use in package)}
 \usage{
-plot_mean_expression(object, features, assay = NULL, cluster_col = NULL)
+plot_mean_expression(
+  object,
+  features,
+  assay = NULL,
+  cluster_col = NULL,
+  colour_low = "white",
+  colour_high = "navy"
+)
 }
 \arguments{
 \item{object}{Enter a Seurat object.}
@@ -16,6 +23,10 @@ parameters use "assay = NULL".}
 
 \item{cluster_col}{Enter the meta.data column in the Seurat object to be
 annotated, such as "seurat_cluster". Default parameters use "cluster_col = NULL".}
+
+\item{colour_low}{Color for lowest expression level. (default = "white")}
+
+\item{colour_high}{Color for highest expression level. (default = "black")}
 }
 \value{
 Average expression box plot of genes in the input "Seurat" object

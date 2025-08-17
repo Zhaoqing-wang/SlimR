@@ -35,6 +35,10 @@
 #'     1.Computes AUC values for candidate cell types. (probability > threshold)
 #'     2.Selects the cell type with the highest AUC as the final predicted type.
 #'     3.Records the selected type's AUC value in the "AUC" column.
+#' @param colour_low Color for lowest probability level in Heatmap visualization of
+#'     probability matrix. (default = "navy")
+#' @param colour_high Color for highest probability level Heatmap visualization of
+#'     probability matrix. (default = "firebrick3")
 #'
 #' @returns A list containing:
 #' \itemize{
@@ -76,7 +80,9 @@
 #'     threshold = 0.8,
 #'     compute_AUC = TRUE,
 #'     plot_AUC = TRUE,
-#'     AUC_correction = TRUE
+#'     AUC_correction = TRUE,
+#'     colour_low = "navy",
+#'     colour_high = "firebrick3"
 #'     )
 #'     }
 #'
@@ -91,7 +97,9 @@ Celltype_Calculate <- function(
     threshold = 0.8,
     compute_AUC = TRUE,
     plot_AUC = TRUE,
-    AUC_correction = TRUE
+    AUC_correction = TRUE,
+    colour_low = "navy",
+    colour_high = "firebrick3"
 ) {
   required_packages <- c("ggplot2", "patchwork", "dplyr", "scales", "tidyr", "gridExtra", "gtable", "grid", "pheatmap")
   for (pkg in required_packages) {
@@ -185,7 +193,7 @@ Celltype_Calculate <- function(
 
   p <- pheatmap::pheatmap(result_matrix,
                           main = "Cell annotation heatmap | SlimR",
-                          color = colorRampPalette(c("navy", "white", "firebrick3"))(50),
+                          color = colorRampPalette(c(colour_low, "white", colour_high))(50),
                           fontsize = 12,
                           cluster_rows = T,
                           cluster_cols = T,

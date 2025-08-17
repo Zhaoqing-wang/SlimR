@@ -15,8 +15,8 @@
 #'     parameters use "assay = 'RNA'".
 #' @param save_path The output path of the cell annotation picture. Example parameters
 #'     use "save_path = './SlimR/Celltype_annotation_Bar/'".
-#' @param metric_names Warning: Do not enter information. This parameter is used to
-#'     check if "Marker_list" conforms to the SlimR output.
+#' @param colour_low Color for lowest expression level. (default = "white")
+#' @param colour_high Color for highest expression level. (default = "black")
 #'
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export
@@ -34,7 +34,9 @@
 #'     species = "Human",
 #'     cluster_col = "seurat_clusters",
 #'     assay = "RNA",
-#'     save_path = file.path(tempdir(),"SlimR_Celltype_Annotation_Combined")
+#'     save_path = file.path(tempdir(),"SlimR_Celltype_Annotation_Combined"),
+#'     colour_low = "white",
+#'     colour_high = "navy"
 #'     )
 #'     }
 #'
@@ -45,7 +47,8 @@ Celltype_Annotation_Combined <- function(
     cluster_col = "seurat_clusters",
     assay = "RNA",
     save_path = NULL,
-    metric_names = NULL
+    colour_low = "white",
+    colour_high = "navy"
 ) {
   if (!inherits(seurat_obj, "Seurat")) stop("Input object must be a Seurat object!")
   if (!is.list(gene_list)) stop("Gene list must be a list of data.frames!")
@@ -106,7 +109,9 @@ Celltype_Annotation_Combined <- function(
       object = seurat_obj,
       features = gene_order_processed,
       assay = assay,
-      cluster_col = cluster_col
+      cluster_col = cluster_col,
+      colour_low = colour_low,
+      colour_high = colour_high,
     )
 
     ggsave(

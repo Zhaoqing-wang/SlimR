@@ -11,7 +11,8 @@ Celltype_Annotation_Combined(
   cluster_col = "seurat_clusters",
   assay = "RNA",
   save_path = NULL,
-  metric_names = NULL
+  colour_low = "white",
+  colour_high = "navy"
 )
 }
 \arguments{
@@ -36,8 +37,9 @@ parameters use "assay = 'RNA'".}
 \item{save_path}{The output path of the cell annotation picture. Example parameters
 use "save_path = './SlimR/Celltype_annotation_Bar/'".}
 
-\item{metric_names}{Warning: Do not enter information. This parameter is used to
-check if "Marker_list" conforms to the SlimR output.}
+\item{colour_low}{Color for lowest expression level. (default = "white")}
+
+\item{colour_high}{Color for highest expression level. (default = "black")}
 }
 \value{
 The cell annotation picture is saved in "save_path".
@@ -52,7 +54,9 @@ Celltype_Annotation_Combined(seurat_obj = sce,
     species = "Human",
     cluster_col = "seurat_clusters",
     assay = "RNA",
-    save_path = file.path(tempdir(),"SlimR_Celltype_Annotation_Combined")
+    save_path = file.path(tempdir(),"SlimR_Celltype_Annotation_Combined"),
+    colour_low = "white",
+    colour_high = "navy"
     )
     }
 

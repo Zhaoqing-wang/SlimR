@@ -14,6 +14,10 @@ Celltype_Annotation_Features(
   save_path = NULL,
   min_counts = 1,
   metric_names = NULL,
+  colour_low = "white",
+  colour_high = "navy",
+  colour_low_mertic = "white",
+  colour_high_mertic = "navy",
   ...
 )
 }
@@ -40,7 +44,16 @@ Format depends on \code{gene_list_type}:
 
 \item{min_counts}{Minimum number of counts for Cellmarker2 annotations (default: \code{1}).}
 
-\item{metric_names}{Optional. Metric column names for custom labeling (used in "Seurat"/"Excel").}
+\item{metric_names}{Optional. Change the row name for the input mertics, not recommended unless
+necessary. (NULL is used as default parameter; used in "Seurat"/"Excel").}
+
+\item{colour_low}{Color for lowest expression level. (default = "white")}
+
+\item{colour_high}{Color for highest expression level. (default = "black")}
+
+\item{colour_low_mertic}{Color for lowest mertic level. (default = "white")}
+
+\item{colour_high_mertic}{Color for highest mertic level. (default = "black")}
 
 \item{...}{Additional parameters passed to the specific annotation function.}
 }
@@ -60,7 +73,11 @@ Celltype_Annotation_Features(seurat_obj = sce,
     species = "Human",
     cluster_col = "seurat_clusters",
     assay = "RNA",
-    save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Cellmarker2")
+    save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Cellmarker2"),
+    colour_low = "white",
+    colour_high = "navy",
+    colour_low_mertic = "white",
+    colour_high_mertic = "navy",
     )
 
 # Example for PanglaoDB
@@ -70,6 +87,10 @@ Celltype_Annotation_Features(seurat_obj = sce,
     cluster_col = "seurat_clusters",
     assay = "RNA",
     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_PanglaoDB")
+    colour_low = "white",
+    colour_high = "navy",
+    colour_low_mertic = "white",
+    colour_high_mertic = "navy",
     )
 
 # Example for Seurat marker list
@@ -79,6 +100,10 @@ Celltype_Annotation_Features(seurat_obj = sce,
     cluster_col = "seurat_clusters",
     assay = "RNA",
     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Seurat")
+    colour_low = "white",
+    colour_high = "navy",
+    colour_low_mertic = "white",
+    colour_high_mertic = "navy",
     )
 
 # Example for Excel marker list
@@ -88,6 +113,10 @@ Celltype_Annotation_Features(seurat_obj = sce,
     cluster_col = "seurat_clusters",
     assay = "RNA",
     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Excel")
+    colour_low = "white",
+    colour_high = "navy",
+    colour_low_mertic = "white",
+    colour_high_mertic = "navy",
     )
 }
 

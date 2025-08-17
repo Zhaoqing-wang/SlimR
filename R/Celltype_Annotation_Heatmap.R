@@ -22,6 +22,10 @@
 #'     contributes to its "specificity score." It amplifies or suppresses the impact
 #'     of variability in the final score calculation.Default parameters use
 #'     "specificity_weight = 3".
+#' @param colour_low Color for lowest probability level in Heatmap visualization of
+#'     probability matrix. (default = "navy")
+#' @param colour_high Color for highest probability level Heatmap visualization of
+#'     probability matrix. (default = "firebrick3")
 #'
 #' @returns The heatmap of the comparison between "cluster_col" in the
 #'     Seurat object and the given gene set "gene_list" needs to be annotated.
@@ -38,7 +42,9 @@
 #'     cluster_col = "seurat_clusters",
 #'     assay = "RNA",
 #'     min_expression = 0.1,
-#'     specificity_weight = 3
+#'     specificity_weight = 3,
+#'     colour_low = "navy",
+#'     colour_high = "firebrick3"
 #'     )
 #'     }
 #'
@@ -49,7 +55,9 @@ Celltype_Annotation_Heatmap <- function(
     cluster_col = "seurat_clusters",
     assay = "RNA",
     min_expression = 0.1,
-    specificity_weight = 3
+    specificity_weight = 3,
+    colour_low = "navy",
+    colour_high = "firebrick3"
 ) {
   required_packages <- c("ggplot2", "patchwork", "dplyr", "scales", "tidyr", "gridExtra", "gtable", "grid")
   for (pkg in required_packages) {
@@ -122,7 +130,7 @@ Celltype_Annotation_Heatmap <- function(
 
   p <- pheatmap::pheatmap(result_matrix,
                           main = "Cell annotation heatmap | SlimR",
-                          color = colorRampPalette(c("navy", "white", "firebrick3"))(50),
+                          color = colorRampPalette(c(colour_low, "white", colour_high))(50),
                           fontsize = 12,
                           cluster_rows = T,
                           cluster_cols = T,

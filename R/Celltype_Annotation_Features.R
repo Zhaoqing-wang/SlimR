@@ -18,7 +18,12 @@
 #' @param assay Assay layer in the Seurat object (default: `"RNA"`).
 #' @param save_path Directory to save output PNGs. Must be explicitly specified.
 #' @param min_counts Minimum number of counts for Cellmarker2 annotations (default: `1`).
-#' @param metric_names Optional. Metric column names for custom labeling (used in "Seurat"/"Excel").
+#' @param metric_names Optional. Change the row name for the input mertics, not recommended unless
+#'     necessary. (NULL is used as default parameter; used in "Seurat"/"Excel").
+#' @param colour_low Color for lowest expression level. (default = "white")
+#' @param colour_high Color for highest expression level. (default = "black")
+#' @param colour_low_mertic Color for lowest mertic level. (default = "white")
+#' @param colour_high_mertic Color for highest mertic level. (default = "black")
 #' @param ... Additional parameters passed to the specific annotation function.
 #'
 #' @returns Saves cell type annotation PNGs in `save_path`. Returns invisibly.
@@ -41,7 +46,11 @@
 #'     species = "Human",
 #'     cluster_col = "seurat_clusters",
 #'     assay = "RNA",
-#'     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Cellmarker2")
+#'     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Cellmarker2"),
+#'     colour_low = "white",
+#'     colour_high = "navy",
+#'     colour_low_mertic = "white",
+#'     colour_high_mertic = "navy",
 #'     )
 #'
 #' # Example for PanglaoDB
@@ -51,6 +60,10 @@
 #'     cluster_col = "seurat_clusters",
 #'     assay = "RNA",
 #'     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_PanglaoDB")
+#'     colour_low = "white",
+#'     colour_high = "navy",
+#'     colour_low_mertic = "white",
+#'     colour_high_mertic = "navy",
 #'     )
 #'
 #' # Example for Seurat marker list
@@ -60,6 +73,10 @@
 #'     cluster_col = "seurat_clusters",
 #'     assay = "RNA",
 #'     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Seurat")
+#'     colour_low = "white",
+#'     colour_high = "navy",
+#'     colour_low_mertic = "white",
+#'     colour_high_mertic = "navy",
 #'     )
 #'
 #' # Example for Excel marker list
@@ -69,6 +86,10 @@
 #'     cluster_col = "seurat_clusters",
 #'     assay = "RNA",
 #'     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Excel")
+#'     colour_low = "white",
+#'     colour_high = "navy",
+#'     colour_low_mertic = "white",
+#'     colour_high_mertic = "navy",
 #'     )
 #' }
 #'
@@ -82,6 +103,10 @@ Celltype_Annotation_Features <- function(
     save_path = NULL,
     min_counts = 1,
     metric_names = NULL,
+    colour_low = "white",
+    colour_high = "navy",
+    colour_low_mertic = "white",
+    colour_high_mertic = "navy",
     ...
 ) {
   if (!inherits(seurat_obj, "Seurat")) {
@@ -116,6 +141,10 @@ Celltype_Annotation_Features <- function(
              assay = assay,
              save_path = save_path,
              min_counts = min_counts,
+             colour_low = colour_low,
+             colour_high = colour_high,
+             colour_low_mertic = colour_low_mertic,
+             colour_high_mertic = colour_high_mertic,
              ...
            )
          },
@@ -127,6 +156,10 @@ Celltype_Annotation_Features <- function(
              cluster_col = cluster_col,
              assay = assay,
              save_path = save_path,
+             colour_low = colour_low,
+             colour_high = colour_high,
+             colour_low_mertic = colour_low_mertic,
+             colour_high_mertic = colour_high_mertic,
              ...
            )
          },
@@ -139,6 +172,10 @@ Celltype_Annotation_Features <- function(
              assay = assay,
              save_path = save_path,
              metric_names = metric_names,
+             colour_low = colour_low,
+             colour_high = colour_high,
+             colour_low_mertic = colour_low_mertic,
+             colour_high_mertic = colour_high_mertic,
              ...
            )
          },
@@ -151,6 +188,10 @@ Celltype_Annotation_Features <- function(
              assay = assay,
              save_path = save_path,
              metric_names = metric_names,
+             colour_low = colour_low,
+             colour_high = colour_high,
+             colour_low_mertic = colour_low_mertic,
+             colour_high_mertic = colour_high_mertic,
              ...
            )
          },
@@ -163,6 +204,10 @@ Celltype_Annotation_Features <- function(
              assay = assay,
              save_path = save_path,
              metric_names = metric_names,
+             colour_low = colour_low,
+             colour_high = colour_high,
+             colour_low_mertic = colour_low_mertic,
+             colour_high_mertic = colour_high_mertic,
              ...
            )
          }

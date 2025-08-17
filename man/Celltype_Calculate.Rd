@@ -15,7 +15,9 @@ Celltype_Calculate(
   threshold = 0.8,
   compute_AUC = TRUE,
   plot_AUC = TRUE,
-  AUC_correction = TRUE
+  AUC_correction = TRUE,
+  colour_low = "navy",
+  colour_high = "firebrick3"
 )
 }
 \arguments{
@@ -64,6 +66,12 @@ When set to TRUE:
 1.Computes AUC values for candidate cell types. (probability > threshold)
 2.Selects the cell type with the highest AUC as the final predicted type.
 3.Records the selected type's AUC value in the "AUC" column.}
+
+\item{colour_low}{Color for lowest probability level in Heatmap visualization of
+probability matrix. (default = "navy")}
+
+\item{colour_high}{Color for highest probability level Heatmap visualization of
+probability matrix. (default = "firebrick3")}
 }
 \value{
 A list containing:
@@ -98,7 +106,9 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     threshold = 0.8,
     compute_AUC = TRUE,
     plot_AUC = TRUE,
-    AUC_correction = TRUE
+    AUC_correction = TRUE,
+    colour_low = "navy",
+    colour_high = "firebrick3"
     )
     }
 

@@ -14,8 +14,12 @@
 #'     parameters use "assay = 'RNA'".
 #' @param save_path The output path of the cell annotation picture. Example parameters
 #'     use "save_path = './SlimR/Celltype_annotation_Excel/'".
-#' @param metric_names Warning: Do not enter information. This parameter is used to
-#'     check if "Marker_list" conforms to the Excel files output.
+#' @param metric_names Change the row name for the input mertics, not recommended unless
+#'     necessary. (NULL is used as default parameter)
+#' @param colour_low Color for lowest expression level. (default = "white")
+#' @param colour_high Color for highest expression level. (default = "black")
+#' @param colour_low_mertic Color for lowest mertic level. (default = "white")
+#' @param colour_high_mertic Color for highest mertic level. (default = "black")
 #'
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export
@@ -31,6 +35,10 @@
 #'     cluster_col = "seurat_clusters",
 #'     assay = "RNA",
 #'     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Excel")
+#'     colour_low = "white",
+#'     colour_high = "navy",
+#'     colour_low_mertic = "white",
+#'     colour_high_mertic = "navy",
 #'     )
 #'     }
 #'
@@ -41,7 +49,11 @@ Celltype_annotation_Excel <- function(
     cluster_col = "seurat_clusters",
     assay = "RNA",
     save_path = NULL,
-    metric_names = NULL
+    metric_names = NULL,
+    colour_low = "white",
+    colour_high = "navy",
+    colour_low_mertic = "white",
+    colour_high_mertic = "navy"
 ) {
   required_packages <- c("ggplot2", "patchwork", "dplyr", "scales", "tidyr")
   for (pkg in required_packages) {
@@ -59,6 +71,11 @@ Celltype_annotation_Excel <- function(
     warning("Writing to non-temporary locations is restricted", immediate. = TRUE)
     path <- file.path(tempdir(), "fallback_output")
   }
+
+  colour_low <- if (is.null(colour_low)) "white" else colour_low
+  colour_high <- if (is.null(colour_high)) "navy" else colour_high
+  colour_low_mertic <- if (is.null(colour_low_mertic)) colour_low else colour_low_mertic
+  colour_high_mertic <- if (is.null(colour_high_mertic)) colour_high else colour_high_mertic
 
   dir.create(save_path, showWarnings = FALSE, recursive = TRUE)
 
@@ -123,7 +140,7 @@ Celltype_annotation_Excel <- function(
       features = gene_order_processed,
       assay = assay,
       group.by = cluster_col,
-      cols = c("white", "dodgerblue")
+      cols = c(colour_low, colour_high)
     ) +
       ggplot2::scale_x_discrete(labels = setNames(gene_order_original, gene_order_processed)) +
       ggplot2::theme(
@@ -179,7 +196,7 @@ Celltype_annotation_Excel <- function(
       ) +
         ggplot2::geom_tile(color = "white") +
         ggplot2::scale_fill_gradientn(
-          colors = c("white", "dodgerblue"),
+          colors = c(colour_low_mertic, colour_high_mertic),
           na.value = "white",
           limits = c(0, 1)
         ) +

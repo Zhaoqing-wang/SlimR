@@ -11,7 +11,11 @@ Celltype_annotation_Cellmarker2(
   cluster_col = "seurat_clusters",
   assay = "RNA",
   save_path = NULL,
-  min_counts = 1
+  min_counts = 1,
+  colour_low = "white",
+  colour_high = "navy",
+  colour_low_mertic = "white",
+  colour_high_mertic = "navy"
 )
 }
 \arguments{
@@ -39,6 +43,14 @@ use "save_path = './SlimR/Celltype_annotation_Cellmarker2/'".}
 This number represents the number of the same gene in the same species and
 the same location in the Cellmarker2 database used for annotation of this cell
 type. Default parameters use "min_counts = 1".}
+
+\item{colour_low}{Color for lowest expression level. (default = "white")}
+
+\item{colour_high}{Color for highest expression level. (default = "black")}
+
+\item{colour_low_mertic}{Color for lowest mertic level. (default = "white")}
+
+\item{colour_high_mertic}{Color for highest mertic level. (default = "black")}
 }
 \value{
 The cell annotation picture is saved in "save_path".
@@ -54,6 +66,10 @@ Celltype_annotation_Cellmarker2(seurat_obj = sce,
     cluster_col = "seurat_clusters",
     assay = "RNA",
     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Cellmarker2")
+    colour_low = "white",
+    colour_high = "navy",
+    colour_low_mertic = "white",
+    colour_high_mertic = "navy",
     )
     }
 

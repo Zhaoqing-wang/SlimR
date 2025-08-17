@@ -18,6 +18,10 @@
 #'     This number represents the number of the same gene in the same species and
 #'     the same location in the Cellmarker2 database used for annotation of this cell
 #'     type. Default parameters use "min_counts = 1".
+#' @param colour_low Color for lowest expression level. (default = "white")
+#' @param colour_high Color for highest expression level. (default = "black")
+#' @param colour_low_mertic Color for lowest mertic level. (default = "white")
+#' @param colour_high_mertic Color for highest mertic level. (default = "black")
 #'
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export
@@ -35,6 +39,10 @@
 #'     cluster_col = "seurat_clusters",
 #'     assay = "RNA",
 #'     save_path = file.path(tempdir(),"SlimR_Celltype_annotation_Cellmarker2")
+#'     colour_low = "white",
+#'     colour_high = "navy",
+#'     colour_low_mertic = "white",
+#'     colour_high_mertic = "navy",
 #'     )
 #'     }
 #'
@@ -45,7 +53,11 @@ Celltype_annotation_Cellmarker2 <- function(
     cluster_col = "seurat_clusters",
     assay = "RNA",
     save_path = NULL,
-    min_counts = 1
+    min_counts = 1,
+    colour_low = "white",
+    colour_high = "navy",
+    colour_low_mertic = "white",
+    colour_high_mertic = "navy"
 ) {
   if (!requireNamespace("cowplot", quietly = TRUE)) {
     stop("Please install package 'cowplot': install.packages('cowplot')")
@@ -64,6 +76,11 @@ Celltype_annotation_Cellmarker2 <- function(
     warning("Writing to non-temporary locations is restricted", immediate. = TRUE)
     path <- file.path(tempdir(), "fallback_output")
   }
+
+  colour_low <- if (is.null(colour_low)) "white" else colour_low
+  colour_high <- if (is.null(colour_high)) "navy" else colour_high
+  colour_low_mertic <- if (is.null(colour_low_mertic)) colour_low else colour_low_mertic
+  colour_high_mertic <- if (is.null(colour_high_mertic)) colour_high else colour_high_mertic
 
   dir.create(save_path, showWarnings = FALSE)
 
@@ -151,7 +168,7 @@ Celltype_annotation_Cellmarker2 <- function(
       features = valid_features,
       assay = assay,
       group.by = cluster_col,
-      cols = c("white", "dodgerblue")
+      cols = c(colour_low, colour_high)
     ) +
       theme(
         axis.text.x = element_text(
@@ -177,8 +194,8 @@ Celltype_annotation_Cellmarker2 <- function(
     hp <- ggplot(heatmap_data, aes(x = Gene, y = "Counts", fill = Counts)) +
       geom_tile(color = "gray") +
       scale_fill_gradient(
-        low = "white",
-        high = "dodgerblue",
+        low = colour_low_mertic,
+        high = colour_high_mertic,
         limits = c(0, max(counts_for_heatmap))
       ) +
       theme_minimal() +
