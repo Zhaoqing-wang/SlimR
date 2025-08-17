@@ -211,7 +211,7 @@ Markers_list_Seurat <- Read_seurat_markers(seurat_markers,
     )
 ```
 
-*Note: Recommend use the parameter `sort_by = "FSS"` to use the 'Feature Significance Score' (FSS, product value of `log2FC` and `Expression ratio`) as the ranking basis*
+*Note: Recommend use the parameter `sort_by = "FSS"` to use the 'Feature Significance Score' (FSS, product value of `log2FC` and `Expression ratio`) as the ranking basis.*
 
 #### 2.5.2 Use `presto` to Speed Up: (Alternative)
 
@@ -236,7 +236,7 @@ Markers_list_Seurat <- Read_seurat_markers(seurat_markers,
 
 **Improtant: This feature depends on the `presto` packages, please run `library(presto)` first.**
 
-*Note: Recommend use the parameter `sort_by = "FSS"` to use the 'Feature Significance Score' (FSS, product value of `log2FC` and `Expression ratio`) as the ranking basis*
+*Note: Recommend use the parameter `sort_by = "FSS"` to use the 'Feature Significance Score' (FSS, product value of `log2FC` and `Expression ratio`) as the ranking basis.*
 
 *Link: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.3. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
@@ -283,7 +283,7 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
 
 **Important: The parameter `cluster_col` in the function `Celltype_Calculate()` and the function `Celltype_Annotation()` must be strictly the same to avoid false matches.**
 
-*Note: Using the parameter `AUC_correction = TRUE` takes a little longer to compute, but it is recommended to correct the predicted cell type this way in order to obtain more accurate cell type prediction results. The lower the parameter `threshold`, the more alternative cell types will be checked by AUC, and the longer the operation time will be.*
+*Note: Using the parameter `AUC_correction = TRUE` takes a little longer to compute, but it is recommended to correct the predicted cell type this way in order to obtain more accurate cell type prediction results. The lower the parameter `threshold`, the more alternative cell types will be checked by AUC, and the longer the run time will be.*
 
 #### 3.1.2 Plot Heatmap (Optional)
 
@@ -311,7 +311,7 @@ Furthermore, the ROC curve and AUC value of the corresponding `cluster_col` and 
 print(SlimR_anno_result$AUC_plot)
 ```
 
-**Improtant: This feature depends on the parameter `plot_AUC = TRUE`**
+**Improtant: This feature depends on the parameter `plot_AUC = TRUE`.**
 
 *Note: If the heatmap is not generated properly, please run the function `library(ggplot2)` first.*
 
@@ -448,7 +448,7 @@ Celltype_annotation_Cellmarker2(
 )
 ```
 
-*Note: To call this function, set the parameter `gene_list_type = "Cellmarker2"` in the function* `Celltype_Annotation_Features`*`()`.*
+*Note: To call this function, set the parameter `gene_list_type = "Cellmarker2"` in the function* `Celltype_Annotation_Features()`*.*
 
 #### 5.2 Annotation Features Plot with PanglaoDB Database
 
@@ -463,7 +463,7 @@ Celltype_annotation_PanglaoDB(
 )
 ```
 
-*Note: To call this function, set the parameter `gene_list_type = "PanglaoDB"` in the function* `Celltype_Annotation_Features`*`()`.*
+*Note: To call this function, set the parameter `gene_list_type = "PanglaoDB"` in the function* `Celltype_Annotation_Features()`*.*
 
 #### 5.3 Annotation Features Plot with Seurat-Based Markers List
 
@@ -478,7 +478,7 @@ Celltype_annotation_Seurat(
 )
 ```
 
-*Note: To call this function, set the parameter `gene_list_type = "Seurat"` in the function* `Celltype_Annotation_Features`*`()`.*
+*Note: To call this function, set the parameter `gene_list_type = "Seurat"` in the function* `Celltype_Annotation_Features()`*.*
 
 #### 5.4 Annotation Features Plot with Excel-Based Markers List
 
