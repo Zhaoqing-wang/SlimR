@@ -111,7 +111,7 @@ Celltype_Annotation_Combined <- function(
       assay = assay,
       cluster_col = cluster_col,
       colour_low = colour_low,
-      colour_high = colour_high,
+      colour_high = colour_high
     )
 
     ggsave(

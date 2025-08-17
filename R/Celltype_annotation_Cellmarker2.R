@@ -161,7 +161,7 @@ Celltype_annotation_Cellmarker2 <- function(
     num_genes <- length(valid_features)
 
     plot_height <- max(6, num_idents * 0.8) + 1
-    plot_width <- max(8, num_genes * 0.3)
+    plot_width <- max(10, num_genes * 0.4)
 
     dp <- Seurat::DotPlot(
       seurat_obj,
