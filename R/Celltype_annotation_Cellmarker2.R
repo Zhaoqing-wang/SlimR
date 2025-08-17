@@ -181,7 +181,7 @@ Celltype_annotation_Cellmarker2 <- function(
         axis.title.y = element_text(family = "sans")
       ) +
       labs(
-        title = paste("Cell Type:", cell_type, "| Database: Cellmarkers2.0 | SlimR"),
+        title = paste("Cell Type:", cell_type, "| Markers_list from Cellmarkers2 Database | SlimR"),
         subtitle = "Dot size: Expression percentage | Color: Normalized expression level"
       )
 
@@ -219,7 +219,7 @@ Celltype_annotation_Cellmarker2 <- function(
       labs(
         x = NULL,
         y = "Counts",
-        title = "Gene counts in database Cellmarkers2.0"
+        title = "Gene counts in Cellmarkers2.0 database"
       )
 
     base_height <- 5
@@ -241,8 +241,8 @@ Celltype_annotation_Cellmarker2 <- function(
       limitsize = FALSE
     )
     cycles <- cycles + 1
-    message(paste0("[", i, "/", total, "] Combined plot saved for: ", cell_type))
+    message(paste0("[", i, "/", total, "] Features plot saved for: ", cell_type))
   }
   message(paste0("\n","SlimR: Out of the ",total," cell types in 'Markers_list', ",cycles," cell types have been processed. You can see the reason for not processing cell types by 'warnings()'."))
-  message(paste0("\n","Visualization saved to: ", normalizePath(save_path)))
+  message(paste0("\n","SlimR: Visualization saved to: ", normalizePath(save_path)))
 }

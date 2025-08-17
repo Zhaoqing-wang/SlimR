@@ -22,10 +22,10 @@
 #' @export
 #' @family Semi_Automated_Annotation_Workflow
 #'
-#' @importFrom magrittr %>%
 #' @importFrom Seurat Idents
 #' @importFrom ggplot2 ggsave
-#' @importFrom dplyr distinct
+#' @importFrom dplyr distinct %>%
+#' @importFrom ggplot2 geom_boxplot geom_point position_dodge scale_color_gradient
 #'
 #' @examples
 #' \dontrun{
@@ -102,10 +102,19 @@ Celltype_Annotation_Combined <- function(
 
     num_clusters <- length(unique(Seurat::Idents(seurat_obj)))
     num_genes <- length(gene_order_original)
-    plot_height <- 5
-    plot_width <- max(6, num_clusters * 0.8) + 2
+    plot_height <- 7
+    plot_width <- max(8, num_clusters * 0.8) + 2
 
-    bar_plot <- plot_mean_expression(
+    split_and_format_features <- function(features, n_per_line = 10) {
+      if (length(features) == 0) return("")
+      feature_groups <- split(features, ceiling(seq_along(features) / n_per_line))
+      formatted_lines <- lapply(feature_groups, function(group) {
+        paste(group, collapse = ", ")
+      })
+      paste(formatted_lines, collapse = "\n")
+    }
+
+    expr_df <- calculate_expression(
       object = seurat_obj,
       features = gene_order_processed,
       assay = assay,
@@ -114,16 +123,40 @@ Celltype_Annotation_Combined <- function(
       colour_high = colour_high
     )
 
+    p <- ggplot(expr_df, aes(x = cluster, y = mean_expression, color = Avg_exp, fill = Avg_exp)) +
+      geom_boxplot(outlier.shape = NA, width = 0.6) +
+      geom_point(position = position_dodge(width = 0.6), size = 2, stroke = 0) +
+      scale_color_gradient(low = colour_low, high = colour_high) +
+      scale_fill_gradient(low = colour_low, high = colour_high) +
+      labs(
+        title = paste0(cell_type," combined features expression per Cluster | SlimR"),
+        subtitle = paste("Features:", split_and_format_features(gene_order_processed, n_per_line = 15)),
+        x = "Cell Cluster",
+        y = "Mean Expression"
+      ) +
+      theme_minimal() +
+      theme(
+        plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+        plot.subtitle = element_text(hjust = 0.5, size = 10),
+        axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 10),
+        axis.title.x = element_text(size = 10),
+        axis.title.y = element_text(size = 10),
+        panel.grid = element_blank()
+      )
+
     ggsave(
       filename = file.path(save_path, paste0(cell_type, " mean expression.png")),
-      plot = bar_plot,
+      plot = p,
       height = plot_height,
       width = plot_width,
       limitsize = FALSE
     )
     cycles <- cycles + 1
-    message(paste0("[", i, "/", total, "] Bar plot saved for: ", cell_type))
+    message(paste0("[", i, "/", total, "] Combined plot saved for: ", cell_type))
   }
+
   message(paste0("\n","SlimR: Out of the ",total," cell types in 'Markers_list', ",cycles," cell types have been processed. You can see the reason for not processing cell types by 'warnings()'."))
-  message(paste0("\n","Visualization saved to: ", normalizePath(save_path)))
+
+  message(paste0("\n","SlimR: Visualization saved to: ", normalizePath(save_path)))
 }

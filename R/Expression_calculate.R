@@ -1,4 +1,4 @@
-#' Counts average expression of gene set and plots Boxplot (Use in package)
+#' Counts average expression of gene set (Use in package)
 #'
 #' @param object Enter a Seurat object.
 #' @param features Enter one or a set of markers.
@@ -9,7 +9,7 @@
 #' @param colour_low Color for lowest expression level. (default = "white")
 #' @param colour_high Color for highest expression level. (default = "black")
 #'
-#' @returns  Average expression box plot of genes in the input "Seurat" object
+#' @returns Average expression genes and relatied informations in the input "Seurat" object
 #'     given "cluster_col" and given "features".
 #'
 #' @family Use_in_packages
@@ -17,17 +17,16 @@
 #' @importFrom Seurat `%||%`
 #' @importFrom Seurat DefaultAssay DefaultAssay<- CellsByIdentities FetchData
 #' @importFrom dplyr group_by summarise left_join
-#' @importFrom ggplot2 geom_boxplot geom_point position_dodge scale_color_gradient
 #'
 #'
-plot_mean_expression <- function(
+calculate_expression <- function(
     object,
     features,
     assay = NULL,
     cluster_col = NULL,
     colour_low = "white",
-    colour_high = "navy")
-  {
+    colour_high = "navy") {
+
   if (!is.null(cluster_col) && !(cluster_col %in% colnames(object@meta.data))) {
     stop("cluster_col not found in meta.data")
   }
@@ -73,36 +72,5 @@ plot_mean_expression <- function(
 
   expr_df <- left_join(expr_df, cluster_avg_exp, by = "cluster")
 
-  split_and_format_features <- function(features, n_per_line = 10) {
-    if (length(features) == 0) return("")
-    feature_groups <- split(features, ceiling(seq_along(features) / n_per_line))
-    formatted_lines <- lapply(feature_groups, function(group) {
-      paste(group, collapse = ", ")
-    })
-    paste(formatted_lines, collapse = "\n")
-  }
-
-  p <- ggplot(expr_df, aes(x = cluster, y = mean_expression, color = Avg_exp, fill = Avg_exp)) +
-    geom_boxplot(outlier.shape = NA, width = 0.6) +
-    geom_point(position = position_dodge(width = 0.6), size = 2, stroke = 0) +
-    scale_color_gradient(low = colour_low, high = colour_high) +
-    scale_fill_gradient(low = colour_low, high = colour_high) +
-    labs(
-      title = "Gene Expression per Cluster | SlimR",
-      subtitle = paste("Features:", split_and_format_features(features, n_per_line = 10)),
-      x = "Cell Cluster",
-      y = "Mean Expression"
-    ) +
-    theme_minimal() +
-    theme(
-      plot.title = element_text(hjust = 0.5, size = 12, face = "bold"),
-      plot.subtitle = element_text(hjust = 0.5, size = 10),
-      axis.text.y = element_text(size = 10),
-      axis.text.x = element_text(size = 10),
-      axis.title.x = element_text(size = 10),
-      axis.title.y = element_text(size = 10),
-      panel.grid = element_blank()
-    )
-
-  return(p)
+  return(expr_df)
 }

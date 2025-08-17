@@ -149,7 +149,7 @@ Celltype_annotation_Excel <- function(
         axis.title.y = ggplot2::element_text(family = "sans")
       ) +
       ggplot2::labs(
-        title = paste("Cell Type:", cell_type, "| Database of markers input by users | SlimR"),
+        title = paste("Cell Type:", cell_type, "| Markers_list input by users | SlimR"),
         subtitle = "Dot size: Expression percentage | Color: Normalized expression level"
       )
 
@@ -200,7 +200,7 @@ Celltype_annotation_Excel <- function(
           na.value = "white",
           limits = c(0, 1)
         ) +
-        ggplot2::labs(title = "Normalized metrics in database of markers input from Excel files") +
+        ggplot2::labs(title = "Normalized metrics in Markers_list input by users") +
         ggplot2::theme(
           axis.text.x = ggplot2::element_text(angle = 45, hjust = 1, vjust = 1),
           axis.title = ggplot2::element_blank(),
@@ -224,8 +224,8 @@ Celltype_annotation_Excel <- function(
       limitsize = FALSE
     )
     cycles <- cycles + 1
-    message(paste0("[", i, "/", total, "] Combined plot saved for: ", cell_type))
+    message(paste0("[", i, "/", total, "] Features plot saved for: ", cell_type))
   }
   message(paste0("\n","SlimR: Out of the ",total," cell types in 'Markers_list', ",cycles," cell types have been processed. You can see the reason for not processing cell types by 'warnings()'."))
-  message(paste0("\n","Visualization saved to: ", normalizePath(save_path)))
+  message(paste0("\n","SlimR: Visualization saved to: ", normalizePath(save_path)))
 }

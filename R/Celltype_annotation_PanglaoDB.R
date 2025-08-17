@@ -159,7 +159,7 @@ Celltype_annotation_PanglaoDB <- function(
         axis.title.y = element_text(family = "sans")
       ) +
       labs(
-        title = paste("Cell Type:", cell_type, "| Database: PanglaoDB | SlimR"),
+        title = paste("Cell Type:", cell_type, "| Markers_list from PanglaoDB Database | SlimR"),
         subtitle = "Dot size: Expression percentage | Color: Normalized expression level"
       )
 
@@ -190,7 +190,7 @@ Celltype_annotation_PanglaoDB <- function(
         limits = c(0, 1)
       ) +
       ggplot2::labs(
-        title = "Normalized metrics in database PanglaoDB",
+        title = "Normalized metrics in PanglaoDB database",
         x = NULL,
         y = NULL
       ) +
@@ -223,8 +223,8 @@ Celltype_annotation_PanglaoDB <- function(
       limitsize = FALSE
     )
     cycles <- cycles + 1
-    message(paste0("[", i, "/", total, "] Combined plot saved for: ", cell_type))
+    message(paste0("[", i, "/", total, "] Features plot saved for: ", cell_type))
   }
   message(paste0("\n","SlimR: Out of the ",total," cell types in 'Markers_list', ",cycles," cell types have been processed. You can see the reason for not processing cell types by 'warnings()'."))
-  message(paste0("\n","Visualization saved to: ", normalizePath(save_path)))
+  message(paste0("\n","SlimR: Visualization saved to: ", normalizePath(save_path)))
 }

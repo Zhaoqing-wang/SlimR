@@ -27,7 +27,6 @@ Imports:
     Seurat,
     tidyr,
     tools,
-    magrittr,
     tibble
 Suggests:
     crayon,

@@ -44,6 +44,6 @@ Calculate gene set expression and infer probabilities with control datasets (Use
 }
 \seealso{
 Other Use_in_packages: 
-\code{\link{plot_mean_expression}()}
+\code{\link{calculate_expression}()}
 }
 \concept{Use_in_packages}
