@@ -10,5 +10,5 @@
 #'
 #' @family SlimR_Database
 #'
-#' @source \doi{https://doi.org/10.1038/s43588-023-00464-9}
+#' @source \doi{10.1038/s43588-023-00464-9}
 "Markers_list_scIBD"
