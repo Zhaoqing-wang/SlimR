@@ -6,7 +6,7 @@
 #'
 #' @details This dataset is used to filter and create a standardized marker list.'
 #'
-#' @family SlimR_Database
+#' @family Section_0_Database
 #'
 #' @source \url{https://panglaodb.se/}
 "PanglaoDB"

@@ -23,7 +23,7 @@
 #'
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export
-#' @family Other_Functions_Provided_By_SlimR
+#' @family Section_5_Other_Functions_Provided_by_SlimR
 #'
 #' @importFrom stats setNames
 #'

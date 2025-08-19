@@ -12,7 +12,7 @@
 #'
 #' @returns The standardized "Marker_list" in the SlimR package
 #' @export
-#' @family Standardized_Marker_list_Input
+#' @family Section_2_Standardized_Markers_List_Input
 #'
 #' @examples
 #' PanglaoDB <- SlimR::PanglaoDB

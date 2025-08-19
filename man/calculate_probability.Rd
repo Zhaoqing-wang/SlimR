@@ -43,7 +43,7 @@ Average expression of genes in the input "Seurat" object given
 Calculate gene set expression and infer probabilities with control datasets (Use in package)
 }
 \seealso{
-Other Use_in_packages: 
+Other Section_1_Functions_Use_in_Package: 
 \code{\link{calculate_expression}()}
 }
-\concept{Use_in_packages}
+\concept{Section_1_Functions_Use_in_Package}

@@ -12,7 +12,7 @@
 #' @returns Average expression genes and relatied informations in the input "Seurat" object
 #'     given "cluster_col" and given "features".
 #'
-#' @family Use_in_packages
+#' @family Section_1_Functions_Use_in_Package
 #'
 #' @importFrom Seurat `%||%`
 #' @importFrom Seurat DefaultAssay DefaultAssay<- CellsByIdentities FetchData

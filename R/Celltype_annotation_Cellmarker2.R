@@ -25,7 +25,7 @@
 #'
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export
-#' @family Other_Functions_Provided_By_SlimR
+#' @family Section_5_Other_Functions_Provided_by_SlimR
 #'
 #' @importFrom ggplot2 ggplot aes theme labs element_text element_blank
 #' @importFrom ggplot2 geom_tile scale_fill_gradient theme_minimal

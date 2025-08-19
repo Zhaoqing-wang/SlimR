@@ -36,7 +36,7 @@ given "cluster_col" and given "features".
 Counts average expression of gene set (Use in package)
 }
 \seealso{
-Other Use_in_packages: 
+Other Section_1_Functions_Use_in_Package: 
 \code{\link{calculate_probability}()}
 }
-\concept{Use_in_packages}
+\concept{Section_1_Functions_Use_in_Package}

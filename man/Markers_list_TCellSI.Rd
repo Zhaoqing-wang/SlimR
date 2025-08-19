@@ -22,7 +22,7 @@ The data source is "https://github.com/GuoBioinfoLab/TCellSI/blob/main/data/mark
 and the reference literature is: Yang et al. (2024) \url{doi:10.1002/imt2.231}.
 }
 \seealso{
-Other SlimR_Database: 
+Other Section_0_Database: 
 \code{\link{Cellmarker2}},
 \code{\link{Cellmarker2_raw}},
 \code{\link{Cellmarker2_table}},
@@ -31,5 +31,5 @@ Other SlimR_Database:
 \code{\link{PanglaoDB_raw}},
 \code{\link{PanglaoDB_table}}
 }
-\concept{SlimR_Database}
+\concept{Section_0_Database}
 \keyword{datasets}

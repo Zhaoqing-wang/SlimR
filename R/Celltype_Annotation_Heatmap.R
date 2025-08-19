@@ -30,7 +30,7 @@
 #' @returns The heatmap of the comparison between "cluster_col" in the
 #'     Seurat object and the given gene set "gene_list" needs to be annotated.
 #' @export
-#' @family Semi_Automated_Annotation_Workflow
+#' @family Section_4_Semi_Automated_Annotation_Workflow
 #'
 #' @importFrom grDevices colorRampPalette
 #'

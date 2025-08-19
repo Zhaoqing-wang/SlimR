@@ -8,7 +8,7 @@
 #'     The data source is "https://github.com/GuoBioinfoLab/TCellSI/blob/main/data/markers.rda",
 #'     and the reference literature is: Yang et al. (2024) <doi:10.1002/imt2.231>.
 #'
-#' @family SlimR_Database
+#' @family Section_0_Database
 #'
 #' @source \url{https://github.com/GuoBioinfoLab/TCellSI/}
 "Markers_list_TCellSI"

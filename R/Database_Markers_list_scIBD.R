@@ -8,7 +8,7 @@
 #'     obtained from scIBD. The article doi source is "https://doi.org/10.1038/s43588-023-00464-9", 
 #'     and the reference literature is: Nie et al. (2023) <doi:10.1038/s43588-023-00464-9>.
 #'
-#' @family SlimR_Database
+#' @family Section_0_Database
 #'
 #' @source \doi{10.1038/s43588-023-00464-9}
 "Markers_list_scIBD"
