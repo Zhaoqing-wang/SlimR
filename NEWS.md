@@ -1,3 +1,8 @@
+# SlimR 1.0.8 (2025-08-20)
+
+-   Note: This version is under development.
+-   Optimize the data filter mode of "Markers_list_scIBD" in the package, and filter through the "FSS" parameter.
+
 # SlimR 1.0.7 (2025-08-19)
 
 -   Added new function `Celltype_Verification()` for predicted cell types validation and generate the validation dotplot.
