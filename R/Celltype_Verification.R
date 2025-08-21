@@ -13,7 +13,7 @@
 #' @param gene_number Integer specifying number of top genes to select per cell type.
 #' @param annotation_col Character string specifying the column in meta.data to use for grouping.
 #' @param colour_low Color for lowest expression level. (default = "white")
-#' @param colour_high Color for highest expression level. (default = "black")
+#' @param colour_high Color for highest expression level. (default = "navy")
 #'
 #' @return A ggplot object showing expression of top variable genes.
 #'

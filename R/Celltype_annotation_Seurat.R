@@ -17,10 +17,10 @@
 #' @param metric_names Change the row name for the input mertics, not recommended unless
 #'     necessary. (NULL is used as default parameter)
 #' @param colour_low Color for lowest expression level. (default = "white")
-#' @param colour_high Color for highest expression level. (default = "black")
+#' @param colour_high Color for highest expression level. (default = "navy")
 #' @param colour_low_mertic Color for lowest mertic level. (default = "white")
-#' @param colour_high_mertic Color for highest mertic level. (default = "black")
-#'
+#' @param colour_high_mertic Color for highest mertic level. (default = "navy")
+#' 
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export
 #' @family Section_5_Other_Functions_Provided_by_SlimR

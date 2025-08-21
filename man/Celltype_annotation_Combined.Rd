@@ -39,7 +39,7 @@ use "save_path = './SlimR/Celltype_annotation_Bar/'".}
 
 \item{colour_low}{Color for lowest expression level. (default = "white")}
 
-\item{colour_high}{Color for highest expression level. (default = "black")}
+\item{colour_high}{Color for highest expression level. (default = "navy")}
 }
 \value{
 The cell annotation picture is saved in "save_path".

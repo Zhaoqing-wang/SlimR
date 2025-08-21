@@ -19,9 +19,9 @@
 #'     the same location in the Cellmarker2 database used for annotation of this cell
 #'     type. Default parameters use "min_counts = 1".
 #' @param colour_low Color for lowest expression level. (default = "white")
-#' @param colour_high Color for highest expression level. (default = "black")
+#' @param colour_high Color for highest expression level. (default = "navy")
 #' @param colour_low_mertic Color for lowest mertic level. (default = "white")
-#' @param colour_high_mertic Color for highest mertic level. (default = "black")
+#' @param colour_high_mertic Color for highest mertic level. (default = "navy")
 #'
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export

@@ -49,11 +49,11 @@ necessary. (NULL is used as default parameter; used in "Seurat"/"Excel").}
 
 \item{colour_low}{Color for lowest expression level. (default = "white")}
 
-\item{colour_high}{Color for highest expression level. (default = "black")}
+\item{colour_high}{Color for highest expression level. (default = "navy")}
 
 \item{colour_low_mertic}{Color for lowest mertic level. (default = "white")}
 
-\item{colour_high_mertic}{Color for highest mertic level. (default = "black")}
+\item{colour_high_mertic}{Color for highest mertic level. (default = "navy")}
 
 \item{...}{Additional parameters passed to the specific annotation function.}
 }

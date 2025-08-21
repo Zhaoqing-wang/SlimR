@@ -16,7 +16,7 @@
 #' @param save_path The output path of the cell annotation picture. Example parameters
 #'     use "save_path = './SlimR/Celltype_annotation_Bar/'".
 #' @param colour_low Color for lowest expression level. (default = "white")
-#' @param colour_high Color for highest expression level. (default = "black")
+#' @param colour_high Color for highest expression level. (default = "navy")
 #'
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export

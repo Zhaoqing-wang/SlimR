@@ -21,9 +21,9 @@
 #' @param metric_names Optional. Change the row name for the input mertics, not recommended unless
 #'     necessary. (NULL is used as default parameter; used in "Seurat"/"Excel").
 #' @param colour_low Color for lowest expression level. (default = "white")
-#' @param colour_high Color for highest expression level. (default = "black")
+#' @param colour_high Color for highest expression level. (default = "navy")
 #' @param colour_low_mertic Color for lowest mertic level. (default = "white")
-#' @param colour_high_mertic Color for highest mertic level. (default = "black")
+#' @param colour_high_mertic Color for highest mertic level. (default = "navy")
 #' @param ... Additional parameters passed to the specific annotation function.
 #'
 #' @returns Saves cell type annotation PNGs in `save_path`. Returns invisibly.

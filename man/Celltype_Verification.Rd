@@ -28,7 +28,7 @@ parameters use "assay = 'RNA'".}
 
 \item{colour_low}{Color for lowest expression level. (default = "white")}
 
-\item{colour_high}{Color for highest expression level. (default = "black")}
+\item{colour_high}{Color for highest expression level. (default = "navy")}
 
 \item{annotation_col}{Character string specifying the column in meta.data to use for grouping.}
 }
