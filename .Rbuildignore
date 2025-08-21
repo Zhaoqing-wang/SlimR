@@ -4,4 +4,5 @@
 ^\.RData$
 ^\.gitignore$
 ^docs/
+^.vscode/
 ^LICENSE\.md$
