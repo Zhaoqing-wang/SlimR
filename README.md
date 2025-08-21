@@ -4,7 +4,7 @@
 
 ## Overview
 
-<img src="inst/Sticker.png" alt="Sticker" width="233.28" height="270" align="right"/>
+<img src="docs/Sticker.png" alt="Sticker" width="233.28" height="270" align="right"/>
 
 SlimR is an R package designed for annotating single-cell and spatial-transcriptomics (ST) datasets. It supports the creation of a unified marker list, `Markers_list`, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB', 'scIBD', 'TCellSI'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers.
 

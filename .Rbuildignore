@@ -3,5 +3,5 @@
 ^\.Rhistory$
 ^\.RData$
 ^\.gitignore$
-^inst/
+^docs/
 ^LICENSE\.md$
