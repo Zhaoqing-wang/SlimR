@@ -53,7 +53,7 @@ install.packages("SlimR")
 
 Option Two: [![GitHub R package version](https://img.shields.io/github/r-package/v/Zhaoqing-wang/SlimR?label=GitHub&color=green)](https://github.com/Zhaoqing-wang/SlimR/releases)
 
-Install SlimR directly from GitHub using: (Development version, more recommended when the version is higher than CRAN package version)
+Install SlimR directly from GitHub using: (Development version, recommended when the version is higher than CRAN package version)
 
 ``` r
 devtools::install_github("Zhaoqing-wang/SlimR")
