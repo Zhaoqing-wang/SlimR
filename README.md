@@ -49,7 +49,7 @@ Install SlimR directly from CRAN using: (Stable version, recommended when the ve
 install.packages("SlimR")
 ```
 
-*Note: Try adjusting the CRAN image to "Global (CDN)" or use "BiocManager::install("SlimR")" if you encounter a version mismatch during installation.*
+*Note: Try adjusting the CRAN image to `Global (CDN)` or use `BiocManager::install("SlimR")` if you encounter a version mismatch during installation.*
 
 Option Two: [![GitHub R package version](https://img.shields.io/github/r-package/v/Zhaoqing-wang/SlimR?label=GitHub&color=green)](https://github.com/Zhaoqing-wang/SlimR/releases)
 
@@ -59,7 +59,7 @@ Install SlimR directly from GitHub using: (Development version, recommended when
 devtools::install_github("Zhaoqing-wang/SlimR")
 ```
 
-*Note: If the function doesn't work, please run the function `install.packages('devtools')` first.*
+*Note: If the function doesn't work, please run `install.packages('devtools')` first.*
 
 ### 1.2 Loading SlimR
 
@@ -129,9 +129,9 @@ Markers_list_Cellmarker2 <- Markers_filter_Cellmarker2(
 )
 ```
 
-**Important: Select at least the 'species' and 'tissue_class' parameters to ensure the accuracy of the annotation.**
+**Important: Select at least the `species` and `tissue_class` parameters to ensure the accuracy of the annotation.**
 
-*Link: Output usable in sections 3.1, 4.1, 4.2, 4.3 and 5.1. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
+*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3 and 5.1. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.2 From PanglaoDB Database
 
@@ -162,9 +162,9 @@ Markers_list_panglaoDB <- Markers_filter_PanglaoDB(
 )
 ```
 
-**Important: Select the 'species_input' and 'organ_input' parameters to ensure the accuracy of the annotation.**
+**Important: Select the `species_input` and `organ_input` parameters to ensure the accuracy of the annotation.**
 
-*Link: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.2. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
+*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3 and 5.2. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.3 From scIBD Database
 
@@ -180,7 +180,7 @@ Markers_list_scIBD <- SlimR::Markers_list_scIBD
 
 *Note: The `Markers_list_scIBD` was generated using section 2.5.2 and the parameters `sort_by = "FSS"` and `gene_filter = 20` were set.*
 
-*Link: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.3. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
+*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3 and 5.3. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.4 From TCellSI Database
 
@@ -194,7 +194,7 @@ Markers_list_TCellSI <- SlimR::Markers_list_TCellSI
 
 **Important: This is only for T cell subset annotation. Ensure that the input Seurat object is of T cell type to guarantee the accuracy of the annotation.**
 
-*Link: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
+*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.5 From Seurat Objects
 
@@ -219,7 +219,7 @@ Markers_list_Seurat <- Read_seurat_markers(seurat_markers,
 
 #### 2.5.2 Use `presto` to Speed Up: (Alternative)
 
-For large data sets, the `presto::wilcoxauc()` function can be used to speed up the operation. (Alternative, sacrifice partial accuracy)
+For large data sets, the `presto::wilcoxauc()` function can be used to speed up the operation. (Alternative, \~10x faster, sacrifice partial accuracy)
 
 ``` r
 seurat_markers <- dplyr::filter(
@@ -242,7 +242,7 @@ Markers_list_Seurat <- Read_seurat_markers(seurat_markers,
 
 *Note: Recommend use the parameter `sort_by = "FSS"` to use the 'Feature Significance Score' (FSS, product value of `log2FC` and `Expression ratio`) as the ranking basis.*
 
-*Link: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.3. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
+*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3 and 5.3. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.6 From Excel Tables
 
@@ -260,7 +260,7 @@ Markers_list_Seurat <- Read_seurat_markers(seurat_markers,
 Markers_list_Excel <- Read_excel_markers("D:/Laboratory/Marker_load.xlsx")
 ```
 
-*Link: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
+*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ## 3. Automated Annotation Workflow
 
@@ -328,7 +328,7 @@ After viewing the list of predicted cell types and the corresponding AUC values,
 Example 1:
 
 ``` r
-# For example, cluster `15` in `cluster_col` corresponds to cell type `Intestinal stem cell`.
+# For example, cluster '15' in 'cluster_col' corresponds to cell type 'Intestinal stem cell'.
 SlimR_anno_result$Prediction_results$Predicted_cell_type[
   SlimR_anno_result$Prediction_results$cluster_col == 15
 ] <- "Intestinal stem cell"
@@ -337,7 +337,7 @@ SlimR_anno_result$Prediction_results$Predicted_cell_type[
 Example 2:
 
 ``` r
-# For example, a predicted cell type with an AUC of 0.5 or less should be labeled `Unknown`.
+# For example, a predicted cell type with an AUC of 0.5 or less should be labeled 'Unknown'.
 SlimR_anno_result$Prediction_results$Predicted_cell_type[
   SlimR_anno_result$Prediction_results$AUC <= 0.5
 ] <- "Unknown"
@@ -466,7 +466,7 @@ Celltype_annotation_Cellmarker2(
 )
 ```
 
-*Note: To call this function, set the parameter `gene_list_type = "Cellmarker2"` in the function* `Celltype_Annotation_Features()`*.*
+*Note: To call this function, set the parameter `gene_list_type = "Cellmarker2"` in the function `Celltype_Annotation_Features()`.*
 
 #### 5.2 Annotation Feature Plots with PanglaoDB Database
 
@@ -485,7 +485,7 @@ Celltype_annotation_PanglaoDB(
 )
 ```
 
-*Note: To call this function, set the parameter `gene_list_type = "PanglaoDB"` in the function* `Celltype_Annotation_Features()`*.*
+*Note: To call this function, set the parameter `gene_list_type = "PanglaoDB"` in the function `Celltype_Annotation_Features()`.*
 
 #### 5.3 Annotation Feature Plots with Seurat-Based Markers List
 
@@ -504,7 +504,7 @@ Celltype_annotation_Seurat(
 )
 ```
 
-*Note: To call this function, set the parameter `gene_list_type = "Seurat"` in the function* `Celltype_Annotation_Features()`*.*
+*Note: To call this function, set the parameter `gene_list_type = "Seurat"` in the function `Celltype_Annotation_Features()`.*
 
 #### 5.4 Annotation Feature Plots with Excel-Based Markers List
 
@@ -523,7 +523,7 @@ Celltype_annotation_Excel(
 )
 ```
 
-*Note: To call this function, set the parameter `gene_list_type = "Excel"` in the function* `Celltype_Annotation_Features`*. This function also works with `Markers_list` without metric information or with metric information generated in other ways.*
+*Note: To call this function, set the parameter `gene_list_type = "Excel"` in the function `Celltype_Annotation_Features`. This function also works with `Markers_list` without metric information or with metric information generated in other ways.*
 
 ## 6. Conclusion
 
