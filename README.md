@@ -59,6 +59,8 @@ Install SlimR directly from GitHub using: (Development version, recommended when
 devtools::install_github("Zhaoqing-wang/SlimR")
 ```
 
+*Note: If the function doesn't work, please run the function `install.packages('devtools')` first.*
+
 ### 1.2 Loading SlimR
 
 Load the package in your R environment:
@@ -236,7 +238,7 @@ Markers_list_Seurat <- Read_seurat_markers(seurat_markers,
     )
 ```
 
-**Improtant: This feature depends on the `presto` packages, please run `devtools::install_github('immunogenomics/presto')` and `library(presto)` first.**
+**Improtant: This feature depends on the `presto` packages, please run `devtools::install_github('immunogenomics/presto')` first.**
 
 *Note: Recommend use the parameter `sort_by = "FSS"` to use the 'Feature Significance Score' (FSS, product value of `log2FC` and `Expression ratio`) as the ranking basis.*
 
