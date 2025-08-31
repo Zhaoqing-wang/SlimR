@@ -289,7 +289,7 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
 
 **Important: The parameter `cluster_col` in the function `Celltype_Calculate()` and the function `Celltype_Annotation()` must be strictly the same to avoid false matches.**
 
-*Note: Using the parameter `AUC_correction = TRUE` takes a little longer to compute, but it is recommended to correct the predicted cell type this way in order to obtain more accurate cell type prediction results. The lower the parameter `threshold`, the more alternative cell types will be checked by AUC, and the longer the run time will be.*
+*Note: Using the parameter `AUC_correction = TRUE` takes a little longer to compute (\~20% longer than only setting parameter `plot_AUC = TRUE`; \~40% longer than only setting parameter `compute_AUC = TRUE`), but it is recommended to correct the predicted cell type this way in order to obtain more accurate cell type prediction results. The lower the parameter `threshold`, the more alternative cell types will be checked by AUC, and the longer the run time will be.*
 
 #### 3.1.2 Plot Heat Map (Optional)
 
