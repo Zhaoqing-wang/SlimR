@@ -2,6 +2,7 @@
 
 -   Note: This version is under development.
 -   Optimize the data filter mode of "Markers_list_scIBD" in the package, and filter through the "FSS" parameter.
+-   Modify and optimize the README file
 
 # SlimR 1.0.7 (2025-08-19)
 

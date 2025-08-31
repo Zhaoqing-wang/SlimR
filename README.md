@@ -8,7 +8,7 @@
 
 SlimR is an R package designed for annotating single-cell and spatial-transcriptomics (ST) datasets. It supports the creation of a unified marker list, `Markers_list`, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB', 'scIBD', 'TCellSI'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers.
 
-Based on the Markers_list, SlimR can calculate gene expression of different cell types and predict annotation information and calculate corresponding AUC by `Celltype_Calculate()`, and annotate it by `Celltype_Annotation()`, then verify it by `Celltype_Verification()`. At the same time, it can calculate gene expression corresponding to the cell type to generate the corresponding annotation reference map for manual annotation (e.g., 'Heatmaps', 'Feature plots', 'Combined plots').
+Based on the Markers_list, SlimR can calculate gene expression of different cell types and predict annotation information and calculate corresponding AUC by `Celltype_Calculate()`, and annotate it by `Celltype_Annotation()`, then verify it by `Celltype_Verification()`. At the same time, it can calculate gene expression corresponding to the cell type to generate the corresponding annotation reference map for manual annotation (e.g., 'Heat Map', 'Feature Plots', 'Combined Plots').
 
 ## Table of Contents
 
@@ -29,9 +29,9 @@ Based on the Markers_list, SlimR can calculate gene expression of different cell
     -   [3.2 Annotate Cell Types](#32-annotate-cell-types)
     -   [3.3 Verify Cell Types](#33-verify-cell-types)
 4.  [Semi-Automated Annotation Workflow](#4-semi-automated-annotation-workflow)
-    -   [4.1 Annotation Heatmap](#41-annotation-heatmap)
-    -   [4.2 Annotation Features Plot](#42-annotation-features-plot)
-    -   [4.3 Annotation Combined Plot](#43-annotation-combined-plot)
+    -   [4.1 Annotation Heat Map](#41-annotation-heat-map)
+    -   [4.2 Annotation Feature Plots](#42-annotation-feature-plots)
+    -   [4.3 Annotation Combined Plots](#43-annotation-combined-plots)
 5.  [Other Functions Provided by SlimR](#5-other-functions-provided-by-slimr)
 6.  [Conclusion](#6-conclusion)
 
@@ -99,7 +99,7 @@ SlimR requires a standardized list format for storing marker information, metric
 
 Cellmarkers2: A database of cell types and markers covering different species and tissue types.
 
-Reference: Hu et al. (2023) <doi:10.1093/nar/gkac947>.
+Reference: *Hu et al. (2023) <doi:10.1093/nar/gkac947>*.
 
 #### 2.1.1 Load Database:
 
@@ -135,7 +135,7 @@ Markers_list_Cellmarker2 <- Markers_filter_Cellmarker2(
 
 PanglaoDB: Database of cell types and markers covering different species and tissue types.
 
-Reference: Franzén et al. (2019) <doi:10.1093/database/baz046>.
+Reference: *Franzén et al. (2019) <doi:10.1093/database/baz046>*.
 
 #### 2.2.1 Load Database:
 
@@ -168,7 +168,7 @@ Markers_list_panglaoDB <- Markers_filter_PanglaoDB(
 
 scIBD: A database of human intestine markers.
 
-Reference: Nie et al. (2023) <doi:10.1038/s43588-023-00464-9>.
+Reference: *Nie et al. (2023) <doi:10.1038/s43588-023-00464-9>*.
 
 ``` r
 Markers_list_scIBD <- SlimR::Markers_list_scIBD
@@ -180,9 +180,9 @@ Markers_list_scIBD <- SlimR::Markers_list_scIBD
 
 ### 2.4 From TCellSI Database
 
-TCellSI: A database of T cell markers of different subtypes.
+TCellSI: A database of T cell markers of different sub types.
 
-Reference: Yang et al. (2024) <doi:10.1002/imt2.231>.
+Reference: *Yang et al. (2024) <doi:10.1002/imt2.231>*.
 
 ``` r
 Markers_list_TCellSI <- SlimR::Markers_list_TCellSI
@@ -264,7 +264,7 @@ Markers_list_Excel <- Read_excel_markers("D:/Laboratory/Marker_load.xlsx")
 
 #### 3.1.1 Calculate Cell Types (Core)
 
-Uses `markers_list` to calculate probability, prediction results, calculate corresponding AUC (optional) and generate heatmap and ROC graphs (optional) for cell annotation.
+Uses `markers_list` to calculate probability, prediction results, calculate corresponding AUC (optional) and generate heat map and ROC graphs (optional) for cell annotation.
 
 ``` r
 SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
@@ -287,7 +287,7 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
 
 *Note: Using the parameter `AUC_correction = TRUE` takes a little longer to compute, but it is recommended to correct the predicted cell type this way in order to obtain more accurate cell type prediction results. The lower the parameter `threshold`, the more alternative cell types will be checked by AUC, and the longer the run time will be.*
 
-#### 3.1.2 Plot Heatmap (Optional)
+#### 3.1.2 Plot Heat Map (Optional)
 
 Check the annotation probability of the cell type to be annotated in the input `cluster_col` column and cell types in `Markers_list` with the following code.
 
@@ -295,7 +295,7 @@ Check the annotation probability of the cell type to be annotated in the input `
 print(SlimR_anno_result$Heatmap_plot)
 ```
 
-*Note: If the heatmap is not generated properly, please run the function `library(pheatmap)` first.*
+*Note: If the heat map is not generated properly, please run the function `library(pheatmap)` first.*
 
 #### 3.1.3 View Prediction Results (Optional)
 
@@ -315,7 +315,7 @@ print(SlimR_anno_result$AUC_plot)
 
 **Improtant: This feature depends on the parameter `plot_AUC = TRUE`.**
 
-*Note: If the heatmap is not generated properly, please run the function `library(ggplot2)` first.*
+*Note: If the heat map is not generated properly, please run the function `library(ggplot2)` first.*
 
 #### 3.1.5 Correction for Predicted Cell Types (Alternative)
 
@@ -383,9 +383,9 @@ Celltype_Verification(seurat_obj = sce,
 
 ## 4. Semi-Automated Annotation Workflow
 
-### 4.1 Annotation Heatmap
+### 4.1 Annotation Heat Map
 
-Generate a heatmap to estimate the likelihood that various cell clusters exhibited similarity to control cell types:
+Generate a heat map to estimate the likelihood that various cell clusters exhibited similarity to control cell types:
 
 ``` r
 Celltype_Annotation_Heatmap(
@@ -402,9 +402,9 @@ Celltype_Annotation_Heatmap(
 
 *Note: Now this function has been incorporated into `Celltype_Calculate()`, and it is recommended to use `Celltype_Calculate()` instead.*
 
-### 4.2 Annotation Features Plot
+### 4.2 Annotation Feature Plots
 
-Generates per-cell-type expression dot plot with metric heatmap (when the metric information exists):
+Generates per-cell-type expression dot plot with metric heat map (when the metric information exists):
 
 ``` r
 Celltype_Annotation_Features(
@@ -420,9 +420,9 @@ Celltype_Annotation_Features(
   )
 ```
 
-Each resulting combined image consists of a dot plot above and a heat map below (if mertic information present). Dot plot show the expression level and expression ratio relationship between the cell type and corresponding markers. Below it, there is a metric heatmap for the corresponding markers (if the metric information exists).
+Each resulting combined image consists of a dot plot above and a heat map below (if metric information present). Dot plot show the expression level and expression ratio relationship between the cell type and corresponding markers. Below it, there is a metric heat map for the corresponding markers (if the metric information exists).
 
-### 4.3 Annotation Combined Plot
+### 4.3 Annotation Combined Plots
 
 Generates per-cell-type expression combined plots:
 
@@ -445,7 +445,7 @@ Each generated combined plot shows the box plot of the expression levels of the 
 
 Functions in section 5.1, 5.2, 5.3 and 5.4 has been incorporated into `Celltype_Annotation_Features()`, and it is recommended to use `Celltype_Annotation_Features()` and set corresponding parameters (for example, `gene_list_type = "Cellmarker2"`) instead. For more information, please refer to section 4.2.
 
-#### 5.1 Annotation Features Plot with Cellmarker2 Database
+#### 5.1 Annotation Feature Plots with Cellmarker2 Database
 
 ``` r
 Celltype_annotation_Cellmarker2(
@@ -464,7 +464,7 @@ Celltype_annotation_Cellmarker2(
 
 *Note: To call this function, set the parameter `gene_list_type = "Cellmarker2"` in the function* `Celltype_Annotation_Features()`*.*
 
-#### 5.2 Annotation Features Plot with PanglaoDB Database
+#### 5.2 Annotation Feature Plots with PanglaoDB Database
 
 ``` r
 Celltype_annotation_PanglaoDB(
@@ -483,7 +483,7 @@ Celltype_annotation_PanglaoDB(
 
 *Note: To call this function, set the parameter `gene_list_type = "PanglaoDB"` in the function* `Celltype_Annotation_Features()`*.*
 
-#### 5.3 Annotation Features Plot with Seurat-Based Markers List
+#### 5.3 Annotation Feature Plots with Seurat-Based Markers List
 
 ``` r
 Celltype_annotation_Seurat(
@@ -502,7 +502,7 @@ Celltype_annotation_Seurat(
 
 *Note: To call this function, set the parameter `gene_list_type = "Seurat"` in the function* `Celltype_Annotation_Features()`*.*
 
-#### 5.4 Annotation Features Plot with Excel-Based Markers List
+#### 5.4 Annotation Feature Plots with Excel-Based Markers List
 
 ``` r
 Celltype_annotation_Excel(
@@ -519,7 +519,7 @@ Celltype_annotation_Excel(
 )
 ```
 
-*Note: To call this function, set the parameter `gene_list_type = "Excel"` in the function* `Celltype_Annotation_Features`*. This function also works with `Markers_list` without mertic information or with mertic information generated in other ways.*
+*Note: To call this function, set the parameter `gene_list_type = "Excel"` in the function* `Celltype_Annotation_Features`*. This function also works with `Markers_list` without metric information or with metric information generated in other ways.*
 
 ## 6. Conclusion
 
