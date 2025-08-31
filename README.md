@@ -176,6 +176,8 @@ Markers_list_scIBD <- SlimR::Markers_list_scIBD
 
 **Important: This is for human intestinal annotation only. The input Seurat object was ensured to be a human intestinal type to ensure the accuracy of the labeling.**
 
+*Note: The `Markers_list_scIBD` was generated using section 2.5.2 and the parameters `sort_by = "FSS"` and `gene_filter = 20` were set.*
+
 *Link: Output 'Markers_list' usable in sections 3.1, 4.1, 4.2, 4.3 and 5.3. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.4 From TCellSI Database
