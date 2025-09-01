@@ -133,6 +133,8 @@ Celltype_Verification <- function(
     }
   }
 
+  message(paste0("\n"))
+  
   all_features <- unique(unlist(feature_list))
   if (length(all_features) == 0) stop("No valid features found for verification")
 
