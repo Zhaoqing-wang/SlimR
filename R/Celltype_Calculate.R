@@ -184,8 +184,13 @@ Celltype_Calculate <- function(
   scores_matrix <- do.call(rbind, cluster_scores_list)
 
   normalize_row <- function(x) {
-    if (diff(range(x)) == 0) return(rep(0, length(x)))
-    (x - min(x)) / (max(x) - min(x))
+  x[is.na(x)] <- 0
+  
+  if (diff(range(x)) == 0) {
+    return(rep(0, length(x)))
+  }
+  
+  (x - min(x)) / (max(x) - min(x))
   }
 
   normalize_matrix <- apply(scores_matrix, 2, normalize_row)
