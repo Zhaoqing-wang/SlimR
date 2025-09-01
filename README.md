@@ -75,7 +75,7 @@ For Seurat objects with multiple layers in the assay, please run `Seurat::JoinLa
 
 ``` r
 # For example, if you want to use the 'RNA' layer in the multilayered Seurat object assay.
-sce@assays$RNA <- Seurat::JoinLayers(sce@assays$RNA)
+sce@assays$RNA <- SeuratObject::JoinLayers(sce@assays$RNA)
 ```
 
 **Important: To ensure accuracy of the annotation, make sure that the entered Seurat object has run the standard process and removed batch effects.**
