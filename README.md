@@ -71,7 +71,7 @@ library(SlimR)
 
 ### 1.3 Prepare Seurat Object
 
-For Seurat objects with multiple layers in the assay, please run `Seurat::JoinLayers()` first.
+For Seurat objects with multiple layers in the assay, please run `SeuratObject::JoinLayers()` first.
 
 ``` r
 # For example, if you want to use the 'RNA' layer in the multilayered Seurat object assay.
