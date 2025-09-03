@@ -224,7 +224,7 @@ Celltype_annotation_Excel <- function(
       limitsize = FALSE
     )
     cycles <- cycles + 1
-    message(paste0("[", i, "/", total, "] Features plot saved for: ", cell_type))
+    message(paste0("[", i, "/", total, "] Feature plots saved for: ", cell_type))
   }
   message(paste0("\n","SlimR: Out of the ",total," cell types in 'Markers_list', ",cycles," cell types have been processed. You can see the reason for not processing cell types by 'warnings()'."))
   message(paste0("\n","SlimR: Visualization saved to: ", normalizePath(save_path)))
