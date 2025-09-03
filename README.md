@@ -194,6 +194,8 @@ Markers_list_TCellSI <- SlimR::Markers_list_TCellSI
 
 **Important: This is only for T cell subset annotation. Ensure that the input Seurat object is of T cell type to guarantee the accuracy of the annotation.**
 
+*Note: The `Markers_list_TCellSI` was generated using section 2.6.*
+
 *Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.5 From Seurat Objects
