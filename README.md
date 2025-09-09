@@ -242,7 +242,7 @@ Markers_list_Seurat <- Read_seurat_markers(seurat_markers,
 
 **Improtant: This feature depends on the `presto` packages, please run `devtools::install_github('immunogenomics/presto')` first.**
 
-*Note: Recommend use the parameter `sort_by = "FSS"` to use the 'Feature Significance Score' (FSS, product value of `log2FC` and `Expression ratio`) or use the parameter `sort_by = "logFC"` as the ranking basis.*
+*Note: Recommend use the parameter `sort_by = "logFC"` or use the parameter `sort_by = "FSS"` to use the 'Feature Significance Score' (FSS, product value of `log2FC` and `Expression ratio`) as the ranking basis.*
 
 *Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3 and 5.3. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
