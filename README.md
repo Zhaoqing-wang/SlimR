@@ -1,6 +1,6 @@
 # SlimR: Marker-Based R Package for Single-Cell and Spatial-Transcriptomic Annotation
 
-[![CRAN Version](https://img.shields.io/cran/v/SlimR?label=CRAN)](https://cran.r-project.org/package=SlimR) [![CRAN License](https://img.shields.io/cran/l/SlimR?label=License&color=green)](https://cran.r-project.org/package=SlimR) [![CRAN Downloads](https://cranlogs.r-pkg.org/badges/SlimR)](https://cran.r-project.org/package=SlimR) [![GitHub R package version](https://img.shields.io/github/r-package/v/Zhaoqing-wang/SlimR?label=GitHub&color=green)](https://github.com/Zhaoqing-wang/SlimR/releases) [![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Zhaoqing-wang/SlimR?label=Commit%20activity)](https://github.com/Zhaoqing-wang/SlimR/commits/main/)
+[![CRAN Version](https://img.shields.io/cran/v/SlimR?label=CRAN)](https://cran.r-project.org/package=SlimR) [![CRAN License](https://img.shields.io/cran/l/SlimR?label=License&color=green)](https://cran.r-project.org/package=SlimR) [![CRAN Downloads](https://cranlogs.r-pkg.org/badges/grand-total/SlimR)](https://cran.r-project.org/package=SlimR) [![GitHub R package version](https://img.shields.io/github/r-package/v/Zhaoqing-wang/SlimR?label=GitHub&color=green)](https://github.com/Zhaoqing-wang/SlimR/releases) [![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Zhaoqing-wang/SlimR?label=Commit%20activity)](https://github.com/Zhaoqing-wang/SlimR/commits/main/)
 
 ## Overview
 
