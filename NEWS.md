@@ -1,6 +1,7 @@
-# SlimR 1.0.8 (2025-09-10)
+# SlimR 1.0.8 (2025-09-26)
 
 -   Note: This version is under development.
+-   Iteratively update the ggplot2-related code to version 4.0.0.
 -   Optimize the data filter mode of "Markers_list_scIBD" in the package, and filter through `sort_by = "logFC"` and `gene_filter = 20` parameter.
 -   Adjust the calculation process of the 'FSS' value in the `read_seurat_markers()` function when 'resources' is set to 'presto'.
 -   Optimize the prompt output during the execution of the `Celltype_Verification()` function.
