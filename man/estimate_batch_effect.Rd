@@ -18,4 +18,17 @@ Batch effect score (0 indicates no detectable batch effect)
 Roughly estimates the potential impact of batch effects
 using available metadata.
 }
-\keyword{internal}
+\seealso{
+Other Section_1_Functions_Use_in_Package: 
+\code{\link{calculate_cluster_variability}()},
+\code{\link{calculate_expression}()},
+\code{\link{calculate_expression_skewness}()},
+\code{\link{calculate_probability}()},
+\code{\link{calculate_probability_adaptive}()},
+\code{\link{extract_dataset_features}()},
+\code{\link{generate_training_data}()},
+\code{\link{postprocess_parameters}()},
+\code{\link{predict_optimal_parameters}()},
+\code{\link{train_parameter_model}()}
+}
+\concept{Section_1_Functions_Use_in_Package}

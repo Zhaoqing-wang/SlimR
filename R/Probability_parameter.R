@@ -23,6 +23,9 @@
 #'   \item model: Trained model (if return_model = TRUE)
 #' }
 #'
+#' @export
+#' @family Section_3_Automated_Annotation_Workflow
+#' 
 #' @importFrom stats dist median predict runif sd aggregate
 #' @importFrom utils installed.packages
 #'
@@ -127,8 +130,10 @@ calculate_parameter <- function(
 #' @return List of dataset characteristics including expression statistics,
 #'         variability measures, and cluster properties
 #'
+#' @family Section_1_Functions_Use_in_Package
+#' 
 #' @importFrom stats dist median sd aggregate
-#' @keywords internal
+#' 
 extract_dataset_features <- function(object, features, assay = NULL, cluster_col = NULL) {
   assay <- if (is.null(assay)) Seurat::DefaultAssay(object) else assay
   Seurat::DefaultAssay(object) <- assay
@@ -194,8 +199,10 @@ extract_dataset_features <- function(object, features, assay = NULL, cluster_col
 #'
 #' @return Numeric value representing cluster separation strength
 #'
+#' @family Section_1_Functions_Use_in_Package
+#' 
 #' @importFrom stats dist aggregate
-#' @keywords internal
+#' 
 calculate_cluster_variability <- function(data.features, features) {
   cluster_means <- stats::aggregate(data.features[, features], 
                             by = list(cluster = data.features$id), 
@@ -223,7 +230,8 @@ calculate_cluster_variability <- function(data.features, features) {
 #'
 #' @return Mean absolute skewness across all genes
 #'
-#' @keywords internal
+#' @family Section_1_Functions_Use_in_Package
+#' 
 calculate_expression_skewness <- function(expression_matrix) {
   skew_vals <- apply(expression_matrix, 2, function(x) {
     if (stats::sd(x) == 0) return(0)
@@ -242,7 +250,8 @@ calculate_expression_skewness <- function(expression_matrix) {
 #'
 #' @return Batch effect score (0 indicates no detectable batch effect)
 #'
-#' @keywords internal
+#' @family Section_1_Functions_Use_in_Package
+#' 
 estimate_batch_effect <- function(object, assay) {
   # Simple batch effect estimation
   if ("batch" %in% colnames(object@meta.data)) {
@@ -267,8 +276,10 @@ estimate_batch_effect <- function(object, assay) {
 #'
 #' @return Data frame with synthetic features and optimal parameter targets
 #'
+#' @family Section_1_Functions_Use_in_Package
+#' 
 #' @importFrom stats runif
-#' @keywords internal
+#' 
 generate_training_data <- function(dataset_features, n_samples = 1000) {
   set.seed(123)  # For reproducible synthetic data generation
   
@@ -319,9 +330,10 @@ generate_training_data <- function(dataset_features, n_samples = 1000) {
 #' @param n_models Number of models for ensemble learning
 #' @param verbose Whether to print training progress
 #'
+#' @family Section_1_Functions_Use_in_Package
+#' 
 #' @return List containing trained model and performance metrics
-#'
-#' @keywords internal
+#' 
 train_parameter_model <- function(training_data, method = "ensemble", n_models = 3, verbose = TRUE) {
   set.seed(123)
   
@@ -426,8 +438,10 @@ train_parameter_model <- function(training_data, method = "ensemble", n_models =
 #'
 #' @return List containing predicted min_expression and specificity_weight
 #'
+#' @family Section_1_Functions_Use_in_Package
+#' 
 #' @importFrom stats predict
-#' @keywords internal
+#' 
 predict_optimal_parameters <- function(model, dataset_features) {
   # Convert features to data frame format expected by model
   feature_df <- as.data.frame(dataset_features)
@@ -450,9 +464,10 @@ predict_optimal_parameters <- function(model, dataset_features) {
 #' @param predicted_params List of raw predicted parameters
 #' @param dataset_features Characteristics of current dataset
 #'
+#' @family Section_1_Functions_Use_in_Package
+#' 
 #' @return List of finalized parameters after post-processing
-#'
-#' @keywords internal
+#' 
 postprocess_parameters <- function(predicted_params, dataset_features) {
   min_expression <- predicted_params$min_expression
   specificity_weight <- predicted_params$specificity_weight
@@ -495,6 +510,8 @@ postprocess_parameters <- function(predicted_params, dataset_features) {
 #'
 #' @return Results from calculate_probability with optional tuning information
 #'
+#' @family Section_1_Functions_Use_in_Package
+#' 
 #' @examples
 #' \dontrun{
 #' # Automatic parameter tuning

@@ -116,6 +116,7 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
 \seealso{
 Other Section_3_Automated_Annotation_Workflow: 
 \code{\link{Celltype_Annotation}()},
-\code{\link{Celltype_Verification}()}
+\code{\link{Celltype_Verification}()},
+\code{\link{calculate_parameter}()}
 }
 \concept{Section_3_Automated_Annotation_Workflow}

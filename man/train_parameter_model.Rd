@@ -27,4 +27,17 @@ List containing trained model and performance metrics
 Trains machine learning models to predict optimal parameters
 based on dataset characteristics.
 }
-\keyword{internal}
+\seealso{
+Other Section_1_Functions_Use_in_Package: 
+\code{\link{calculate_cluster_variability}()},
+\code{\link{calculate_expression}()},
+\code{\link{calculate_expression_skewness}()},
+\code{\link{calculate_probability}()},
+\code{\link{calculate_probability_adaptive}()},
+\code{\link{estimate_batch_effect}()},
+\code{\link{extract_dataset_features}()},
+\code{\link{generate_training_data}()},
+\code{\link{postprocess_parameters}()},
+\code{\link{predict_optimal_parameters}()}
+}
+\concept{Section_1_Functions_Use_in_Package}
