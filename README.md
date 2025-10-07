@@ -8,7 +8,7 @@
 
 SlimR is an R package designed for annotating single-cell and spatial-transcriptomics (ST) datasets. It supports the creation of a unified marker list, `Markers_list`, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB', 'scIBD', 'TCellSI'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers.
 
-Based on the Markers_list, SlimR can calculate gene expression of different cell types and predict annotation information and calculate corresponding AUC by `Celltype_Calculate()`, and annotate it by `Celltype_Annotation()`, then verify it by `Celltype_Verification()`. At the same time, it can calculate gene expression corresponding to the cell type to generate the corresponding annotation reference map for manual annotation (e.g., 'Heat Map', 'Feature Plots', 'Combined Plots').
+SlimR can predict parameters by machine learning (e.g., 'Random Forest', 'Gradient Boosting', 'Support Vector Machine', 'Ensemble Learning'), and based on Markers_list, calculate gene expression of different cell types and predict annotation information and calculate corresponding AUC by `Celltype_Calculate()`, and annotate it by `Celltype_Annotation()`, then verify it by `Celltype_Verification()`. At the same time, it can calculate gene expression corresponding to the cell type to generate a reference map for manual annotation (e.g., 'Heat Map', 'Feature Plots', 'Combined Plots').
 
 ## Table of Contents
 

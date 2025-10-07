@@ -29,7 +29,6 @@ Other Section_1_Functions_Use_in_Package:
 \code{\link{calculate_expression}()},
 \code{\link{calculate_expression_skewness}()},
 \code{\link{calculate_probability}()},
-\code{\link{calculate_probability_adaptive}()},
 \code{\link{estimate_batch_effect}()},
 \code{\link{generate_training_data}()},
 \code{\link{postprocess_parameters}()},
