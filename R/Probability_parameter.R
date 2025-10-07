@@ -69,17 +69,17 @@ calculate_parameter <- function(
     warning("Using fewer than 5 features may affect parameter tuning accuracy")
   }
   
-  if (verbose) message("Extracting dataset features...")
+  if (verbose) message("SlimR parameter calculate: Extracting dataset features.")
   
   # Extract dataset characteristics for ML model
   dataset_features <- extract_dataset_features(object, features, assay, cluster_col)
   
-  if (verbose) message("Generating training data...")
+  if (verbose) message("SlimR parameter calculate: Generating training data.")
   
   # Generate synthetic training data based on empirical rules
   training_data <- generate_training_data(dataset_features)
   
-  if (verbose) message("Training machine learning model...")
+  if (verbose) message("SlimR parameter calculate: Training machine learning model.")
   
   # Train ML model to predict optimal parameters
   model_results <- train_parameter_model(
@@ -96,7 +96,7 @@ calculate_parameter <- function(
   final_params <- postprocess_parameters(predicted_params, dataset_features)
   
   if (verbose) {
-    message("SlimR calculate parameter recommendation: ")
+    message("SlimR parameter calculate: Parameter recommendation: ")
     message("  min_expression: ", round(final_params$min_expression, 3))
     message("  specificity_weight: ", round(final_params$specificity_weight, 3))
     message("  Model performance (R-squared): ", round(model_results$performance, 3))
@@ -348,7 +348,7 @@ train_parameter_model <- function(training_data, method = "ensemble", n_models =
     performances_weight <- numeric(n_models)
     
     for (i in 1:n_models) {
-      if (verbose) message("Training ensemble model ", i, "/", n_models)
+      if (verbose) message("SlimR parameter calculate: Training ensemble model ", i, "/", n_models)
       
       # Use different data subsets for diversity
       train_idx <- sample(nrow(training_data), nrow(training_data) * 0.8)
@@ -434,7 +434,7 @@ train_parameter_model <- function(training_data, method = "ensemble", n_models =
     
   } else {
     # Single model approach - train separate models
-    if (verbose) message("Training ", method, " models...")
+    if (verbose) message("SlimR parameter calculate: Training ", method, " models.")
     
     model_method <- switch(method,
       "rf" = "rf",
@@ -592,7 +592,7 @@ calculate_probability_adaptive <- function(
 ) {
   
   if (auto_tune || is.null(min_expression) || is.null(specificity_weight)) {
-    if (verbose) message("Performing automatic parameter tuning...")
+    if (verbose) message("SlimR calculate: Performing automatic parameter tuning.")
     
     tuned_params <- calculate_parameter(
       object = object,
@@ -613,7 +613,7 @@ calculate_probability_adaptive <- function(
   }
   
   if (verbose) {
-    message("Using parameters: min_expression = ", round(min_expression, 3), 
+    message("SlimR calculate: Using parameters: min_expression = ", round(min_expression, 3), 
             ", specificity_weight = ", round(specificity_weight, 3))
   }
   
