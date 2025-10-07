@@ -96,7 +96,7 @@ calculate_parameter <- function(
   final_params <- postprocess_parameters(predicted_params, dataset_features)
   
   if (verbose) {
-    message("Parameter recommendation:")
+    message("SlimR calculate parameter recommendation: ")
     message("  min_expression: ", round(final_params$min_expression, 3))
     message("  specificity_weight: ", round(final_params$specificity_weight, 3))
     message("  Model performance (R-squared): ", round(model_results$performance, 3))
@@ -342,8 +342,10 @@ train_parameter_model <- function(training_data, method = "ensemble", n_models =
   
   if (method == "ensemble") {
     # Ensemble approach: combine multiple model types
-    models <- list()
-    performances <- numeric(n_models)
+    models_min_expression <- list()
+    models_specificity_weight <- list()
+    performances_min <- numeric(n_models)
+    performances_weight <- numeric(n_models)
     
     for (i in 1:n_models) {
       if (verbose) message("Training ensemble model ", i, "/", n_models)
@@ -352,57 +354,87 @@ train_parameter_model <- function(training_data, method = "ensemble", n_models =
       train_idx <- sample(nrow(training_data), nrow(training_data) * 0.8)
       train_subset <- training_data[train_idx, ]
       
-      # Alternate between different model types
+      # Train separate models for each parameter
       if (i %% 3 == 1) {
-        # Random Forest
-        model <- caret::train(
+        # Random Forest for min_expression
+        model_min <- caret::train(
           x = train_subset[, feature_columns],
-          y = data.frame(
-            min_expression = train_subset$optimal_min_expression,
-            specificity_weight = train_subset$optimal_specificity_weight
-          ),
+          y = train_subset$optimal_min_expression,  # Single vector, not data frame
+          method = "rf",
+          trControl = caret::trainControl(method = "cv", number = 5),
+          verbose = FALSE
+        )
+        
+        # Random Forest for specificity_weight
+        model_weight <- caret::train(
+          x = train_subset[, feature_columns],
+          y = train_subset$optimal_specificity_weight,  # Single vector, not data frame
           method = "rf",
           trControl = caret::trainControl(method = "cv", number = 5),
           verbose = FALSE
         )
       } else if (i %% 3 == 2) {
-        # Gradient Boosting Machine
-        model <- caret::train(
+        # Gradient Boosting for min_expression
+        model_min <- caret::train(
           x = train_subset[, feature_columns],
-          y = data.frame(
-            min_expression = train_subset$optimal_min_expression,
-            specificity_weight = train_subset$optimal_specificity_weight
-          ),
+          y = train_subset$optimal_min_expression,
+          method = "gbm",
+          trControl = caret::trainControl(method = "cv", number = 5),
+          verbose = FALSE
+        )
+        
+        # Gradient Boosting for specificity_weight
+        model_weight <- caret::train(
+          x = train_subset[, feature_columns],
+          y = train_subset$optimal_specificity_weight,
           method = "gbm",
           trControl = caret::trainControl(method = "cv", number = 5),
           verbose = FALSE
         )
       } else {
-        # Support Vector Machine
-        model <- caret::train(
+        # Support Vector Machine for min_expression
+        model_min <- caret::train(
           x = train_subset[, feature_columns],
-          y = data.frame(
-            min_expression = train_subset$optimal_min_expression,
-            specificity_weight = train_subset$optimal_specificity_weight
-          ),
+          y = train_subset$optimal_min_expression,
+          method = "svmRadial",
+          trControl = caret::trainControl(method = "cv", number = 5),
+          verbose = FALSE
+        )
+        
+        # Support Vector Machine for specificity_weight
+        model_weight <- caret::train(
+          x = train_subset[, feature_columns],
+          y = train_subset$optimal_specificity_weight,
           method = "svmRadial",
           trControl = caret::trainControl(method = "cv", number = 5),
           verbose = FALSE
         )
       }
       
-      models[[i]] <- model
-      performances[i] <- max(model$results$Rsquared, na.rm = TRUE)
+      models_min_expression[[i]] <- model_min
+      models_specificity_weight[[i]] <- model_weight
+      performances_min[i] <- max(model_min$results$Rsquared, na.rm = TRUE)
+      performances_weight[i] <- max(model_weight$results$Rsquared, na.rm = TRUE)
     }
     
-    # Select best performing model
-    best_idx <- which.max(performances)
-    final_model <- models[[best_idx]]
-    performance <- performances[best_idx]
+    # Select best performing models for each parameter
+    best_idx_min <- which.max(performances_min)
+    best_idx_weight <- which.max(performances_weight)
+    
+    final_model_min <- models_min_expression[[best_idx_min]]
+    final_model_weight <- models_specificity_weight[[best_idx_weight]]
+    
+    performance <- mean(c(performances_min[best_idx_min], performances_weight[best_idx_weight]))
+    
+    # Return both models
+    final_model <- list(
+      min_expression_model = final_model_min,
+      specificity_weight_model = final_model_weight
+    )
     
   } else {
-    # Single model approach
-    if (verbose) message("Training ", method, " model...")
+    # Single model approach - train separate models
+    if (verbose) message("Training ", method, " models...")
     
     model_method <- switch(method,
       "rf" = "rf",
@@ -411,18 +443,33 @@ train_parameter_model <- function(training_data, method = "ensemble", n_models =
       stop("Unsupported machine learning method: ", method)
     )
     
-    final_model <- caret::train(
+    # Train model for min_expression
+    model_min <- caret::train(
       x = training_data[, feature_columns],
-      y = data.frame(
-        min_expression = training_data$optimal_min_expression,
-        specificity_weight = training_data$optimal_specificity_weight
-      ),
+      y = training_data$optimal_min_expression,  # Single vector
       method = model_method,
       trControl = caret::trainControl(method = "cv", number = 5),
       verbose = FALSE
     )
     
-    performance <- max(final_model$results$Rsquared, na.rm = TRUE)
+    # Train model for specificity_weight
+    model_weight <- caret::train(
+      x = training_data[, feature_columns],
+      y = training_data$optimal_specificity_weight,  # Single vector
+      method = model_method,
+      trControl = caret::trainControl(method = "cv", number = 5),
+      verbose = FALSE
+    )
+    
+    performance <- mean(c(
+      max(model_min$results$Rsquared, na.rm = TRUE),
+      max(model_weight$results$Rsquared, na.rm = TRUE)
+    ))
+    
+    final_model <- list(
+      min_expression_model = model_min,
+      specificity_weight_model = model_weight
+    )
   }
   
   return(list(model = final_model, performance = performance))
@@ -433,7 +480,7 @@ train_parameter_model <- function(training_data, method = "ensemble", n_models =
 #' Applies the trained machine learning model to predict optimal
 #' parameters for the current dataset.
 #'
-#' @param model Trained machine learning model
+#' @param model Trained machine learning model (now a list with two models)
 #' @param dataset_features Extracted characteristics of current dataset
 #'
 #' @return List containing predicted min_expression and specificity_weight
@@ -447,12 +494,13 @@ predict_optimal_parameters <- function(model, dataset_features) {
   feature_df <- as.data.frame(dataset_features)
   feature_df <- feature_df[names(dataset_features)]  # Maintain consistent order
   
-  # Generate predictions
-  predicted <- stats::predict(model, newdata = feature_df)
+  # Generate predictions using separate models
+  predicted_min <- stats::predict(model$min_expression_model, newdata = feature_df)
+  predicted_weight <- stats::predict(model$specificity_weight_model, newdata = feature_df)
   
   return(list(
-    min_expression = predicted[1, "min_expression"],
-    specificity_weight = predicted[1, "specificity_weight"]
+    min_expression = as.numeric(predicted_min[1]),
+    specificity_weight = as.numeric(predicted_weight[1])
   ))
 }
 

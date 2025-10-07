@@ -7,7 +7,7 @@
 predict_optimal_parameters(model, dataset_features)
 }
 \arguments{
-\item{model}{Trained machine learning model}
+\item{model}{Trained machine learning model (now a list with two models)}
 
 \item{dataset_features}{Extracted characteristics of current dataset}
 }
