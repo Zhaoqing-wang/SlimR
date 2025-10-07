@@ -2,7 +2,7 @@
 % Please edit documentation in R/Probability_parameter.R
 \name{estimate_batch_effect}
 \alias{estimate_batch_effect}
-\title{Estimate Batch Effect Strength}
+\title{Estimate Batch Effect Strength (Use in package)}
 \usage{
 estimate_batch_effect(seurat_obj, assay)
 }

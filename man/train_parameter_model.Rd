@@ -2,7 +2,7 @@
 % Please edit documentation in R/Probability_parameter.R
 \name{train_parameter_model}
 \alias{train_parameter_model}
-\title{Train Parameter Prediction Model}
+\title{Train Parameter Prediction Model (Use in package)}
 \usage{
 train_parameter_model(
   training_data,

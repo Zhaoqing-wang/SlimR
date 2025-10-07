@@ -2,7 +2,7 @@
 % Please edit documentation in R/Probability_parameter.R
 \name{calculate_cluster_variability}
 \alias{calculate_cluster_variability}
-\title{Calculate Cluster Variability}
+\title{Calculate Cluster Variability (Use in package)}
 \usage{
 calculate_cluster_variability(data.features, features)
 }

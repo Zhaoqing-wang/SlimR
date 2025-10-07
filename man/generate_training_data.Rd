@@ -2,7 +2,7 @@
 % Please edit documentation in R/Probability_parameter.R
 \name{generate_training_data}
 \alias{generate_training_data}
-\title{Generate Training Data for Machine Learning Model}
+\title{Generate Training Data for Machine Learning Model (Use in package)}
 \usage{
 generate_training_data(dataset_features, n_samples = 1000)
 }

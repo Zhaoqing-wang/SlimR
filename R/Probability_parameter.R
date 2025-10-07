@@ -56,6 +56,7 @@
 #' }
 #'
 #' @export
+#' 
 Parameter_Calculate <- function(
     seurat_obj,
     features,
@@ -127,7 +128,7 @@ Parameter_Calculate <- function(
   return(result)
 }
 
-#' Extract Dataset Characteristics for Machine Learning
+#' Extract Dataset Characteristics for Machine Learning (Use in package)
 #'
 #' Computes various statistical features from single-cell data that are used
 #' as input for the parameter prediction model.
@@ -199,7 +200,7 @@ extract_dataset_features <- function(seurat_obj, features, assay = NULL, cluster
   return(dataset_features)
 }
 
-#' Calculate Cluster Variability
+#' Calculate Cluster Variability (Use in package)
 #'
 #' Measures the degree of separation between different cell clusters
 #' based on expression patterns.
@@ -231,7 +232,7 @@ calculate_cluster_variability <- function(data.features, features) {
   return(variability)
 }
 
-#' Calculate Expression Distribution Skewness
+#' Calculate Expression Distribution Skewness (Use in package)
 #'
 #' Computes the average skewness of gene expression distributions
 #' across all features.
@@ -250,7 +251,7 @@ calculate_expression_skewness <- function(expression_matrix) {
   return(mean(abs(skew_vals), na.rm = TRUE))
 }
 
-#' Estimate Batch Effect Strength
+#' Estimate Batch Effect Strength (Use in package)
 #'
 #' Roughly estimates the potential impact of batch effects
 #' using available metadata.
@@ -276,7 +277,7 @@ estimate_batch_effect <- function(seurat_obj, assay) {
   return(0)  # Default: no batch effect detected
 }
 
-#' Generate Training Data for Machine Learning Model
+#' Generate Training Data for Machine Learning Model (Use in package)
 #'
 #' Creates synthetic training data based on empirical rules about
 #' optimal parameter relationships with dataset characteristics.
@@ -330,7 +331,7 @@ generate_training_data <- function(dataset_features, n_samples = 1000) {
   return(training_data)
 }
 
-#' Train Parameter Prediction Model
+#' Train Parameter Prediction Model (Use in package)
 #'
 #' Trains machine learning models to predict optimal parameters
 #' based on dataset characteristics.
@@ -485,7 +486,7 @@ train_parameter_model <- function(training_data, method = "ensemble", n_models =
   return(list(model = final_model, performance = performance))
 }
 
-#' Predict Optimal Parameters Using Trained Model
+#' Predict Optimal Parameters Using Trained Model (Use in package)
 #'
 #' Applies the trained machine learning model to predict optimal
 #' parameters for the current dataset.
@@ -514,7 +515,7 @@ predict_optimal_parameters <- function(model, dataset_features) {
   ))
 }
 
-#' Post-process Predicted Parameters
+#' Post-process Predicted Parameters (Use in package)
 #'
 #' Applies constraints and dataset-specific adjustments to ensure
 #' predicted parameters are within reasonable ranges.

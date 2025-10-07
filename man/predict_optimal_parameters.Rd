@@ -2,7 +2,7 @@
 % Please edit documentation in R/Probability_parameter.R
 \name{predict_optimal_parameters}
 \alias{predict_optimal_parameters}
-\title{Predict Optimal Parameters Using Trained Model}
+\title{Predict Optimal Parameters Using Trained Model (Use in package)}
 \usage{
 predict_optimal_parameters(model, dataset_features)
 }

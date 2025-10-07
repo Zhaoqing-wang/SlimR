@@ -2,7 +2,7 @@
 % Please edit documentation in R/Probability_parameter.R
 \name{calculate_expression_skewness}
 \alias{calculate_expression_skewness}
-\title{Calculate Expression Distribution Skewness}
+\title{Calculate Expression Distribution Skewness (Use in package)}
 \usage{
 calculate_expression_skewness(expression_matrix)
 }

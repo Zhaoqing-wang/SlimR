@@ -2,7 +2,7 @@
 % Please edit documentation in R/Probability_parameter.R
 \name{postprocess_parameters}
 \alias{postprocess_parameters}
-\title{Post-process Predicted Parameters}
+\title{Post-process Predicted Parameters (Use in package)}
 \usage{
 postprocess_parameters(predicted_params, dataset_features)
 }
