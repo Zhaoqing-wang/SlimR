@@ -531,6 +531,6 @@ Celltype_annotation_Excel(
 
 Thank you for using SlimR. For questions, issues, or suggestions, please submit them in the issue section or discussion section on GitHub (suggested) or send an email (alternative):
 
-**Zhaoqing Wang**
-
 zhaoqingwang\@mail.sdu.edu.cn
+
+**Zhaoqing Wang**
