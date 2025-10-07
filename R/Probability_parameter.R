@@ -32,13 +32,13 @@
 #' @examples
 #' \dontrun{
 #' # Basic usage
-#' params <- calculate_parameter(
+#' SlimR_params <- calculate_parameter(
 #'   object = seurat_obj,
 #'   features = c("CD3E", "CD4", "CD8A")
 #' )
 #' 
 #' # Use with custom method
-#' params <- calculate_parameter(
+#' SlimR_params <- calculate_parameter(
 #'   object = seurat_obj,
 #'   features = variable_genes,
 #'   method = "rf"
