@@ -25,9 +25,10 @@ SlimR can predict parameters by machine learning (e.g., 'Random Forest', 'Gradie
     -   [2.5 From Seurat Objects](#25-from-seurat-objects)
     -   [2.6 From Excel Tables](#26-from-excel-tables)
 3.  [Automated Annotation Workflow](#3-automated-annotation-workflow)
-    -   [3.1 Calculate Cell Types](#31-calculate-cell-types)
-    -   [3.2 Annotate Cell Types](#32-annotate-cell-types)
-    -   [3.3 Verify Cell Types](#33-verify-cell-types)
+    -   [3.1 Calculate Parameter](#31-calculate-paramter)
+    -   [3.2 Calculate Cell Types](#32-calculate-cell-types)
+    -   [3.3 Annotate Cell Types](#33-annotate-cell-types)
+    -   [3.4 Verify Cell Types](#34-verify-cell-types)
 4.  [Semi-Automated Annotation Workflow](#4-semi-automated-annotation-workflow)
     -   [4.1 Annotation Heat Map](#41-annotation-heat-map)
     -   [4.2 Annotation Feature Plots](#42-annotation-feature-plots)
@@ -266,9 +267,42 @@ Markers_list_Excel <- Read_excel_markers("D:/Laboratory/Marker_load.xlsx")
 
 ## 3. Automated Annotation Workflow
 
-### 3.1 Calculate Cell Types
+### 3.1 Calculate Parameter
 
-#### 3.1.1 Calculate Cell Types (Core)
+SlimR integrates multiple machine learning algorithms (e.g., Random Forest, Gradient Boosting, Support Vector Machine, Ensemble Learning) to automatically determine optimal `min_expression` and `specificity_weight` parameters in section 3.2.1 for cell types probability calculate.
+
+``` r
+# Basic usage uses default genes
+SlimR_params <- Parameter_Calculate(
+   seurat_obj = sce,
+   features = c("CD3E", "CD4", "CD8A"),
+   assay = "RNA",
+   cluster_col = "seurat_clusters",
+   method = "ensemble",
+   n_models = 3,
+   return_model = FALSE,
+   verbose = TRUE
+   )
+ 
+ # Use with custom method: use the genes corresponding to a specific cell type in 'Markers_list' as input
+SlimR_params <- Parameter_Calculate(
+   seurat_obj = sce,
+   features = unique(Markers_list_Cellmarker2$`B cell`$marker),
+   assay = "RNA",
+   cluster_col = "seurat_clusters",
+   method = "rf",
+   return_model = FALSE,
+   verbose = TRUE
+   )
+```
+
+**Important: This scheme is optional and can be skipped to section 3.2.1 for cell type probability calculation using default parameters.**
+
+*Note: Using the parameter `method = "rf"` in the function `Parameter_Calculate ()` can modify the machine learning model used.Machine learning method: `rf` (Random Forest), `gbm` (Gradient Boosting), `svm` (Support Vector Machine), or `ensemble` (Ensemble Learning; default)*
+
+### 3.2 Calculate Cell Types
+
+#### 3.2.1 Calculate Cell Types (Core)
 
 Uses `markers_list` to calculate probability, prediction results, calculate corresponding AUC (optional) and generate heat map and ROC graphs (optional) for cell annotation.
 
@@ -293,7 +327,7 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
 
 *Note: Using the parameter `AUC_correction = TRUE` takes a little longer to compute (\~20% longer than only setting parameter `plot_AUC = TRUE`; \~40% longer than only setting parameter `compute_AUC = TRUE`), but it is recommended to correct the predicted cell type this way in order to obtain more accurate cell type prediction results. The lower the parameter `threshold`, the more alternative cell types will be checked by AUC, and the longer the run time will be.*
 
-#### 3.1.2 Plot Heat Map (Optional)
+#### 3.2.2 Plot Heat Map (Optional)
 
 Check the annotation probability of the cell type to be annotated in the input `cluster_col` column and cell types in `Markers_list` with the following code.
 
@@ -303,7 +337,7 @@ print(SlimR_anno_result$Heatmap_plot)
 
 *Note: If the heat map is not generated properly, please run the function `library(pheatmap)` first.*
 
-#### 3.1.3 View Prediction Results (Optional)
+#### 3.2.3 View Prediction Results (Optional)
 
 Cell type information results predicted by SlimR can be viewed with the following code.
 
@@ -311,7 +345,7 @@ Cell type information results predicted by SlimR can be viewed with the followin
 View(SlimR_anno_result$Prediction_results)
 ```
 
-#### 3.1.4 Plot ROC Curve and AUC Value (Optional)
+#### 3.2.4 Plot ROC Curve and AUC Value (Optional)
 
 Furthermore, the ROC curve and AUC value of the corresponding `cluster_col` and predicted cell types can be viewed by the following code.
 
@@ -323,7 +357,7 @@ print(SlimR_anno_result$AUC_plot)
 
 *Note: If the heat map is not generated properly, please run the function `library(ggplot2)` first.*
 
-#### 3.1.5 Correction for Predicted Cell Types (Alternative)
+#### 3.2.5 Correction for Predicted Cell Types (Alternative)
 
 After viewing the list of predicted cell types and the corresponding AUC values, the predicted cell types can be corrected with the following code.
 
@@ -353,7 +387,7 @@ View(SlimR_anno_result$Prediction_results)
 
 **Improtant: It is strongly recommended that if you need to correct the cell type, use cell types in `SlimR_anno_result$Prediction_results$Alternative_cell_type`.**
 
-### 3.2 Annotate Cell Types
+### 3.3 Annotate Cell Types
 
 Assigns SlimR predicted cell types information in `SlimR_anno_result$Prediction_results$Predicted_cell_type` to the Seurat object based on cluster annotations, and stores the results into `seurat_obj@meta.data$annotation_col`.
 
@@ -368,7 +402,7 @@ sce <- Celltype_Annotation(seurat_obj = sce,
 
 **Important: The parameter `cluster_col` in the function `Celltype_Calculate()` and the function `Celltype_Annotation()` must be strictly the same to avoid false matches. And the parameter `annotation_col` in the function `Celltype_Annotation()` and the function `Celltype_Verification()` must be strictly the same to avoid false matches.**
 
-### 3.3 Verify Cell Types
+### 3.4 Verify Cell Types
 
 Use the cell group identity information in `seurat_obj@meta.data$annotation_col` and use the 'Feature Significance Score' (FSS, product value of `log2FC` and `Expression ratio`) as the ranking basis.
 

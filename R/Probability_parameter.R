@@ -4,7 +4,7 @@
 #' min_expression and specificity_weight parameters for single-cell data analysis
 #' based on dataset characteristics.
 #'
-#' @param object A Seurat object containing single-cell data
+#' @param seurat_obj A Seurat object containing single-cell data
 #' @param features Character vector of feature names (genes) to analyze
 #' @param assay Name of assay to use (default: default assay)
 #' @param cluster_col Column name in metadata containing cluster information
@@ -31,23 +31,33 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Basic usage
-#' SlimR_params <- calculate_parameter(
-#'   object = seurat_obj,
-#'   features = c("CD3E", "CD4", "CD8A")
-#' )
+#' # Basic usage 
+#' SlimR_params <- Parameter_Calculate(
+#'   seurat_obj = sce,
+#'   features = c("CD3E", "CD4", "CD8A"),
+#'   assay = "RNA",
+#'   cluster_col = "seurat_clusters",
+#'   method = "ensemble",
+#'   n_models = 3,
+#'   return_model = FALSE,
+#'   verbose = TRUE
+#'   )
 #' 
 #' # Use with custom method
-#' SlimR_params <- calculate_parameter(
-#'   object = seurat_obj,
-#'   features = variable_genes,
-#'   method = "rf"
-#' )
+#' SlimR_params <- Parameter_Calculate(
+#'   seurat_obj = sce,
+#'   features = unique(Markers_list_Cellmarker2$`B cell`$marker),
+#'   assay = "RNA",
+#'   cluster_col = "seurat_clusters",
+#'   method = "rf",
+#'   return_model = FALSE,
+#'   verbose = TRUE
+#'   )
 #' }
 #'
 #' @export
-calculate_parameter <- function(
-    object,
+Parameter_Calculate <- function(
+    seurat_obj,
     features,
     assay = NULL,
     cluster_col = NULL,
@@ -61,7 +71,7 @@ calculate_parameter <- function(
     stop("Please install caret package: install.packages('caret')")
   }
   
-  if (!inherits(object, "Seurat")) {
+  if (!inherits(seurat_obj, "Seurat")) {
     stop("Input object must be a Seurat object")
   }
   
@@ -72,7 +82,7 @@ calculate_parameter <- function(
   if (verbose) message("SlimR parameter calculate: Extracting dataset features.")
   
   # Extract dataset characteristics for ML model
-  dataset_features <- extract_dataset_features(object, features, assay, cluster_col)
+  dataset_features <- extract_dataset_features(seurat_obj, features, assay, cluster_col)
   
   if (verbose) message("SlimR parameter calculate: Generating training data.")
   
@@ -122,7 +132,7 @@ calculate_parameter <- function(
 #' Computes various statistical features from single-cell data that are used
 #' as input for the parameter prediction model.
 #'
-#' @param object Seurat object
+#' @param seurat_obj Seurat object
 #' @param features Features to analyze
 #' @param assay Assay name
 #' @param cluster_col Cluster column name
@@ -134,18 +144,18 @@ calculate_parameter <- function(
 #' 
 #' @importFrom stats dist median sd aggregate
 #' 
-extract_dataset_features <- function(object, features, assay = NULL, cluster_col = NULL) {
-  assay <- if (is.null(assay)) Seurat::DefaultAssay(object) else assay
-  Seurat::DefaultAssay(object) <- assay
+extract_dataset_features <- function(seurat_obj, features, assay = NULL, cluster_col = NULL) {
+  assay <- if (is.null(assay)) Seurat::DefaultAssay(seurat_obj) else assay
+  Seurat::DefaultAssay(seurat_obj) <- assay
   
-  cells <- unlist(Seurat::CellsByIdentities(object = object))
-  data.features <- Seurat::FetchData(object = object, vars = features, cells = cells)
+  cells <- unlist(Seurat::CellsByIdentities(object = seurat_obj))
+  data.features <- Seurat::FetchData(object = seurat_obj, vars = features, cells = cells)
   
   # Assign cluster identities
   if (!is.null(cluster_col)) {
-    data.features$id <- object@meta.data[cells, cluster_col, drop = TRUE]
+    data.features$id <- seurat_obj@meta.data[cells, cluster_col, drop = TRUE]
   } else {
-    data.features$id <- Seurat::Idents(object = object)[cells]
+    data.features$id <- Seurat::Idents(object = seurat_obj)[cells]
   }
   
   features <- setdiff(features, "id")
@@ -183,7 +193,7 @@ extract_dataset_features <- function(object, features, assay = NULL, cluster_col
     
     # Distribution characteristics
     expression_skewness = calculate_expression_skewness(data.features[, features]),
-    batch_effect_score = estimate_batch_effect(object, assay)
+    batch_effect_score = estimate_batch_effect(seurat_obj, assay)
   )
   
   return(dataset_features)
@@ -245,19 +255,19 @@ calculate_expression_skewness <- function(expression_matrix) {
 #' Roughly estimates the potential impact of batch effects
 #' using available metadata.
 #'
-#' @param object Seurat object
+#' @param seurat_obj Seurat object
 #' @param assay Assay name
 #'
 #' @return Batch effect score (0 indicates no detectable batch effect)
 #'
 #' @family Section_1_Functions_Use_in_Package
 #' 
-estimate_batch_effect <- function(object, assay) {
+estimate_batch_effect <- function(seurat_obj, assay) {
   # Simple batch effect estimation
-  if ("batch" %in% colnames(object@meta.data)) {
+  if ("batch" %in% colnames(seurat_obj@meta.data)) {
     # If batch information is available, use simplified approach
     # without requiring bluster package
-    batch_groups <- unique(object@meta.data$batch)
+    batch_groups <- unique(seurat_obj@meta.data$batch)
     if (length(batch_groups) > 1) {
       # Return a simple metric based on batch group count
       return(length(batch_groups) * 0.1)

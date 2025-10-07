@@ -1,7 +1,7 @@
-# SlimR 1.0.8 (2025-10-07)
+# SlimR 1.0.8 (2025-10-08)
 
 -   Note: This version is under development.
--   This version adds the function of machine learning parameter recognition.
+-   This version adds the function of machine learning (e.g., 'Random Forest', 'Gradient Boosting', 'Support Vector Machine', 'Ensemble Learning') parameter recognition.
 -   Iteratively update the ggplot2-related code to version 4.0.0.
 -   Optimize the data filter mode of "Markers_list_scIBD" in the package, and filter through `sort_by = "logFC"` and `gene_filter = 20` parameter.
 -   Adjust the calculation process of the 'FSS' value in the `read_seurat_markers()` function when 'resources' is set to 'presto'.

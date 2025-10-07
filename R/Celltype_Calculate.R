@@ -431,7 +431,7 @@ Celltype_Calculate <- function(
       colors <- scales::hue_pal()(color_count)
 
       auc_plot <- ggplot(combined_df, aes(.data$FPR, y = .data$TPR, color = .data$label)) +
-        geom_line(linewidth = 1) +
+        geom_line(size = 1) +
         geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "black") +
         labs(
           title = "ROC Curves for Predicted Cell Types | SlimR",

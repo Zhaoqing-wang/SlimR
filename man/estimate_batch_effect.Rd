@@ -4,10 +4,10 @@
 \alias{estimate_batch_effect}
 \title{Estimate Batch Effect Strength}
 \usage{
-estimate_batch_effect(object, assay)
+estimate_batch_effect(seurat_obj, assay)
 }
 \arguments{
-\item{object}{Seurat object}
+\item{seurat_obj}{Seurat object}
 
 \item{assay}{Assay name}
 }

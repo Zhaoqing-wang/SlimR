@@ -4,10 +4,15 @@
 \alias{extract_dataset_features}
 \title{Extract Dataset Characteristics for Machine Learning}
 \usage{
-extract_dataset_features(object, features, assay = NULL, cluster_col = NULL)
+extract_dataset_features(
+  seurat_obj,
+  features,
+  assay = NULL,
+  cluster_col = NULL
+)
 }
 \arguments{
-\item{object}{Seurat object}
+\item{seurat_obj}{Seurat object}
 
 \item{features}{Features to analyze}
 
