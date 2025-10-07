@@ -1,4 +1,4 @@
-# SlimR 1.0.8 (2025-09-26)
+# SlimR 1.0.8 (2025-10-07)
 
 -   Note: This version is under development.
 -   This version adds the function of machine learning parameter recognition.

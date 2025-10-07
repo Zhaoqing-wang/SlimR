@@ -2,13 +2,13 @@
   if (requireNamespace("crayon", quietly = TRUE)) {
     message <- paste0(
       "Please cite: Wang Z (2025). ",
-      crayon::italic("SlimR: Marker-Based Package for Single-Cell and Spatial-Transcriptomic Annotation."),
+      crayon::italic("SlimR: Machine Learning-Assisted Marker-Based Package for Single-Cell and Spatial Transcriptomics Annotation."),
       " R package version", crayon::bold(" 1.0.8."),
       " Available at: https://github.com/Zhaoqing-wang/SlimR"
     )
   } else {
     message <- paste0(
-      "Please cite: Wang Z (2025). SlimR: Marker-Based Package for Single-Cell and Spatial-Transcriptomic Annotation.",
+      "Please cite: Wang Z (2025). SlimR: Machine Learning-Assisted Marker-Based Package for Single-Cell and Spatial Transcriptomics Annotation.",
       "R package version 1.0.8. Available at: https://github.com/Zhaoqing-wang/SlimR"
     )
   }

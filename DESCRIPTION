@@ -1,6 +1,6 @@
 Package: SlimR
 Version: 1.0.8
-Title: Marker-Based Package for Single-Cell and Spatial-Transcriptomic Annotation
+Title: Machine Learning-Assisted Marker-Based Package for Single-Cell and Spatial Transcriptomics Annotation
 Description: Annotates single-cell and spatial-transcriptomic (ST) data using marker datasets. Supports unified markers list ('Markers_list') creation from built-in databases (e.g., 'Cellmarker2', 'PanglaoDB', 'scIBD', 'TCellSI'), Seurat objects, or user-supplied Excel files. Uses Markers_list to compute cell-type-specific gene expression, predict annotations with AUC calculation and correction via 'Celltype_Calculate()', assign annotations using 'Celltype_Annotation()', and validate results with 'Celltype_Verification()'. The package also generates reference plots ('Heat Map', 'Feature plots', 'Combined plots') for manual verification. For more details see Kabacoff (2020, ISBN:9787115420572).
 Authors@R: 
     person(given = "Zhaoqing",family = "Wang",
@@ -26,9 +26,10 @@ Imports:
     tibble
 Suggests:
     crayon,
-    caret
+    caret,
+    gbm
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
-Date: 2025-09-26
+Date: 2025-10-07
