@@ -8,7 +8,7 @@
 
 SlimR is an R package designed for annotating single-cell and spatial-transcriptomics (ST) datasets. It supports the creation of a unified marker list, `Markers_list`, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB', 'scIBD', 'TCellSI'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers.
 
-SlimR can predict parameters by machine learning (e.g., 'Random Forest', 'Gradient Boosting', 'Support Vector Machine', 'Ensemble Learning'), and based on Markers_list, calculate gene expression of different cell types and predict annotation information and calculate corresponding AUC by `Celltype_Calculate()`, and annotate it by `Celltype_Annotation()`, then verify it by `Celltype_Verification()`. At the same time, it can calculate gene expression corresponding to the cell type to generate a reference map for manual annotation (e.g., 'Heat Map', 'Feature Plots', 'Combined Plots').
+SlimR can predict calculate parameters by machine learning algorithms (e.g., 'Random Forest', 'Gradient Boosting', 'Support Vector Machine', 'Ensemble Learning'), and based on Markers_list, calculate gene expression of different cell types and predict annotation information and calculate corresponding AUC by `Celltype_Calculate()`, and annotate it by `Celltype_Annotation()`, then verify it by `Celltype_Verification()`. At the same time, it can calculate gene expression corresponding to the cell type to generate a reference map for manual annotation (e.g., 'Heat Map', 'Feature Plots', 'Combined Plots').
 
 ## Table of Contents
 
@@ -25,7 +25,7 @@ SlimR can predict parameters by machine learning (e.g., 'Random Forest', 'Gradie
     -   [2.5 From Seurat Objects](#25-from-seurat-objects)
     -   [2.6 From Excel Tables](#26-from-excel-tables)
 3.  [Automated Annotation Workflow](#3-automated-annotation-workflow)
-    -   [3.1 Calculate Parameter](#31-calculate-paramter)
+    -   [3.1 Calculate Parameter (Alternative)](#31-calculate-parameter-alternative)
     -   [3.2 Calculate Cell Types](#32-calculate-cell-types)
     -   [3.3 Annotate Cell Types](#33-annotate-cell-types)
     -   [3.4 Verify Cell Types](#34-verify-cell-types)
@@ -267,9 +267,9 @@ Markers_list_Excel <- Read_excel_markers("D:/Laboratory/Marker_load.xlsx")
 
 ## 3. Automated Annotation Workflow
 
-### 3.1 Calculate Parameter
+### 3.1 Calculate Parameter (Alternative)
 
-SlimR integrates multiple machine learning algorithms (e.g., Random Forest, Gradient Boosting, Support Vector Machine, Ensemble Learning) to automatically determine optimal `min_expression` and `specificity_weight` parameters in section 3.2.1 for cell types probability calculate.
+SlimR integrates multiple machine learning algorithms (e.g., Random Forest, Gradient Boosting, Support Vector Machine, Ensemble Learning) to automatically determine optimal `min_expression` and `specificity_weight` parameters in section 3.2 for cell types probability calculate.
 
 ``` r
 # Basic usage uses default genes
@@ -296,7 +296,7 @@ SlimR_params <- Parameter_Calculate(
    )
 ```
 
-**Important: This scheme is optional and can be skipped to section 3.2.1 for cell type probability calculation using default parameters.**
+**Important: This scheme is optional and can be skipped to section 3.2 for cell type probability calculation using default parameters.**
 
 *Note: Using the parameter `method = "rf"` in the function `Parameter_Calculate ()` can modify the machine learning model used.Machine learning method: `rf` (Random Forest), `gbm` (Gradient Boosting), `svm` (Support Vector Machine), or `ensemble` (Ensemble Learning; default)*
 
@@ -322,6 +322,8 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     colour_high = "firebrick3"
     )
 ```
+
+You can use the `min_expression = SlimR_params$min_expression` and `specificity_weight = SlimR_params$specificity_weight` parameter in function `Celltype_Calculate()` if you have run the `Parameter_Calculate ()` function in section 3.1 above.
 
 **Important: The parameter `cluster_col` in the function `Celltype_Calculate()` and the function `Celltype_Annotation()` must be strictly the same to avoid false matches.**
 
