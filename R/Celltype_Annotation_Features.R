@@ -28,7 +28,7 @@
 #'
 #' @returns Saves cell type annotation PNGs in `save_path`. Returns invisibly.
 #' @export
-#' @family Section_4_Semi_Automated_Annotation_Workflow
+#' @family Section_4_Semi_Automated_Annotation
 #'
 #' @importFrom stats setNames
 #' @importFrom dplyr all_of

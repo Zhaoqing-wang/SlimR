@@ -65,9 +65,9 @@ Markers_list_Seurat <- Read_seurat_markers(seurat_markers,
 
 }
 \seealso{
-Other Section_2_Standardized_Markers_List_Input: 
+Other Section_2_Standardized_Markers_List: 
 \code{\link{Markers_filter_Cellmarker2}()},
 \code{\link{Markers_filter_PanglaoDB}()},
 \code{\link{Read_excel_markers}()}
 }
-\concept{Section_2_Standardized_Markers_List_Input}
+\concept{Section_2_Standardized_Markers_List}

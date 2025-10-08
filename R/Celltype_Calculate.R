@@ -58,7 +58,7 @@
 #' }
 #'
 #' @export
-#' @family Section_3_Automated_Annotation_Workflow
+#' @family Section_3_Automated_Annotation
 #'
 #' @importFrom grDevices colorRampPalette
 #' @importFrom utils tail

@@ -73,9 +73,9 @@ Celltype_annotation_Excel(seurat_obj = sce,
 
 }
 \seealso{
-Other Section_5_Other_Functions_Provided_by_SlimR: 
+Other Section_5_Other_Functions_Provided: 
 \code{\link{Celltype_annotation_Cellmarker2}()},
 \code{\link{Celltype_annotation_PanglaoDB}()},
 \code{\link{Celltype_annotation_Seurat}()}
 }
-\concept{Section_5_Other_Functions_Provided_by_SlimR}
+\concept{Section_5_Other_Functions_Provided}

@@ -122,8 +122,8 @@ Celltype_Annotation_Features(seurat_obj = sce,
 
 }
 \seealso{
-Other Section_4_Semi_Automated_Annotation_Workflow: 
+Other Section_4_Semi_Automated_Annotation: 
 \code{\link{Celltype_Annotation_Combined}()},
 \code{\link{Celltype_Annotation_Heatmap}()}
 }
-\concept{Section_4_Semi_Automated_Annotation_Workflow}
+\concept{Section_4_Semi_Automated_Annotation}

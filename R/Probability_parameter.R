@@ -24,7 +24,7 @@
 #' }
 #'
 #' @export
-#' @family Section_3_Automated_Annotation_Workflow
+#' @family Section_3_Automated_Annotation
 #' 
 #' @importFrom stats dist median predict runif sd aggregate
 #' @importFrom utils installed.packages

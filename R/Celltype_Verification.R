@@ -18,7 +18,7 @@
 #' @return A ggplot object showing expression of top variable genes.
 #'
 #' @export
-#' @family Section_3_Automated_Annotation_Workflow
+#' @family Section_3_Automated_Annotation
 #'
 #' @importFrom Seurat DotPlot FetchData
 #' @importFrom dplyr distinct bind_rows arrange desc top_n

@@ -76,9 +76,9 @@ SlimR_params <- Parameter_Calculate(
 
 }
 \seealso{
-Other Section_3_Automated_Annotation_Workflow: 
+Other Section_3_Automated_Annotation: 
 \code{\link{Celltype_Annotation}()},
 \code{\link{Celltype_Calculate}()},
 \code{\link{Celltype_Verification}()}
 }
-\concept{Section_3_Automated_Annotation_Workflow}
+\concept{Section_3_Automated_Annotation}

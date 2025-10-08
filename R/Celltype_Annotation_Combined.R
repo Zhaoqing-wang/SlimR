@@ -20,7 +20,7 @@
 #'
 #' @returns The cell annotation picture is saved in "save_path".
 #' @export
-#' @family Section_4_Semi_Automated_Annotation_Workflow
+#' @family Section_4_Semi_Automated_Annotation
 #'
 #' @importFrom Seurat Idents
 #' @importFrom ggplot2 ggsave

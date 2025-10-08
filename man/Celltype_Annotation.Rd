@@ -50,9 +50,9 @@ sce <- Celltype_Annotation(seurat_obj = sce,
 
 }
 \seealso{
-Other Section_3_Automated_Annotation_Workflow: 
+Other Section_3_Automated_Annotation: 
 \code{\link{Celltype_Calculate}()},
 \code{\link{Celltype_Verification}()},
 \code{\link{Parameter_Calculate}()}
 }
-\concept{Section_3_Automated_Annotation_Workflow}
+\concept{Section_3_Automated_Annotation}
