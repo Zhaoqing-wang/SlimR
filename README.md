@@ -8,7 +8,7 @@
 
 SlimR is an R package designed for annotating single-cell and spatial-transcriptomics (ST) datasets. It supports the creation of a unified marker list, `Markers_list`, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB', 'scIBD', 'TCellSI'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers.
 
-SlimR can predict calculate parameters by machine learning algorithms (e.g., 'Random Forest', 'Gradient Boosting', 'Support Vector Machine', 'Ensemble Learning'), and based on Markers_list, calculate gene expression of different cell types and predict annotation information and calculate corresponding AUC by `Celltype_Calculate()`, and annotate it by `Celltype_Annotation()`, then verify it by `Celltype_Verification()`. At the same time, it can calculate gene expression corresponding to the cell type to generate a reference map for manual annotation (e.g., 'Heat Map', 'Feature Plots', 'Combined Plots').
+SlimR can predict calculation parameters by machine learning algorithms (e.g., 'Random Forest', 'Gradient Boosting', 'Support Vector Machine', 'Ensemble Learning') by `Parameter_Calculate()`, and based on `Markers_list`, calculate gene expression of different cell types and predict annotation information and calculate corresponding AUC by `Celltype_Calculate()`, and annotate it by `Celltype_Annotation()`, then verify it by `Celltype_Verification()`. At the same time, it can calculate gene expression corresponding to the cell type to generate a reference map for manual annotation (e.g., 'Heat Map', 'Feature Plots', 'Combined Plots').
 
 ## Table of Contents
 
@@ -44,7 +44,7 @@ SlimR can predict calculate parameters by machine learning algorithms (e.g., 'Ra
 
 Option One: [![CRAN Version](https://img.shields.io/cran/v/SlimR?label=CRAN)](https://cran.r-project.org/package=SlimR)
 
-Install SlimR directly from CRAN using: (Stable version, recommended when the version equivalent to GitHub package version)
+Install SlimR directly from CRAN using: (Stable version, recommended when the version is equivalent to the GitHub package version)
 
 ``` r
 install.packages("SlimR")
@@ -54,7 +54,7 @@ install.packages("SlimR")
 
 Option Two: [![GitHub R package version](https://img.shields.io/github/r-package/v/Zhaoqing-wang/SlimR?label=GitHub&color=green)](https://github.com/Zhaoqing-wang/SlimR/releases)
 
-Install SlimR directly from GitHub using: (Development version, recommended when the version is higher than CRAN package version)
+Install SlimR directly from GitHub using: (Development version, recommended when the version is higher than the CRAN package version)
 
 ``` r
 devtools::install_github("Zhaoqing-wang/SlimR")
@@ -96,7 +96,7 @@ install.packages(c("cowplot", "dplyr", "ggplot2", "patchwork",
 
 ## 2. Standardized Markers_list Input
 
-SlimR requires a standardized list format for storing marker information, metrics (can be omitted), and corresponding cell types (list names = cell types (necessary), first column = markers (necessary), subsequent columns = metrics (can be omitted)).
+SlimR requires a standardized list format for storing marker information, metrics (can be omitted), and corresponding cell types (list names = cell types (essential), first column = markers (essential), subsequent columns = metrics (can be omitted)).
 
 ### 2.1 From Cellmarker2 Database
 
@@ -132,7 +132,7 @@ Markers_list_Cellmarker2 <- Markers_filter_Cellmarker2(
 
 **Important: Select at least the `species` and `tissue_class` parameters to ensure the accuracy of the annotation.**
 
-*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3 and 5.1. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
+*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3, and 5.1. [Click to section 3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.2 From PanglaoDB Database
 
@@ -165,7 +165,7 @@ Markers_list_panglaoDB <- Markers_filter_PanglaoDB(
 
 **Important: Select the `species_input` and `organ_input` parameters to ensure the accuracy of the annotation.**
 
-*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3 and 5.2. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
+*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3, and 5.2. [Click to section 3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.3 From scIBD Database
 
@@ -177,15 +177,15 @@ Reference: *Nie et al. (2023) <doi:10.1038/s43588-023-00464-9>*.
 Markers_list_scIBD <- SlimR::Markers_list_scIBD
 ```
 
-**Important: This is for human intestinal annotation only. The input Seurat object was ensured to be a human intestinal type to ensure the accuracy of the labeling.**
+**Important: This is for human intestinal annotation only. The input Seurat object was ensured to be of a human intestinal type to ensure the accuracy of the labeling.**
 
 *Note: The `Markers_list_scIBD` was generated using section 2.5.2 and the parameters `sort_by = "logFC"` and `gene_filter = 20` were set.*
 
-*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3 and 5.3. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
+*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3, and 5.3. [Click to section 3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.4 From TCellSI Database
 
-TCellSI: A database of T cell markers of different sub types.
+TCellSI: A database of T cell markers of different subtypes.
 
 Reference: *Yang et al. (2024) <doi:10.1002/imt2.231>*.
 
@@ -193,11 +193,11 @@ Reference: *Yang et al. (2024) <doi:10.1002/imt2.231>*.
 Markers_list_TCellSI <- SlimR::Markers_list_TCellSI
 ```
 
-**Important: This is only for T cell subset annotation. Ensure that the input Seurat object is of T cell type to guarantee the accuracy of the annotation.**
+**Important: This feature depends on the `presto` package. Please run `devtools::install_github('immunogenomics/presto')` first.**
 
 *Note: The `Markers_list_TCellSI` was generated using section 2.6.*
 
-*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
+*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3, and 5.4. [Click to section 3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.5 From Seurat Objects
 
@@ -218,7 +218,7 @@ Markers_list_Seurat <- Read_seurat_markers(seurat_markers,
     )
 ```
 
-*Note: Recommend use the parameter `sort_by = "FSS"` to use the 'Feature Significance Score' (FSS, product value of `log2FC` and `Expression ratio`) or use the parameter `sort_by = "avg_log2FC"` as the ranking basis.*
+*Note: Recommend using the parameter `sort_by = "FSS"` to use the 'Feature Significance Score' (FSS, product value of `log2FC` and `Expression ratio`) or use the parameter `sort_by = "avg_log2FC"` as the ranking basis.*
 
 #### 2.5.2 Use `presto` to Speed Up: (Alternative)
 
@@ -241,11 +241,11 @@ Markers_list_Seurat <- Read_seurat_markers(seurat_markers,
     )
 ```
 
-**Improtant: This feature depends on the `presto` packages, please run `devtools::install_github('immunogenomics/presto')` first.**
+**Important: This feature depends on the `presto` package. Please first run 'devtools::install_github (' immunogenomics/presto') 'if prompted to install the package.**
 
-*Note: Recommend use the parameter `sort_by = "logFC"` or use the parameter `sort_by = "FSS"` to use the 'Feature Significance Score' (FSS, product value of `log2FC` and `Expression ratio`) as the ranking basis.*
+*Note: Recommend using the parameter `sort_by = "logFC"` or using the parameter `sort_by = "FSS"` to use the 'Feature Significance Score' (FSS, product value of `log2FC` and `Expression ratio`) as the ranking basis.*
 
-*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3 and 5.3. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
+*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3, and 5.3. [Click to section 3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.6 From Excel Tables
 
@@ -263,13 +263,13 @@ Markers_list_Seurat <- Read_seurat_markers(seurat_markers,
 Markers_list_Excel <- Read_excel_markers("D:/Laboratory/Marker_load.xlsx")
 ```
 
-*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3 and 5.4. [Click to section3 automated annotation workflow.](#3-automated-annotation-workflow)*
+*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3, and 5.4. [Click to section 3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ## 3. Automated Annotation Workflow
 
 ### 3.1 Calculate Parameter (Alternative)
 
-SlimR integrates multiple machine learning algorithms (e.g., Random Forest, Gradient Boosting, Support Vector Machine, Ensemble Learning) to automatically determine optimal `min_expression` and `specificity_weight` parameters in section 3.2 for cell types probability calculate.
+SlimR integrates multiple machine learning algorithms (e.g., Random Forest, Gradient Boosting, Support Vector Machine, and Ensemble Learning) to automatically determine the optimal `min_expression` and `specificity_weight` parameters in Section 3.2 for calculating the probability of cell types.
 
 ``` r
 # Basic usage uses default genes
@@ -304,7 +304,7 @@ SlimR_params <- Parameter_Calculate(
 
 #### 3.2.1 Calculate Cell Types (Core)
 
-Uses `markers_list` to calculate probability, prediction results, calculate corresponding AUC (optional) and generate heat map and ROC graphs (optional) for cell annotation.
+Uses `markers_list` to calculate probability, prediction results, calculate corresponding AUC (optional), and generate heat map and ROC graphs (optional) for cell annotation.
 
 ``` r
 SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
@@ -323,11 +323,11 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     )
 ```
 
-You can use the `min_expression = SlimR_params$min_expression` and `specificity_weight = SlimR_params$specificity_weight` parameter in function `Celltype_Calculate()` if you have run the `Parameter_Calculate ()` function in section 3.1 above.
+You can use the `min_expression = SlimR_params$min_expression` and `specificity_weight = SlimR_params$specificity_weight` parameters in the function `Celltype_Calculate()` if you have run the `Parameter_Calculate ()` function in section 3.1 above.
 
 **Important: The parameter `cluster_col` in the function `Celltype_Calculate()` and the function `Celltype_Annotation()` must be strictly the same to avoid false matches.**
 
-*Note: Using the parameter `AUC_correction = TRUE` takes a little longer to compute (\~20% longer than only setting parameter `plot_AUC = TRUE`; \~40% longer than only setting parameter `compute_AUC = TRUE`), but it is recommended to correct the predicted cell type this way in order to obtain more accurate cell type prediction results. The lower the parameter `threshold`, the more alternative cell types will be checked by AUC, and the longer the run time will be.*
+*Note: Using the parameter `AUC_correction = TRUE` takes a little longer to compute (\~20% longer than only setting parameter `plot_AUC = TRUE`; \~40% longer than only setting parameter `compute_AUC = TRUE`), but it is recommended to correct the predicted cell type this way to obtain more accurate cell type prediction results. The lower the parameter `threshold`, the more alternative cell types AUC will check, and the longer the run time will be.*
 
 #### 3.2.2 Plot Heat Map (Optional)
 
@@ -355,7 +355,7 @@ Furthermore, the ROC curve and AUC value of the corresponding `cluster_col` and 
 print(SlimR_anno_result$AUC_plot)
 ```
 
-**Improtant: This feature depends on the parameter `plot_AUC = TRUE`.**
+**Important: This feature depends on the parameter `plot_AUC = TRUE`.**
 
 *Note: If the heat map is not generated properly, please run the function `library(ggplot2)` first.*
 
@@ -381,13 +381,13 @@ SlimR_anno_result$Prediction_results$Predicted_cell_type[
 ] <- "Unknown"
 ```
 
-After modifying the corresponding predicted cell type, the following code is used to view the updated predicted cell type table.
+After modifying the corresponding predicted cell type, the following code is used to view the updated table of predicted cell types.
 
 ``` r
 View(SlimR_anno_result$Prediction_results)
 ```
 
-**Improtant: It is strongly recommended that if you need to correct the cell type, use cell types in `SlimR_anno_result$Prediction_results$Alternative_cell_type`.**
+**Important: It is strongly recommended that if you need to correct the cell type, use cell types in `SlimR_anno_result$Prediction_results$Alternative_cell_type`.**
 
 ### 3.3 Annotate Cell Types
 
@@ -402,7 +402,7 @@ sce <- Celltype_Annotation(seurat_obj = sce,
     )
 ```
 
-**Important: The parameter `cluster_col` in the function `Celltype_Calculate()` and the function `Celltype_Annotation()` must be strictly the same to avoid false matches. And the parameter `annotation_col` in the function `Celltype_Annotation()` and the function `Celltype_Verification()` must be strictly the same to avoid false matches.**
+**Important: The parameter `cluster_col` in the function `Celltype_Calculate()` and the function `Celltype_Annotation()` must be strictly the same to avoid false matches. The parameter `annotation_col` in the functions `Celltype_Annotation()` and `Celltype_Verification()` must be strictly the same to avoid false matches.**
 
 ### 3.4 Verify Cell Types
 
@@ -462,7 +462,7 @@ Celltype_Annotation_Features(
   )
 ```
 
-Each resulting combined image consists of a dot plot above and a heat map below (if metric information present). Dot plot show the expression level and expression ratio relationship between the cell type and corresponding markers. Below it, there is a metric heat map for the corresponding markers (if the metric information exists).
+Each resulting combined image consists of a dot plot above and a heat map below (if metric information is present). The dot plot illustrates the relationship between the expression level and expression ratio of the cell type and its corresponding markers. Below it, a metric heat map is displayed for the corresponding markers (if metric information is available).
 
 ### 4.3 Annotation Combined Plots
 
@@ -485,7 +485,7 @@ Each generated combined plot shows the box plot of the expression levels of the 
 
 ## 5. Other Functions Provided by SlimR
 
-Functions in section 5.1, 5.2, 5.3 and 5.4 has been incorporated into `Celltype_Annotation_Features()`, and it is recommended to use `Celltype_Annotation_Features()` and set corresponding parameters (for example, `gene_list_type = "Cellmarker2"`) instead. For more information, please refer to section 4.2.
+Functions in sections 5.1, 5.2, 5.3, and 5.4 have been incorporated into `Celltype_Annotation_Features()`, and it is recommended to use `Celltype_Annotation_Features()` and set corresponding parameters (for example, `gene_list_type = "Cellmarker2"`) instead. For more information, please refer to section 4.2.
 
 #### 5.1 Annotation Feature Plots with Cellmarker2 Database
 
@@ -561,7 +561,7 @@ Celltype_annotation_Excel(
 )
 ```
 
-*Note: To call this function, set the parameter `gene_list_type = "Excel"` in the function `Celltype_Annotation_Features`. This function also works with `Markers_list` without metric information or with metric information generated in other ways.*
+*Note: To call this function, set the parameter `gene_list_type = "Excel"` in the function `Celltype_Annotation_Features`. This function also works with `Markers_list` that contains either no metric information or metric information generated in other ways.*
 
 ## 6. Conclusion
 
