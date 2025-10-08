@@ -25,7 +25,7 @@ SlimR can predict calculation parameters by machine learning algorithms (e.g., '
     -   [2.5 From Seurat Objects](#25-from-seurat-objects)
     -   [2.6 From Excel Tables](#26-from-excel-tables)
 3.  [Automated Annotation Workflow](#3-automated-annotation-workflow)
-    -   [3.1 Calculate Parameter (Alternative)](#31-calculate-parameter-alternative)
+    -   [3.1 Calculate Parameter](#31-calculate-parameter)
     -   [3.2 Calculate Cell Types](#32-calculate-cell-types)
     -   [3.3 Annotate Cell Types](#33-annotate-cell-types)
     -   [3.4 Verify Cell Types](#34-verify-cell-types)
@@ -267,7 +267,7 @@ Markers_list_Excel <- Read_excel_markers("D:/Laboratory/Marker_load.xlsx")
 
 ## 3. Automated Annotation Workflow
 
-### 3.1 Calculate Parameter (Alternative)
+### 3.1 Calculate Parameter
 
 SlimR integrates multiple machine learning algorithms (e.g., Random Forest, Gradient Boosting, Support Vector Machine, and Ensemble Learning) to automatically determine the optimal `min_expression` and `specificity_weight` parameters in Section 3.2 for calculating the probability of cell types.
 
