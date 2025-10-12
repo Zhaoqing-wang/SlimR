@@ -251,11 +251,11 @@ Markers_list_Seurat <- Read_seurat_markers(seurat_markers,
 
 **Format Requirements**:
 
--   Each sheet name = cell type (necessary)
+-   Each sheet name = cell type (essential)
 
--   First row = column headers (necessary)
+-   First row = column headers (essential)
 
--   First column = markers (necessary)
+-   First column = markers (essential)
 
 -   Subsequent columns = metrics (can be omitted)
 
