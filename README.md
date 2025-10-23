@@ -451,6 +451,7 @@ Generates per-cell-type expression dot plot with metric heat map (when the metri
 ``` r
 Celltype_Annotation_Features(
   seurat_obj = sce,
+  cluster_col = "seurat_clusters",
   gene_list = Markers_list,
   gene_list_type = "Cellmarker2",
   species = "Human",
