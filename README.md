@@ -329,6 +329,12 @@ You can use the `min_expression = SlimR_params$min_expression` and `specificity_
 
 *Note: Using the parameter `AUC_correction = TRUE` takes a little longer to compute (\~20% longer than only setting parameter `plot_AUC = TRUE`; \~40% longer than only setting parameter `compute_AUC = TRUE`), but it is recommended to correct the predicted cell type this way to obtain more accurate cell type prediction results. The lower the parameter `threshold`, the more alternative cell types AUC will check, and the longer the run time will be.*
 
+If you encounter the error message `Error in .rowNamesDF<-: ! duplicate 'row.names' are not allowed`, , please run `base::make.unique()` first.
+
+``` r
+rownames(sce) <- base::make.unique(rownames(sce))
+```
+
 #### 3.2.2 Plot Heat Map (Optional)
 
 Check the annotation probability of the cell type to be annotated in the input `cluster_col` column and cell types in `Markers_list` with the following code.
