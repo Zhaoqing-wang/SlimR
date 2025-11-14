@@ -329,9 +329,10 @@ You can use the `min_expression = SlimR_params$min_expression` and `specificity_
 
 *Note: Using the parameter `AUC_correction = TRUE` takes a little longer to compute (\~20% longer than only setting parameter `plot_AUC = TRUE`; \~40% longer than only setting parameter `compute_AUC = TRUE`), but it is recommended to correct the predicted cell type this way to obtain more accurate cell type prediction results. The lower the parameter `threshold`, the more alternative cell types AUC will check, and the longer the run time will be.*
 
-If you encounter the error message `Error in .rowNamesDF<-: ! duplicate 'row.names' are not allowed`, , please run `base::make.unique()` first.
+Error handling: If you encounter the error message `Error in .rowNamesDF<-: ! duplicate 'row.names' are not allowed` when running `Celltype_Calculate()`, please run `base::make.unique()` first. (Alternative)
 
 ``` r
+# If you encounter the error message `Error in .rowNamesDF<-: ! duplicate 'row.names' are not allowed` when running `Celltype_Calculate()`.
 rownames(sce) <- base::make.unique(rownames(sce))
 ```
 
