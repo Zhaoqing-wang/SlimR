@@ -1,3 +1,8 @@
+# SlimR 1.0.9 (2025-11-23)
+-   This version is in development and will be released to CRAN soon.
+-   This version incorporates the T Cell Markers database PCSCT, with the data sourced from the article "Pan-cancer single cell landscape of tumor-infiltrating T cells". The reference literature is: L. Zheng et al. (2021) <doi:10.1126/science.abe6474>.
+-   Modify and optimize the README and NEWS files.
+
 # SlimR 1.0.8 (2025-10-08)
 
 -   This version adds the function of machine learning (e.g., 'Random Forest', 'Gradient Boosting', 'Support Vector Machine', 'Ensemble Learning') for cell types probability calculation parameter recognition.
