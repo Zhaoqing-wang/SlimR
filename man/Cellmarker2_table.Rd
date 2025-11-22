@@ -24,7 +24,7 @@ This list is used to choose filters for creation of standardized marker list.
 Other Section_0_Database: 
 \code{\link{Cellmarker2}},
 \code{\link{Cellmarker2_raw}},
-\code{\link{Markers_list_PCSCT}},
+\code{\link{Markers_list_PCTIT}},
 \code{\link{Markers_list_TCellSI}},
 \code{\link{Markers_list_scIBD}},
 \code{\link{PanglaoDB}},
