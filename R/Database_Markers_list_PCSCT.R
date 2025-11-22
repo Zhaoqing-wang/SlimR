@@ -2,9 +2,9 @@
 #'
 #' A dataset containing marker genes for different T cell types from the article "Pan-cancer single cell landscapeof tumor-infiltrating T cells"
 #'
-#' @format A list with ten tables.
+#' @format A list with 40 tables.
 #'
-#' @details This list is a table of 40 types of T cell markers obtained from the article "Pan-cancer single cell landscapeof tumor-infiltrating T cells".
+#' @details This list is a table of 40 types of pan-cancer tumor-infiltrating T cell markers obtained from the article "Pan-cancer single cell landscapeof tumor-infiltrating T cells".
 #'     The data source is "https://doi.org/10.1126/science.abe6474",
 #'     and the reference literature is: L. Zheng et al. (2021) <doi:10.1126/science.abe6474>.
 #'
