@@ -1,6 +1,6 @@
-#' List of cell type markers in the article "Pan-cancer single cell landscapeof tumor-infiltrating T cells"
+#' List of T cell subtype markers in the article "Pan-cancer single cell landscape of tumor-infiltrating T cells"
 #'
-#' A dataset containing marker genes for different T cell types from the article "Pan-cancer single cell landscapeof tumor-infiltrating T cells"
+#' A dataset containing marker genes for different T cell types from the article "Pan-cancer single cell landscape of tumor-infiltrating T cells"
 #'
 #' @format A list with 40 tables.
 #'

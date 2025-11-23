@@ -3,7 +3,7 @@
 \docType{data}
 \name{Markers_list_TCellSI}
 \alias{Markers_list_TCellSI}
-\title{List of cell type markers in the TCellSI dataset}
+\title{List of T cell subtype markers in the article TCellSI}
 \format{
 A list with ten tables.
 }
@@ -14,7 +14,7 @@ A list with ten tables.
 Markers_list_TCellSI
 }
 \description{
-A dataset containing marker genes for different T cell types from TCellSI
+A dataset containing marker genes for different T cell subtypes from TCellSI
 }
 \details{
 This list is a table of 10 types of T cell markers obtained from TCellSI.

@@ -3,7 +3,7 @@
 \docType{data}
 \name{Markers_list_scIBD}
 \alias{Markers_list_scIBD}
-\title{List of cell type markers in the scIBD dataset}
+\title{List of cell type markers in the article scIBD}
 \format{
 A list with one hundred and one tables.
 }

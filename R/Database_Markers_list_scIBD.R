@@ -1,4 +1,4 @@
-#' List of cell type markers in the scIBD dataset
+#' List of cell type markers in the article scIBD
 #'
 #' A dataset containing marker genes for different human intestine cell types from scIBD
 #'

@@ -1,6 +1,6 @@
-#' List of cell type markers in the TCellSI dataset
+#' List of T cell subtype markers in the article TCellSI
 #'
-#' A dataset containing marker genes for different T cell types from TCellSI
+#' A dataset containing marker genes for different T cell subtypes from TCellSI
 #'
 #' @format A list with ten tables.
 #'

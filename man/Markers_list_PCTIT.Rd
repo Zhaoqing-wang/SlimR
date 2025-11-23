@@ -3,7 +3,7 @@
 \docType{data}
 \name{Markers_list_PCTIT}
 \alias{Markers_list_PCTIT}
-\title{List of cell type markers in the article "Pan-cancer single cell landscapeof tumor-infiltrating T cells"}
+\title{List of T cell subtype markers in the article "Pan-cancer single cell landscape of tumor-infiltrating T cells"}
 \format{
 A list with 40 tables.
 }
@@ -14,7 +14,7 @@ A list with 40 tables.
 Markers_list_PCTIT
 }
 \description{
-A dataset containing marker genes for different T cell types from the article "Pan-cancer single cell landscapeof tumor-infiltrating T cells"
+A dataset containing marker genes for different T cell types from the article "Pan-cancer single cell landscape of tumor-infiltrating T cells"
 }
 \details{
 This list is a table of 40 types of pan-cancer tumor-infiltrating T cell (PCTIT) markers obtained from the article "Pan-cancer single cell landscapeof tumor-infiltrating T cells".
