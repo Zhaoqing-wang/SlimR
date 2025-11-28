@@ -210,7 +210,7 @@ Markers_list_Seurat <- Read_seurat_markers(seurat_markers,
     )
 ```
 
-**Important: This feature depends on the `presto` package. Please first run 'devtools::install_github (' immunogenomics/presto') 'if prompted to install the package.**
+**Important: This feature depends on the `presto` package. Please first run 'devtools::install_github('immunogenomics/presto') 'if prompted to install the package.**
 
 *Note: Recommend using the parameter `sort_by = "logFC"` or using the parameter `sort_by = "FSS"` to use the 'Feature Significance Score' (FSS, product value of `log2FC` and `Expression ratio`) as the ranking basis.*
 
