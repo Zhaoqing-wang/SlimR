@@ -4,13 +4,17 @@
 \alias{Read_excel_markers}
 \title{Create "Marker_list" from Excel files ".xlsx"}
 \usage{
-Read_excel_markers(path)
+Read_excel_markers(path, has_colnames = TRUE)
 }
 \arguments{
 \item{path}{The path information of Marker files stored in ".xlsx" format.
 The Sheet name in the file is filled with cell type. The first line of
 each Sheet is the table head, the first column is filled with markers
 information, and the following column is filled with mertic information.}
+
+\item{has_colnames}{Logical value indicating whether the first row contains
+column names. If FALSE, the first column will be named "Markers" and
+subsequent columns will be named "Col1", "Col2", etc.}
 }
 \value{
 The standardized "Marker_list" in the SlimR package.
@@ -23,7 +27,7 @@ Create "Marker_list" from Excel files ".xlsx"
 Markers_list_Excel <- Read_excel_markers(
     "D:/Laboratory/Marker_load.xlsx"
     )
-    }
+}
 
 }
 \seealso{

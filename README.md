@@ -232,6 +232,8 @@ Markers_list_Seurat <- Read_seurat_markers(seurat_markers,
 Markers_list_Excel <- Read_excel_markers("D:/Laboratory/Marker_load.xlsx")
 ```
 
+**Important: If the "First row" is missing in the input Excel file, please set the parameter 'has_colnames=FALSE' in the function 'Read_excel_markers()'**
+
 *Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3, and 5.4. [Click to section 3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
 ### 2.5 Example: From Article scIBD
