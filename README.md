@@ -6,7 +6,7 @@
 
 <img src="docs/Sticker.png" alt="Sticker" width="233.28" height="270" align="right"/>
 
-SlimR is an R package designed for annotating single-cell and spatial-transcriptomics (ST) datasets. It supports the creation of a unified marker list, `Markers_list`, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB', 'scIBD', 'TCellSI','PCTIT'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers.
+SlimR is an R package designed for annotating single-cell and spatial-transcriptomics (ST) datasets. It supports the creation of a unified marker list, `Markers_list`, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB', 'scIBD', 'TCellSI','PCTIT','PCTAM'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers.
 
 SlimR can predict calculation parameters by machine learning algorithms (e.g., 'Random Forest', 'Gradient Boosting', 'Support Vector Machine', 'Ensemble Learning') by `Parameter_Calculate()`, and based on `Markers_list`, calculate gene expression of different cell types and predict annotation information and calculate corresponding AUC by `Celltype_Calculate()`, and annotate it by `Celltype_Annotation()`, then verify it by `Celltype_Verification()`. At the same time, it can calculate gene expression corresponding to the cell type to generate a reference map for manual annotation (e.g., 'Heat Map', 'Feature Plots', 'Combined Plots').
 
@@ -271,7 +271,7 @@ Markers_list_TCellSI <- SlimR::Markers_list_TCellSI
 
 ### 2.7 Example: From Atlas of Pan Cancer T Cells
 
-PCTIT: List of T cell subtype markers in the article "Pan-cancer single cell landscape of tumor-infiltrating T cells"
+PCTIT: List of T cell subtype markers in the article "Pan-cancer single cell landscape of tumor-infiltrating T cells".
 
 Reference: *L. Zheng et al. (2021) <doi:10.1126/science.abe6474>*.
 
@@ -287,7 +287,7 @@ Markers_list_PCTIT <- SlimR::Markers_list_PCTIT
 
 ### 2.8 Example: From Review of Pan Cancer Macrophages
 
-PCTAM: List of Macrophage subtype markers in the article "Macrophage diversity in cancer revisited in the era of single-cell omics"
+PCTAM: List of Macrophage subtype markers in the article "Macrophage diversity in cancer revisited in the era of single-cell omics".
 
 Reference: *Ruo-Yu Ma et al. (2022) <doi:10.1016/j.it.2022.04.008>*.
 
