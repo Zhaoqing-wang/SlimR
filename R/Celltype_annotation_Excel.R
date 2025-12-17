@@ -167,11 +167,45 @@ Celltype_annotation_Excel <- function(
         colnames(current_df)[2:ncol(current_df)]
       }
 
-      metric_data <- cbind(
-        valid_data,
-        current_df[valid_idx, 2:ncol(current_df), drop = FALSE][!duplicated(valid_data$processed), ]
-      )
-      colnames(metric_data)[3:ncol(metric_data)] <- metric_cols
+      ## safe assembly of metric values aligned to deduplicated valid_data
+      rows_subset <- current_df[valid_idx, , drop = FALSE]
+
+      if (nrow(rows_subset) == 0 || ncol(rows_subset) == 1) {
+        metric_values <- data.frame(matrix(nrow = nrow(valid_data), ncol = 0))
+      } else {
+        # compute processed names for the subset (use provided column if present)
+        if ("processed" %in% colnames(rows_subset)) {
+          processed_subset <- as.character(rows_subset$processed)
+        } else {
+          genes_subset <- as.character(rows_subset[[1]])
+          processed_subset <- if (species == "Human") {
+            toupper(genes_subset)
+          } else {
+            paste0(toupper(substr(genes_subset, 1, 1)), tolower(substr(genes_subset, 2, nchar(genes_subset))))
+          }
+        }
+
+        # match deduplicated processed names to the subset (first occurrence)
+        match_idx <- match(valid_data$processed, processed_subset)
+
+        # prepare an NA-filled matrix and then fill rows where matches exist
+        n_metrics <- ncol(rows_subset) - 1
+        metric_mat <- matrix(NA, nrow = nrow(valid_data), ncol = n_metrics)
+        colnames(metric_mat) <- colnames(rows_subset)[2:ncol(rows_subset)]
+
+        for (r in seq_along(match_idx)) {
+          m <- match_idx[r]
+          if (!is.na(m)) {
+            metric_mat[r, ] <- as.vector(as.matrix(rows_subset[m, 2:ncol(rows_subset), drop = FALSE]))
+          }
+        }
+        metric_values <- as.data.frame(metric_mat, stringsAsFactors = FALSE, check.names = FALSE)
+      }
+
+      metric_data <- cbind(valid_data, metric_values)
+      if (ncol(metric_values) > 0) {
+        colnames(metric_data)[3:ncol(metric_data)] <- metric_cols
+      }
 
       metric_long <- tidyr::pivot_longer(
         metric_data,
