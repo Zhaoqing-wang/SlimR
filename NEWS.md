@@ -1,4 +1,4 @@
-# SlimR 1.0.9 (2025-11-27)
+# SlimR 1.0.9 (2025-12-18)
 -   This version incorporates the T Cell Markers database PCTIT, with the data sourced from the article "Pan-cancer single cell landscape of tumor-infiltrating T cells". The reference literature is: L. Zheng et al. (2021) <doi:10.1126/science.abe6474>.
 -   This version incorporates the Macrophage Markers database PCTAM, with the data sourced from the article "Macrophage diversity in cancer revisited in the era of single-cell omics". The reference literature is: Ruo-Yu Ma et al. (2022) <doi:10.1016/j.it.2022.04.008>.
 -   Added a 'has_colnames' parameter to 'Read_excel_markers()' function to support reading Excel files without column headers by automatically naming the first column as "Markers".
