@@ -28,6 +28,7 @@ Other Section_0_Database:
 \code{\link{Cellmarker2}},
 \code{\link{Cellmarker2_raw}},
 \code{\link{Cellmarker2_table}},
+\code{\link{Markers_list_PCTAM}},
 \code{\link{Markers_list_PCTIT}},
 \code{\link{Markers_list_TCellSI}},
 \code{\link{PanglaoDB}},

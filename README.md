@@ -23,8 +23,9 @@ SlimR can predict calculation parameters by machine learning algorithms (e.g., '
     -   [2.3 From Seurat Objects](#23-from-seurat-objects)
     -   [2.4 From Excel Tables](#24-from-excel-tables)
     -   [2.5 Example: From Article scIBD](#25-example-from-article-scibd)
-    -   [2.6 Example: From Article TCellSI](#26-example-from-article-tcellsi)
-    -   [2.7 Example: From Article PCTIT](#27-example-from-article-pctit)
+    -   [2.6 Example: From Tool TCellSI](#26-example-from-tool-tcellsi)
+    -   [2.7 Example: From Atlas of Pan Cancer T Cells](#27-example-from-atlas-of-pan-cancer-t-cell)
+    -   [2.8 Example: From Review of Pan Cancer Macrophages](#28-example-from-review-of-pan-cancer-macrophage)
 3.  [Automated Annotation Workflow](#3-automated-annotation-workflow)
     -   [3.1 Calculate Parameter](#31-calculate-parameter)
     -   [3.2 Calculate Cell Types](#32-calculate-cell-types)
@@ -252,7 +253,7 @@ Markers_list_scIBD <- SlimR::Markers_list_scIBD
 
 *Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3, and 5.3. [Click to section 3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
-### 2.6 Example: From Article TCellSI
+### 2.6 Example: From Tool TCellSI
 
 TCellSI: A database of T cell markers of different subtypes.
 
@@ -268,7 +269,7 @@ Markers_list_TCellSI <- SlimR::Markers_list_TCellSI
 
 *Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3, and 5.4. [Click to section 3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
-### 2.7 Example: From Article PCTIT
+### 2.7 Example: From Atlas of Pan Cancer T Cells
 
 PCTIT: List of T cell subtype markers in the article "Pan-cancer single cell landscape of tumor-infiltrating T cells"
 
@@ -281,6 +282,22 @@ Markers_list_PCTIT <- SlimR::Markers_list_PCTIT
 **Important: This is only used for annotation of T cell subsets. It was ensured that the input Seurat subjects were T cell subsets to ensure the accuracy of labeling.**
 
 *Note: The `Markers_list_PCTIT` was generated using section 2.4.*
+
+*Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3, and 5.4. [Click to section 3 automated annotation workflow.](#3-automated-annotation-workflow)*
+
+### 2.8 Example: From Review of Pan Cancer Macrophages
+
+PCTAM: List of Macrophage subtype markers in the article "Macrophage diversity in cancer revisited in the era of single-cell omics"
+
+Reference: *Ruo-Yu Ma et al. (2022) <doi:10.1016/j.it.2022.04.008>*.
+
+``` r
+Markers_list_PCTAM <- SlimR::Markers_list_PCTAM
+```
+
+**Important: This is only used for annotation of Macrophage subsets. It was ensured that the input Seurat subjects were Macrophage subsets to ensure the accuracy of labeling.**
+
+*Note: The `Markers_list_PCTAM` was generated using section 2.4.*
 
 *Link: Output `Markers_list` usable in sections 3.1, 4.1, 4.2, 4.3, and 5.4. [Click to section 3 automated annotation workflow.](#3-automated-annotation-workflow)*
 
