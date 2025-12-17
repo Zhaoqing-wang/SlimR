@@ -1,6 +1,6 @@
 # SlimR 1.0.9 (2025-11-23)
 -   This version is in development and will be released to CRAN soon.
--   This version incorporates the T Cell Markers database PCSCT, with the data sourced from the article "Pan-cancer single cell landscape of tumor-infiltrating T cells". The reference literature is: L. Zheng et al. (2021) <doi:10.1126/science.abe6474>.
+-   This version incorporates the T Cell Markers database PCTIT, with the data sourced from the article "Pan-cancer single cell landscape of tumor-infiltrating T cells". The reference literature is: L. Zheng et al. (2021) <doi:10.1126/science.abe6474>.
 -   Added a 'has_colnames' parameter to 'Read_excel_markers()' function to support reading Excel files without column headers by automatically naming the first column as "Markers".
 -   Modify and optimize the README and NEWS files.
 
