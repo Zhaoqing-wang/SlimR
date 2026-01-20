@@ -25,10 +25,7 @@ Imports:
     tools,
     tibble
 Suggests:
-    crayon,
-    caret,
-    gbm,
-    lattice
+    crayon
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
