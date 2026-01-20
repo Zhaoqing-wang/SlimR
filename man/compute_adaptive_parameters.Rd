@@ -4,17 +4,19 @@
 \alias{compute_adaptive_parameters}
 \title{Compute Adaptive Parameters Based on Dataset Features (Use in package)}
 \usage{
-compute_adaptive_parameters(dataset_features)
+compute_adaptive_parameters(dataset_features, n_celltypes = 50)
 }
 \arguments{
 \item{dataset_features}{List of dataset characteristics from extract_dataset_features()}
+
+\item{n_celltypes}{Expected number of cell types in marker database}
 }
 \value{
-List containing min_expression, specificity_weight, and rationale
+List containing min_expression, specificity_weight, threshold, and rationale
 }
 \description{
-Calculates optimal min_expression and specificity_weight parameters
-using empirically-derived adaptive algorithms based on dataset characteristics.
+Calculates optimal min_expression, specificity_weight, and threshold parameters
+using continuous adaptive algorithms based on dataset characteristics.
 }
 \seealso{
 Other Section_1_Functions_Use_in_Package: 

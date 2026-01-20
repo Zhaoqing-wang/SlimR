@@ -9,6 +9,7 @@ Parameter_Calculate(
   features = NULL,
   assay = NULL,
   cluster_col = NULL,
+  n_celltypes = 50,
   verbose = TRUE
 )
 }
@@ -22,6 +23,9 @@ will use highly variable features from the Seurat object.}
 
 \item{cluster_col}{Column name in metadata containing cluster information}
 
+\item{n_celltypes}{Expected number of cell types in marker database (default: 50).
+Used for threshold recommendation calculation.}
+
 \item{verbose}{Whether to print progress messages (default: TRUE)}
 }
 \value{
@@ -29,14 +33,15 @@ A list containing:
 \itemize{
 \item min_expression: Recommended expression threshold
 \item specificity_weight: Recommended specificity weight
+\item threshold: Recommended probability threshold for candidate selection
 \item dataset_features: Extracted dataset characteristics
 \item parameter_rationale: Explanation of parameter choices
 }
 }
 \description{
-This function automatically determines optimal min_expression and specificity_weight
-parameters for single-cell data analysis based on dataset characteristics using
-adaptive algorithms derived from empirical analysis of single-cell datasets.
+This function automatically determines optimal min_expression, specificity_weight,
+and threshold parameters for single-cell data analysis based on dataset characteristics
+using adaptive algorithms derived from empirical analysis of single-cell datasets.
 }
 \examples{
 \dontrun{
@@ -45,6 +50,7 @@ SlimR_params <- Parameter_Calculate(
   features = c("CD3E", "CD4", "CD8A"),
   assay = "RNA",
   cluster_col = "seurat_clusters",
+  n_celltypes = 98,
   verbose = TRUE
   )
 }
