@@ -8,8 +8,8 @@ Authors@R:
            role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8348-7245"))
 License: MIT + file LICENSE
-URL: https://github.com/Zhaoqing-wang/SlimR
-BugReports: https://github.com/Zhaoqing-wang/SlimR/issues
+URL: https://github.com/zhaoqing-wang/SlimR
+BugReports: https://github.com/zhaoqing-wang/SlimR/issues
 Depends: 
     R (>= 3.5)
 Imports: 
@@ -33,4 +33,4 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
-Date: 2025-12-17
+Date: 2026-01-20
