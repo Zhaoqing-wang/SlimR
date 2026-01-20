@@ -352,7 +352,7 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     )
 ```
 
-You can use the `min_expression = SlimR_params$min_expression` and `specificity_weight = SlimR_params$specificity_weight` parameters in the function `Celltype_Calculate()` if you have run the `Parameter_Calculate ()` function in section 3.1 above.
+You can use the `min_expression = SlimR_params$min_expression` and `specificity_weight = SlimR_params$specificity_weight` and `threshold = SlimR_params$threshold` parameters in the function `Celltype_Calculate()` if you have run the `Parameter_Calculate ()` function in section 3.1 above.
 
 **Important: The parameter `cluster_col` in the function `Celltype_Calculate()` and the function `Celltype_Annotation()` must be strictly the same to avoid false matches.**
 
