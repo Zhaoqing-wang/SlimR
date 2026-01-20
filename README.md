@@ -1,6 +1,6 @@
 # SlimR: Machine Learning-Assisted, Marker-Based Tool for Single-Cell and Spatial Transcriptomics Annotation
 
-[![CRAN Package Version](https://img.shields.io/cran/v/SlimR?label=CRAN)](https://cran.r-project.org/package=SlimR) [![CRAN License](https://img.shields.io/cran/l/SlimR?label=License&color=green)](https://cran.r-project.org/package=SlimR) [![CRAN Downloads](https://cranlogs.r-pkg.org/badges/grand-total/SlimR)](https://cran.r-project.org/package=SlimR) [![GitHub Package Version](https://img.shields.io/github/r-package/v/Zhaoqing-wang/SlimR?label=GitHub&color=green)](https://github.com/Zhaoqing-wang/SlimR/releases) [![GitHub Maintainer](https://img.shields.io/badge/Maintainer-Zhaoqing_Wang-blue)](https://github.com/Zhaoqing-wang)
+[![CRAN Package Version](https://img.shields.io/cran/v/SlimR?label=CRAN)](https://cran.r-project.org/package=SlimR) [![CRAN License](https://img.shields.io/cran/l/SlimR?label=License&color=green)](https://cran.r-project.org/package=SlimR) [![CRAN Downloads](https://cranlogs.r-pkg.org/badges/grand-total/SlimR)](https://cran.r-project.org/package=SlimR) [![GitHub Package Version](https://img.shields.io/github/r-package/v/zhaoqing-wang/SlimR?label=GitHub&color=green)](https://github.com/zhaoqing-wang/SlimR/releases) [![GitHub Maintainer](https://img.shields.io/badge/Maintainer-Zhaoqing_Wang-blue)](https://github.com/zhaoqing-wang)
 
 ## Overview
 
@@ -54,12 +54,12 @@ install.packages("SlimR")
 
 *Note: Try adjusting the CRAN image to `Global (CDN)` or use `BiocManager::install("SlimR")` if you encounter a version mismatch during installation.*
 
-Option Two: [![GitHub R package version](https://img.shields.io/github/r-package/v/Zhaoqing-wang/SlimR?label=GitHub&color=green)](https://github.com/Zhaoqing-wang/SlimR/releases)
+Option Two: [![GitHub R package version](https://img.shields.io/github/r-package/v/zhaoqing-wang/SlimR?label=GitHub&color=green)](https://github.com/zhaoqing-wang/SlimR/releases)
 
 Install SlimR directly from GitHub using: (Development version, recommended when the version is higher than the CRAN package version)
 
 ``` r
-devtools::install_github("Zhaoqing-wang/SlimR")
+devtools::install_github("zhaoqing-wang/SlimR")
 ```
 
 *Note: If the function doesn't work, please run `install.packages('devtools')` first.*
