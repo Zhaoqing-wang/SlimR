@@ -24,7 +24,7 @@
 #'     "specificity_weight = 3".
 #' @param threshold This parameter refers to the normalized similarity between the
 #'     "alternative cell type" and the "predicted cell type" in the returned results.
-#'     (the default parameter is 0.8)
+#'     (the default parameter is 0.6)
 #' @param compute_AUC Logical indicating whether to calculate AUC values for predicted
 #'     cell types. AUC measures how well the marker genes distinguish the cluster from
 #'     others. When TRUE, adds an AUC column to the prediction results. (default: TRUE)
@@ -78,7 +78,7 @@
 #'     assay = "RNA",
 #'     min_expression = 0.1,
 #'     specificity_weight = 3,
-#'     threshold = 0.8,
+#'     threshold = 0.6,
 #'     compute_AUC = TRUE,
 #'     plot_AUC = TRUE,
 #'     AUC_correction = TRUE,
@@ -95,7 +95,7 @@ Celltype_Calculate <- function(
     assay = "RNA",
     min_expression = 0.1,
     specificity_weight = 3,
-    threshold = 0.8,
+    threshold = 0.6,
     compute_AUC = TRUE,
     plot_AUC = TRUE,
     AUC_correction = TRUE,

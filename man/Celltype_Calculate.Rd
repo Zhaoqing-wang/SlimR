@@ -12,7 +12,7 @@ Celltype_Calculate(
   assay = "RNA",
   min_expression = 0.1,
   specificity_weight = 3,
-  threshold = 0.8,
+  threshold = 0.6,
   compute_AUC = TRUE,
   plot_AUC = TRUE,
   AUC_correction = TRUE,
@@ -52,7 +52,7 @@ of variability in the final score calculation.Default parameters use
 
 \item{threshold}{This parameter refers to the normalized similarity between the
 "alternative cell type" and the "predicted cell type" in the returned results.
-(the default parameter is 0.8)}
+(the default parameter is 0.6)}
 
 \item{compute_AUC}{Logical indicating whether to calculate AUC values for predicted
 cell types. AUC measures how well the marker genes distinguish the cluster from
@@ -104,7 +104,7 @@ SlimR_anno_result <- Celltype_Calculate(seurat_obj = sce,
     assay = "RNA",
     min_expression = 0.1,
     specificity_weight = 3,
-    threshold = 0.8,
+    threshold = 0.6,
     compute_AUC = TRUE,
     plot_AUC = TRUE,
     AUC_correction = TRUE,
