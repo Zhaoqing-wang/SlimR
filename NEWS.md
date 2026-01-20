@@ -1,6 +1,6 @@
-# SlimR dev (2026-01-20)
+# SlimR 1.1.0 (2026-01-20)
 -   This version optimizes the AUC calculation in Celltype_Calculate () to be more robust by test all gene AUCs instead of average gene expression AUCs in the previous version.
--   
+-   The machine learning algorithm in the Parameter_Calculate() function is optimized to be adaptive machine learning to improve the generalization ability of the model.
 -   Modify and optimize the README and NEWS files.
 
 # SlimR 1.0.9 (2025-12-18)

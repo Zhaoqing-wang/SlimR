@@ -1,4 +1,4 @@
-# SlimR: Machine Learning-Assisted, Marker-Based Tool for Single-Cell and Spatial Transcriptomics Annotation
+# SlimR: Adaptive Machine Learning-Powered, Context-Matching Tool for Single-Cell and Spatial Transcriptomics Annotation
 
 [![CRAN Package Version](https://img.shields.io/cran/v/SlimR?label=CRAN)](https://cran.r-project.org/package=SlimR) [![CRAN License](https://img.shields.io/cran/l/SlimR?label=License&color=green)](https://cran.r-project.org/package=SlimR) [![CRAN Downloads](https://cranlogs.r-pkg.org/badges/grand-total/SlimR)](https://cran.r-project.org/package=SlimR) [![GitHub Package Version](https://img.shields.io/github/r-package/v/zhaoqing-wang/SlimR?label=GitHub&color=green)](https://github.com/zhaoqing-wang/SlimR/releases) [![GitHub Maintainer](https://img.shields.io/badge/Maintainer-Zhaoqing_Wang-blue)](https://github.com/zhaoqing-wang)
 
@@ -8,7 +8,7 @@
 
 SlimR is an R package designed for annotating single-cell and spatial-transcriptomics (ST) datasets. It supports the creation of a unified marker list, `Markers_list`, using sources including: the package's built-in curated species-specific cell type and marker reference databases (e.g., 'Cellmarker2', 'PanglaoDB', 'scIBD', 'TCellSI','PCTIT','PCTAM'), Seurat objects containing cell label information, or user-provided Excel tables mapping cell types to markers.
 
-SlimR can predict calculation parameters by machine learning algorithms (e.g., 'Random Forest', 'Gradient Boosting', 'Support Vector Machine', 'Ensemble Learning') by `Parameter_Calculate()`, and based on `Markers_list`, calculate gene expression of different cell types and predict annotation information and calculate corresponding AUC by `Celltype_Calculate()`, and annotate it by `Celltype_Annotation()`, then verify it by `Celltype_Verification()`. At the same time, it can calculate gene expression corresponding to the cell type to generate a reference map for manual annotation (e.g., 'Heat Map', 'Feature Plots', 'Combined Plots').
+SlimR can predict calculation parameters by adaptive machine learning algorithms by `Parameter_Calculate()`, and based on `Markers_list`, calculate gene expression of different cell types and predict annotation information and calculate corresponding AUC by `Celltype_Calculate()`, and annotate it by `Celltype_Annotation()`, then verify it by `Celltype_Verification()`. At the same time, it can calculate gene expression corresponding to the cell type to generate a reference map for manual annotation (e.g., 'Heat Map', 'Feature Plots', 'Combined Plots').
 
 ## Table of Contents
 
@@ -310,31 +310,24 @@ SlimR integrates multiple machine learning algorithms (e.g., Random Forest, Grad
 ``` r
 # Basic usage uses default genes
 SlimR_params <- Parameter_Calculate(
-   seurat_obj = sce,
-   features = c("CD3E", "CD4", "CD8A"),
-   assay = "RNA",
-   cluster_col = "seurat_clusters",
-   method = "ensemble",
-   n_models = 3,
-   return_model = FALSE,
-   verbose = TRUE
-   )
+  seurat_obj = sce,
+  features = c("CD3E", "CD4", "CD8A"),
+  assay = "RNA",
+  cluster_col = "seurat_clusters",
+  verbose = TRUE
+  )
  
  # Use with custom method: use the genes corresponding to a specific cell type in 'Markers_list' as input
-SlimR_params <- Parameter_Calculate(
-   seurat_obj = sce,
-   features = unique(Markers_list_Cellmarker2$`B cell`$marker),
-   assay = "RNA",
-   cluster_col = "seurat_clusters",
-   method = "rf",
-   return_model = FALSE,
-   verbose = TRUE
-   )
+ SlimR_params <- Parameter_Calculate(
+  seurat_obj = sce,
+  features = unique(Markers_list_Cellmarker2$`B cell`$marker),
+  assay = "RNA",
+  cluster_col = "seurat_clusters",
+  verbose = TRUE
+  )
 ```
 
 **Important: This scheme is optional and can be skipped to section 3.2 for cell type probability calculation using default parameters.**
-
-*Note: Using the parameter `method = "rf"` in the function `Parameter_Calculate ()` can modify the machine learning model used.Machine learning method: `rf` (Random Forest), `gbm` (Gradient Boosting), `svm` (Support Vector Machine), or `ensemble` (Ensemble Learning; default)*
 
 ### 3.2 Calculate Cell Types
 

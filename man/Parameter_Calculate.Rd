@@ -6,30 +6,21 @@
 \usage{
 Parameter_Calculate(
   seurat_obj,
-  features,
+  features = NULL,
   assay = NULL,
   cluster_col = NULL,
-  method = "ensemble",
-  n_models = 3,
-  return_model = FALSE,
   verbose = TRUE
 )
 }
 \arguments{
 \item{seurat_obj}{A Seurat object containing single-cell data}
 
-\item{features}{Character vector of feature names (genes) to analyze}
+\item{features}{Character vector of feature names (genes) to analyze. If NULL,
+will use highly variable features from the Seurat object.}
 
 \item{assay}{Name of assay to use (default: default assay)}
 
 \item{cluster_col}{Column name in metadata containing cluster information}
-
-\item{method}{Machine learning method: "rf" (random forest), "gbm" (gradient boosting),
-"svm" (support vector machine), or "ensemble" (default)}
-
-\item{n_models}{Number of models for ensemble learning (default: 3)}
-
-\item{return_model}{Whether to return trained model (default: FALSE)}
 
 \item{verbose}{Whether to print progress messages (default: TRUE)}
 }
@@ -38,38 +29,22 @@ A list containing:
 \itemize{
 \item min_expression: Recommended expression threshold
 \item specificity_weight: Recommended specificity weight
-\item performance: Model performance metric (R-squared)
 \item dataset_features: Extracted dataset characteristics
-\item model: Trained model (if return_model = TRUE)
+\item parameter_rationale: Explanation of parameter choices
 }
 }
 \description{
-This function uses machine learning to automatically determine optimal
-min_expression and specificity_weight parameters for single-cell data analysis
-based on dataset characteristics.
+This function automatically determines optimal min_expression and specificity_weight
+parameters for single-cell data analysis based on dataset characteristics using
+adaptive algorithms derived from empirical analysis of single-cell datasets.
 }
 \examples{
 \dontrun{
-# Basic usage 
 SlimR_params <- Parameter_Calculate(
   seurat_obj = sce,
   features = c("CD3E", "CD4", "CD8A"),
   assay = "RNA",
   cluster_col = "seurat_clusters",
-  method = "ensemble",
-  n_models = 3,
-  return_model = FALSE,
-  verbose = TRUE
-  )
-
-# Use with custom method
-SlimR_params <- Parameter_Calculate(
-  seurat_obj = sce,
-  features = unique(Markers_list_Cellmarker2$`B cell`$marker),
-  assay = "RNA",
-  cluster_col = "seurat_clusters",
-  method = "rf",
-  return_model = FALSE,
   verbose = TRUE
   )
 }
