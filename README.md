@@ -305,7 +305,7 @@ Markers_list_PCTAM <- SlimR::Markers_list_PCTAM
 
 ### 3.1 Calculate Parameter
 
-SlimR integrates multiple machine learning algorithms (e.g., Random Forest, Gradient Boosting, Support Vector Machine, and Ensemble Learning) to automatically determine the optimal `min_expression` and `specificity_weight` parameters in Section 3.2 for calculating the probability of cell types.
+SlimR integrates adaptive machine learning algorithms to automatically determine the optimal `min_expression` and `specificity_weight` parameters in Section 3.2 for calculating the probability of cell types.
 
 ``` r
 # Basic usage uses default genes
