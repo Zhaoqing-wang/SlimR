@@ -1,3 +1,8 @@
+# SlimR dev (2026-01-20)
+-   This version optimizes the AUC calculation in Celltype_Calculate () to be more robust by test all gene AUCs instead of average gene expression AUCs in the previous version.
+-   
+-   Modify and optimize the README and NEWS files.
+
 # SlimR 1.0.9 (2025-12-18)
 -   This version incorporates the T Cell Markers database PCTIT, with the data sourced from the article "Pan-cancer single cell landscape of tumor-infiltrating T cells". The reference literature is: L. Zheng et al. (2021) <doi:10.1126/science.abe6474>.
 -   This version incorporates the Macrophage Markers database PCTAM, with the data sourced from the article "Macrophage diversity in cancer revisited in the era of single-cell omics". The reference literature is: Ruo-Yu Ma et al. (2022) <doi:10.1016/j.it.2022.04.008>.

@@ -55,6 +55,7 @@
 #'     }
 #'   \item Heatmap_plot: Heatmap visualization of probability matrix
 #'   \item AUC_plot: AUC visualization of Predicted cell type
+#'   \item AUC_list: The resulting list of AUC values calculated for genes in alternative cell types above the approximate threshold
 #' }
 #'
 #' @export
@@ -256,6 +257,52 @@ Celltype_Calculate <- function(
     return(auc)
   }
 
+  compute_max_gene_auc <- function(expr_data, labels) {
+    if (ncol(expr_data) == 0) {
+      return(list(max_auc = NA, individual_aucs = numeric(0), best_gene_expr = NULL, 
+                  gene_names = character(0), sorted_indices = integer(0)))
+    }
+    
+    n_genes <- ncol(expr_data)
+    individual_aucs <- numeric(n_genes)
+    gene_names <- colnames(expr_data)
+    
+    for (i in seq_len(n_genes)) {
+      gene_expr <- expr_data[, i]
+      
+      gene_sd <- sd(gene_expr, na.rm = TRUE)
+      if (is.na(gene_sd) || gene_sd < 1e-6) {
+        individual_aucs[i] <- NA
+        next
+      }
+      
+      if (length(unique(labels)) >= 2) {
+        individual_aucs[i] <- fastAUC(gene_expr, labels)
+      } else {
+        individual_aucs[i] <- NA
+      }
+    }
+    
+    valid_idx <- !is.na(individual_aucs)
+    
+    if (sum(valid_idx) == 0) {
+      return(list(max_auc = NA, individual_aucs = individual_aucs, best_gene_expr = NULL,
+                  gene_names = gene_names, sorted_indices = integer(0)))
+    }
+    
+    sorted_indices <- order(individual_aucs, decreasing = TRUE, na.last = TRUE)
+    max_auc <- individual_aucs[sorted_indices[1]]
+    best_gene_expr <- expr_data[, sorted_indices[1]]
+    
+    return(list(
+      max_auc = max_auc,
+      individual_aucs = individual_aucs,
+      best_gene_expr = best_gene_expr,
+      gene_names = gene_names,
+      sorted_indices = sorted_indices
+    ))
+  }
+
   compute_roc_data <- function(predictions, labels) {
     ord <- order(predictions, decreasing = TRUE)
     labels <- labels[ord]
@@ -275,6 +322,8 @@ Celltype_Calculate <- function(
   if (compute_AUC) {
 
     Seurat::DefaultAssay(seurat_obj) <- assay
+    
+    auc_list_storage <- list()
 
     if (AUC_correction) {
       message(paste0("\n","SlimR AUC correction: Performing AUC correction for all candidate cell types (threshold > ",threshold,")."))
@@ -293,44 +342,70 @@ Celltype_Calculate <- function(
           next
         }
 
-        auc_vals <- numeric(length(candidate_types))
-        names(auc_vals) <- candidate_types
-
+        auc_results_list <- list()
+        
         for (j in seq_along(candidate_types)) {
           cell_type <- candidate_types[j]
           features <- valid_genes_list[[cell_type]]
 
           all_cells <- colnames(seurat_obj)
           expr_data <- FetchData(seurat_obj, vars = features, cells = all_cells)
-          cell_scores <- rowMeans(expr_data, na.rm = TRUE)
-
+          
           labels <- seurat_obj@meta.data[all_cells, cluster_col] == cluster_id
           if (length(unique(labels)) < 2) {
-            auc_vals[j] <- NA
             warning(paste("Skipping AUC for cluster", cluster_id, "and cell type", cell_type, ": Only one class present"))
+            next
           } else {
-            auc_vals[j] <- fastAUC(cell_scores, labels)
+            auc_results_list[[cell_type]] <- compute_max_gene_auc(expr_data, labels)
+            
+            if (!cell_type %in% names(auc_list_storage)) {
+              auc_list_storage[[cell_type]] <- matrix(NA, 
+                                                       nrow = length(unique(seurat_obj@meta.data[[cluster_col]])),
+                                                       ncol = length(features))
+              rownames(auc_list_storage[[cell_type]]) <- unique(seurat_obj@meta.data[[cluster_col]])
+              colnames(auc_list_storage[[cell_type]]) <- features
+            }
+            
+            auc_list_storage[[cell_type]][cluster_id, ] <- auc_results_list[[cell_type]]$individual_aucs
           }
         }
 
-        if (all(is.na(auc_vals))) {
-          best_idx <- 1
-          best_auc <- NA
-        } else {
-          best_idx <- which.max(auc_vals)
-          best_auc <- auc_vals[best_idx]
+        if (length(auc_results_list) == 0) {
+          new_predicted[i] <- candidate_types[1]
+          new_aucs[i] <- NA
+          new_alt_list[i] <- NA
+          next
         }
-
-        best_type <- candidate_types[best_idx]
+        
+        ranked_types <- names(auc_results_list)
+        type_scores <- matrix(NA, nrow = length(ranked_types), 
+                             ncol = max(sapply(auc_results_list, function(x) length(x$individual_aucs))))
+        rownames(type_scores) <- ranked_types
+        
+        for (ct in ranked_types) {
+          sorted_aucs <- auc_results_list[[ct]]$individual_aucs[auc_results_list[[ct]]$sorted_indices]
+          type_scores[ct, 1:length(sorted_aucs)] <- sorted_aucs
+        }
+        
+        final_order <- ranked_types
+        for (col_idx in 1:ncol(type_scores)) {
+          col_vals <- type_scores[final_order, col_idx]
+          if (all(is.na(col_vals))) break
+          final_order <- final_order[order(col_vals, decreasing = TRUE, na.last = TRUE)]
+          if (length(unique(col_vals[!is.na(col_vals)])) == 1) next
+        }
+        
+        best_type <- final_order[1]
+        best_auc <- auc_results_list[[best_type]]$max_auc
+        
         new_predicted[i] <- best_type
         new_aucs[i] <- best_auc
-
-        alt_types <- candidate_types[-best_idx]
-        alt_aucs <- auc_vals[-best_idx]
+        
+        alt_types <- final_order[-1]
         alt_strs <- character(0)
-
         for (k in seq_along(alt_types)) {
-          alt_strs[k] <- paste0(alt_types[k], " (",round(alt_aucs[k], digits = 7), ")")
+          alt_auc <- auc_results_list[[alt_types[k]]]$max_auc
+          alt_strs[k] <- paste0(alt_types[k], " (", round(alt_auc, digits = 7), ")")
         }
         new_alt_list[i] <- paste(alt_strs, collapse = " ; ")
       }
@@ -358,14 +433,24 @@ Celltype_Calculate <- function(
 
         all_cells <- colnames(seurat_obj)
         expr_data <- FetchData(seurat_obj, vars = features, cells = all_cells)
-        cell_scores <- rowMeans(expr_data, na.rm = TRUE)
-
+        
         labels <- seurat_obj@meta.data[all_cells, cluster_col] == cluster_id
         if (length(unique(labels)) < 2) {
           warning(paste("Skipping AUC for cluster", cluster_id, ": Only one class present"))
           auc_values[i] <- NA
         } else {
-          auc_values[i] <- fastAUC(cell_scores, labels)
+          auc_result <- compute_max_gene_auc(expr_data, labels)
+          auc_values[i] <- auc_result$max_auc
+          
+          if (!cell_type %in% names(auc_list_storage)) {
+            auc_list_storage[[cell_type]] <- matrix(NA, 
+                                                     nrow = length(unique(seurat_obj@meta.data[[cluster_col]])),
+                                                     ncol = length(features))
+            rownames(auc_list_storage[[cell_type]]) <- unique(seurat_obj@meta.data[[cluster_col]])
+            colnames(auc_list_storage[[cell_type]]) <- features
+          }
+          
+          auc_list_storage[[cell_type]][cluster_id, ] <- auc_result$individual_aucs
         }
       }
       prediction_results$AUC <- auc_values
@@ -402,14 +487,22 @@ Celltype_Calculate <- function(
       all_cells <- colnames(seurat_obj)
 
       expr_data <- FetchData(seurat_obj, vars = features, cells = all_cells)
-      cell_scores <- rowMeans(expr_data, na.rm = TRUE)
-
+      
       labels <- seurat_obj@meta.data[all_cells, cluster_col] == cluster_id
-
+      
       if (length(unique(labels)) < 2) {
         warning(paste("Skipping AUC plot for cluster", cluster_id, ": Insufficient classes"))
         next
       }
+      
+      auc_result <- compute_max_gene_auc(expr_data, labels)
+      
+      if (is.null(auc_result$best_gene_expr) || is.na(auc_result$max_auc)) {
+        warning(paste("Skipping AUC plot for cluster", cluster_id, ": No valid genes"))
+        next
+      }
+      
+      cell_scores <- auc_result$best_gene_expr
 
       roc_data <- compute_roc_data(cell_scores, labels)
 
@@ -482,6 +575,10 @@ Celltype_Calculate <- function(
 
   if (!is.null(auc_plot)) {
     return_list$AUC_plot <- auc_plot
+  }
+  
+  if (compute_AUC && exists("auc_list_storage") && length(auc_list_storage) > 0) {
+    return_list$AUC_list <- auc_list_storage
   }
 
   return(return_list)

@@ -89,6 +89,7 @@ A list containing:
 }
 \item Heatmap_plot: Heatmap visualization of probability matrix
 \item AUC_plot: AUC visualization of Predicted cell type
+\item AUC_list: The resulting list of AUC values calculated for genes in alternative cell types above the approximate threshold
 }
 }
 \description{
